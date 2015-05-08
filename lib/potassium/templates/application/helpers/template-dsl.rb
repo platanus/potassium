@@ -5,14 +5,12 @@ module TemplateDSL
     require_relative './environment-helpers'
     require_relative './gem-helpers'
     require_relative './callback-helpers'
-    require_relative './text-helpers'
 
     object.send :extend, TemplateHelpers
     object.send :extend, VariableHelpers
     object.send :extend, EnvironmentHelpers
     object.send :extend, GemHelpers
     object.send :extend, CallbackHelpers
-    object.send :extend, TextHelpers
 
     object.send :source_path, source_path
   end

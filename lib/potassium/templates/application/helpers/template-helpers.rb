@@ -19,17 +19,4 @@ module TemplateHelpers
   def erase_comments(file)
     gsub_file file, /^\s*#[^\n]*\n/, ''
   end
-
-  # Some code redefinitions
-  def self.extended(object)
-    old_ask = object.send(:method, :ask)
-
-    object.define_singleton_method :ask do |text, *attributes|
-      instance_exec(text, :green, *attributes, &old_ask)
-    end
-
-    object.define_singleton_method :yes? do |text|
-      ask(text, :limited_to => ["yes", "no"]) == "yes"
-    end
-  end
 end
