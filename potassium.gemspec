@@ -22,4 +22,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "gli", "~> 2.12.2"
   spec.add_development_dependency "rails", "~> 4.2"
+  spec.add_development_dependency "inquirer", "~> 0.2"
 end

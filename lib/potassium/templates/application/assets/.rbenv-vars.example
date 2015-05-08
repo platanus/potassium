@@ -1,0 +1,5 @@
+DB_NAME=<%= @app_name.downcase %>
+DB_USER=root
+DB_PASSWORD=
+DEFAULT_EMAIL_ADDRESS=
+SECRET_KEY_BASE=
