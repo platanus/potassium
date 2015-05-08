@@ -1,25 +1,3 @@
 #!/usr/bin/env ruby
-require 'thor'
-require 'potassium'
 
-class PotassiumCommand < Thor::Group
-  desc 'Bootstrap a Rails application'
-
-  argument :application_name, :type => :string, :required => true
-
-  def find_template
-    @template_finder = Potassium::TemplateFinder.new
-    @template = @template_finder.default_template
-  end
-
-  def run_template
-    @template.source_paths << Rails::Generators::AppGenerator.source_root
-    @template.start
-  end
-end
-
-if ARGV.last == '--version' || ARGV.last == '-v'
-  puts Potassium::VERSION
-else  
-  PotassiumCommand.start(ARGV)
-end
+require 'potassium/cli'
