@@ -9,7 +9,5 @@ module Potassium::CLI
 
   commands_from 'potassium/cli/commands'
 
-  default_command :create
-
   exit Potassium::CLI.run(ARGV)
 end
