@@ -4,45 +4,47 @@ A Rails application generator from [Platanus](https://github.com/platanus), insp
 
 ## Installation
 
-Run the following command:
+Just install it globally:
 
     $ gem install potassium
 
 ## Usage
 
-To create a new project:
+Use the `potassium` command to create a new project:
 
     $ potassium create project-name
 
 ## What's inside Potassium?
 
-Potassium Rails apps includes integrations with the following technologies we use by convention:
+Potassium Rails apps includes the following gems and technologies:
 
-- Rbenv for managing our ruby versions.
-- Rbenv-vars for keeping secrets and by-server configurations.
-- Bower for frontend assets packages.
-- EditorConfig for keeping all our editor configurations the same. 
-- Pry and Pry-ByeBug for a less painful debugging experience.
-- RSpec for unit and integration testing.
-- FactoryGirl for keep factories for the tests.
-- Guard for continuous testing and other watch-related tasks.
+- [rbenv](https://github.com/sstephenson/rbenv) for managing the project's ruby version.
+- [rbenv-vars](https://github.com/sstephenson/rbenv-vars) for keeping secrets and by-server configurations.
+- [Bower](http://bower.io) for frontend assets packages.
+- [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same. 
+- [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience.
+- [RSpec](http://rspec.info) for unit and integration testing.
+- [FactoryGirl](https://github.com/thoughtbot/factory_girl) for test factories.
+- [Guard](http://guardgem.org) for continuous testing and other watch-related tasks.
 
 And some optional integrations that will be asked for on project's creation:
 
-- PostgreSQL or MySQL for our databases.
-- Devise for authentication.
-- ActiveAdmin for admin interfaces.
-- Pundit for role-based authorization.
+- [PostgreSQL](http://www.postgresql.org) or [MySQL](https://www.mysql.com) for the database.
+- [Devise](https://github.com/plataformatec/devise) for authentication.
+- [ActiveAdmin](http://activeadmin.info) for admin interfaces.
+- [Pundit](https://github.com/elabs/pundit) for role-based authorization.
 
-## How do i add something new to Potassium?
+## Contributing
+
+### How do i add something new to Potassium?
 
 In the [lib/potassium/templates/application](lib/potassium/templates/application) folder, you will find [the template](lib/potassium/templates/application/template.rb). You should follow the next conventions to add something:
 
 *__NOTE:__ If you only want to use Potassium but not to add something new, the next parts shouldn't be necessary.*
 
-### Asking
+#### Ask
 
-If you need to ask something to the user, follow the next steps:
+If you need to ask something to the user before doing something, follow the next steps:
 
 1. Create a ruby file on the [recipes/asks](lib/potassium/templates/application/recipes/asks) folder.
 2. Then, ask something using the methods defined in [Inquirer](https://github.com/arlimus/inquirer.rb), that we use by default. Use the [DSL](docs/dsl.md) to store some information.
@@ -55,9 +57,9 @@ If you need to ask something to the user, follow the next steps:
   end
   ```
 
-### Installing Something
+#### Install
 
-Now, to add some behavior, thanks the [DSL](docs/dsl.md), we have a kind of flow of what is happening in the template execution. To understand this better, please read [the template](lib/potassium/templates/application/template.rb). Anyway, the structure is like this:
+Now, to add some behavior, thanks to the [DSL](docs/dsl.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template](lib/potassium/templates/application/template.rb). Anyway, the structure is like this:
 
 1. Clean the Gemfile and add the base gems that rails needs to work.
 2. Then, run all the **asks** recipes.
@@ -108,8 +110,8 @@ For example, if we want to create an optional recipe to add a gem called `banana
   end
   ```
 
-5. Ready, this should be enough.
+5. Ready, let's start working on your new project.
 
-### The DSL
+#### The DSL
 
 To see some further documentation of what we added to the rails template's DSL, check the [DSL documentation](docs/dsl.md). Remember that the DSL we are documenting is an extension over the [Rails Application Template DSL](http://edgeguides.rubyonrails.org/rails_application_templates.html), that itself is a dsl based on [Thor](https://github.com/erikhuda/thor/wiki).
