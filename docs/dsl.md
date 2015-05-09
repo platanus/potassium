@@ -1,21 +1,3 @@
-# Rails Template
-
-On this template, we base our Rails applications.
-
-## Usage
-
-Clone the template.
-
-```bash
-$ git clone git@github.com:platanus/rails_template.git
-```
-
-Create your new application based on template
-
-```bash
-$ rails new my_new_app -m /path_to_template_root/app_template.rb
-```
-
 ## The DSL
 
 The DSL to extend and add recipes defines methods divided in mixins called helpers.
