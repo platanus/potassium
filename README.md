@@ -36,7 +36,7 @@ And some optional integrations that will be asked for on project's creation:
 
 ## Contributing
 
-### How do i add something new to Potassium?
+### How do I add something new to Potassium?
 
 In the [lib/potassium/templates/application](lib/potassium/templates/application) folder, you will find [the template](lib/potassium/templates/application/template.rb). You should follow the next conventions to add something:
 
@@ -59,15 +59,15 @@ If you need to ask something to the user before doing something, follow the next
 
 #### Install
 
-Now, to add some behavior, thanks to the [DSL](docs/dsl.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template](lib/potassium/templates/application/template.rb). Anyway, the structure is like this:
+Now, to add some behavior, thanks to the [DSL](docs/dsl.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template](lib/potassium/templates/application/template.rb). The structure looks like this:
 
 1. Clean the Gemfile and add the base gems that rails needs to work.
-2. Then, run all the **asks** recipes.
-3. Then, execute all the **recipes**, that are ruby files stored on the [recipes](lib/potassium/templates/application/recipes) folder. They specify what gems are needed and registers callbacks based on this process, usually to execute things after the gem installation happened or after some other recipe finished his work.
-4. Then, install the gems, filling the Gemfile before with all the gathered gems.
+2. Run all the **asks** recipes.
+3. Execute all the **recipes**, that are ruby files stored on the [recipes](lib/potassium/templates/application/recipes) folder. They specify what gems are needed and registers callbacks based on this process, usually to execute things after the gem installation happened or after some other recipe finished his work.
+4. Install the gems, filling the Gemfile before with all the gathered gems.
 5. Finally, create the database.
 
-The main step is the 3, when we run the recipes. A recipe can do anything (because is a ruby script) but what should be their main responsabilities are to gather gems and register callbacks for the process.
+The main step is the 3rd, when we run the recipes. A recipe can do anything (because is a ruby script) but their responsability should be to gather gems and register callbacks for the process.
 
 For example, if we want to create an optional recipe to add a gem called `banana_split` that needs to run a generator, we can do the following.
 
@@ -88,7 +88,7 @@ For example, if we want to create an optional recipe to add a gem called `banana
   end
   ```
 
-3. Create the **recipe**. Register a gem using `gather_gem` and use a callback to run after the `gem_install` action succeded to run the generator. `gem_install` is one of the main actions that should be easily visible with a sneak peek in [the template](lib/potassium/templates/application/template.rb).
+3. Create the **recipe**. Register a gem using `gather_gem` and create a callback to be called after the `gem_install` action succeded to run the generator. `gem_install` is one of the main actions that should be easily visible with a sneak peek in [the template](lib/potassium/templates/application/template.rb).
 
   ```ruby
   # application/recipes/banana_split.rb
@@ -114,4 +114,4 @@ For example, if we want to create an optional recipe to add a gem called `banana
 
 #### The DSL
 
-To see some further documentation of what we added to the rails template's DSL, check the [DSL documentation](docs/dsl.md). Remember that the DSL we are documenting is an extension over the [Rails Application Template DSL](http://edgeguides.rubyonrails.org/rails_application_templates.html), that itself is a dsl based on [Thor](https://github.com/erikhuda/thor/wiki).
+To see further documentation of what we added to the rails template's DSL, check the [DSL documentation](docs/dsl.md). Remember that the DSL we are documenting is an extension over the [Rails Application Template DSL](http://edgeguides.rubyonrails.org/rails_application_templates.html), that itself is a dsl based on [Thor](https://github.com/erikhuda/thor/wiki).
