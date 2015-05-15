@@ -18,6 +18,7 @@ run_action(:asking) do
   eval_file "recipes/asks/devise.rb"
   eval_file "recipes/asks/admin.rb"
   eval_file "recipes/asks/pundit.rb"
+  eval_file "recipes/asks/lang.rb"
 end
 
 run_action(:recipe_loading) do

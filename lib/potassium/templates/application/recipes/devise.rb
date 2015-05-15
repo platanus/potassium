@@ -1,6 +1,7 @@
 authentication_framework = {
   devise: ->{
     gather_gem 'devise'
+    gather_gem 'devise-i18n'
 
     after(:gem_install) do
       generate "devise:install"
