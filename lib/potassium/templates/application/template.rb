@@ -31,6 +31,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/pry.rb"
   eval_file "recipes/devise.rb"
   eval_file "recipes/admin.rb"
+  eval_file "recipes/angular_admin.rb"
   eval_file "recipes/pundit.rb"
   eval_file "recipes/testing.rb"
   eval_file "recipes/production.rb"
