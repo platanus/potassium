@@ -1,6 +1,7 @@
 if get(:admin_mode)
   if equals?(:authentication, :devise)
     gather_gem 'activeadmin', github: 'activeadmin'
+    gather_gem 'activeadmin_addons'
 
     after(:gem_install, :wrap_in_action => :admin_install) do
       generate "active_admin:install"
