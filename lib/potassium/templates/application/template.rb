@@ -27,6 +27,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/rbenv.rb"
   eval_file "recipes/bower.rb"
   eval_file "recipes/editorconfig.rb"
+  eval_file "recipes/aws_sdk.rb"
   eval_file "recipes/i18n.rb"
   eval_file "recipes/pry.rb"
   eval_file "recipes/devise.rb"
