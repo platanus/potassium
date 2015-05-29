@@ -1,5 +1,4 @@
 --color
---require spec_helper
---warnings
+--require rails_helper
 --format=doc
 --format=Nc
