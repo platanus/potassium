@@ -24,3 +24,8 @@ Features:
 
 Chore:
   - Removed several questions for ActiveAdmin support.
+
+## 1.2.1
+
+Refactor:
+  - Speed up `help` and `version` commands by lazily requiring rails dependencies.
