@@ -1,6 +1,7 @@
 if get(:api_support)
   gather_gem 'versionist'
   gather_gem 'responders'
+  gather_gem 'simple_token_authentication', '~> 1.0'
 
   after(:gem_install) do
     line = "Rails.application.routes.draw do\n"
