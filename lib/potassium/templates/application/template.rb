@@ -19,6 +19,7 @@ run_action(:asking) do
   eval_file "recipes/asks/admin.rb"
   eval_file "recipes/asks/pundit.rb"
   eval_file "recipes/asks/lang.rb"
+  eval_file "recipes/asks/api.rb"
 end
 
 run_action(:recipe_loading) do
@@ -38,6 +39,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/testing.rb"
   eval_file "recipes/production.rb"
   eval_file "recipes/git.rb"
+  eval_file "recipes/api.rb"
 end
 
 say "Gathered enough information. Applying the template. Wait a minute.", :green
