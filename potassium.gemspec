@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "bundler", "~> 1.7"
-  spec.add_runtime_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "rake", "~> 10.0"
   spec.add_runtime_dependency "gli", "~> 2.12.2"
   spec.add_runtime_dependency "rails", "~> 4.2"
   spec.add_runtime_dependency "inquirer", "~> 0.2"
