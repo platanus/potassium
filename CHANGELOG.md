@@ -29,3 +29,8 @@ Chore:
 
 Refactor:
   - Speed up `help` and `version` commands by lazily requiring rails dependencies.
+
+## 1.2.2
+
+Fix:
+  - Multiple changes to make it work correctly within rubygems.
