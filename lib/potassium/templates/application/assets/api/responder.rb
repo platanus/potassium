@@ -31,7 +31,7 @@ class ApiResponder < ActionController::Responder
   def display_errors
     controller.render({
       :status => :unprocessable_entity,
-      :json => { errors: format_errors }
+      :json => { msg: "invalid_attributes", errors: format_errors }
     })
   end
 
