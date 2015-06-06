@@ -1,5 +1,8 @@
 module Potassium::CLI
+  desc "Create a new Potassium Rails project."
+  arg 'app_path'
   command :create do |c|
+    c.default_desc "Create a new project."
     c.action do |global_options, options, args|
       require "potassium/templates/application/generator"
       require "potassium/template_finder"

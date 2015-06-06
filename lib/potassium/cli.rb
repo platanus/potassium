@@ -4,6 +4,8 @@ require "gli"
 module Potassium::CLI
   extend GLI::App
 
+  program_desc "Plataus Rails application generator"
+
   version Potassium::VERSION
   hide_commands_without_desc true
 
