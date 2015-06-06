@@ -32,5 +32,17 @@ Refactor:
 
 ## 1.2.2
 
-Fix:
+Bugfixes:
   - Multiple changes to make it work correctly within rubygems.
+
+## 1.2.3
+
+Bugfixes:
+  - Fix database name to use when dashes are present.
+
+Features:
+  - Added optional API support that includes the following:
+    - A concern that offer standard responses to common errors.
+    - Versionist Support.
+    - `simple_token_authentication`, `active_model_serializers` and `responders` gem.
+    - A default responder for API common behavior.
