@@ -26,13 +26,22 @@ Potassium Rails apps includes the following gems and technologies:
 - [RSpec](http://rspec.info) for unit and integration testing.
 - [FactoryGirl](https://github.com/thoughtbot/factory_girl) for test factories.
 - [Guard](http://guardgem.org) for continuous testing and other watch-related tasks.
+- [AWS-SDK](https://github.com/aws/aws-sdk-ruby) for file uploads, sdks, etc and because we use AWS.
 
-And some optional integrations that will be asked for on project's creation:
+The following optional integrations are added too:
 
 - [PostgreSQL](http://www.postgresql.org) or [MySQL](https://www.mysql.com) for the database.
 - [Devise](https://github.com/plataformatec/devise) for authentication.
 - [ActiveAdmin](http://activeadmin.info) for admin interfaces.
+- [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin.
 - [Pundit](https://github.com/elabs/pundit) for role-based authorization.
+
+And, finally, we also include optional API support, which includes:
+
+- [Responders](https://github.com/plataformatec/responders) for dry-ing our api controllers.
+- [Versionist](https://github.com/bploetz/versionist) for some flexible api versioning.
+- [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers) for record serialization.
+- [Simple Token Authentication](https://github.com/gonzalo-bulnes/simple_token_authentication) for stateless API authentication.
 
 ## Contributing
 
@@ -40,7 +49,7 @@ And some optional integrations that will be asked for on project's creation:
 
 In the [lib/potassium/templates/application](lib/potassium/templates/application) folder, you will find [the template](lib/potassium/templates/application/template.rb). You should follow the next conventions to add something:
 
-*__NOTE:__ If you only want to use Potassium but not to add something new, the next parts shouldn't be necessary.*
+*__NOTE:__ If you only want to use Potassium but not to add something new, the next parts can be easily skipped.*
 
 #### Ask
 
@@ -115,3 +124,15 @@ For example, if we want to create an optional recipe to add a gem called `banana
 #### The DSL
 
 To see further documentation of what we added to the rails template's DSL, check the [DSL documentation](docs/dsl.md). Remember that the DSL we are documenting is an extension over the [Rails Application Template DSL](http://edgeguides.rubyonrails.org/rails_application_templates.html), that itself is a dsl based on [Thor](https://github.com/erikhuda/thor/wiki).
+
+## Credits
+
+Thank you [contributors](https://github.com/platanus/potassium/graphs/contributors)!
+
+<img src="http://platan.us/gravatar_with_text.png" alt="Platanus" width="250"/>
+
+potassium is maintained by [platanus](http://platan.us).
+
+## License
+
+Potassium is © 2014 platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.

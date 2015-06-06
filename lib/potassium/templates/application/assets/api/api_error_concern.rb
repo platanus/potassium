@@ -2,39 +2,39 @@ module ApiErrorConcern
   extend ActiveSupport::Concern
 
   included do
-    rescue_from "Exception" do |exc|
-      logger.error exc.message
-      logger.error exc.backtrace.join("\n")
-      api_respond_error(:internal_server_error, {
-        msg: "server_error",
-        type: exc.class.to_s,
-        detail: exc.message
+    rescue_from "Exception" do |exception|
+      logger.error exception.message
+      logger.error exception.backtrace.join("\n")
+      respond_api_error(:internal_server_error, {
+        message: "server_error",
+        type: exception.class.to_s,
+        detail: exception.message
       })
     end
 
-    rescue_from "ActiveRecord::RecordNotFound" do |exc|
-      api_respond_error(:not_found, {
-        msg: "record_not_found",
-        detail: exc.message
+    rescue_from "ActiveRecord::RecordNotFound" do |exception|
+      respond_api_error(:not_found, {
+        message: "record_not_found",
+        detail: exception.message
       })
     end
 
-    rescue_from "ActiveModel::ForbiddenAttributesError" do |exc|
-      api_respond_error(:bad_request, {
-        msg: "protected_attributes",
-        detail: exc.message
+    rescue_from "ActiveModel::ForbiddenAttributesError" do |exception|
+      respond_api_error(:bad_request, {
+        message: "protected_attributes",
+        detail: exception.message
       })
     end
 
-    rescue_from "ActiveRecord::RecordInvalid" do |exc|
-      api_respond_error(:bad_request, {
-        msg: "invalid_attributes",
-        errors: exc.record.errors
+    rescue_from "ActiveRecord::RecordInvalid" do |exception|
+      respond_api_error(:bad_request, {
+        message: "invalid_attributes",
+        errors: exception.record.errors
       })
     end
   end
 
-  def api_respond_error(_status, _error_obj = {})
-    render json: _error_obj, status: _status
+  def respond_api_error(status, error = {})
+    render json: error, status: status
   end
 end
