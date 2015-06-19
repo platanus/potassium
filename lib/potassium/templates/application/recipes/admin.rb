@@ -2,6 +2,7 @@ if get(:admin_mode)
   if equals?(:authentication, :devise)
     gather_gem 'activeadmin', github: 'activeadmin'
     gather_gem 'activeadmin_addons'
+    gather_gem 'active_skin'
 
     after(:gem_install, :wrap_in_action => :admin_install) do
       generate "active_admin:install"
@@ -18,6 +19,20 @@ if get(:admin_mode)
            end\n
            ActiveAdmin.setup do |config|
              config.view_factory.footer = CustomFooter
+           HERE
+      end
+
+      line = "@import \"active_admin/base\";"
+      style = "app/assets/stylesheets/active_admin.css.scss"
+      gsub_file style, /(#{Regexp.escape(line)})/mi do |match|
+        <<-HERE.gsub(/^ {11}/, '')
+           #{line}
+           $skinActiveColor: #001CEE;
+           $skinHeaderBck: #002744;
+           $panelHeaderBck: #002744;
+           //$skinLogo: $skinHeaderBck image-url("logo_admin.png") no-repeat center center;
+
+           @import "active_skin";
            HERE
       end
     end
