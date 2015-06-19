@@ -18,6 +18,8 @@ authorization_framework = {
         end
 
         template "assets/active_admin/pundit_page_policy.rb", "app/policies/active_admin/page_policy.rb"
+        template "assets/active_admin/comment_policy.rb", "app/policies/active_admin/comment_policy.rb"
+        template "assets/active_admin/admin_user_policy.rb", "app/policies/admin_user_policy.rb"
       end
     end
   }
