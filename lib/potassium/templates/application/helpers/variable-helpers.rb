@@ -4,6 +4,10 @@ module VariableHelpers
     @_data[key] = value
   end
 
+  def selected?(key, value = nil)
+    value ? equals?(key, value) : get(key)
+  end
+
   def get(key)
     @_data ||= {}
     @_data[key]
