@@ -4,6 +4,7 @@ recipe = ARGV.first
 def selected?(key, val = nil); true; end
 
 run_action(:recipe_loading) do
+  eval_file "recipes/asks/#{recipe}.rb" rescue Exception
   eval_file "recipes/#{recipe}.rb"
 end
 

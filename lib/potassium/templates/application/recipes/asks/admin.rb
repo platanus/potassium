@@ -1,4 +1,4 @@
-if equals?(:authentication, :devise)
+if selected?(:authentication, :devise)
   admin_mode = Ask.confirm "Do you want to use ActiveAdmin?"
   if admin_mode
     angular_admin = Ask.confirm "Do you want Angular support for ActiveAdmin?"
