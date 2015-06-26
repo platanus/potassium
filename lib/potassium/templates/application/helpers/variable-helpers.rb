@@ -17,6 +17,10 @@ module VariableHelpers
     get(key) == value
   end
 
+  def exists?(key)
+    equals?("#{key}_exists".to_sym, true)
+  end
+
   private
 
   def ensure_variable(key, default_value)

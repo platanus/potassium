@@ -1,4 +1,16 @@
 module GemHelpers
+
+  def gem_exists?(regex)
+    exists = false
+    File.open("Gemfile").each_line do |line|
+      if line =~ regex
+        exists = true
+        return
+      end
+    end
+    exists
+  end
+
   def gather_gem(name, *attributes)
     ensure_variable(:gems, {})
     current_gem_groups = get(:current_gem_groups) || [:base]
