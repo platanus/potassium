@@ -1,5 +1,8 @@
 class Api::V1::BaseController < ApplicationController
-  include ApiErrorConcern
+  if Rails.env.production?
+    include ApiErrorConcern
+  end
+
   self.responder = ApiResponder
 
   respond_to :json
