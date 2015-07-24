@@ -14,6 +14,8 @@ Use the `potassium` command to create a new project:
 
     $ potassium create project-name
 
+It's important to note that it will perform a version check before running to ensure that you're using the latest potassium.
+
 ## What's inside Potassium?
 
 Potassium Rails apps includes the following gems and technologies:
@@ -21,7 +23,7 @@ Potassium Rails apps includes the following gems and technologies:
 - [rbenv](https://github.com/sstephenson/rbenv) for managing the project's ruby version.
 - [rbenv-vars](https://github.com/sstephenson/rbenv-vars) for keeping secrets and by-server configurations.
 - [Bower](http://bower.io) for frontend assets packages.
-- [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same. 
+- [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same.
 - [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience.
 - [RSpec](http://rspec.info) for unit and integration testing.
 - [FactoryGirl](https://github.com/thoughtbot/factory_girl) for test factories.
