@@ -14,7 +14,7 @@ Use the `potassium` command to create a new project:
 
     $ potassium create project-name
 
-It's important to note that it will perform a version check before running to ensure that you're using the latest potassium. If, for some reason (connectivity problems, a fast proof-of-concept or debugging) you want to skip the version check, you can use the `--no-version-check` flag. Anyway, this option is just for those corner cases. It shouldn't be used by default.
+It's important to note that it will perform a version check before running to ensure that you're using the latest potassium.
 
 ## What's inside Potassium?
 

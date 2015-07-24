@@ -42,9 +42,9 @@ module Potassium
       print white("Please run: ")
       print green("gem update potassium ")
       print white("to upgrade your potassium installation.\n\n")
-      print white("If you want to run this outdated version of potassium anyway, ")
+      print white("If you really need to run this outdated version of potassium anyway, ")
       print white("re-run this command with the ")
-      print green("--no-version-check")
+      print black("--no-version-check")
       puts white(" flag.")
     end
 
