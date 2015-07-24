@@ -20,7 +20,7 @@ Bugfixes:
 Features:
   - Added `aws-sdk` gem (< 2).
   - Added `activeadmin_addons` when using ActiveAdmin.
-  - Added AngularJS support for ActiveAdmin. 
+  - Added AngularJS support for ActiveAdmin.
 
 Chore:
   - Removed several questions for ActiveAdmin support.
@@ -46,3 +46,8 @@ Features:
     - Versionist Support.
     - `simple_token_authentication`, `active_model_serializers` and `responders` gem.
     - A default responder for API common behavior.
+
+## 1.2.4
+
+Features:
+  - Added Rack CORS gem and config
