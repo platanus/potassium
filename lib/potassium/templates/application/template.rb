@@ -40,6 +40,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/production.rb"
   eval_file "recipes/git.rb"
   eval_file "recipes/api.rb"
+  eval_file "recipes/rack-cors.rb"
 end
 
 say "Gathered enough information. Applying the template. Wait a minute.", :green
