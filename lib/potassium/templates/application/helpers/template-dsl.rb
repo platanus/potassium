@@ -5,9 +5,7 @@ module TemplateDSL
     require_relative './environment-helpers'
     require_relative './gem-helpers'
     require_relative './callback-helpers'
-    require_relative './recipe-helpers'
 
-    object.send :extend, RecipeHelpers
     object.send :extend, TemplateHelpers
     object.send :extend, VariableHelpers
     object.send :extend, EnvironmentHelpers

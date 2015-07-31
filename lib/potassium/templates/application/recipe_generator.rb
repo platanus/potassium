@@ -4,10 +4,6 @@ require "inquirer"
 
 module Potassium
   class RecipeGenerator < Rails::Generators::NamedBase
-    def exported_recipes
-      @exported_recipes ||= []
-    end
-
     def run_generator
       require_relative "./helpers/template-dsl"
       TemplateDSL.extend_dsl(self, source_path: __FILE__)
