@@ -25,3 +25,7 @@ after(:gem_install) do
 
   run "guard init"
 end
+
+gsub_file 'config/environments/development.rb', /config.action_mailer.raise_delivery_errors = false\n/ do
+  "config.action_mailer.raise_delivery_errors = true"
+end
