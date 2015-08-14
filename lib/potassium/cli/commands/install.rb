@@ -1,10 +1,11 @@
 require 'levenshtein'
 
 module Potassium::CLI
-  command :add_recipe do |c|
+  desc "Installs a new feature or library"
+  command :install do |c|
     c.action do |global_options, options, args|
       if args.first.nil?
-        puts "There are the available recipes you can add:"
+        puts "These are the available recipes you can install:"
         recipe_name_list.each do |recipe|
           puts recipe
         end
