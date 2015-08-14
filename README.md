@@ -20,13 +20,13 @@ It's important to note that it will perform a version check before running to en
 
 ### Adding recipes to an existing project
 
-Use the `potassium add_recipe` command to add a recipe to a project:
+Use the `potassium install` command to add a recipe to a project:
 
-    $ potassium add_recipe i18n
+    $ potassium install i18n
 
 You can run the command on its own to view all the available recipes:
 
-    $ potassium add_recipe
+    $ potassium install
 
 ## What's inside Potassium?
 
