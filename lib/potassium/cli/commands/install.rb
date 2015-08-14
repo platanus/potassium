@@ -1,17 +1,17 @@
 require 'levenshtein'
+require 'inquirer'
+require "potassium/templates/application/recipe_generator"
 
 module Potassium::CLI
   desc "Installs a new feature or library"
   command :install do |c|
     c.action do |global_options, options, args|
       if args.first.nil?
-        puts "These are the available recipes you can install:"
-        recipe_name_list.each do |recipe|
-          puts recipe
-        end
+        index = Ask.list('Select a recipe to install', recipe_name_list)
+        ARGV << recipe_name_list[index]
+        Potassium::RecipeGenerator.start
       else
         if recipe_exists?(args)
-          require "potassium/templates/application/recipe_generator"
           Potassium::RecipeGenerator.start
         else
           puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess_recipe_name(args)}"
@@ -33,9 +33,11 @@ module Potassium::CLI
   end
 
   def self.recipe_name_list
-    source_root = File.expand_path('../../../templates/application/recipes', __FILE__)
-    files = Dir.entries(source_root).select { |e| e.end_with?('.rb') }
-    files.map { |e| e.gsub('.rb', '') }
+    @recipe_name_list ||= begin
+      source_root = File.expand_path('../../../templates/application/recipes', __FILE__)
+      files = Dir.entries(source_root).select { |e| e.end_with?('.rb') }
+      files.map { |e| e.gsub('.rb', '') }
+    end
   end
 
   def self.find_closest_recipe(recipe_list, possible_recipe)

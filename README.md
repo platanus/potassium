@@ -24,7 +24,7 @@ Use the `potassium install` command to add a recipe to a project:
 
     $ potassium install i18n
 
-You can run the command on its own to view all the available recipes:
+You can run the command on its own to view all the available recipes and select one:
 
     $ potassium install
 
