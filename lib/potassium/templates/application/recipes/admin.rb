@@ -24,6 +24,13 @@ if get(:admin_mode)
 
       line = "@import \"active_admin/base\";"
       style = "app/assets/stylesheets/active_admin.css.scss"
+
+      style = if File.exist?(Rails.root.join(style))
+        style
+      else
+        "app/assets/stylesheets/active_admin.scss"
+      end
+
       gsub_file style, /(#{Regexp.escape(line)})/mi do |match|
         <<-HERE.gsub(/^ {11}/, '')
            #{line}
