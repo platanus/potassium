@@ -25,7 +25,7 @@ if get(:admin_mode)
       line = "@import \"active_admin/base\";"
       style = "app/assets/stylesheets/active_admin.css.scss"
 
-      style = if File.exist?(Rails.root.join(style))
+      style = if File.exist?(style)
         style
       else
         "app/assets/stylesheets/active_admin.scss"
