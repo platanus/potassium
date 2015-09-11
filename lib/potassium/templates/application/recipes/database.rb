@@ -3,11 +3,15 @@ def activate_for_active_record(db)
   copy_file "assets/config/database_#{db[:name]}.yml", 'config/database.yml'
 
   discard_gem 'sqlite3'
-  gather_gem db[:gem_name]
+  if db[:version]
+    gather_gem db[:gem_name], db[:version]
+  else
+    gather_gem db[:gem_name]
+  end
 end
 
 databases = {
-  mysql: { name: 'mysql', gem_name: 'mysql2', relational: true },
+  mysql: { name: 'mysql', gem_name: 'mysql2', version: '~> 0.3.18', relational: true },
   postgresql: { name: 'postgresql', gem_name: 'pg', relational: true }
 }
 
