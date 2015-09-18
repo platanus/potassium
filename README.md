@@ -10,11 +10,23 @@ Just install it globally:
 
 ## Usage
 
-Use the `potassium` command to create a new project:
+### Starting a new project from scratch
+
+Use the `potassium create` command to create a new project:
 
     $ potassium create project-name
 
 It's important to note that it will perform a version check before running to ensure that you're using the latest potassium.
+
+### Adding recipes to an existing project
+
+Use the `potassium install` command to add a recipe to a project:
+
+    $ potassium install i18n
+
+You can run the command on its own to view all the available recipes and select one:
+
+    $ potassium install
 
 ## What's inside Potassium?
 

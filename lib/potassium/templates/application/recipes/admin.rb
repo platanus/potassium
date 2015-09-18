@@ -1,5 +1,5 @@
-if get(:admin_mode)
-  if equals?(:authentication, :devise)
+if selected?(:admin_mode)
+  if selected?(:authentication, :devise)
     gather_gem 'activeadmin', github: 'activeadmin'
     gather_gem 'activeadmin_addons'
     gather_gem 'active_skin'

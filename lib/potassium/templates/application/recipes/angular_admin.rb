@@ -1,4 +1,4 @@
-if get(:angular_admin)
+if selected?(:angular_admin)
 
   after(:admin_install) do
     copy_file 'assets/active_admin/init_activeadmin_angular.rb', 'config/initializers/init_activeadmin_angular.rb'

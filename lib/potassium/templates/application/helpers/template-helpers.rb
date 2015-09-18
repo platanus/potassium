@@ -1,4 +1,12 @@
 module TemplateHelpers
+  def load_recipe(recipe)
+    return if exists?(recipe)
+    eval_file "recipes/checks/#{recipe}.rb" rescue Exception
+    eval_file "recipes/dependencies/#{recipe}.rb" rescue Exception
+    eval_file "recipes/asks/#{recipe}.rb" rescue Exception
+    eval_file "recipes/#{recipe}.rb"
+  end
+
   def eval_file(source)
     location = File.expand_path(find_in_source_paths(source))
     unique_name = SecureRandom.hex
