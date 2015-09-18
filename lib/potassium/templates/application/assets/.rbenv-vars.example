@@ -1,3 +1,4 @@
+DB_HOST=
 DB_NAME=<%= get(:underscorized_app_name) %>
 DB_USER=root
 DB_PASSWORD=
