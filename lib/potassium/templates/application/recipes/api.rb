@@ -18,5 +18,10 @@ if get(:api_support)
     copy_file 'assets/api/base_controller.rb', 'app/controllers/api/v1/base_controller.rb'
     copy_file 'assets/api/api_error_concern.rb', 'app/controllers/concerns/api_error_concern.rb'
     copy_file 'assets/api/responder.rb', 'app/responders/api_responder.rb'
+
+    application %{
+      # Enables root API objects
+      ActiveRecord::Base.include_root_in_json = true
+    }
   end
 end
