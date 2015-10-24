@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+Features:
+
+  - Gets ruby version from http://ruby.platan.us/latest
+
 ## 1.4
 
 Features:
