@@ -24,7 +24,7 @@ run_action(:asking) do
 end
 
 run_action(:recipe_loading) do
-  eval_file "recipes/unicorn.rb"
+  eval_file "recipes/puma.rb"
   eval_file "recipes/database.rb"
   eval_file "recipes/readme.rb"
   eval_file "recipes/rbenv.rb"
