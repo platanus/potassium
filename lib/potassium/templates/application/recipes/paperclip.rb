@@ -14,7 +14,7 @@ if selected?(:paperclip)
 end}
   end
 
-  append_to_file '.rbenv-vars.example', 'AWS_BUCKET='
-  append_to_file '.rbenv-vars', 'AWS_BUCKET='
+  append_to_file '.env.example', 'AWS_BUCKET='
+  append_to_file '.env', 'AWS_BUCKET='
 
 end

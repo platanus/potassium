@@ -2,12 +2,6 @@ set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 
-default_env(
-  'DB_NAME' => get(:underscorized_app_name).to_s,
-  'DB_USER' => "root",
-  'DB_PASSWORD' => ''
-)
-
 run_action(:cleaning) do
   clean_gemfile
   gather_gem('spring')
@@ -27,7 +21,8 @@ run_action(:recipe_loading) do
   eval_file "recipes/puma.rb"
   eval_file "recipes/database.rb"
   eval_file "recipes/readme.rb"
-  eval_file "recipes/rbenv.rb"
+  eval_file "recipes/ruby.rb"
+  eval_file "recipes/env.rb"
   eval_file "recipes/bower.rb"
   eval_file "recipes/editorconfig.rb"
   eval_file "recipes/aws_sdk.rb"

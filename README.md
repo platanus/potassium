@@ -32,8 +32,8 @@ You can run the command on its own to view all the available recipes and select 
 
 Potassium Rails apps includes the following gems and technologies:
 
-- [rbenv](https://github.com/sstephenson/rbenv) for managing the project's ruby version.
-- [rbenv-vars](https://github.com/sstephenson/rbenv-vars) for keeping secrets and by-server configurations.
+- [Ruby](https://www.ruby-lang.org) Set the project ruby version based on http://ruby.platan.us/latest
+- [dotenv](https://github.com/bkeepers/dotenv) load environmental variables in development
 - [Bower](http://bower.io) for frontend assets packages.
 - [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same.
 - [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience.

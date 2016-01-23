@@ -3,6 +3,7 @@
 ## Unreleased
 
 Features:
+  - Use `.env` instead of `.rbenv-vars`
   - Use Puma instead of unicorn
   - Gets ruby version from http://ruby.platan.us/latest
   - Adds the install command
