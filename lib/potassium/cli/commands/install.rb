@@ -5,7 +5,7 @@ require "potassium/templates/application/recipe_generator"
 module Potassium::CLI
   desc "Installs a new feature or library"
   command :install do |c|
-    c.action do |global_options, options, args|
+    c.action do |_global_options, _options, args|
       if args.first.nil?
         index = Ask.list('Select a recipe to install', recipe_name_list)
         ARGV << recipe_name_list[index]
@@ -14,7 +14,8 @@ module Potassium::CLI
         if recipe_exists?(args)
           Potassium::RecipeGenerator.start
         else
-          puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess_recipe_name(args)}"
+          guess = guess_recipe_name(args)
+          puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess}"
         end
       end
     end

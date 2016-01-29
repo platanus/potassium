@@ -4,9 +4,7 @@ A Rails application generator from [Platanus](https://github.com/platanus), insp
 
 ## Installation
 
-First, be sure to have Rails 4.2+ installed on your system.
-
-Then, install Potassium globally:
+You have to install Potassium globally:
 
     $ gem install potassium
 
@@ -18,7 +16,7 @@ Use the `potassium create` command to create a new project:
 
     $ potassium create project-name
 
-It's important to note that it will perform a version check before running to ensure that you're using the latest potassium.
+It's important to note that it will perform a version check before running to ensure that you're using the latest potassium. Also, if you feel that it's too slow, you may need to update rubygems: `gem update --system`.
 
 ### Adding recipes to an existing project
 

@@ -1,8 +1,8 @@
 if selected?(:paperclip)
   gather_gem('paperclip', '~> 4.3')
 
-  gsub_file "config/environments/production.rb", /^end$/o do |match|
-    match = %q{
+  gsub_file "config/environments/production.rb", /^end$/o do |_match|
+    %{
 
   # Paperclip support for S3
   config.paperclip_defaults = {

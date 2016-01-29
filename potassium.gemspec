@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Potassium::VERSION
   spec.authors       = ["juliogarciag"]
   spec.email         = ["julioggonz@gmail.com"]
-  spec.summary       = %q{An application generator from Platanus}
-  spec.description   = %q{An application generator from Platanus}
+  spec.summary       = "An application generator from Platanus"
+  spec.description   = "An application generator from Platanus"
   spec.homepage      = "https://github.com/platanus/potassium"
   spec.license       = "MIT"
 
@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_runtime_dependency "rails", Potassium::RAILS_VERSION
   spec.add_runtime_dependency "gli", "~> 2.12.2"
   spec.add_runtime_dependency "inquirer", "~> 0.2"
   spec.add_runtime_dependency "gems", "~> 0.8"

@@ -7,7 +7,7 @@ module Potassium::CLI
                               desc: "Performs a version check before running.",
                               negatable: true
 
-    c.action do |global_options, options, args|
+    c.action do |_global_options, options, _args|
       require "potassium/newest_version_ensurer"
 
       begin_creation = -> do

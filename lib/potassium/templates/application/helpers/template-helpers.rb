@@ -1,10 +1,15 @@
 module TemplateHelpers
   def load_recipe(recipe)
     return if exists?(recipe)
-    eval_file "recipes/checks/#{recipe}.rb" rescue Exception
-    eval_file "recipes/dependencies/#{recipe}.rb" rescue Exception
-    eval_file "recipes/asks/#{recipe}.rb" rescue Exception
+    eval_file_with_rescue "recipes/checks/#{recipe}.rb"
+    eval_file_with_rescue "recipes/dependencies/#{recipe}.rb"
+    eval_file_with_rescue "recipes/asks/#{recipe}.rb"
     eval_file "recipes/#{recipe}.rb"
+  end
+
+  def eval_file_with_rescue(source)
+    eval_file(source)
+  rescue StandardError
   end
 
   def eval_file(source)

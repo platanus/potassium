@@ -11,7 +11,7 @@ module CallbackHelpers
 
   def before(action_name, wrap_in_action: false, &action)
     ensure_callbacks_variables_for_action(action_name)
-    add_callback(action_name, :before, action)
+    add_callback(action_name, :before, wrap_action(action, wrap_in_action))
   end
 
   def run_action(action_name, &action)
@@ -32,7 +32,7 @@ module CallbackHelpers
 
   def wrap_action(action, wrap_in_action)
     return action unless wrap_in_action
-    ->{ run_action(wrap_in_action, &action) }
+    -> { run_action(wrap_in_action, &action) }
   end
 
   def ensure_callbacks_variables_for_action(action_name)

@@ -1,14 +1,6 @@
 module GemHelpers
-
-  def gem_exists?(regex)
-    exists = false
-    File.open("Gemfile").each_line do |line|
-      if line =~ regex
-        exists = true
-        return
-      end
-    end
-    exists
+  def gem_exists?(regexp)
+    File.open("Gemfile").each_line.any? { |line| line =~ regexp }
   end
 
   def gather_gem(name, *attributes)
@@ -20,7 +12,7 @@ module GemHelpers
   end
 
   def discard_gem(name)
-    get(:gems).each do |environments, gems|
+    get(:gems).each do |_environments, gems|
       gems.delete_if do |gem_entry|
         gem_entry[:name] == name
       end

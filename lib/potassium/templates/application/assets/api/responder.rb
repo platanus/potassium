@@ -3,15 +3,15 @@ class ApiResponder < ActionController::Responder
     return display_errors if has_errors?
     return head :no_content if delete?
 
-    display resource, :status_code => status_code
+    display resource, status_code: status_code
   end
 
   private
 
-  def display(resource, given_options = {})
-    controller.render options.merge(given_options).merge({
-      :json => serializer.as_json
-    })
+  def display(_resource, given_options = {})
+    controller.render options.merge(given_options).merge(
+      json: serializer.as_json
+    )
   end
 
   def serializer
@@ -25,14 +25,14 @@ class ApiResponder < ActionController::Responder
 
   def status_code
     return :created if post?
-    return :ok
+    :ok
   end
 
   def display_errors
-    controller.render({
-      :status => :unprocessable_entity,
-      :json => { msg: "invalid_attributes", errors: format_errors }
-    })
+    controller.render(
+      status: :unprocessable_entity,
+      json: { msg: "invalid_attributes", errors: format_errors }
+    )
   end
 
   def format_errors

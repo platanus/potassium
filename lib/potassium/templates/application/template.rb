@@ -2,11 +2,11 @@ set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 
-default_env({
-  'DB_NAME' => "#{get(:underscorized_app_name)}",
+default_env(
+  'DB_NAME' => get(:underscorized_app_name).to_s,
   'DB_USER' => "root",
   'DB_PASSWORD' => ''
-})
+)
 
 run_action(:cleaning) do
   clean_gemfile

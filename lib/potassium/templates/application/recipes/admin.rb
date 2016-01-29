@@ -4,12 +4,12 @@ if selected?(:admin_mode)
     gather_gem 'activeadmin_addons'
     gather_gem 'active_skin'
 
-    after(:gem_install, :wrap_in_action => :admin_install) do
+    after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install"
 
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
-      gsub_file initializer, /(#{Regexp.escape(line)})/mi do |match|
+      gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
         <<-HERE.gsub(/^ {11}/, '')
            class CustomFooter < ActiveAdmin::Component
              def build
@@ -25,13 +25,9 @@ if selected?(:admin_mode)
       line = "@import \"active_admin/base\";"
       style = "app/assets/stylesheets/active_admin.css.scss"
 
-      style = if File.exist?(style)
-        style
-      else
-        "app/assets/stylesheets/active_admin.scss"
-      end
+      style = File.exist?(style) ? style : "app/assets/stylesheets/active_admin.scss"
 
-      gsub_file style, /(#{Regexp.escape(line)})/mi do |match|
+      gsub_file style, /(#{Regexp.escape(line)})/mi do |_match|
         <<-HERE.gsub(/^ {11}/, '')
            #{line}
            $skinActiveColor: #001CEE;

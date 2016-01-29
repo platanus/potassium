@@ -1,5 +1,5 @@
 authorization_framework = {
-  pundit: ->{
+  pundit: -> do
     gather_gem 'pundit'
 
     after(:gem_install) do
@@ -17,14 +17,17 @@ authorization_framework = {
           "config.authorization_adapter = ActiveAdmin::PunditAdapter\n"
         end
 
-        template "assets/active_admin/pundit_page_policy.rb", "app/policies/active_admin/page_policy.rb"
-        template "assets/active_admin/comment_policy.rb", "app/policies/active_admin/comment_policy.rb"
-        template "assets/active_admin/admin_user_policy.rb", "app/policies/admin_user_policy.rb"
+        template "assets/active_admin/pundit_page_policy.rb",
+          "app/policies/active_admin/page_policy.rb"
+        template "assets/active_admin/comment_policy.rb",
+          "app/policies/active_admin/comment_policy.rb"
+        template "assets/active_admin/admin_user_policy.rb",
+          "app/policies/admin_user_policy.rb"
       end
     end
-  }
+  end
 }
 
 if get(:authorization)
-  instance_exec(&(authorization_framework[get(:authorization)] || ->{ }))
+  instance_exec(&(authorization_framework[get(:authorization)] || -> {}))
 end

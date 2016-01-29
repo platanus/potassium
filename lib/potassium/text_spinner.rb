@@ -5,7 +5,7 @@ module Potassium
       :counter, :started
 
     DEFAULT_ATTRIBUTES = {
-      wait_condition: -> { },
+      wait_condition: -> {},
       base_message: "",
       interval: 0.4,
       message_continuations: ["", ".", "..", "..."]
@@ -13,7 +13,7 @@ module Potassium
 
     def initialize(attributes = {})
       DEFAULT_ATTRIBUTES.merge(attributes).each do |key, value|
-        self.public_send("#{key}=", value)
+        public_send("#{key}=", value)
       end
       self.started = false
       self.counter = 0
@@ -45,7 +45,7 @@ module Potassium
     end
 
     def clear_message
-      print "\r#{" " * (base_message.size * 2)}\r"
+      print "\r#{' ' * (base_message.size * 2)}\r"
     end
 
     def already_started_message

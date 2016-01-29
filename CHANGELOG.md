@@ -68,8 +68,3 @@ Features:
 
 Bugfixes:
   - Removed `default_command` call to fix --version usage.
-
-## 1.3.4
-
-Bugfixes:
-  - Removed `rails` from the runtime dependencies due to terrible performance.
