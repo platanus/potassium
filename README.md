@@ -4,7 +4,9 @@ A Rails application generator from [Platanus](https://github.com/platanus), insp
 
 ## Installation
 
-Just install it globally:
+First, be sure to have Rails 4.2+ installed on your system.
+
+Then, install Potassium globally:
 
     $ gem install potassium
 
