@@ -1,4 +1,4 @@
-gather_gems(:production) do
+gather_gems(:production, :staging) do
   gather_gem 'puma'
 end
 
