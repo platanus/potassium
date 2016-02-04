@@ -15,9 +15,11 @@ run_action(:asking) do
   eval_file "recipes/asks/i18n.rb"
   eval_file "recipes/asks/api.rb"
   eval_file "recipes/asks/paperclip.rb"
+  eval_file "recipes/asks/heroku.rb"
 end
 
 run_action(:recipe_loading) do
+  eval_file "recipes/heroku.rb"
   eval_file "recipes/puma.rb"
   eval_file "recipes/database.rb"
   eval_file "recipes/readme.rb"
