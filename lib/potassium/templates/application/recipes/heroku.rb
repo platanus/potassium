@@ -4,4 +4,5 @@ if get(:heroku)
   end
 
   copy_file 'assets/Procfile', 'Procfile'
+  copy_file 'assets/.buildpacks', '.buildpacks'
 end
