@@ -1,2 +1,2 @@
 remove_file "README.rdoc"
-create_file "README.md", "TODO: write an awesome README file"
+template "assets/README.md.erb", "README.md"
