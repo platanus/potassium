@@ -1,6 +1,6 @@
 def activate_for_active_record(db)
   remove_file 'config/database.yml'
-  copy_file "assets/config/database_#{db[:name]}.yml", 'config/database.yml'
+  template "assets/config/database_#{db[:name]}.yml.erb", 'config/database.yml'
 
   discard_gem 'sqlite3'
   if db[:version]
@@ -15,7 +15,7 @@ databases = {
   postgresql: { name: 'postgresql', gem_name: 'pg', relational: true }
 }
 
-if db = databases[get(:database).to_sym]
+if db = databases[get(:database)]
   if db[:relational]
     activate_for_active_record(db)
   end

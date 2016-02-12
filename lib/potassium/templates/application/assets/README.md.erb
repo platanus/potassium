@@ -1,0 +1,56 @@
+# <%= get(:titleized_app_name) %>
+This is a Rails application, initially generated using [Potassium](https://github.com/platanus/potassium) by Platanus.
+
+## Local installation
+Assuming you've just cloned the repo:
+- Run 'bundle' to get your gems ready.
+<% if(selected?(:database,:mysql) || selected?(:database,:postgresql))-%>
+- Make sure you have <%=get(:database).to_s.titleize%> running on your computer, or configure an external <%=get(:database).to_s.titleize%> endpoint to work with.
+<% end-%>
+- Run 'rake db:setup' to create your tables.
+- Run 'rails s' and watch puma start
+
+## External services
+TODO: add external services here
+
+## Deployment
+<% if selected?(:heroku) %>
+This project is pre-configured to be (easily) deployed to Heroku servers, but needs you to have the Potassium binary installed. If you don't, then run:
+```shell
+$ gem install potassium
+```
+- Then, make sure you have the permissions required to create an app on the Platanus Heroku Account. Right now, this means having access to the Platanus Founders shared 1Password vault :)
+- Then run
+```shell
+$ potassium heroku create
+```
+this will create the app on heroku, create a pipeline and link the app to the pipeline.
+
+You'll still have to manually log in to the heroku dahsboard, go to the new pipeline and 'configure automatic deploys' using Github
+
+![Hint](https://cloud.githubusercontent.com/assets/313750/13019759/fa86c8ca-d1af-11e5-8869-cd2efb5513fa.png)
+
+Remember to connect each stage to the corresponding branch:
+
+1. Staging -> Master
+2. Production -> Production
+
+<% end-%>
+
+## Internal dependencies
+<% if selected?(:authentication, :devise) %>
+### Authentication
+We are using the great [Devise](https://github.com/plataformatec/devise) library by [PlataformaTec](http://plataformatec.com.br/)
+<%= selected?(:authentication_model) ? "and contains a built-in **#{get(':authentication_model')}** Model" : "" -%>
+<% end-%>
+<% if selected?(:authorization, :pundit)%>
+### Authorization
+For defining which parts of the system each user has access to, we have chosen to include the [Pundit](https://github.com/elabs/pundit) gem, by [Elabs](http://elabs.se/).
+<% end-%>
+<% if selected?(:paperclip) %>
+### Uploads
+For managing uploads, this project uses [Paperclip](https://github.com/thoughtbot/paperclip), a gem made by the awesome [Thoughbot](https://thoughtbot.com/) team.
+<% end-%>
+### Admin
+As a way to speed up development of an admin interface, we're using [ActiveAdmin](https://github.com/activeadmin/activeadmin)
+

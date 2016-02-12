@@ -18,7 +18,8 @@ authentication_framework = {
         "config.mailer_sender = ENV['DEFAULT_EMAIL_ADDRESS']"
       end
 
-      append_to_file '.rbenv-vars.example', 'DEVISE_SECRET_KEY='
+      append_to_file '.env.example', 'DEVISE_SECRET_KEY='
+      append_to_file '.env', 'DEVISE_SECRET_KEY='
     end
   end
 }

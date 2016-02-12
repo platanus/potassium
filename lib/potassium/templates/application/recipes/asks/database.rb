@@ -1,9 +1,9 @@
 databases = {
-  "MySQL" => "mysql",
-  "PostgreSQL" => "postgresql",
-  "None, thanks" => "none"
+  mysql: "MySQL",
+  postgresql: "PostgreSQL",
+  none: "None, thanks"
 }
 
-database = databases.values[Ask.list("Which database are you using?", databases.keys)]
+database = databases.keys[Ask.list("Which database are you using?", databases.values)]
 
 set :database, database
