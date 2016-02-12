@@ -15,7 +15,7 @@ databases = {
   postgresql: { name: 'postgresql', gem_name: 'pg', relational: true }
 }
 
-if db = databases[get(:database).to_sym]
+if db = databases[get(:database)]
   if db[:relational]
     activate_for_active_record(db)
   end
