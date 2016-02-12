@@ -7,6 +7,8 @@ Features:
   - Use Puma instead of unicorn
   - Gets ruby version from http://ruby.platan.us/latest
   - Adds the install command
+  - Adds heroku buildpack support using the [multi buildpack](http://github.com/ddollar/heroku-buildpack-multi)
+  - Adds `rack-timeout` to prevent long running requests
 
 ## 1.3
 
