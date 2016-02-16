@@ -75,5 +75,6 @@ module GemHelpers
 
   def fix_withespace_issues
     gsub_file("Gemfile", /^group/, "\ngroup")
+    gsub_file("Gemfile", /^\n\n/, "\n")
   end
 end

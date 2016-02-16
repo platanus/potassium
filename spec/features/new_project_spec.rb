@@ -9,13 +9,15 @@ RSpec.describe "A new project" do
     create_dummy_project
   end
 
-  it "is bundled" do
+  it "is correctly bundled" do
     expect { on_project { `bundle exec rails -v` } }.to_not output.to_stderr
   end
 
   it "is a valid rubocop project" do
-    options, paths = RuboCop::Options.new.parse([project_path.to_s])
-    runner = RuboCop::Runner.new(options, RuboCop::ConfigStore.new)
-    expect(runner.run(paths)).to eq(true)
+    on_project do
+      options, paths = RuboCop::Options.new.parse(["."])
+      runner = RuboCop::Runner.new(options, RuboCop::ConfigStore.new)
+      expect(runner.run(paths)).to eq(true)
+    end
   end
 end
