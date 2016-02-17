@@ -9,6 +9,7 @@ Features:
   - Adds the install command
   - Adds heroku buildpack support using the [multi buildpack](http://github.com/ddollar/heroku-buildpack-multi)
   - Adds `rack-timeout` to prevent long running requests
+  - Adds [deploy-tasks buildpack](http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks) mainly to perform migrations, [#39](http://github.com/platanus/potassium/pull/39)
 
 ## 1.3
 
