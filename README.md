@@ -79,11 +79,12 @@ When you choose to deploy to heroku a few extra things are added for the project
 - Adds a `.buildpacks` file with the default buildpacks to use. It use the
   following buildpacks:
 
-  1. [ruby-version][heroku-buildpack-ruby-version] to support the use of the
-  `.ruby-version` file to tell heroku with ruby version to user
-  1. [bower][heroku-buildpack-bower] to make sure `bower install` is run before the
-  assets precompilation process
-  1. [ruby][heroku-buildpack-ruby] as the base buildpack to run ruby applications
+  | index | buildpack | description |
+  |-------|-----------|-------------|
+  | 1.    | [bower][heroku-buildpack-bower] | to make sure `bower install` run before the assets precompilation task |
+  | 2.    | [ruby-version][heroku-buildpack-ruby-version] | to support the use of `.ruby-version` file to instruct heroku which ruby version to use |
+  | 3.    | [ruby][heroku-buildpack-ruby] | the base buildpack to run ruby applications |
+  | 4.    | [ruby-deploy-tasks][buildpack-deploy-tasks] | to run rake task after the deployment is complete, for example `db:migrate` |
 
   **Note**: You need to set your app buildpack with the [multi-buildpack][heroku-buildpack-multi]
 
@@ -94,6 +95,7 @@ When you choose to deploy to heroku a few extra things are added for the project
 [heroku-buildpack-bower]: http://github.com/platanus/heroku-buildpack-bower
 [heroku-buildpack-ruby]: http://github.com/heroku/heroku-buildpack-ruby
 [heroku-buildpack-multi]: http://github.com/ddollar/heroku-buildpack-multi
+[buildpack-deploy-tasks]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
 
 ## Contributing
 
