@@ -52,6 +52,7 @@ The following optional integrations are added too:
 - [ActiveAdmin](http://activeadmin.info) for admin interfaces.
 - [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin.
 - [Pundit](https://github.com/elabs/pundit) for role-based authorization.
+- [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.
 
 A few more things are added to the project:
 
