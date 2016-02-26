@@ -1,8 +1,10 @@
 languages = {
-  "Spanish" => "es",
-  "English" => "en"
+  es: "Spanish",
+  en: "English"
 }
 
-lang = languages.values[Ask.list("What is the main language of your app?", languages.keys)]
+lang = answer(:lang) do
+  languages.keys[Ask.list("What is the main language of your app?", languages.values)]
+end
 
 set(:lang, lang)

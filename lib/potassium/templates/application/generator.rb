@@ -4,6 +4,10 @@ require "inquirer"
 
 module Potassium
   class ApplicationGenerator < Rails::Generators::AppGenerator
+    class << self
+      attr_accessor :cli_options
+    end
+
     def finish_template
       require_relative "./helpers/template-dsl"
       TemplateDSL.extend_dsl(self, source_path: __FILE__)
