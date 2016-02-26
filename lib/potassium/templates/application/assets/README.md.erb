@@ -61,4 +61,7 @@ For managing uploads, this project uses [Paperclip](https://github.com/thoughtbo
 <% end-%>
 ### Admin
 As a way to speed up development of an admin interface, we're using [ActiveAdmin](https://github.com/activeadmin/activeadmin)
-
+<% if selected?(:delayed_job) %>
+### Queue System
+For managing tasks in the background, this project uses [DelayedJob](https://github.com/collectiveidea/delayed_job)
+<% end-%>
