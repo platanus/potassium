@@ -1,5 +1,5 @@
 if get(:heroku)
-  gather_gems(:development, :test) do
+  gather_gems(:production, :staging) do
     gather_gem('rails_stdout_logging')
   end
 
