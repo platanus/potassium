@@ -14,28 +14,36 @@ module Potassium::CLI
       desc: "Decides which language to use. Available: es, en"
     c.switch "devise",
       desc: "Whether to use Devise for authentication or not",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "devise-user-model",
       desc: "Whether to create a User model for Devise",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "admin",
       desc: "Whether to use ActiveAdmin or not",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "angular-admin",
       desc: "Whether to use Angular within ActiveAdmin or not",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "pundit",
       desc: "Whether to use Pundit for authorization or not",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "api",
       desc: "Whether to apply the API mode or not",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "paperclip",
       desc: "Whether to include Paperclip as dependency",
-      negatable: true
+      negatable: true,
+      default_value: "none"
     c.switch "heroku",
       desc: "Whether to prepare to application for Heroku or not",
-      negatable: true
+      negatable: true,
+      default_value: "none"
 
     c.action do |_global_options, options, _args|
       require "potassium/newest_version_ensurer"
