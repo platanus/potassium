@@ -24,7 +24,7 @@ after(:gem_install) do
   create_file 'spec/support/.keep'
 
   run "guard init"
-  run "bundle binstubs rspec"
+  run "bundle binstubs rspec-core"
 end
 
 raise_delivery_errors_regexp = /config.action_mailer.raise_delivery_errors = false\n/
