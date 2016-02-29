@@ -32,4 +32,17 @@ module TemplateHelpers
   def erase_comments(file)
     gsub_file file, /^\s*#[^\n]*\n/, ''
   end
+
+  # TODO: Refactor to be able to reuse it and reduce the duplication and confusion.
+  def cut_comments(file, limit: 100)
+    gsub_file file, /^\s*#[^\n]*\n/ do |match|
+      if match.size > limit
+        match.partition(/[\w\W]{#{limit - 1}}/).reject(&:blank?).map do |line|
+          (line.size == limit - 1) ? "#{line}-" : "# #{line}"
+        end.join("\n")
+      else
+        match
+      end
+    end
+  end
 end

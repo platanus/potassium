@@ -12,14 +12,14 @@ module PotassiumTestHelpers
   def create_dummy_project
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
-        system("#{potassium_bin} create #{APP_NAME}")
+        run_command("#{potassium_bin} create #{APP_NAME} #{bin_arguments}")
       end
     end
   end
 
   def drop_dummy_database
     return unless File.exist?(project_path)
-    on_project { system("bundle exec rake db:drop") }
+    on_project { run_command("bundle exec rake db:drop") }
   end
 
   def project_path
@@ -44,7 +44,25 @@ module PotassiumTestHelpers
     File.join(root_path, "bin", "potassium")
   end
 
+  def bin_arguments
+    [
+      "--db=mysql",
+      "--lang=es",
+      "--no-devise",
+      "--no-admin",
+      "--no-pundit",
+      "--no-paperclip",
+      "--no-api",
+      "--no-heroku",
+      "--no-delayed-job"
+    ].join(" ")
+  end
+
   def root_path
     File.expand_path("../../../", __FILE__)
+  end
+
+  def run_command(command)
+    system(command)
   end
 end

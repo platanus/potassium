@@ -44,6 +44,10 @@ module Potassium::CLI
       desc: "Whether to prepare to application for Heroku or not",
       negatable: true,
       default_value: "none"
+    c.switch "delayed-job",
+      desc: "Whether to use DelayedJob or not",
+      negatable: true,
+      default_value: "none"
 
     c.action do |_global_options, options, _args|
       require "potassium/newest_version_ensurer"

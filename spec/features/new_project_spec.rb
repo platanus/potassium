@@ -1,6 +1,5 @@
 require "spec_helper"
 require "rubocop"
-require "pry"
 
 RSpec.describe "A new project" do
   before(:all) do
