@@ -4,6 +4,8 @@ databases = {
   none: "None, thanks"
 }
 
-database = databases.keys[Ask.list("Which database are you using?", databases.values)]
+database = answer(:db) do
+  databases.keys[Ask.list("Which database are you using?", databases.values)]
+end
 
-set :database, database
+set :database, database.to_sym

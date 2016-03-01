@@ -10,13 +10,11 @@ module Potassium::CLI
         index = Ask.list('Select a recipe to install', recipe_name_list)
         ARGV << recipe_name_list[index]
         Potassium::RecipeGenerator.start
+      elsif recipe_exists?(args)
+        Potassium::RecipeGenerator.start
       else
-        if recipe_exists?(args)
-          Potassium::RecipeGenerator.start
-        else
-          guess = guess_recipe_name(args)
-          puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess}"
-        end
+        guess = guess_recipe_name(args)
+        puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess}"
       end
     end
   end

@@ -30,7 +30,6 @@ module Potassium
           sleep interval
           self.counter += 1
         end
-        clear_message
         self.started = false
       end
     end
@@ -42,10 +41,6 @@ module Potassium
         message_continuations[counter % message_continuations.size]
       end
       print "\r#{base_message}#{message_continuation}"
-    end
-
-    def clear_message
-      print "\r#{' ' * (base_message.size * 2)}\r"
     end
 
     def already_started_message

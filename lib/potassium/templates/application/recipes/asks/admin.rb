@@ -1,7 +1,9 @@
 if selected?(:authentication, :devise)
-  admin_mode = Ask.confirm "Do you want to use ActiveAdmin?"
+  admin_mode = answer(:admin) { Ask.confirm("Do you want to use ActiveAdmin?") }
   if admin_mode
-    angular_admin = Ask.confirm "Do you want Angular support for ActiveAdmin?"
+    angular_admin = answer(:"angular-admin") do
+      Ask.confirm "Do you want Angular support for ActiveAdmin?"
+    end
     set(:angular_admin, angular_admin)
   end
 

@@ -1,2 +1,2 @@
-AllCops:
-  RunRailsCops: false
+Rails:
+  Enabled: false
