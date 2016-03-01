@@ -6,6 +6,7 @@ if selected?(:delayed_job)
 
   after(:gem_install) do
     generate "delayed_job:active_record"
+    run "bundle binstubs delayed_job"
 
     if selected?(:heroku)
       gsub_file "Procfile", /^.*$/m do |match|

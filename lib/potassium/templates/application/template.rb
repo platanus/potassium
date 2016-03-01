@@ -4,7 +4,7 @@ set :underscorized_app_name, get(:app_name).underscore
 
 run_action(:cleaning) do
   clean_gemfile
-  gather_gem('spring')
+  gather_gem("spring")
 end
 
 run_action(:asking) do
