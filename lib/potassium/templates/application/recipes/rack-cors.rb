@@ -5,9 +5,9 @@ after(:gem_install) do
       allow do
         origins '*'
         resource '*',
-          :headers => :any,
-          :expose  => ['X-Page', 'X-PageTotal'],
-          :methods => [:get, :post, :delete, :put, :options]
+          headers: :any,
+          expose: ['X-Page', 'X-PageTotal'],
+          methods: [:get, :post, :delete, :put, :options]
       end
     end
   }
