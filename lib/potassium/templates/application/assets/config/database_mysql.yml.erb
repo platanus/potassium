@@ -3,8 +3,8 @@ development: &default
   database: <%= get(:underscorized_app_name) %>_development
   encoding: utf8
   username: root
-  host: <%%= ENV["BOXEN_MYSQL_HOST"] || "127.0.0.1" %>
-  port: <%%= ENV["BOXEN_MYSQL_PORT"] || 3306 %>
+  host: <%%= ENV["BOXEN_MYSQL_HOST"] || ENV["MYSQL_HOST"] || "127.0.0.1" %>
+  port: <%%= ENV["BOXEN_MYSQL_PORT"] || ENV["MYSQL_PORT"] || 3306 %>
   min_messages: warning
   pool: <%%= Integer(ENV.fetch("DB_POOL", 5)) %>
   reaping_frequency: <%%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
