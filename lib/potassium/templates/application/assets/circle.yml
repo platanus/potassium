@@ -1,0 +1,16 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker-compose -f docker-compose.ci.yml pull
+    - docker-compose -f docker-compose.ci.yml build test
+
+database:
+  override:
+    - echo "Skipping database"
+
+test:
+  override:
+    - bin/cibuild
