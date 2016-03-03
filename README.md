@@ -77,6 +77,8 @@ When you choose to deploy to heroku a few extra things are added for the project
   to configure the app to log to standard out,
   which is how [Heroku's logging][heroku-logging] works.
 - Adds a [Procfile][procfile] to define the processes to run in heroku
+- Setup continuous integration in [CircleCI](circle-ci) to run tests. It use
+  docker to maintain better parity between testing and production environments
 - Adds a `.buildpacks` file with the default buildpacks to use. It use the
   following buildpacks:
 
@@ -97,6 +99,7 @@ When you choose to deploy to heroku a few extra things are added for the project
 [heroku-buildpack-ruby]: http://github.com/heroku/heroku-buildpack-ruby
 [heroku-buildpack-multi]: http://github.com/ddollar/heroku-buildpack-multi
 [buildpack-deploy-tasks]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
+[circle-ci]: https://circleci.com
 
 ## Contributing
 
