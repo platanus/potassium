@@ -9,10 +9,11 @@ module PotassiumTestHelpers
     FileUtils.mkdir_p(tmp_path)
   end
 
-  def create_dummy_project
+  def create_dummy_project(arguments = {})
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
-        run_command("#{potassium_bin} create #{APP_NAME} #{bin_arguments}")
+        full_arguments = hash_to_arguments(default_arguments.merge(arguments))
+        run_command("#{potassium_bin} create #{APP_NAME} #{full_arguments}")
       end
     end
   end
@@ -44,18 +45,30 @@ module PotassiumTestHelpers
     File.join(root_path, "bin", "potassium")
   end
 
-  def bin_arguments
-    [
-      "--db=mysql",
-      "--lang=es",
-      "--no-devise",
-      "--no-admin",
-      "--no-pundit",
-      "--no-paperclip",
-      "--no-api",
-      "--no-heroku",
-      "--no-delayed-job"
-    ].join(" ")
+  def default_arguments
+    {
+      "db" => "mysql",
+      "lang" => "es",
+      "heroku" => false,
+      "admin" => false,
+      "pundit" => false,
+      "paperclip" => false,
+      "devise" => false,
+      "api" => false,
+      "delayed-job" => false
+    }
+  end
+
+  def hash_to_arguments(hash)
+    hash.map do |key, value|
+      if value == true
+        "--#{key}"
+      elsif value == false
+        "--no-#{key}"
+      elsif value
+        "--#{key}=#{value}"
+      end
+    end.join(" ")
   end
 
   def root_path

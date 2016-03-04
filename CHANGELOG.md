@@ -7,10 +7,18 @@ Features:
   - Use Puma instead of unicorn
   - Gets ruby version from http://ruby.platan.us/latest
   - Adds the install command
-  - Adds heroku buildpack support using the [multi buildpack](http://github.com/ddollar/heroku-buildpack-multi)
+  - Adds heroku buildpack support using the [multi buildpack](multi-buildpack)
   - Adds `rack-timeout` to prevent long running requests
-  - Adds [deploy-tasks buildpack](http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks) mainly to perform migrations, [#39](http://github.com/platanus/potassium/pull/39)
-  - Add Delayed Jobs to handle background processes [#41]
+  - Adds [deploy-tasks buildpack](deploy-tasks) mainly to perform migrations, [#39]
+  - Add Delayed Jobs to handle background processes, [#41]
+  - Adds continuous integration using [CircleCI](https://circleci.com)
+  and docker, [#51]
+
+[multi-buildpack]: http://github.com/ddollar/heroku-buildpack-multi
+[deploy-tasts]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
+[#39]: http://github.com/platanus/potassium/pull/39
+[#41]: http://github.com/platanus/potassium/pull/41
+[#51]: http://github.com/platanus/potassium/pull/51
 
 ## 1.3
 

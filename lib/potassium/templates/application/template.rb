@@ -1,6 +1,7 @@
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
+set :dasherized_app_name, get(:app_name).dasherize
 
 run_action(:cleaning) do
   clean_gemfile
@@ -44,6 +45,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/api.rb"
   eval_file "recipes/rack-cors.rb"
   eval_file "recipes/paperclip.rb"
+  eval_file "recipes/ci.rb"
   eval_file "recipes/cleanup.rb"
 end
 

@@ -1,4 +1,4 @@
-# <%= get(:titleized_app_name) %>
+# <%= get(:titleized_app_name) %> <% if selected?(:heroku) %>[![Circle CI](https://circleci.com/gh/platanus/<%= get(:dasherized_app_name)%>.svg?style=svg)](https://circleci.com/gh/platanus/<%= get(:dasherized_app_name)%>)<% end-%>
 This is a Rails application, initially generated using [Potassium](https://github.com/platanus/potassium) by Platanus.
 
 ## Local installation
@@ -13,8 +13,8 @@ Assuming you've just cloned the repo:
 ## External services
 TODO: add external services here
 
-## Deployment
 <% if selected?(:heroku) %>
+## Deployment
 This project is pre-configured to be (easily) deployed to Heroku servers, but needs you to have the Potassium binary installed. If you don't, then run:
 ```shell
 $ gem install potassium
@@ -43,6 +43,16 @@ Remember to connect each stage to the corresponding branch:
 2. Production -> Production
 
 That's it. You should already have a running app and each time you push to the corresponding branch, the system will (hopefully) update accordingly.
+
+## Continuous Integrations
+
+The project is setup to run tests
+in [CircleCI](https://circleci.com/gh/platanus/<%= get(:dasherized_app_name)%>/tree/master)
+
+You can also run the test locally simulating the production environment using docker.
+Just make sure you have docker installed and run:
+
+    bin/cibuild
 <% end-%>
 
 ## Internal dependencies

@@ -4,6 +4,7 @@ module TemplateDSL
     require_relative './variable-helpers'
     require_relative './environment-helpers'
     require_relative './gem-helpers'
+    require_relative './docker-helpers'
     require_relative './callback-helpers'
     require_relative './answer-helpers'
 

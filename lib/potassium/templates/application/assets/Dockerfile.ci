@@ -1,0 +1,4 @@
+FROM platanus/buildstep
+EXPOSE 3000
+
+RUN /exec bundle install --with test

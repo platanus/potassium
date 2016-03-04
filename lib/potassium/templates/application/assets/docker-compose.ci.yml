@@ -1,0 +1,6 @@
+test:
+  build: .
+  dockerfile: Dockerfile.ci
+  working_dir: '/app'
+  environment:
+    RAILS_ENV: test

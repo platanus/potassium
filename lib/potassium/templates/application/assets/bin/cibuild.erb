@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+DOCKE_COMPOSE_ARGS="-f docker-compose.ci.yml run"
+
+<% if(selected?(:database, :mysql) || selected?(:database, :postgresql))-%>
+function test_<%=get(:database).to_s%> {
+  docker-compose $DOCKE_COMPOSE_ARGS test sh -c 'nc -z $<%=get(:database).to_s.upcase%>_HOST $<%=get(:database).to_s.upcase%>_PORT'
+}
+
+count=0
+# Chain tests together by using &&
+until ( test_<%=get(:database).to_s%> && echo "Services ready" )
+do
+  ((count++))
+  if [ ${count} -gt 50 ]
+  then
+    echo "Services didn't become ready in time"
+    exit 1
+  else
+    echo "Waiting for services to become ready..."
+  fi
+  sleep 0.2
+done
+<% end-%>
+
+docker-compose $DOCKE_COMPOSE_ARGS test /exec bundle exec rake db:setup
+docker-compose $DOCKE_COMPOSE_ARGS test /exec bundle exec rspec spec
