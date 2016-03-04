@@ -1,4 +1,5 @@
 paperclip = load_recipe "paperclip"
+admin = load_recipe "admin"
 
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
@@ -13,7 +14,7 @@ end
 run_action(:asking) do
   eval_file "recipes/asks/database.rb"
   eval_file "recipes/asks/devise.rb"
-  eval_file "recipes/asks/admin.rb"
+  admin.ask
   eval_file "recipes/asks/delayed_job.rb"
   eval_file "recipes/asks/pundit.rb"
   eval_file "recipes/asks/i18n.rb"
@@ -35,7 +36,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/i18n.rb"
   eval_file "recipes/pry.rb"
   eval_file "recipes/devise.rb"
-  eval_file "recipes/admin.rb"
+  admin.create
   eval_file "recipes/angular_admin.rb"
   eval_file "recipes/delayed_job.rb"
   eval_file "recipes/pundit.rb"

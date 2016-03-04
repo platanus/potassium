@@ -1,12 +1,46 @@
-if selected?(:admin_mode)
-  if selected?(:authentication, :devise)
-    gather_gem 'activeadmin', github: 'activeadmin'
-    gather_gem 'activeadmin_addons'
-    gather_gem 'active_skin'
+class Recipes::Admin < Recipes::Base
+  def ask
+    if t.selected?(:authentication, :devise)
+      admin_mode = t.answer(:admin) { Ask.confirm("Do you want to use ActiveAdmin?") }
+      if admin_mode
+        angular_admin = t.answer(:"angular-admin") do
+          Ask.confirm "Do you want Angular support for ActiveAdmin?"
+        end
+        t.set(:angular_admin, angular_admin)
+      end
 
-    after(:gem_install, wrap_in_action: :admin_install) do
+      t.set(:admin_mode, admin_mode)
+    end
+  end
+
+  def create
+    if t.selected?(:admin_mode)
+      if t.selected?(:authentication, :devise)
+        add_active_admin
+      else
+        t.say "ActiveAdmin can't be installed because Devise isn't enabled.", :yellow
+      end
+    end
+  end
+
+  def install
+    if t.gem_exists?(/devise/)
+      add_active_admin
+    else
+      t.say "ActiveAdmin can't be installed because Devise isn't installed.", :yellow
+      false
+    end
+  end
+
+  private
+
+  def add_active_admin
+    t.gather_gem 'activeadmin', github: 'activeadmin'
+    t.gather_gem 'activeadmin_addons'
+    t.gather_gem 'active_skin'
+
+    t.after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install"
-
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
@@ -24,7 +58,6 @@ if selected?(:admin_mode)
 
       line = "@import \"active_admin/base\";"
       style = "app/assets/stylesheets/active_admin.css.scss"
-
       style = File.exist?(style) ? style : "app/assets/stylesheets/active_admin.scss"
 
       gsub_file style, /(#{Regexp.escape(line)})/mi do |_match|
@@ -38,8 +71,8 @@ if selected?(:admin_mode)
            @import "active_skin";
            HERE
       end
+
+      generate "activeadmin_addons:install"
     end
-  else
-    say "ActiveAdmin can't be installed because Devise isn't enabled.", :red
   end
 end
