@@ -1,15 +1,7 @@
 module TemplateHelpers
   def load_recipe(recipe)
-    return if exists?(recipe)
-    eval_file_with_rescue "recipes/checks/#{recipe}.rb"
-    eval_file_with_rescue "recipes/dependencies/#{recipe}.rb"
-    eval_file_with_rescue "recipes/asks/#{recipe}.rb"
-    eval_file "recipes/#{recipe}.rb"
-  end
-
-  def eval_file_with_rescue(source)
-    eval_file(source)
-  rescue StandardError
+    require_relative "../recipes/#{recipe}"
+    Recipes.const_get(recipe.camelize).new(self)
   end
 
   def eval_file(source)

@@ -1,3 +1,5 @@
+paperclip = load_recipe "paperclip"
+
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
@@ -16,7 +18,7 @@ run_action(:asking) do
   eval_file "recipes/asks/pundit.rb"
   eval_file "recipes/asks/i18n.rb"
   eval_file "recipes/asks/api.rb"
-  eval_file "recipes/asks/paperclip.rb"
+  paperclip.ask
   eval_file "recipes/asks/heroku.rb"
 end
 
@@ -44,8 +46,8 @@ run_action(:recipe_loading) do
   eval_file "recipes/git.rb"
   eval_file "recipes/api.rb"
   eval_file "recipes/rack-cors.rb"
-  eval_file "recipes/paperclip.rb"
   eval_file "recipes/ci.rb"
+  paperclip.create
   eval_file "recipes/cleanup.rb"
 end
 

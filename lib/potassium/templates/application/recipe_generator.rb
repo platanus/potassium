@@ -1,9 +1,15 @@
 require "rails/generators"
 require "rails/generators/rails/app/app_generator"
 require "inquirer"
+require "potassium/recipe"
 
+# TODO: Rename to InstallGenerator
 module Potassium
   class RecipeGenerator < Rails::Generators::NamedBase
+    class << self
+      attr_accessor :cli_options
+    end
+
     def run_generator
       require_relative "./helpers/template-dsl"
       TemplateDSL.extend_dsl(self, source_path: __FILE__)
