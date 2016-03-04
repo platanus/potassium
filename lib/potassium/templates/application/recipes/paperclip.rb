@@ -1,22 +1,16 @@
 class Recipes::Paperclip < Recipes::Base
   def ask
-    self.selected = t.answer(:paperclip) do
-      Ask.confirm("Do you want to use Paperclip for uploads?")
-    end
+    paperclip = t.answer(:paperclip) { Ask.confirm("Do you want to use Paperclip for uploads?") }
+    t.set(:paperclip, paperclip)
   end
 
   def create
-    add_paperclip if selected?
+    add_paperclip if t.selected?(:paperclip)
   end
 
   def install
     add_paperclip
   end
-
-  private
-
-  attr_accessor :selected
-  alias_method :selected?, :selected
 
   def add_paperclip
     t.gather_gem 'paperclip', '~> 4.3'
