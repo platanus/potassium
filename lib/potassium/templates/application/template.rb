@@ -6,6 +6,7 @@ delayed_job = load_recipe "delayed_job"
 pundit = load_recipe "pundit"
 i18n = load_recipe "i18n"
 api = load_recipe "api"
+heroku = load_recipe "heroku"
 
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
@@ -26,11 +27,11 @@ run_action(:asking) do
   i18n.ask
   api.ask
   paperclip.ask
-  eval_file "recipes/asks/heroku.rb"
+  heroku.ask
 end
 
 run_action(:recipe_loading) do
-  eval_file "recipes/heroku.rb"
+  heroku.create
   eval_file "recipes/puma.rb"
   database.create
   eval_file "recipes/readme.rb"
