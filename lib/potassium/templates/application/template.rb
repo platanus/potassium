@@ -3,6 +3,7 @@ devise = load_recipe "devise"
 paperclip = load_recipe "paperclip"
 admin = load_recipe "admin"
 delayed_job = load_recipe "delayed_job"
+pundit = load_recipe "pundit"
 
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
@@ -19,7 +20,7 @@ run_action(:asking) do
   devise.ask
   admin.ask
   delayed_job.ask
-  eval_file "recipes/asks/pundit.rb"
+  pundit.ask
   eval_file "recipes/asks/i18n.rb"
   eval_file "recipes/asks/api.rb"
   paperclip.ask
@@ -42,7 +43,7 @@ run_action(:recipe_loading) do
   admin.create
   eval_file "recipes/angular_admin.rb"
   delayed_job.create
-  eval_file "recipes/pundit.rb"
+  pundit.create
   eval_file "recipes/testing.rb"
   eval_file "recipes/production.rb"
   eval_file "recipes/staging.rb"
