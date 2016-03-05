@@ -1,29 +1,10 @@
-database = load_recipe "database"
-devise = load_recipe "devise"
-paperclip = load_recipe "paperclip"
-admin = load_recipe "admin"
-delayed_job = load_recipe "delayed_job"
-pundit = load_recipe "pundit"
-i18n = load_recipe "i18n"
-api = load_recipe "api"
-heroku = load_recipe "heroku"
-puma = load_recipe "puma"
-readme = load_recipe "readme"
-ruby = load_recipe "ruby"
-env = load_recipe "env"
-bower = load_recipe "bower"
-editorconfig = load_recipe "editorconfig"
-aws_sdk = load_recipe "aws_sdk"
-pry = load_recipe "pry"
-angular_admin = load_recipe "angular_admin"
-testing = load_recipe "testing"
-production = load_recipe "production"
-staging = load_recipe "staging"
-secrets = load_recipe "secrets"
-git = load_recipe "git"
-rack_cors = load_recipe "rack_cors"
-ci = load_recipe "ci"
-cleanup = load_recipe "cleanup"
+Dir.entries(File.expand_path('../recipes', __FILE__)).each do |file_name|
+  if file_name.end_with?('.rb')
+    recipe_name = file_name.gsub('.rb', '')
+    singleton_class.send(:attr_reader, "#{recipe_name}_recipe")
+    instance_variable_set("@#{recipe_name}_recipe", load_recipe(recipe_name))
+  end
+end
 
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
@@ -36,44 +17,44 @@ run_action(:cleaning) do
 end
 
 run_action(:asking) do
-  database.ask
-  devise.ask
-  admin.ask
-  delayed_job.ask
-  pundit.ask
-  i18n.ask
-  api.ask
-  paperclip.ask
-  heroku.ask
+  database_recipe.ask
+  devise_recipe.ask
+  admin_recipe.ask
+  delayed_job_recipe.ask
+  pundit_recipe.ask
+  i18n_recipe.ask
+  api_recipe.ask
+  paperclip_recipe.ask
+  heroku_recipe.ask
 end
 
 run_action(:recipe_loading) do
-  heroku.create
-  puma.create
-  database.create
-  readme.create
-  ruby.create
-  env.create
-  bower.create
-  editorconfig.create
-  aws_sdk.create
-  i18n.create
-  pry.create
-  devise.create
-  admin.create
-  angular_admin.create
-  delayed_job.create
-  pundit.create
-  testing.create
-  production.create
-  staging.create
-  secrets.create
-  git.create
-  api.create
-  rack_cors.create
-  ci.create
-  paperclip.create
-  cleanup.create
+  heroku_recipe.create
+  puma_recipe.create
+  database_recipe.create
+  readme_recipe.create
+  ruby_recipe.create
+  env_recipe.create
+  bower_recipe.create
+  editorconfig_recipe.create
+  aws_sdk_recipe.create
+  i18n_recipe.create
+  pry_recipe.create
+  devise_recipe.create
+  admin_recipe.create
+  angular_admin_recipe.create
+  delayed_job_recipe.create
+  pundit_recipe.create
+  testing_recipe.create
+  production_recipe.create
+  staging_recipe.create
+  secrets_recipe.create
+  git_recipe.create
+  api_recipe.create
+  rack_cors_recipe.create
+  ci_recipe.create
+  paperclip_recipe.create
+  cleanup_recipe.create
 end
 
 say "Gathered enough information. Applying the template. Wait a minute.", :green
