@@ -3,7 +3,6 @@ require "rails/generators/rails/app/app_generator"
 require "inquirer"
 require "potassium/recipe"
 
-# TODO: Rename to InstallGenerator
 module Potassium
   class RecipeGenerator < Rails::Generators::NamedBase
     class << self

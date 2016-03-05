@@ -12,7 +12,7 @@ module Potassium
     def finish_template
       require_relative "./helpers/template-dsl"
       TemplateDSL.extend_dsl(self, source_path: __FILE__)
-      template_location = File.expand_path('./template.rb', File.dirname(__FILE__))
+      template_location = File.expand_path('./application_template.rb', File.dirname(__FILE__))
       instance_eval File.read(template_location), template_location
       super
     end

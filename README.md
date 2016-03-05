@@ -105,7 +105,7 @@ When you choose to deploy to heroku a few extra things are added for the project
 
 ### How do I add something new to Potassium?
 
-In the [lib/potassium/templates/application](lib/potassium/templates/application) folder, you will find [the template](lib/potassium/templates/application/template.rb). You should follow the next conventions to add something:
+In the [lib/potassium/templates/application](lib/potassium/templates/application) folder, you will find [the template](lib/potassium/templates/application/application_template.rb). You should follow the next conventions to add something:
 
 *__NOTE:__ If you only want to use Potassium but not to add something new, the next parts can be easily skipped.*
 
@@ -115,7 +115,7 @@ If you need to ask something to the user before doing something, follow the next
 
 1. Create a ruby file on the [recipes/asks](lib/potassium/templates/application/recipes/asks) folder.
 2. Then, ask something using the methods defined in [Inquirer](https://github.com/arlimus/inquirer.rb), that we use by default. Use the [DSL](docs/dsl.md) to store some information.
-3. Finally, register the **ask** you created in [the template](lib/potassium/templates/application/template.rb):
+3. Finally, register the **ask** you created in [the template](lib/potassium/templates/application/application_template.rb):
 
   ```ruby
   run_action(:asking) do
@@ -126,7 +126,7 @@ If you need to ask something to the user before doing something, follow the next
 
 #### Install
 
-Now, to add some behavior, thanks to the [DSL](docs/dsl.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template](lib/potassium/templates/application/template.rb). The structure looks like this:
+Now, to add some behavior, thanks to the [DSL](docs/dsl.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template](lib/potassium/templates/application/application_template.rb). The structure looks like this:
 
 1. Clean the Gemfile and add the base gems that rails needs to work.
 2. Run all the **asks** recipes.
@@ -155,7 +155,7 @@ For example, if we want to create an optional recipe to add a gem called `banana
   end
   ```
 
-3. Create the **recipe**. Register a gem using `gather_gem` and create a callback to be called after the `gem_install` action succeded to run the generator. `gem_install` is one of the main actions that should be easily visible with a sneak peek in [the template](lib/potassium/templates/application/template.rb).
+3. Create the **recipe**. Register a gem using `gather_gem` and create a callback to be called after the `gem_install` action succeded to run the generator. `gem_install` is one of the main actions that should be easily visible with a sneak peek in [the template](lib/potassium/templates/application/application_template.rb).
 
   ```ruby
   # application/recipes/banana_split.rb
