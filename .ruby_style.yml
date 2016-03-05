@@ -1,2 +1,4 @@
 Rails:
   Enabled: false
+Metrics/MethodLength:
+  Enabled: false
