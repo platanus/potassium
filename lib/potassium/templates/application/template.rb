@@ -5,6 +5,7 @@ admin = load_recipe "admin"
 delayed_job = load_recipe "delayed_job"
 pundit = load_recipe "pundit"
 i18n = load_recipe "i18n"
+api = load_recipe "api"
 
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
@@ -23,7 +24,7 @@ run_action(:asking) do
   delayed_job.ask
   pundit.ask
   i18n.ask
-  eval_file "recipes/asks/api.rb"
+  api.ask
   paperclip.ask
   eval_file "recipes/asks/heroku.rb"
 end
@@ -50,7 +51,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/staging.rb"
   eval_file "recipes/secrets.rb"
   eval_file "recipes/git.rb"
-  eval_file "recipes/api.rb"
+  api.create
   eval_file "recipes/rack-cors.rb"
   eval_file "recipes/ci.rb"
   paperclip.create
