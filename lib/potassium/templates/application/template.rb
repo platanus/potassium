@@ -7,6 +7,23 @@ pundit = load_recipe "pundit"
 i18n = load_recipe "i18n"
 api = load_recipe "api"
 heroku = load_recipe "heroku"
+puma = load_recipe "puma"
+readme = load_recipe "readme"
+ruby = load_recipe "ruby"
+env = load_recipe "env"
+bower = load_recipe "bower"
+editorconfig = load_recipe "editorconfig"
+aws_sdk = load_recipe "aws_sdk"
+pry = load_recipe "pry"
+angular_admin = load_recipe "angular_admin"
+testing = load_recipe "testing"
+production = load_recipe "production"
+staging = load_recipe "staging"
+secrets = load_recipe "secrets"
+git = load_recipe "git"
+rack_cors = load_recipe "rack_cors"
+ci = load_recipe "ci"
+cleanup = load_recipe "cleanup"
 
 set :app_name, @app_name
 set :titleized_app_name, get(:app_name).titleize
@@ -32,31 +49,31 @@ end
 
 run_action(:recipe_loading) do
   heroku.create
-  eval_file "recipes/puma.rb"
+  puma.create
   database.create
-  eval_file "recipes/readme.rb"
-  eval_file "recipes/ruby.rb"
-  eval_file "recipes/env.rb"
-  eval_file "recipes/bower.rb"
-  eval_file "recipes/editorconfig.rb"
-  eval_file "recipes/aws_sdk.rb"
+  readme.create
+  ruby.create
+  env.create
+  bower.create
+  editorconfig.create
+  aws_sdk.create
   i18n.create
-  eval_file "recipes/pry.rb"
+  pry.create
   devise.create
   admin.create
-  eval_file "recipes/angular_admin.rb"
+  angular_admin.create
   delayed_job.create
   pundit.create
-  eval_file "recipes/testing.rb"
-  eval_file "recipes/production.rb"
-  eval_file "recipes/staging.rb"
-  eval_file "recipes/secrets.rb"
-  eval_file "recipes/git.rb"
+  testing.create
+  production.create
+  staging.create
+  secrets.create
+  git.create
   api.create
-  eval_file "recipes/rack-cors.rb"
-  eval_file "recipes/ci.rb"
+  rack_cors.create
+  ci.create
   paperclip.create
-  eval_file "recipes/cleanup.rb"
+  cleanup.create
 end
 
 say "Gathered enough information. Applying the template. Wait a minute.", :green
