@@ -1,3 +1,4 @@
+database = load_recipe "database"
 paperclip = load_recipe "paperclip"
 admin = load_recipe "admin"
 
@@ -12,7 +13,7 @@ run_action(:cleaning) do
 end
 
 run_action(:asking) do
-  eval_file "recipes/asks/database.rb"
+  database.ask
   eval_file "recipes/asks/devise.rb"
   admin.ask
   eval_file "recipes/asks/delayed_job.rb"
@@ -26,7 +27,7 @@ end
 run_action(:recipe_loading) do
   eval_file "recipes/heroku.rb"
   eval_file "recipes/puma.rb"
-  eval_file "recipes/database.rb"
+  database.create
   eval_file "recipes/readme.rb"
   eval_file "recipes/ruby.rb"
   eval_file "recipes/env.rb"
