@@ -57,7 +57,7 @@ run_action(:recipe_loading) do
   cleanup_recipe.create
 end
 
-say "Gathered enough information. Applying the template. Wait a minute.", :green
+info "Gathered enough information. Applying the template. Wait a minute."
 
 run_action(:gem_install) do
   build_gemfile

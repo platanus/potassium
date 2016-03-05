@@ -3,8 +3,8 @@ require 'semantic'
 
 class Recipes::Ruby < Recipes::Base
   def create
-    t.say 'Getting platanus latest ruby version...', :green
-    t.say "Using ruby version #{version_alias}", :green
+    t.info 'Getting platanus latest ruby version...'
+    t.info "Using ruby version #{version_alias}"
     t.create_file '.ruby-version', version_alias
   end
 

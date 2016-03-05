@@ -18,7 +18,7 @@ class Recipes::Admin < Recipes::Base
       if t.selected?(:authentication, :devise)
         add_active_admin
       else
-        t.say "ActiveAdmin can't be installed because Devise isn't enabled.", :yellow
+        t.info "ActiveAdmin can't be installed because Devise isn't enabled."
       end
     end
   end
@@ -27,7 +27,7 @@ class Recipes::Admin < Recipes::Base
     if t.gem_exists?(/devise/)
       add_active_admin
     else
-      t.say "ActiveAdmin can't be installed because Devise isn't installed.", :yellow
+      t.info "ActiveAdmin can't be installed because Devise isn't installed."
       false
     end
   end

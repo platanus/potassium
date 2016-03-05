@@ -7,6 +7,7 @@ module TemplateDSL
     require_relative './docker-helpers'
     require_relative './callback-helpers'
     require_relative './answer-helpers'
+    require_relative './info-helpers'
 
     object.send :extend, TemplateHelpers
     object.send :extend, VariableHelpers
@@ -14,6 +15,7 @@ module TemplateDSL
     object.send :extend, GemHelpers
     object.send :extend, CallbackHelpers
     object.send :extend, AnswerHelpers
+    object.send :extend, InfoHelpers
 
     object.send :source_path, source_path
     object.load_answers
