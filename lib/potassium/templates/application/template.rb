@@ -1,4 +1,5 @@
 database = load_recipe "database"
+devise = load_recipe "devise"
 paperclip = load_recipe "paperclip"
 admin = load_recipe "admin"
 
@@ -14,7 +15,7 @@ end
 
 run_action(:asking) do
   database.ask
-  eval_file "recipes/asks/devise.rb"
+  devise.ask
   admin.ask
   eval_file "recipes/asks/delayed_job.rb"
   eval_file "recipes/asks/pundit.rb"
@@ -36,7 +37,7 @@ run_action(:recipe_loading) do
   eval_file "recipes/aws_sdk.rb"
   eval_file "recipes/i18n.rb"
   eval_file "recipes/pry.rb"
-  eval_file "recipes/devise.rb"
+  devise.create
   admin.create
   eval_file "recipes/angular_admin.rb"
   eval_file "recipes/delayed_job.rb"
