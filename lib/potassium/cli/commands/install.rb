@@ -1,6 +1,7 @@
 require 'levenshtein'
 require 'inquirer'
-require "potassium/templates/application/recipe_generator"
+require 'potassium/templates/application/recipe_generator'
+require 'potassium/recipe'
 
 module Potassium::CLI
   desc "Installs a new feature or library"
@@ -36,11 +37,19 @@ module Potassium::CLI
   end
 
   def self.recipe_name_list
-    @recipe_name_list ||= begin
-      source_root = File.expand_path('../../../templates/application/recipes', __FILE__)
-      files = Dir.entries(source_root).select { |e| e.end_with?('.rb') }
-      files.map { |e| e.gsub('.rb', '') }
+    list = []
+
+    source_root = File.expand_path('../../../templates/application/recipes', __FILE__)
+    Dir.entries(source_root).each do |file_name|
+      if file_name.end_with?('.rb')
+        recipe_name = file_name.gsub('.rb', '')
+        require "potassium/templates/application/recipes/#{recipe_name}"
+        recipe_class = Recipes.const_get(recipe_name.camelize)
+        list << recipe_name if recipe_class.method_defined?(:install)
+      end
     end
+
+    list
   end
 
   def self.find_closest_recipe(recipe_list, possible_recipe)

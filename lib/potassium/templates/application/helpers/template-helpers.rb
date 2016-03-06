@@ -1,7 +1,11 @@
 module TemplateHelpers
   def load_recipe(recipe)
+    get_recipe_class(recipe).new(self)
+  end
+
+  def get_recipe_class(recipe)
     require_relative "../recipes/#{recipe}"
-    Recipes.const_get(recipe.camelize).new(self)
+    Recipes.const_get(recipe.camelize)
   end
 
   def eval_file(source)
