@@ -52,6 +52,10 @@ class Recipes::Devise < Recipes::Base
         "config.mailer_sender = ENV['DEFAULT_EMAIL_ADDRESS']"
       end
 
+      gsub_file "config/initializers/devise.rb", /(\# config.pepper.+)/i do |_match|
+        "# config.pepper = 'onhcylrat7x8bjyr5o15sxaix3vbu0sl'"
+      end
+
       append_to_file '.env.example', 'DEVISE_SECRET_KEY='
       append_to_file '.env', 'DEVISE_SECRET_KEY='
     end
