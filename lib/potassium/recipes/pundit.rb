@@ -20,8 +20,12 @@ class Recipes::Pundit < Recipes::Base
   end
 
   def install
-    run_pundit_installer
-    install_admin_pundit if t.gem_exists?(/activeadmin/)
+    if t.gem_exists?(/pundit/)
+      t.info "Pundit is already installed"
+    else
+      run_pundit_installer
+      install_admin_pundit if t.gem_exists?(/activeadmin/)
+    end
   end
 
   def run_pundit_installer

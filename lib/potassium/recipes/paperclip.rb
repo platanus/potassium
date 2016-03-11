@@ -9,7 +9,11 @@ class Recipes::Paperclip < Recipes::Base
   end
 
   def install
-    add_paperclip
+    if t.gem_exists?(/paperclip/)
+      t.info "Paperclip is already installed"
+    else
+      add_paperclip
+    end
   end
 
   def add_paperclip

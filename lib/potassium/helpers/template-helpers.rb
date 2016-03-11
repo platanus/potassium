@@ -41,4 +41,14 @@ module TemplateHelpers
       end
     end
   end
+
+  def file_exist?(file_path)
+    full_path = File.join(destination_root, file_path)
+    File.exist?(full_path)
+  end
+
+  def dir_exist?(dir_path)
+    full_path = File.join(destination_root, dir_path)
+    Dir.exist?(full_path)
+  end
 end

@@ -17,10 +17,12 @@ class Recipes::Admin < Recipes::Base
   end
 
   def install
-    if t.gem_exists?(/devise/)
+    if t.gem_exists?(/activeadmin/)
+      t.info "ActiveAdmin is already installed"
+    elsif t.gem_exists?(/devise/)
       add_active_admin
     else
-      t.error "ActiveAdmin can't be installed because Devise isn't installed."
+      t.info "ActiveAdmin can't be installed because Devise isn't installed."
     end
   end
 

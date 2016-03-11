@@ -9,7 +9,11 @@ class Recipes::Heroku < Recipes::Base
   end
 
   def install
-    add_heroku
+    if t.gem_exists?(/rails_stdout_logging/)
+      t.info "Heroku is already installed"
+    else
+      add_heroku
+    end
   end
 
   private

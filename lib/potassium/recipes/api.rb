@@ -9,7 +9,11 @@ class Recipes::Api < Recipes::Base
   end
 
   def install
-    add_api
+    if t.gem_exists?(/versionist/)
+      t.info "API related stuff are already installed"
+    else
+      add_api
+    end
   end
 
   private

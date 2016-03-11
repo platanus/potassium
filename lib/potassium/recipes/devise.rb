@@ -15,8 +15,12 @@ class Recipes::Devise < Recipes::Base
   end
 
   def install
-    ask_for_devise_model
-    add_devise
+    if t.gem_exists?(/devise/)
+      t.info "Devise is already installed"
+    else
+      ask_for_devise_model
+      add_devise
+    end
   end
 
   private

@@ -18,10 +18,12 @@ class Recipes::AngularAdmin < Recipes::Base
   end
 
   def install
-    if t.gem_exists?(/activeadmin/)
+    if t.dir_exist?("app/assets/javascripts/admin")
+      t.info "ActiveAdmin is already installed"
+    elsif t.gem_exists?(/activeadmin/)
       add_angular_admin
     else
-      t.error "ActiveAdmin can't be installed because Active Admin isn't installed."
+      t.info "ActiveAdmin can't be installed because Active Admin isn't installed."
     end
   end
 

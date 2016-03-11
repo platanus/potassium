@@ -9,8 +9,12 @@ class Recipes::DelayedJob < Recipes::Base
   end
 
   def install
-    t.set(:heroku, t.gem_exists?(/rails_stdout_logging/))
-    add_delayed_job
+    if t.gem_exists?(/delayed_job_active_record/)
+      t.info "Delayed Job is already installed"
+    else
+      t.set(:heroku, t.gem_exists?(/rails_stdout_logging/))
+      add_delayed_job
+    end
   end
 
   private
