@@ -32,8 +32,7 @@ module GemHelpers
   end
 
   def build_gemfile
-    call_gem_for_gathered_gems
-    fix_withespace_issues
+    fix_withespace_issues if call_gem_for_gathered_gems
   end
 
   private
@@ -41,6 +40,8 @@ module GemHelpers
   def call_gem_for_gathered_gems
     ensure_variable(:gems, {})
     gems = get(:gems)
+
+    return false if gems.empty?
 
     base_gems = gems.delete([:base]) || []
 
@@ -51,6 +52,8 @@ module GemHelpers
         call_gem_for_gems(env_gems)
       end
     end
+
+    true
   end
 
   def call_gem_for_gems(gems)
