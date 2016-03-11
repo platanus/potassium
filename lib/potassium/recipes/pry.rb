@@ -5,6 +5,6 @@ class Recipes::Pry < Recipes::Base
       gather_gem('pry-byebug')
     end
 
-    t.template 'assets/.pryrc', '.pryrc'
+    t.template '../assets/.pryrc', '.pryrc'
   end
 end

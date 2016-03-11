@@ -4,7 +4,7 @@ class Recipes::Env < Recipes::Base
       gather_gem('dotenv-rails')
     end
 
-    t.template 'assets/.env.example.erb', '.env.example'
+    t.template '../assets/.env.example.erb', '.env.example'
     t.run "cp .env.example .env"
   end
 end

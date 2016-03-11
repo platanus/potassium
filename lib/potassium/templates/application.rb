@@ -1,4 +1,4 @@
-Dir.entries(File.expand_path('../recipes', __FILE__)).each do |file_name|
+Dir.entries(File.expand_path('../../recipes', __FILE__)).each do |file_name|
   if file_name.end_with?('.rb')
     recipe_name = file_name.gsub('.rb', '')
     singleton_class.send(:attr_reader, "#{recipe_name}_recipe")

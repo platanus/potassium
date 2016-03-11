@@ -1,6 +1,6 @@
 require 'levenshtein'
 require 'inquirer'
-require 'potassium/templates/application/recipe_generator'
+require 'potassium/generators/recipe'
 require 'potassium/recipe'
 
 module Potassium::CLI
@@ -39,11 +39,11 @@ module Potassium::CLI
   def self.recipe_name_list
     list = []
 
-    source_root = File.expand_path('../../../templates/application/recipes', __FILE__)
+    source_root = File.expand_path('../../../recipes', __FILE__)
     Dir.entries(source_root).each do |file_name|
       if file_name.end_with?('.rb')
         recipe_name = file_name.gsub('.rb', '')
-        require "potassium/templates/application/recipes/#{recipe_name}"
+        require "potassium/recipes/#{recipe_name}"
         recipe_class = Recipes.const_get(recipe_name.camelize)
         list << recipe_name if recipe_class.method_defined?(:install)
       end

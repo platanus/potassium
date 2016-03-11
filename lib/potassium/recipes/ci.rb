@@ -1,13 +1,13 @@
 class Recipes::Ci < Recipes::Base
   def create
     if t.get(:heroku)
-      t.copy_file 'assets/Dockerfile.ci', 'Dockerfile.ci'
-      t.copy_file 'assets/circle.yml', 'circle.yml'
+      t.copy_file '../assets/Dockerfile.ci', 'Dockerfile.ci'
+      t.copy_file '../assets/circle.yml', 'circle.yml'
 
-      t.template 'assets/bin/cibuild.erb', 'bin/cibuild'
+      t.template '../assets/bin/cibuild.erb', 'bin/cibuild'
       t.run "chmod a+x bin/cibuild"
 
-      t.copy_file 'assets/docker-compose.ci.yml', 'docker-compose.ci.yml'
+      t.copy_file '../assets/docker-compose.ci.yml', 'docker-compose.ci.yml'
 
       compose = DockerHelpers.new('docker-compose.ci.yml')
 

@@ -17,10 +17,10 @@ class Recipes::Testing < Recipes::Base
       generate "rspec:install"
 
       remove_file 'spec/rails_helper.rb'
-      copy_file 'assets/testing/rails_helper.rb', 'spec/rails_helper.rb'
+      copy_file '../assets/testing/rails_helper.rb', 'spec/rails_helper.rb'
 
       remove_file '.rspec'
-      copy_file 'assets/testing/.rspec', '.rspec'
+      copy_file '../assets/testing/.rspec', '.rspec'
 
       empty_directory 'spec/support'
       create_file 'spec/support/.keep'

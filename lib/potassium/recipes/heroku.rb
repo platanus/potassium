@@ -19,7 +19,7 @@ class Recipes::Heroku < Recipes::Base
       gather_gem('rails_stdout_logging')
     end
 
-    t.copy_file 'assets/Procfile', 'Procfile'
-    t.copy_file 'assets/.buildpacks', '.buildpacks'
+    t.copy_file '../assets/Procfile', 'Procfile'
+    t.copy_file '../assets/.buildpacks', '.buildpacks'
   end
 end

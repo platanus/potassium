@@ -6,7 +6,7 @@ class Recipes::Puma < Recipes::Base
       gather_gem 'rack-timeout'
     end
 
-    t.copy_file "assets/config/puma.rb", 'config/puma.rb'
+    t.copy_file '../assets/config/puma.rb', 'config/puma.rb'
 
     # Configure rack-timout
     rack_timeout_config = <<-RUBY

@@ -31,9 +31,9 @@ class Recipes::Api < Recipes::Base
         HERE
       end
 
-      copy_file 'assets/api/base_controller.rb', 'app/controllers/api/v1/base_controller.rb'
-      copy_file 'assets/api/api_error_concern.rb', 'app/controllers/concerns/api_error_concern.rb'
-      copy_file 'assets/api/responder.rb', 'app/responders/api_responder.rb'
+      copy_file '../assets/api/base_controller.rb', 'app/controllers/api/v1/base_controller.rb'
+      copy_file '../assets/api/api_error_concern.rb', 'app/controllers/concerns/api_error_concern.rb'
+      copy_file '../assets/api/responder.rb', 'app/responders/api_responder.rb'
     end
   end
 end

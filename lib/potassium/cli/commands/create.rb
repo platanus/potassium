@@ -53,7 +53,7 @@ module Potassium::CLI
       require "potassium/newest_version_ensurer"
 
       begin_creation = -> do
-        require "potassium/templates/application/application_generator"
+        require "potassium/generators/application"
         require "potassium/template_finder"
 
         template_finder = Potassium::TemplateFinder.new

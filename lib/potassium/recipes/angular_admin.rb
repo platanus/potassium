@@ -2,12 +2,12 @@ class Recipes::AngularAdmin < Recipes::Base
   def create
     if t.selected?(:angular_admin)
       t.after(:admin_install) do
-        copy_file 'assets/active_admin/init_activeadmin_angular.rb',
+        copy_file '../assets/active_admin/init_activeadmin_angular.rb',
           'config/initializers/init_activeadmin_angular.rb'
 
         create_file 'app/assets/javascripts/admin_app.js', "angular.module('ActiveAdmin', []);"
 
-        copy_file 'assets/active_admin/active_admin.js.coffee',
+        copy_file '../assets/active_admin/active_admin.js.coffee',
           'app/assets/javascripts/active_admin.js.coffee',
           force: true
 

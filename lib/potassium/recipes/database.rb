@@ -30,7 +30,7 @@ class Recipes::Database < Recipes::Base
 
   def activate_for_active_record(db)
     t.remove_file 'config/database.yml'
-    t.template "assets/config/database_#{db[:name]}.yml.erb", 'config/database.yml'
+    t.template "../assets/config/database_#{db[:name]}.yml.erb", 'config/database.yml'
 
     t.discard_gem 'sqlite3'
     if db[:version]
