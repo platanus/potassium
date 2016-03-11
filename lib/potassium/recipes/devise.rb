@@ -5,7 +5,7 @@ class Recipes::Devise < Recipes::Base
     end
 
     if use_devise
-      t.set(:authentication, :devise)
+      t.set(:authentication, use_devise)
       ask_for_devise_model
     end
   end
@@ -15,7 +15,6 @@ class Recipes::Devise < Recipes::Base
   end
 
   def install
-    t.set(:authentication, :devise)
     ask_for_devise_model
     add_devise
   end
@@ -31,34 +30,26 @@ class Recipes::Devise < Recipes::Base
   end
 
   def add_devise
-    authentication_framework = {
-      devise: -> do
-        t.gather_gem 'devise'
-        t.gather_gem 'devise-i18n'
+    t.gather_gem 'devise'
+    t.gather_gem 'devise-i18n'
 
-        t.after(:gem_install) do
-          generate "devise:install"
+    t.after(:gem_install) do
+      generate "devise:install"
 
-          if auth_model = get(:authentication_model)
-            generate "devise #{auth_model}"
-          end
-
-          gsub_file "config/initializers/devise.rb", /(\# config.secret_key.+)/i do |_match|
-            "config.secret_key = ENV['DEVISE_SECRET_KEY']"
-          end
-
-          gsub_file "config/initializers/devise.rb", /(config.mailer_sender.+)/i do |_match|
-            "config.mailer_sender = ENV['DEFAULT_EMAIL_ADDRESS']"
-          end
-
-          append_to_file '.env.example', 'DEVISE_SECRET_KEY='
-          append_to_file '.env', 'DEVISE_SECRET_KEY='
-        end
+      if auth_model = get(:authentication_model)
+        generate "devise #{auth_model}"
       end
-    }
 
-    if t.get(:authentication)
-      instance_exec(&(authentication_framework[t.get(:authentication)] || -> {}))
+      gsub_file "config/initializers/devise.rb", /(\# config.secret_key.+)/i do |_match|
+        "config.secret_key = ENV['DEVISE_SECRET_KEY']"
+      end
+
+      gsub_file "config/initializers/devise.rb", /(config.mailer_sender.+)/i do |_match|
+        "config.mailer_sender = ENV['DEFAULT_EMAIL_ADDRESS']"
+      end
+
+      append_to_file '.env.example', 'DEVISE_SECRET_KEY='
+      append_to_file '.env', 'DEVISE_SECRET_KEY='
     end
   end
 end

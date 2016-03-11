@@ -1,6 +1,6 @@
 class Recipes::Admin < Recipes::Base
   def ask
-    if t.selected?(:authentication, :devise)
+    if t.selected?(:authentication)
       admin_mode = t.answer(:admin) { Ask.confirm("Do you want to use ActiveAdmin?") }
       t.set(:admin_mode, admin_mode)
     end
@@ -8,7 +8,7 @@ class Recipes::Admin < Recipes::Base
 
   def create
     if t.selected?(:admin_mode)
-      if t.selected?(:authentication, :devise)
+      if t.selected?(:authentication)
         add_active_admin
       else
         t.info "ActiveAdmin can't be installed because Devise isn't enabled."
