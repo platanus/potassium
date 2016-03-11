@@ -20,6 +20,7 @@ run_action(:asking) do
   database_recipe.ask
   devise_recipe.ask
   admin_recipe.ask
+  angular_admin_recipe.ask
   delayed_job_recipe.ask
   pundit_recipe.ask
   i18n_recipe.ask

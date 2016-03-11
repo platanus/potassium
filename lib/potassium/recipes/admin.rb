@@ -2,13 +2,6 @@ class Recipes::Admin < Recipes::Base
   def ask
     if t.selected?(:authentication, :devise)
       admin_mode = t.answer(:admin) { Ask.confirm("Do you want to use ActiveAdmin?") }
-      if admin_mode
-        angular_admin = t.answer(:"angular-admin") do
-          Ask.confirm "Do you want Angular support for ActiveAdmin?"
-        end
-        t.set(:angular_admin, angular_admin)
-      end
-
       t.set(:admin_mode, admin_mode)
     end
   end
