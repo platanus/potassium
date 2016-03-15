@@ -18,14 +18,15 @@ class Recipes::Paperclip < Recipes::Base
 
   def add_paperclip
     t.gather_gem 'paperclip', '~> 4.3'
-    paperclip_config = %{
-    config.paperclip_defaults = {
-      :storage => :s3,
-      :s3_credentials => {
-        :bucket => ENV['AWS_BUCKET']
-      }
-    }
-    }
+    paperclip_config =
+      <<-RUBY.gsub(/^ {7}/, '')
+         config.paperclip_defaults = {
+           storage: :s3,
+           s3_credentials: {
+             bucket: ENV['AWS_BUCKET']
+           }
+         }
+         RUBY
     t.application paperclip_config.strip, env: 'production'
     t.append_to_file '.env.example', 'AWS_BUCKET='
     t.append_to_file '.env', 'AWS_BUCKET='
