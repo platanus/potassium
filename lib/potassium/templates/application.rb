@@ -55,6 +55,7 @@ run_action(:recipe_loading) do
   rack_cors_recipe.create
   ci_recipe.create
   paperclip_recipe.create
+  style_recipe.create
   cleanup_recipe.create
 end
 

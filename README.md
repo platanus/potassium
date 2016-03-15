@@ -57,8 +57,13 @@ The following optional integrations are added too:
 A few more things are added to the project:
 
 - A [low database connection pool limit][pool]
+- Setup [Rubocop][rubocop] configuration with Platanus [style guides][rubocop-platanus]
+- Setup [Hound CI][platanus-hound] configuration, with Platanus flavour
 
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
+[rubocop]: https://github.com/bbatsov/rubocop
+[rubocop-platanus]: https://raw.githubusercontent.com/platanus/hound/platanus/config/style_guides/platanus/ruby.yml
+[platanus-hound]: http://monkeyci.platan.us
 
 ### API support
 

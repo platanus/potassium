@@ -13,6 +13,15 @@ Assuming you've just cloned the repo:
 ## External services
 TODO: add external services here
 
+## Style Guides
+
+The style guides are enforced through a self hosted version of [Hound CI](http://monkyeci.platan.us). The style configuration can also be used locally
+in development runing `rubocop` or just using the rubocop integration for your text editor of choice.
+
+### Per-project custom styles
+
+You can add custom rules to this project just adding them to the `.ruby-style.yml` file.
+
 <% if selected?(:heroku) %>
 ## Deployment
 This project is pre-configured to be (easily) deployed to Heroku servers, but needs you to have the Potassium binary installed. If you don't, then run:
