@@ -1,0 +1,3 @@
+inherit_from:
+  - https://raw.githubusercontent.com/platanus/hound/platanus/config/style_guides/platanus/ruby.yml
+  - .ruby_style.yml
