@@ -1,17 +1,22 @@
 require 'levenshtein'
 require 'inquirer'
-require "potassium/templates/application/recipe_generator"
+require 'potassium/generators/recipe'
+require 'potassium/recipe'
 
 module Potassium::CLI
   desc "Installs a new feature or library"
   command :install do |c|
-    c.action do |_global_options, _options, args|
+    c.action do |_global_options, options, args|
       if args.first.nil?
         index = Ask.list('Select a recipe to install', recipe_name_list)
         ARGV << recipe_name_list[index]
-        Potassium::RecipeGenerator.start
+        template = Potassium::RecipeGenerator
+        template.cli_options = options
+        template.start
       elsif recipe_exists?(args)
-        Potassium::RecipeGenerator.start
+        template = Potassium::RecipeGenerator
+        template.cli_options = options
+        template.start
       else
         guess = guess_recipe_name(args)
         puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess}"
@@ -32,11 +37,19 @@ module Potassium::CLI
   end
 
   def self.recipe_name_list
-    @recipe_name_list ||= begin
-      source_root = File.expand_path('../../../templates/application/recipes', __FILE__)
-      files = Dir.entries(source_root).select { |e| e.end_with?('.rb') }
-      files.map { |e| e.gsub('.rb', '') }
+    list = []
+
+    source_root = File.expand_path('../../../recipes', __FILE__)
+    Dir.entries(source_root).each do |file_name|
+      if file_name.end_with?('.rb')
+        recipe_name = file_name.gsub('.rb', '')
+        require "potassium/recipes/#{recipe_name}"
+        recipe_class = Recipes.const_get(recipe_name.camelize)
+        list << recipe_name if recipe_class.method_defined?(:install)
+      end
     end
+
+    list
   end
 
   def self.find_closest_recipe(recipe_list, possible_recipe)

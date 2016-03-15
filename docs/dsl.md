@@ -136,7 +136,7 @@ run_action(:gem_install) do
 end
 
 before(:gem_install) do
-  say "We are going to run gem install now", :green
+  success "We are going to run gem install now"
 end
 ```
 

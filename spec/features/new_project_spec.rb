@@ -14,9 +14,7 @@ RSpec.describe "A new project" do
 
   it "is a valid rubocop project" do
     on_project do
-      options, paths = RuboCop::Options.new.parse(["."])
-      runner = RuboCop::Runner.new(options, RuboCop::ConfigStore.new)
-      expect(runner.run(paths)).to eq(true)
+      expect(run_rubocop).to eq(true)
     end
   end
 end
