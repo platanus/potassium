@@ -1,39 +1,39 @@
-class Recipes::Admin < Recipes::Base
+class Recipes::Admin < Rails::AppBuilder
   def ask
-    if t.selected?(:authentication)
-      admin_mode = t.answer(:admin) { Ask.confirm("Do you want to use ActiveAdmin?") }
-      t.set(:admin_mode, admin_mode)
+    if selected?(:authentication)
+      admin_mode = answer(:admin) { Ask.confirm("Do you want to use ActiveAdmin?") }
+      set(:admin_mode, admin_mode)
     end
   end
 
   def create
-    if t.selected?(:admin_mode)
-      if t.selected?(:authentication)
+    if selected?(:admin_mode)
+      if selected?(:authentication)
         add_active_admin
       else
-        t.info "ActiveAdmin can't be installed because Devise isn't enabled."
+        info "ActiveAdmin can't be installed because Devise isn't enabled."
       end
     end
   end
 
   def install
-    if t.gem_exists?(/activeadmin/)
-      t.info "ActiveAdmin is already installed"
-    elsif t.gem_exists?(/devise/)
+    if gem_exists?(/activeadmin/)
+      info "ActiveAdmin is already installed"
+    elsif gem_exists?(/devise/)
       add_active_admin
     else
-      t.info "ActiveAdmin can't be installed because Devise isn't installed."
+      info "ActiveAdmin can't be installed because Devise isn't installed."
     end
   end
 
   private
 
   def add_active_admin
-    t.gather_gem 'activeadmin', github: 'activeadmin'
-    t.gather_gem 'activeadmin_addons'
-    t.gather_gem 'active_skin'
+    gather_gem 'activeadmin', github: 'activeadmin'
+    gather_gem 'activeadmin_addons'
+    gather_gem 'active_skin'
 
-    t.after(:gem_install, wrap_in_action: :admin_install) do
+    after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install"
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"

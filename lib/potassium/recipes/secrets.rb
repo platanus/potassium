@@ -1,5 +1,5 @@
-class Recipes::Secrets < Recipes::Base
+class Recipes::Secrets < Rails::AppBuilder
   def create
-    t.template '../assets/config/secrets.yml.erb', 'config/secrets.yml', force: true
+    template '../assets/config/secrets.yml.erb', 'config/secrets.yml', force: true
   end
 end

@@ -1,17 +1,17 @@
-class Recipes::Testing < Recipes::Base
+class Recipes::Testing < Rails::AppBuilder
   def create
-    t.gather_gems(:development, :test) do
+    gather_gems(:development, :test) do
       gather_gem('rspec-rails')
       gather_gem('factory_girl_rails')
       gather_gem('guard-rspec', require: false)
       gather_gem('rspec-nc', require: false)
     end
 
-    t.gather_gems(:test) do
+    gather_gems(:test) do
       gather_gem('shoulda-matchers', require: false)
     end
 
-    t.after(:gem_install) do
+    after(:gem_install) do
       remove_dir 'test'
 
       generate "rspec:install"
@@ -30,7 +30,7 @@ class Recipes::Testing < Recipes::Base
     end
 
     raise_delivery_errors_regexp = /config.action_mailer.raise_delivery_errors = false\n/
-    t.gsub_file 'config/environments/development.rb', raise_delivery_errors_regexp do
+    gsub_file 'config/environments/development.rb', raise_delivery_errors_regexp do
       "config.action_mailer.raise_delivery_errors = true"
     end
   end

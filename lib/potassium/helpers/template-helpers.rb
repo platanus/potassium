@@ -1,11 +1,22 @@
 module TemplateHelpers
-  def load_recipe(recipe)
-    get_recipe_class(recipe).new(self)
+  def load_recipe(recipe_name)
+    @recipes ||= {}
+    @recipes[recipe_name] ||= get_recipe_class(recipe_name.to_sym).new(self)
   end
 
-  def get_recipe_class(recipe)
-    require_relative "../recipes/#{recipe}"
-    Recipes.const_get(recipe.camelize)
+  def create(recipe_name)
+    recipe = load_recipe(recipe_name)
+    recipe.create
+  end
+
+  def ask(recipe_name)
+    recipe = load_recipe(recipe_name)
+    recipe.ask
+  end
+
+  def install(recipe_name)
+    recipe = load_recipe(recipe_name)
+    recipe.install
   end
 
   def eval_file(source)
@@ -50,5 +61,12 @@ module TemplateHelpers
   def dir_exist?(dir_path)
     full_path = File.join(destination_root, dir_path)
     Dir.exist?(full_path)
+  end
+
+  private
+
+  def get_recipe_class(recipe_name)
+    require_relative "../recipes/#{recipe_name}"
+    Recipes.const_get(recipe_name.to_s.camelize)
   end
 end

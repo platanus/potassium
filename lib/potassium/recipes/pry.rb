@@ -1,10 +1,10 @@
-class Recipes::Pry < Recipes::Base
+class Recipes::Pry < Rails::AppBuilder
   def create
-    t.gather_gems(:development, :test) do
+    gather_gems(:development, :test) do
       gather_gem('pry-rails')
       gather_gem('pry-byebug')
     end
 
-    t.template '../assets/.pryrc', '.pryrc'
+    template '../assets/.pryrc', '.pryrc'
   end
 end

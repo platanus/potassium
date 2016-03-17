@@ -1,18 +1,18 @@
-class Recipes::DelayedJob < Recipes::Base
+class Recipes::DelayedJob < Rails::AppBuilder
   def ask
-    use_delayed_job = t.answer(:"delayed-job") { Ask.confirm("Do you want to use delayed jobs?") }
-    t.set(:delayed_job, use_delayed_job)
+    use_delayed_job = answer(:"delayed-job") { Ask.confirm("Do you want to use delayed jobs?") }
+    set(:delayed_job, use_delayed_job)
   end
 
   def create
-    add_delayed_job if t.selected?(:delayed_job)
+    add_delayed_job if selected?(:delayed_job)
   end
 
   def install
-    if t.gem_exists?(/delayed_job_active_record/)
-      t.info "Delayed Job is already installed"
+    if gem_exists?(/delayed_job_active_record/)
+      info "Delayed Job is already installed"
     else
-      t.set(:heroku, t.gem_exists?(/rails_stdout_logging/))
+      set(:heroku, gem_exists?(/rails_stdout_logging/))
       add_delayed_job
     end
   end
@@ -20,12 +20,12 @@ class Recipes::DelayedJob < Recipes::Base
   private
 
   def add_delayed_job
-    t.gather_gem "delayed_job_active_record"
+    gather_gem "delayed_job_active_record"
 
     delayed_job_config = "config.active_job.queue_adapter = :delayed_job"
-    t.application(delayed_job_config)
+    application(delayed_job_config)
 
-    t.after(:gem_install) do
+    after(:gem_install) do
       generate "delayed_job:active_record"
       run "bundle binstubs delayed_job"
 

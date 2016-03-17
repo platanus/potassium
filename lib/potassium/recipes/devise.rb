@@ -1,11 +1,11 @@
-class Recipes::Devise < Recipes::Base
+class Recipes::Devise < Rails::AppBuilder
   def ask
-    use_devise = t.answer(:devise) do
+    use_devise = answer(:devise) do
       Ask.confirm "Do you want to use Devise for authentication? (required for ActiveAdmin)"
     end
 
     if use_devise
-      t.set(:authentication, use_devise)
+      set(:authentication, use_devise)
       ask_for_devise_model
     end
   end
@@ -15,8 +15,8 @@ class Recipes::Devise < Recipes::Base
   end
 
   def install
-    if t.gem_exists?(/devise/)
-      t.info "Devise is already installed"
+    if gem_exists?(/devise/)
+      info "Devise is already installed"
     else
       ask_for_devise_model
       add_devise
@@ -26,18 +26,18 @@ class Recipes::Devise < Recipes::Base
   private
 
   def ask_for_devise_model
-    create_user_model = t.answer(:"devise-user-model") do
+    create_user_model = answer(:"devise-user-model") do
       Ask.confirm "Do you want to create a user model for Devise?"
     end
 
-    t.set(:authentication_model, :user) if create_user_model
+    set(:authentication_model, :user) if create_user_model
   end
 
   def add_devise
-    t.gather_gem 'devise'
-    t.gather_gem 'devise-i18n'
+    gather_gem 'devise'
+    gather_gem 'devise-i18n'
 
-    t.after(:gem_install) do
+    after(:gem_install) do
       generate "devise:install"
 
       if auth_model = get(:authentication_model)

@@ -1,17 +1,17 @@
-class Recipes::Ci < Recipes::Base
+class Recipes::Ci < Rails::AppBuilder
   def create
-    if t.get(:heroku)
-      t.copy_file '../assets/Dockerfile.ci', 'Dockerfile.ci'
-      t.copy_file '../assets/circle.yml', 'circle.yml'
+    if get(:heroku)
+      copy_file '../assets/Dockerfile.ci', 'Dockerfile.ci'
+      copy_file '../assets/circle.yml', 'circle.yml'
 
-      t.template '../assets/bin/cibuild.erb', 'bin/cibuild'
-      t.run "chmod a+x bin/cibuild"
+      template '../assets/bin/cibuild.erb', 'bin/cibuild'
+      run "chmod a+x bin/cibuild"
 
-      t.copy_file '../assets/docker-compose.ci.yml', 'docker-compose.ci.yml'
+      copy_file '../assets/docker-compose.ci.yml', 'docker-compose.ci.yml'
 
       compose = DockerHelpers.new('docker-compose.ci.yml')
 
-      if t.selected?(:database, :mysql)
+      if selected?(:database, :mysql)
         service = <<-YAML
           image: "mysql:5.6.23"
           environment:
@@ -22,7 +22,7 @@ class Recipes::Ci < Recipes::Base
         compose.add_env('test', 'MYSQL_HOST', 'mysql')
         compose.add_env('test', 'MYSQL_PORT', '3306')
 
-      elsif t.selected?(:database, :postgresql)
+      elsif selected?(:database, :postgresql)
         service = <<-YAML
           image: "postgres:9.4.5"
           environment:
