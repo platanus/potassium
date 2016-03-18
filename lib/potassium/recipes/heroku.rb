@@ -65,7 +65,7 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def logged_in?
-    system('heroku auth:whoami &> /dev/null')
+    !who_am_i.include? "not logged in"
   end
 
   def who_am_i
