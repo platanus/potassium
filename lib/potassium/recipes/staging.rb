@@ -1,5 +1,5 @@
-class Recipes::Staging < Recipes::Base
+class Recipes::Staging < Rails::AppBuilder
   def create
-    t.copy_file '../assets/config/environments/staging.rb', "config/environments/staging.rb"
+    copy_file '../assets/config/environments/staging.rb', "config/environments/staging.rb"
   end
 end

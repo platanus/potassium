@@ -1,4 +1,4 @@
-class Recipes::Database < Recipes::Base
+class Recipes::Database < Rails::AppBuilder
   def ask
     databases = {
       mysql: "MySQL",
@@ -6,11 +6,11 @@ class Recipes::Database < Recipes::Base
       none: "None, thanks"
     }
 
-    database = t.answer(:db) do
+    database = answer(:db) do
       databases.keys[Ask.list("Which database are you using?", databases.values)]
     end
 
-    t.set :database, database.to_sym
+    set :database, database.to_sym
   end
 
   def create
@@ -19,7 +19,7 @@ class Recipes::Database < Recipes::Base
       postgresql: { name: 'postgresql', gem_name: 'pg', relational: true }
     }
 
-    if db = databases[t.get(:database)]
+    if db = databases[get(:database)]
       if db[:relational]
         activate_for_active_record(db)
       end
@@ -29,14 +29,14 @@ class Recipes::Database < Recipes::Base
   private
 
   def activate_for_active_record(db)
-    t.remove_file 'config/database.yml'
-    t.template "../assets/config/database_#{db[:name]}.yml.erb", 'config/database.yml'
+    remove_file 'config/database.yml'
+    template "../assets/config/database_#{db[:name]}.yml.erb", 'config/database.yml'
 
-    t.discard_gem 'sqlite3'
+    discard_gem 'sqlite3'
     if db[:version]
-      t.gather_gem db[:gem_name], db[:version]
+      gather_gem db[:gem_name], db[:version]
     else
-      t.gather_gem db[:gem_name]
+      gather_gem db[:gem_name]
     end
   end
 end

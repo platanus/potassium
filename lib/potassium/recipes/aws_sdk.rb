@@ -1,5 +1,5 @@
-class Recipes::AwsSdk < Recipes::Base
+class Recipes::AwsSdk < Rails::AppBuilder
   def create
-    t.gather_gem('aws-sdk', '< 2')
+    gather_gem('aws-sdk', '< 2')
   end
 end

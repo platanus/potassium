@@ -1,12 +1,12 @@
-class Recipes::Puma < Recipes::Base
+class Recipes::Puma < Rails::AppBuilder
   def create
-    t.gather_gem 'puma'
+    gather_gem 'puma'
 
-    t.gather_gems(:production, :staging) do
+    gather_gems(:production, :staging) do
       gather_gem 'rack-timeout'
     end
 
-    t.copy_file '../assets/config/puma.rb', 'config/puma.rb'
+    copy_file '../assets/config/puma.rb', 'config/puma.rb'
 
     # Configure rack-timout
     rack_timeout_config =
@@ -14,6 +14,6 @@ class Recipes::Puma < Recipes::Base
          Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
          RUBY
 
-    t.append_file "config/environments/production.rb", rack_timeout_config
+    append_file "config/environments/production.rb", rack_timeout_config
   end
 end

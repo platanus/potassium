@@ -1,6 +1,6 @@
-class Recipes::Readme < Recipes::Base
+class Recipes::Readme < Rails::AppBuilder
   def create
-    t.remove_file "README.md"
-    t.template '../assets/README.md.erb', 'README.md'
+    remove_file "README.md"
+    template '../assets/README.md.erb', 'README.md'
   end
 end

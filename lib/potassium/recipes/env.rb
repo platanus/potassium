@@ -1,10 +1,10 @@
-class Recipes::Env < Recipes::Base
+class Recipes::Env < Rails::AppBuilder
   def create
-    t.gather_gems(:development, :test) do
+    gather_gems(:development, :test) do
       gather_gem('dotenv-rails')
     end
 
-    t.template '../assets/.env.example.erb', '.env.example'
-    t.run "cp .env.example .env"
+    template '../assets/.env.example.erb', '.env.example'
+    run "cp .env.example .env"
   end
 end

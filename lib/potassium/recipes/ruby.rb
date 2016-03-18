@@ -1,11 +1,11 @@
 require 'net/http'
 require 'semantic'
 
-class Recipes::Ruby < Recipes::Base
+class Recipes::Ruby < Rails::AppBuilder
   def create
-    t.info 'Getting platanus latest ruby version...'
-    t.info "Using ruby version #{version_alias}"
-    t.create_file '.ruby-version', version_alias
+    info 'Getting platanus latest ruby version...'
+    info "Using ruby version #{version_alias}"
+    create_file '.ruby-version', version_alias
   end
 
   private

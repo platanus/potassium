@@ -1,7 +1,7 @@
-class Recipes::RackCors < Recipes::Base
+class Recipes::RackCors < Rails::AppBuilder
   def create
-    t.gather_gem('rack-cors', '~> 0.4.0')
-    t.after(:gem_install) do
+    gather_gem('rack-cors', '~> 0.4.0')
+    after(:gem_install) do
       rack_cors_config =
         <<-RUBY.gsub(/^ {7}/, '')
            config.middleware.insert_before 0, "Rack::Cors" do

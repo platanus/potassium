@@ -1,26 +1,26 @@
-class Recipes::I18n < Recipes::Base
+class Recipes::I18n < Rails::AppBuilder
   def ask
     languages = {
       es: "Spanish",
       en: "English"
     }
 
-    lang = t.answer(:lang) do
+    lang = answer(:lang) do
       languages.keys[Ask.list("What is the main language of your app?", languages.values)]
     end
 
-    t.set(:lang, lang)
+    set(:lang, lang)
   end
 
   def create
-    t.gather_gem('rails-i18n')
+    gather_gem('rails-i18n')
 
-    if t.equals?(:lang, :es)
-      t.template('../assets/es.yml', 'config/locales/es.yml')
+    if equals?(:lang, :es)
+      template('../assets/es.yml', 'config/locales/es.yml')
     end
 
-    t.gsub_file 'config/application.rb', /# config\.i18n\.default_locale =[^\n]+\n/ do
-      "config.i18n.default_locale = :#{t.get(:lang)}\n"
+    gsub_file 'config/application.rb', /# config\.i18n\.default_locale =[^\n]+\n/ do
+      "config.i18n.default_locale = :#{get(:lang)}\n"
     end
   end
 end

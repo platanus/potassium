@@ -3,6 +3,10 @@ require "rails/generators/rails/app/app_generator"
 require "inquirer"
 require "potassium/recipe"
 
+class Rails::AppBuilder
+  include Rails::ActionMethods
+end
+
 module Potassium
   class RecipeGenerator < Rails::Generators::NamedBase
     class << self
