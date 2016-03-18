@@ -17,19 +17,23 @@ bin/rake db:setup
 mkdir -p .git/safe
 
 <% if selected?(:heroku) -%>
-# Setup heroku application remotes
-if heroku apps:info --app <%= get(:heroku_app_name_staging) %> &> /dev/null; then
-  git remote add staging git@heroku.com:<%= get(:heroku_app_name_staging) %>.git || true
-  git config heroku.remote staging
-  echo 'You are a collaborator on the "<%= get(:heroku_app_name_staging) %>" Heroku app'
-else
-  echo 'Ask for access to the "<%= get(:heroku_app_name_staging) %>" Heroku app'
-fi
+if heroku auth:whoami &> /dev/null; then
+  # Setup heroku application remotes
+  if heroku apps:info --app <%= get(:heroku_app_name_staging) %> &> /dev/null; then
+    git remote add staging git@heroku.com:<%= get(:heroku_app_name_staging) %>.git || true
+    git config heroku.remote staging
+    echo 'You are a collaborator on the "<%= get(:heroku_app_name_staging) %>" Heroku app'
+  else
+    echo 'Ask for access to the "<%= get(:heroku_app_name_staging) %>" Heroku app'
+  fi
 
-if heroku apps:info --app <%= get(:heroku_app_name_production) %> &> /dev/null; then
-  git remote add production git@heroku.com:<%= get(:heroku_app_name_production) %>.git || true
-  echo 'You are a collaborator on the "<%= get(:heroku_app_name_production) %>" Heroku app'
+  if heroku apps:info --app <%= get(:heroku_app_name_production) %> &> /dev/null; then
+    git remote add production git@heroku.com:<%= get(:heroku_app_name_production) %>.git || true
+    echo 'You are a collaborator on the "<%= get(:heroku_app_name_production) %>" Heroku app'
+  else
+    echo 'Ask for access to the "<%= get(:heroku_app_name_production) %>" Heroku app'
+  fi
 else
-  echo 'Ask for access to the "<%= get(:heroku_app_name_production) %>" Heroku app'
+  echo 'You need to login to heroku. Run "heroku login"'
 fi
 <% end-%>
