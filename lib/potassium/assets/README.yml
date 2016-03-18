@@ -1,16 +1,16 @@
 readme:
   internal_dependencies:
-    title: "## Internal dependencies"
+    title: "Internal dependencies"
     sections:
       devise:
-        title: "### Authentication"
+        title: "Authentication"
         body: "We are using the great [Devise](https://github.com/plataformatec/devise) library by [PlataformaTec](http://plataformatec.com.br/)"
       paperclip:
-        title: "### Uploads"
+        title: "Uploads"
         body: "For managing uploads, this project uses [Paperclip](https://github.com/thoughtbot/paperclip), a gem made by the awesome [Thoughbot](https://thoughtbot.com/) team."
       pundit:
-        title: "### Authorization"
+        title: "Authorization"
         body: "For defining which parts of the system each user has access to, we have chosen to include the [Pundit](https://github.com/elabs/pundit) gem, by [Elabs](http://elabs.se/)."
       delayed_job:
-        title: "### Queue System"
+        title: "Queue System"
         body: "For managing tasks in the background, this project uses [DelayedJob](https://github.com/collectiveidea/delayed_job)"

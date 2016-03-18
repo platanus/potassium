@@ -58,13 +58,16 @@ module TemplateHelpers
   end
 
   def file_exist?(file_path)
-    full_path = File.join(destination_root, file_path)
-    File.exist?(full_path)
+    File.exist?(file_path)
   end
 
   def dir_exist?(dir_path)
-    full_path = File.join(destination_root, dir_path)
-    Dir.exist?(full_path)
+    Dir.exist?(dir_path)
+  end
+
+  def read_file(file_path)
+    fail "#{file_path} does not exist in destination" unless file_exist?(file_path)
+    File.read(file_path)
   end
 
   def cli_options

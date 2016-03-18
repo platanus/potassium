@@ -11,7 +11,7 @@ class Recipes::Devise < Rails::AppBuilder
   end
 
   def create
-    add_devise
+    add_devise if selected?(:authentication)
   end
 
   def install

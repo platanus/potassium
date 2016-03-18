@@ -6,14 +6,22 @@ module ReadmeHelpers
   end
 
   def add_section_to_readme(section_data)
-    line = "#{section_data[:header]}\n"
-    insert_into_file "README.md", after: line do
+    add_header_to_readme(section_data[:header])
+    insert_into_readme(section_data[:header]) do
       <<-HERE.gsub(/^ {6}/, '')
 
-      #{section_data[:title]}
+      ### #{section_data[:title]}
 
       #{section_data[:body]}
+      HERE
+    end
+  end
 
+  def add_header_to_readme(header)
+    return if read_file("README.md").match("## #{header}")
+    insert_into_readme do
+      <<-HERE.gsub(/^ {6}/, '')
+      ## #{header}
       HERE
     end
   end
@@ -36,7 +44,20 @@ module ReadmeHelpers
   end
 
   def get_readme
-    config_path = File.expand_path("../../assets/README.yml", __FILE__)
-    YAML.load(File.read(config_path))
+    file = File.expand_path("../../assets/README.yml", __FILE__)
+    YAML.load(File.read(file))
+  end
+
+  def insert_into_readme(after_text = nil, &block)
+    if after_text
+      line = "#{after_text}\n"
+      insert_into_file "README.md", after: line do
+        block.call
+      end
+    else
+      append_to_file "README.md" do
+        block.call
+      end
+    end
   end
 end
