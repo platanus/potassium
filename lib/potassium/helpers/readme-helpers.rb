@@ -1,13 +1,9 @@
 module ReadmeHelpers
-  def add_to_readme(header, key, iterpolation_values = {})
-    section_data = readme_data(header, key, iterpolation_values)
-    return unless section_data
-    add_section_to_readme(section_data)
-  end
+  def add_readme_section(header, section, iterpolation_values = {})
+    section_data = readme_section_data(header, section, iterpolation_values)
+    add_readme_header(header, iterpolation_values)
 
-  def add_section_to_readme(section_data)
-    add_header_to_readme(section_data[:header])
-    insert_into_readme(section_data[:header]) do
+    insert_into_readme(section_data[:header_title]) do
       <<-HERE.gsub(/^ {6}/, '')
 
       ### #{section_data[:title]}
@@ -17,29 +13,55 @@ module ReadmeHelpers
     end
   end
 
-  def add_header_to_readme(header)
-    return if read_file("README.md").match("## #{header}")
-    insert_into_readme do
-      <<-HERE.gsub(/^ {6}/, '')
-      ## #{header}
-      HERE
+  def add_readme_header(header, iterpolation_values = {})
+    header_data = readme_header_data(header, iterpolation_values)
+    return if read_file("README.md").match("## #{header_data[:title]}")
+
+    if header_data[:body]
+      insert_into_readme do
+        <<-HERE.gsub(/^ {8}/, '')
+
+        ## #{header_data[:title]}
+
+        #{header_data[:body]}
+        HERE
+      end
+    else
+      insert_into_readme do
+        <<-HERE.gsub(/^ {8}/, '')
+
+        ## #{header_data[:title]}
+        HERE
+      end
     end
   end
 
-  def readme_data(header, key, iterpolation_values)
+  def readme_header_data(header, iterpolation_values)
     file = get_readme
-    header_data = file["readme"][header.to_s]
-    section_data = header_data["sections"][key.to_s]
+    header_data = file["readme"]["headers"][header.to_s]
+
     {
-      header: header_data["title"],
+      title: header_data["title"],
+      body: interpolate_text(header_data["body"], iterpolation_values)
+    }
+  end
+
+  def readme_section_data(header, section, iterpolation_values)
+    file = get_readme
+    header_data = file["readme"]["headers"][header.to_s]
+    section_data = header_data["sections"][section.to_s]
+
+    {
+      header_title: header_data["title"],
       title: interpolate_text(section_data["title"], iterpolation_values),
       body: interpolate_text(section_data["body"], iterpolation_values)
     }
   end
 
   def interpolate_text(text, iterpolation_values)
+    return unless text
     b = binding
-    iterpolation_values.each { |k, v| b.local_variable_set(k, v) }
+    iterpolation_values.each { |k, v| singleton_class.send(:define_method, k) { v } }
     ERB.new(text).result(b)
   end
 

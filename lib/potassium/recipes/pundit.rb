@@ -37,7 +37,7 @@ class Recipes::Pundit < Rails::AppBuilder
         "include Pundit\n  protect_from_forgery"
       end
       generate "pundit:install"
-      add_to_readme :internal_dependencies, :pundit
+      add_readme_section :internal_dependencies, :pundit
     end
   end
 
