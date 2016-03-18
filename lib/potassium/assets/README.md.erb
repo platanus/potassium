@@ -42,14 +42,16 @@ This project is pre-configured to be (easily) deployed to Heroku servers, but ne
 
     $ gem install potassium
 
-- Then, make sure you have the permissions required to create an app on the Platanus Heroku Account. Right now, this means having access to the Platanus Founders shared 1Password vault :)
-- Then run
+Then, make sure you are logged in to the Heroku account where you want to create the app and run
 
-      $ potassium heroku create
+    $ potassium install heroku --force
 
 this will create the app on heroku, create a pipeline and link the app to the pipeline.
 
 You'll still have to manually log in to the heroku dahsboard, go to the new pipeline and 'configure automatic deploys' using Github
+You can run the following command to open the dashboard in the pipeline page
+
+    $ heroku pipelines:open
 
 ![Hint](https://cloud.githubusercontent.com/assets/313750/13019759/fa86c8ca-d1af-11e5-8869-cd2efb5513fa.png)
 
