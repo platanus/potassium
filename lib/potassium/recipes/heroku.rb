@@ -80,12 +80,20 @@ class Recipes::Heroku < Rails::AppBuilder
     run_toolbelt_command "config:add #{rack_env}", staged_app_name
 
     set_rails_secrets(environment)
+    set_app_multi_buildpack(environment)
     add_app_to_pipeline(staged_app_name, environment)
   end
 
   def set_rails_secrets(environment)
     run_toolbelt_command(
       "config:add SECRET_KEY_BASE=#{generate_secret}",
+      app_name_for(environment)
+    )
+  end
+
+  def set_app_multi_buildpack(environment)
+    run_toolbelt_command(
+      "buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git",
       app_name_for(environment)
     )
   end
