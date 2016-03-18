@@ -74,22 +74,3 @@ Just make sure you have docker installed and run:
 <% end-%>
 
 ## Internal dependencies
-<% if selected?(:authentication, :devise) %>
-### Authentication
-We are using the great [Devise](https://github.com/plataformatec/devise) library by [PlataformaTec](http://plataformatec.com.br/)
-<%= selected?(:authentication_model) ? "and contains a built-in **#{get(':authentication_model')}** Model" : "" -%>
-<% end-%>
-<% if selected?(:authorization, :pundit)%>
-### Authorization
-For defining which parts of the system each user has access to, we have chosen to include the [Pundit](https://github.com/elabs/pundit) gem, by [Elabs](http://elabs.se/).
-<% end-%>
-<% if selected?(:paperclip) %>
-### Uploads
-For managing uploads, this project uses [Paperclip](https://github.com/thoughtbot/paperclip), a gem made by the awesome [Thoughbot](https://thoughtbot.com/) team.
-<% end-%>
-### Admin
-As a way to speed up development of an admin interface, we're using [ActiveAdmin](https://github.com/activeadmin/activeadmin)
-<% if selected?(:delayed_job) %>
-### Queue System
-For managing tasks in the background, this project uses [DelayedJob](https://github.com/collectiveidea/delayed_job)
-<% end-%>

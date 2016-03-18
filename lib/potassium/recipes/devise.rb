@@ -58,6 +58,7 @@ class Recipes::Devise < Rails::AppBuilder
 
       append_to_file '.env.example', 'DEVISE_SECRET_KEY='
       append_to_file '.env', 'DEVISE_SECRET_KEY='
+      add_to_readme :internal_dependencies, :devise
     end
   end
 end
