@@ -8,6 +8,7 @@ module TemplateDSL
     require_relative './callback-helpers'
     require_relative './answer-helpers'
     require_relative './info-helpers'
+    require_relative './readme-helpers'
 
     object.send :extend, TemplateHelpers
     object.send :extend, VariableHelpers
@@ -16,6 +17,7 @@ module TemplateDSL
     object.send :extend, CallbackHelpers
     object.send :extend, AnswerHelpers
     object.send :extend, InfoHelpers
+    object.send :extend, ReadmeHelpers
 
     object.send :source_path, source_path
     object.load_answers
