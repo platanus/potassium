@@ -19,6 +19,7 @@ run_action(:asking) do
   ask :api
   ask :paperclip
   ask :heroku
+  ask :github
 end
 
 run_action(:recipe_loading) do
@@ -49,6 +50,7 @@ run_action(:recipe_loading) do
   create :paperclip
   create :style
   create :script
+  create :github
   create :cleanup
 end
 
