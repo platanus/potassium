@@ -25,7 +25,7 @@ class Recipes::Testing < Rails::AppBuilder
       empty_directory 'spec/support'
       create_file 'spec/support/.keep'
 
-      run "guard init"
+      run "bundle exec guard init"
       run "bundle binstubs rspec-core"
     end
 
