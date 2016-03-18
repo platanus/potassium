@@ -2,13 +2,26 @@
 This is a Rails application, initially generated using [Potassium](https://github.com/platanus/potassium) by Platanus.
 
 ## Local installation
-Assuming you've just cloned the repo:
-- Run 'bundle' to get your gems ready.
-<% if(selected?(:database,:mysql) || selected?(:database,:postgresql))-%>
-- Make sure you have <%=get(:database).to_s.titleize%> running on your computer, or configure an external <%=get(:database).to_s.titleize%> endpoint to work with.
-<% end-%>
-- Run 'rake db:setup' to create your tables.
-- Run 'rails s' and watch puma start
+Assuming you've just cloned the repo, run this script to setup the project in your
+machine:
+
+    $ ./bin/setup
+
+It assumes you have a machine equipped with Ruby, <%=get(:database).to_s.titleize%>, etc. If not, set up
+your machine with [boxen].
+
+The script will do the following among other things:
+
+- Install the dependecies
+- Prepare your database
+- Adds heroku remotes
+
+After the app setup is done you can run it with [Heroku Local]
+
+    $ heroku local
+
+[Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
+[boxen]: http://github.com/platanus/our-boxen
 
 ## External services
 TODO: add external services here
@@ -24,25 +37,21 @@ You can add custom rules to this project just adding them to the `.ruby-style.ym
 
 <% if selected?(:heroku) %>
 ## Deployment
+
 This project is pre-configured to be (easily) deployed to Heroku servers, but needs you to have the Potassium binary installed. If you don't, then run:
-```shell
-$ gem install potassium
-```
-- Another prerequisite that you probably already meet, is having the Heroku Toolbelt installed. If you don't have it, type:
-```
-$ brew install heroku-toolbelt
-```
-- Then, make sure you have the permissions required to create an app on the Company Heroku Account. On Platanus right now, this means having access to the Platanus Founders shared 1Password vault :) If you do, go ahead and login to Heroku using the mentioned credentials:
-```
-$ heroku login
-```
-- Only then, you are ready to run
-```shell
-$ potassium heroku create
-```
+
+    $ gem install potassium
+
+Then, make sure you are logged in to the Heroku account where you want to create the app and run
+
+    $ potassium install heroku --force
+
 this will create the app on heroku, create a pipeline and link the app to the pipeline.
 
-You'll still have to log in to the heroku dahsboard via browser, go see the newly created pipeline and 'configure automatic deploys' using Github
+You'll still have to manually log in to the heroku dahsboard, go to the new pipeline and 'configure automatic deploys' using Github
+You can run the following command to open the dashboard in the pipeline page
+
+    $ heroku pipelines:open
 
 ![Hint](https://cloud.githubusercontent.com/assets/313750/13019759/fa86c8ca-d1af-11e5-8869-cd2efb5513fa.png)
 

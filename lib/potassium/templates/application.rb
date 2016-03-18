@@ -1,4 +1,4 @@
-set :app_name, @app_name
+set :app_name, app_name
 set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 set :dasherized_app_name, get(:app_name).dasherize
@@ -48,6 +48,7 @@ run_action(:recipe_loading) do
   create :ci
   create :paperclip
   create :style
+  create :script
   create :cleanup
 end
 
