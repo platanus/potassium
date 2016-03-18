@@ -13,6 +13,8 @@ Features:
   - Add Delayed Jobs to handle background processes, [#41]
   - Adds continuous integration using [CircleCI](https://circleci.com)
   and docker, [#51]
+  - Adds heroku app creation to the heroku recipe, [#60]
+  - Adds github repo creation through hub
 
 [multi-buildpack]: http://github.com/ddollar/heroku-buildpack-multi
 [deploy-tasts]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
