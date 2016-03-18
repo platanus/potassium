@@ -11,7 +11,10 @@ module AnswerHelpers
   private
 
   def extract_answers(options)
-    options.except("version-check", :"version-check").reduce({}) do |hash, (k, v)|
+    options.except(
+      "version-check", :"version-check",
+      "force", :force
+    ).reduce({}) do |hash, (k, v)|
       hash.merge(k => v == "none" ? nil : v)
     end
   end

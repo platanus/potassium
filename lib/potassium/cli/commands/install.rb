@@ -6,6 +6,9 @@ require 'potassium/recipe'
 module Potassium::CLI
   desc "Installs a new feature or library"
   command :install do |c|
+    c.switch "force",
+      desc: "Whether to force the recipe installation",
+      default_value: false
     c.action do |_global_options, options, args|
       if args.first.nil?
         index = Ask.list('Select a recipe to install', recipe_name_list)

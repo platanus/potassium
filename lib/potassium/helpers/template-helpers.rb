@@ -1,4 +1,8 @@
 module TemplateHelpers
+  def app_name
+    @app_name || app_name_from_file
+  end
+
   def load_recipe(recipe_name)
     @recipes ||= {}
     @recipes[recipe_name] ||= get_recipe_class(recipe_name.to_sym).new(self)
@@ -63,10 +67,22 @@ module TemplateHelpers
     Dir.exist?(full_path)
   end
 
+  def cli_options
+    self.class.cli_options
+  end
+
+  def force?
+    cli_options[:force]
+  end
+
   private
 
   def get_recipe_class(recipe_name)
     require_relative "../recipes/#{recipe_name}"
     Recipes.const_get(recipe_name.to_s.camelize)
+  end
+
+  def app_name_from_file
+    File.read('config/application.rb').match(/module\s(.*)/)[1].underscore.dasherize
   end
 end
