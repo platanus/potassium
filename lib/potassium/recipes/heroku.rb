@@ -45,7 +45,9 @@ class Recipes::Heroku < Rails::AppBuilder
       %w(staging production).each do |environment|
         create_app_on_heroku(environment)
       end
-      outro
+      puts "Remember to connect the github repository to the new pipeline"
+      open_pipeline_command = "\e[33mheroku pipelines:open #{heroku_pipeline_name}\e[0m"
+      puts "run #{open_pipeline_command} to open the dashboard"
     else
       puts "You are not logged in into heroku"
       login_command = "\e[33mheroku login\e[0m"
@@ -78,7 +80,7 @@ class Recipes::Heroku < Rails::AppBuilder
     rack_env = "RACK_ENV=#{environment} RAILS_ENV=#{environment}"
     staged_app_name = app_name_for(environment)
 
-    run_toolbelt_command "create #{staged_app_name}", staged_app_name
+    run_toolbelt_command "create #{staged_app_name} --remote #{environment}"
     run_toolbelt_command "config:add #{rack_env}", staged_app_name
 
     set_rails_secrets(environment)
@@ -122,13 +124,11 @@ class Recipes::Heroku < Rails::AppBuilder
     SecureRandom.hex(64)
   end
 
-  def run_toolbelt_command(command, app_env_name)
-    `heroku #{command} --app #{app_env_name}`
-  end
-
-  def outro
-    puts "Remember to connect the github repository to the new pipeline"
-    open_pipeline_command = "\e[33mheroku pipelines:open #{heroku_pipeline_name}\e[0m"
-    puts "run #{open_pipeline_command} to open the dashboard"
+  def run_toolbelt_command(command, app_env_name = nil)
+    if app_env_name.nil?
+      `heroku #{command}`
+    else
+      `heroku #{command} --app #{app_env_name}`
+    end
   end
 end
