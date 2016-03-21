@@ -54,6 +54,8 @@ class Recipes::Heroku < Rails::AppBuilder
       install_command = "\e[33mpostassium install heroku --force\e[0m"
       puts "Just run #{install_command}"
     end
+
+    add_readme_header :deployment
   end
 
   def heroku_pipeline_name

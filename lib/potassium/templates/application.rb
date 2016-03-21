@@ -23,10 +23,12 @@ run_action(:asking) do
 end
 
 run_action(:recipe_loading) do
+  create :readme
   create :heroku
+  create :ci
+  create :style
   create :puma
   create :database
-  create :readme
   create :ruby
   create :env
   create :bower
@@ -46,9 +48,7 @@ run_action(:recipe_loading) do
   create :git
   create :api
   create :rack_cors
-  create :ci
   create :paperclip
-  create :style
   create :script
   create :github
   create :cleanup

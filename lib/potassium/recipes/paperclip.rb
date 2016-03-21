@@ -30,5 +30,6 @@ class Recipes::Paperclip < Rails::AppBuilder
     application paperclip_config.strip, env: 'production'
     append_to_file '.env.example', 'AWS_BUCKET='
     append_to_file '.env', 'AWS_BUCKET='
+    add_readme_section :internal_dependencies, :paperclip
   end
 end

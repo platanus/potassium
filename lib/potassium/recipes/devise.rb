@@ -11,7 +11,7 @@ class Recipes::Devise < Rails::AppBuilder
   end
 
   def create
-    add_devise
+    add_devise if selected?(:authentication)
   end
 
   def install
@@ -58,6 +58,7 @@ class Recipes::Devise < Rails::AppBuilder
 
       append_to_file '.env.example', 'DEVISE_SECRET_KEY='
       append_to_file '.env', 'DEVISE_SECRET_KEY='
+      add_readme_section :internal_dependencies, :devise
     end
   end
 end

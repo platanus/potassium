@@ -28,6 +28,7 @@ class Recipes::DelayedJob < Rails::AppBuilder
     after(:gem_install) do
       generate "delayed_job:active_record"
       run "bundle binstubs delayed_job"
+      add_readme_section :internal_dependencies, :delayed_job
 
       if selected?(:heroku)
         gsub_file "Procfile", /^.*$/m do |match|
