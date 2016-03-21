@@ -5,7 +5,7 @@ class Recipes::Github < Rails::AppBuilder
       Ask.confirm("Do you want to use create the github repository? (#{repo_name})")
     end
     if github_repo_create
-      github_repo_private = answer(:github_private) do
+      github_repo_private = answer(:"github-private") do
         Ask.confirm("Should the repository be private?")
       end
     end

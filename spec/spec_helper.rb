@@ -22,6 +22,11 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   config.before(:all) do
+    add_fakes_to_path
     create_tmp_directory
+  end
+
+  config.before(:each) do
+    FakeGithub.clear!
   end
 end
