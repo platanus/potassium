@@ -35,10 +35,12 @@ RSpec.describe "Heroku" do
     expect(FakeHeroku).to have_configured_vars("staging", "SECRET_KEY_BASE")
     expect(FakeHeroku).to have_configured_vars("staging", "RACK_ENV")
     expect(FakeHeroku).to have_configured_vars("staging", "RAILS_ENV")
+    expect(FakeHeroku).to have_configured_vars("staging", "DEPLOY_TASKS")
 
     expect(FakeHeroku).to have_configured_vars("production", "SECRET_KEY_BASE")
     expect(FakeHeroku).to have_configured_vars("production", "RACK_ENV")
     expect(FakeHeroku).to have_configured_vars("production", "RAILS_ENV")
+    expect(FakeHeroku).to have_configured_vars("production", "DEPLOY_TASKS")
 
     expect(FakeHeroku).to have_created_pipeline_for("staging")
     expect(FakeHeroku).to have_add_pipeline_for("production")

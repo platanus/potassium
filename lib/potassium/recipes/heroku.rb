@@ -82,6 +82,7 @@ class Recipes::Heroku < Rails::AppBuilder
 
     run_toolbelt_command "create #{staged_app_name} --remote #{environment}"
     run_toolbelt_command "config:add #{rack_env}", staged_app_name
+    run_toolbelt_command "config:add DEPLOY_TASKS=db:migrate", staged_app_name
 
     set_rails_secrets(environment)
     set_app_multi_buildpack(environment)
