@@ -48,6 +48,14 @@ module Potassium::CLI
       desc: "Whether to use DelayedJob or not",
       negatable: true,
       default_value: "none"
+    c.switch "github",
+      desc: "Whether to create a github repository",
+      negatable: true,
+      default_value: "none"
+    c.switch "github-private",
+      desc: "Whether to the github repository is private",
+      negatable: true,
+      default_value: false
 
     c.action do |_global_options, options, _args|
       require "potassium/newest_version_ensurer"

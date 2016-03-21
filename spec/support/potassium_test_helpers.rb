@@ -12,6 +12,7 @@ module PotassiumTestHelpers
   def create_dummy_project(arguments = {})
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
+        add_fakes_to_path
         full_arguments = hash_to_arguments(default_arguments.merge(arguments))
         run_command("#{potassium_bin} create #{APP_NAME} #{full_arguments}")
       end
@@ -21,6 +22,10 @@ module PotassiumTestHelpers
   def drop_dummy_database
     return unless File.exist?(project_path)
     on_project { run_command("bundle exec rake db:drop") }
+  end
+
+  def add_fakes_to_path
+    ENV["PATH"] = "#{support_bin}:#{ENV['PATH']}"
   end
 
   def project_path
@@ -55,7 +60,9 @@ module PotassiumTestHelpers
       "paperclip" => false,
       "devise" => false,
       "api" => false,
-      "delayed-job" => false
+      "delayed-job" => false,
+      "github" => false,
+      "github-private" => false
     }
   end
 
@@ -69,6 +76,10 @@ module PotassiumTestHelpers
         "--#{key}=#{value}"
       end
     end.join(" ")
+  end
+
+  def support_bin
+    File.join(root_path, "spec", "fakes", "bin")
   end
 
   def root_path
