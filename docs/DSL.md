@@ -11,6 +11,8 @@ The DSL to extend and add recipes defines methods divided in mixins called helpe
 - [Environment](#environment-helpers)
 - [Callback](#callback-helpers)
 - [Gem](#gem-helpers)
+- [Info](#info-helpers)
+- [Readme](#readme-helpers)
 
 ### Template Helpers
 
@@ -218,4 +220,73 @@ run_action(:gem_install) do
   build_gemfile
   run "bundle install"
 end
+```
+
+### Info Helpers
+
+##### | `success(message)`
+
+To show success messages through standard output.
+
+```ruby
+success("gem installed!")
+```
+
+##### | `error(message)`
+
+To show error messages through standard output.
+
+```ruby
+error("error trying to create installation file")
+```
+
+##### | `info(message)`
+
+To show info messages through standard output.
+
+
+```ruby
+info("ActiveAdmin is already installed")
+```
+
+### Readme Helpers
+
+After running the potassium's `create` command, a custom `README.md` file will be generated with recipes you chose.
+Each recipe defines a "chunk" of that file. To do this, first you need to fill the [README.yml](/lib/potassium/assets/README.yml) file with desired definitions. Then, execute one of the following methods:
+
+##### | `add_readme_header(header, iterpolation_values)`
+
+If, for example, you want to add the style guide header, you need to do:
+
+```yml
+readme:
+  headers:
+    style_guide:
+      title: "Style Guides"
+      body: "The style guides are enforced through a self hosted version of..."
+```
+
+Then, in the recipe:
+
+```ruby
+add_readme_header(:style_guide)
+```
+
+##### | `add_readme_section(header, section, iterpolation_values)`
+
+To add header's sections. Paperclip, for example:
+
+```yml
+readme:
+  headers:
+    internal_dependencies:
+      title: "Internal dependencies"
+      sections:
+        paperclip:
+          title: "Uploads"
+          body: "For managing uploads, this project uses..."
+```
+
+```ruby
+add_readme_section(:internal_dependencies, :paperclip)
 ```
