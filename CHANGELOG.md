@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.0.0
+
 Features:
   - Use `.env` instead of `.rbenv-vars`
   - Use Puma instead of unicorn
@@ -15,6 +17,7 @@ Features:
   and docker, [#51]
   - Adds heroku app creation to the heroku recipe, [#60]
   - Adds github repo creation through hub
+  - Build a project Readme based on the potassium installed recipes, [#61]
 
 [multi-buildpack]: http://github.com/ddollar/heroku-buildpack-multi
 [deploy-tasts]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
