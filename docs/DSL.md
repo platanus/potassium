@@ -16,6 +16,40 @@ The DSL to extend and add recipes defines methods divided in mixins called helpe
 
 ### Template Helpers
 
+##### | `ask(recipe_name)`
+
+Loads the recipe and execute its `ask` method.
+
+```ruby
+ask :devise
+```
+
+##### | `create(recipe_name)`
+
+Loads the recipe and execute its `create` method.
+
+```ruby
+create :devise
+```
+
+##### | `install(recipe_name)`
+
+Loads the recipe and execute its `install` method. If the recipe implements
+a `installed?` method it will check first if it is already installed. You can
+force the installation by passing the `--force` argument on the cli.
+
+```ruby
+install :devise
+```
+
+##### | `load_recipe(recipe_name)`
+
+Loads and return the recipe.
+
+##### | `force?`
+
+Whether the `--force` argument was passed from the cli.
+
 ##### | `eval_file(file)`
 
 Just evals a file from the source path of this folder. Example:

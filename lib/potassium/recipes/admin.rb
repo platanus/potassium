@@ -17,13 +17,16 @@ class Recipes::Admin < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/activeadmin/)
-      info "ActiveAdmin is already installed"
-    elsif gem_exists?(/devise/)
+    devise = load_recipe(:devise)
+    if devise.installed?
       add_active_admin
     else
       info "ActiveAdmin can't be installed because Devise isn't installed."
     end
+  end
+
+  def installed?
+    gem_exists?(/activeadmin/)
   end
 
   private

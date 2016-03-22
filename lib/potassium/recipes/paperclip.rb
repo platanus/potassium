@@ -9,12 +9,14 @@ class Recipes::Paperclip < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/paperclip/)
-      info "Paperclip is already installed"
-    else
-      add_paperclip
-    end
+    add_paperclip
   end
+
+  def installed?
+    gem_exists?(/paperclip/)
+  end
+
+  private
 
   def add_paperclip
     gather_gem 'paperclip', '~> 4.3'

@@ -14,7 +14,7 @@ You have to install Potassium globally:
 
 Use the `potassium create` command to create a new project:
 
-    $ potassium create project-name
+    $ potassium create <project-name>
 
 > It's important to note that it will perform a version check before running to ensure that you're using the latest potassium. Also, if you feel that it's too slow, you may need to update rubygems: `gem update --system`.
 
@@ -22,7 +22,11 @@ Use the `potassium create` command to create a new project:
 
 Use the `potassium install` command to add a recipe to a project:
 
-    $ potassium install i18n
+    $ potassium install devise
+
+You can force an already installed recipe by passing the `--force` argument
+
+    $ potassium install devise --force
 
 You can run the command on its own to view all the available recipes and select one:
 

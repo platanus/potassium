@@ -20,13 +20,17 @@ class Recipes::Pundit < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/pundit/)
-      info "Pundit is already installed"
-    else
-      run_pundit_installer
-      install_admin_pundit if gem_exists?(/activeadmin/)
-    end
+    run_pundit_installer
+
+    active_admin = load_recipe(:admin)
+    install_admin_pundit if active_admin.installed?
   end
+
+  def installed?
+    gem_exists?(/pundit/)
+  end
+
+  private
 
   def run_pundit_installer
     gather_gem 'pundit'
