@@ -9,11 +9,11 @@ class Recipes::Api < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/versionist/)
-      info "API related stuff are already installed"
-    else
-      add_api
-    end
+    add_api
+  end
+
+  def installed?
+    gem_exists?(/versionist/)
   end
 
   private

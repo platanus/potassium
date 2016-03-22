@@ -9,12 +9,13 @@ class Recipes::DelayedJob < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/delayed_job_active_record/)
-      info "Delayed Job is already installed"
-    else
-      set(:heroku, gem_exists?(/rails_stdout_logging/))
-      add_delayed_job
-    end
+    heroku = load_recipe(:heroku)
+    set(:heroku, heroku.installed?)
+    add_delayed_job
+  end
+
+  def installed?
+    gem_exists?(/delayed_job_active_record/)
   end
 
   private

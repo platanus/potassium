@@ -15,12 +15,12 @@ class Recipes::Devise < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/devise/)
-      info "Devise is already installed"
-    else
-      ask_for_devise_model
-      add_devise
-    end
+    ask_for_devise_model
+    add_devise
+  end
+
+  def installed?
+    gem_exists?(/devise/)
   end
 
   private

@@ -24,11 +24,11 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def install
-    if gem_exists?(/rails_stdout_logging/) && !force?
-      info "Heroku is already installed"
-    else
-      add_heroku
-    end
+    add_heroku
+  end
+
+  def installed?
+    gem_exists?(/rails_stdout_logging/)
   end
 
   private

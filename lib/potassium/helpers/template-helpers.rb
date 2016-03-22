@@ -20,7 +20,13 @@ module TemplateHelpers
 
   def install(recipe_name)
     recipe = load_recipe(recipe_name)
-    recipe.install
+
+    if !recipe.respond_to?(:installed?) || !recipe.installed? || force?
+      recipe.install
+    else
+      info "#{recipe_name.to_s.titleize} is already installed"
+      info "Use --force to force the installation"
+    end
   end
 
   def eval_file(source)

@@ -5,10 +5,12 @@ class Recipes::Script < Rails::AppBuilder
   end
 
   def install
-    if file_exist?("bin/setup") && !force?
-      set(:heroku, true)
-      load_recipe(:heroku)
-    end
+    heroku = load_recipe(:heroku)
+    set(:heroku, heroku.installed?)
     create
+  end
+
+  def installed?
+    file_exist?("bin/setup")
   end
 end

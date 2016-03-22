@@ -18,13 +18,16 @@ class Recipes::AngularAdmin < Rails::AppBuilder
   end
 
   def install
-    if dir_exist?("app/assets/javascripts/admin")
-      info "ActiveAdmin is already installed"
-    elsif gem_exists?(/activeadmin/)
+    active_admin = load_recipe(:admin)
+    if active_admin.installed?
       add_angular_admin
     else
       info "ActiveAdmin can't be installed because Active Admin isn't installed."
     end
+  end
+
+  def installed?
+    dir_exist?("app/assets/javascripts/admin")
   end
 
   def add_angular_admin
