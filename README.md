@@ -59,6 +59,9 @@ A few more things are added to the project:
 - A [low database connection pool limit][pool]
 - Setup [Rubocop][rubocop] configuration with Platanus [style guides][rubocop-platanus]
 - Setup [Hound CI][platanus-hound] configuration, with Platanus flavour
+- Setup continuous integration in [CircleCI](circle-ci) to run tests.
+- A `bin/setup` script to setup things on a newly cloned project
+- A `bin/cibuild` script to run continuous integration build on CI
 
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
 [rubocop]: https://github.com/bbatsov/rubocop
@@ -74,27 +77,52 @@ The optional API support includes:
 - [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers) for record serialization.
 - [Simple Token Authentication](https://github.com/gonzalo-bulnes/simple_token_authentication) for stateless API authentication.
 
-### Heroku support
+### Heroku
 
 When you choose to deploy to heroku a few extra things are added for the project.
 
-- Adds the [Rails Stdout Logging][logging-gem] gem
-  to configure the app to log to standard out,
-  which is how [Heroku's logging][heroku-logging] works.
-- Adds a [Procfile][procfile] to define the processes to run in heroku
-- Setup continuous integration in [CircleCI](circle-ci) to run tests. It use
-  docker to maintain better parity between testing and production environments
-- Adds a `.buildpacks` file with the default buildpacks to use. It use the
-  following buildpacks:
+  - Adds the [Rails Stdout Logging][logging-gem] gem
+    to configure the app to log to standard out,
+    which is how [Heroku's logging][heroku-logging] works.
+  - Adds a [Procfile][procfile] to define the processes to run in heroku
+  - Setup continuous integration using docker and herokuish to maintain better
+    parity between testing and production environments
+  - Adds a `.buildpacks` file with the default buildpacks to use. It use the
+    following buildpacks:
 
-  | index | buildpack | description |
-  |-------|-----------|-------------|
-  | 1.    | [bower][heroku-buildpack-bower] | to make sure `bower install` run before the assets precompilation task |
-  | 2.    | [ruby-version][heroku-buildpack-ruby-version] | to support the use of `.ruby-version` file to instruct heroku which ruby version to use |
-  | 3.    | [ruby][heroku-buildpack-ruby] | the base buildpack to run ruby applications |
-  | 4.    | [ruby-deploy-tasks][buildpack-deploy-tasks] | to run rake task after the deployment is complete, for example `db:migrate` |
+| index | buildpack | description |
+|-------|-----------|-------------|
+| 1.    | [bower][heroku-buildpack-bower] | to make sure `bower install` run before the assets precompilation task |
+| 2.    | [ruby-version][heroku-buildpack-ruby-version] | to support the use of `.ruby-version` file to instruct heroku which ruby version to use |
+| 3.    | [ruby][heroku-buildpack-ruby] | the base buildpack to run ruby applications |
+| 4.    | [ruby-deploy-tasks][buildpack-deploy-tasks] | to run rake task after the deployment is complete, for example `db:migrate` |
 
-  **Note**: You need to set your app buildpack with the [multi-buildpack][heroku-buildpack-multi]
+Also the heroku applications are created
+
+  - Creates a `staging` and `production` applications
+  - Creates a pipeline and assign the above application to the `staging`
+    and `production` stages.
+  - Setup initial configuration variables
+  - Set the application buildpack to the [multi-buildpack][heroku-buildpack-multi]
+  - Set **deploy-tasks** buildpack is setup to run `rake db:migrate` after each deploy
+
+You'll need to manually
+
+  - Connect the pipeline with the github repository
+  - Assign a branch to each stage for auto deployments
+  - Enable deploy after CI pass
+
+### Continuous Integration
+
+In order to CicleCI start building the project on each push you need tell circle ci.
+Go to https://circleci.com/add-projects, choose the repository from the list and hit
+**Build Project**
+
+### Hound CI
+
+In order to Hound start checking your project's PRs you need enable that repository.
+Go to https://monkeyci.platan.us, choose the repository from the list and hit
+**Activate**
 
 [logging-gem]: https://github.com/heroku/rails_stdout_logging
 [heroku-logging]: https://devcenter.heroku.com/articles/logging#writing-to-your-log
