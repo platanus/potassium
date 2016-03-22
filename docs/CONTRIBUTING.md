@@ -53,7 +53,9 @@ This method is used if you need to ask something to the user before doing someth
 
     ```ruby
     def ask
-      use_banana_split = Ask.confirm("Do you want to use Banana Split?")
+      use_banana_split = answer(:banana_split) do
+        Ask.confirm("Do you wan to use Banana Split?")
+      end
       set(:use_banana_split, true) if use_banana_split
     end
     ```
