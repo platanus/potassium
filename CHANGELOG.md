@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Fix discard_gem helper
+- Adds install command for database recipe
 
 ## 2.0.0
 
