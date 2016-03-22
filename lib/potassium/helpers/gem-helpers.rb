@@ -12,6 +12,7 @@ module GemHelpers
   end
 
   def discard_gem(name)
+    ensure_variable(:gems, {})
     get(:gems).each do |_environments, gems|
       gems.delete_if do |gem_entry|
         gem_entry[:name] == name

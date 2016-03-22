@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Fix discard_gem helper
+
 ## 2.0.0
 
 Features:
