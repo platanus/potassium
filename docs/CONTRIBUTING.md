@@ -4,13 +4,13 @@
 
 ### Template
 
-In the [lib/potassium/templates/application](lib/potassium/templates) folder, you will find [the template][the-template].
+In the [lib/potassium/templates](/lib/potassium/templates) folder, you will find [the template][the-template].
 
-Now, to add some behavior, thanks to the [DSL](docs/DSL.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template][the-template]. The structure looks like this:
+Now, to add some behavior, thanks to the [DSL](/docs/DSL.md) we have a kind of standard flow of what happens when a new project is created. To understand this better, please read [the template][the-template]. The structure looks like this:
 
 1. Clean the `Gemfile` and add the base gems that rails needs to work.
 2. Run all the `ask` methods from the recipes.
-3. Execute all the `create` methods from the recipes, that are ruby classes stored on the [recipes](lib/potassium/recipes) folder. Here you can specify what gems are needed and register callbacks based on this process, usually to execute things after the gem installation happened or after some other recipe finished his work.
+3. Execute all the `create` methods from the recipes, that are ruby classes stored on the [recipes](/lib/potassium/recipes) folder. Here you can specify what gems are needed and register callbacks based on this process, usually to execute things after the gem installation happened or after some other recipe finished his work.
 4. Install the gems, filling the `Gemfile` before with all the gathered gems.
 5. Finally, create the database.
 
@@ -49,7 +49,7 @@ For example, if we want to create an optional recipe to add a gem called
 
 This method is used if you need to ask something to the user before doing something.
 
-1. Use the [answer method](DSL.md#answer-helpers) to ask something using the methods defined in [Inquirer](https://github.com/arlimus/inquirer.rb), that we use by default. Use the [DSL](docs/dsl.md) to store some information.
+1. Use the [answer method](DSL.md#answer-helpers) to ask something using the methods defined in [Inquirer](https://github.com/arlimus/inquirer.rb), that we use by default. Use the [DSL](/docs/dsl.md) to store some information.
 
     ```ruby
     def ask
@@ -98,7 +98,7 @@ We'll call this method to add specific functionality to the rails project.
 
 The install method will be called when you use the `install` command from potassium.
 For example if you run `portassium install devise` this will use
-[the recipe template](lib/potassium/templates/recipe.rb) to load an execute the
+[the recipe template](/lib/potassium/templates/recipe.rb) to load an execute the
 `install` method for the **devise** recipe.
 
 You can defined the main functionallity of a recipe in a private method and call
