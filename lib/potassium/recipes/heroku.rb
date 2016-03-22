@@ -41,6 +41,9 @@ class Recipes::Heroku < Rails::AppBuilder
     copy_file '../assets/Procfile', 'Procfile'
     copy_file '../assets/.buildpacks', '.buildpacks'
 
+    template "../assets/bin/setup_heroku.erb", "bin/setup_heroku", force: true
+    run "chmod a+x bin/setup_heroku"
+
     if logged_in?
       %w(staging production).each do |environment|
         create_app_on_heroku(environment)

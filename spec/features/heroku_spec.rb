@@ -48,9 +48,14 @@ RSpec.describe "Heroku" do
     bin_setup_path = "#{project_path}/bin/setup"
     bin_setup = IO.read(bin_setup_path)
 
-    expect(bin_setup).to include("heroku apps:info --app pl-#{app_name}-staging")
-    expect(bin_setup).to include("heroku apps:info --app pl-#{app_name}-production")
-    expect(bin_setup).to include("git config heroku.remote staging")
+    expect(bin_setup).to include("bin/setup_heroku")
+
+    bin_setup_heroku_path = "#{project_path}/bin/setup_heroku"
+    bin_setup_heroku = IO.read(bin_setup_heroku_path)
+
+    expect(bin_setup_heroku).to include("heroku apps:info --app pl-#{app_name}-staging")
+    expect(bin_setup_heroku).to include("heroku apps:info --app pl-#{app_name}-production")
+    expect(bin_setup_heroku).to include("git config heroku.remote staging")
     expect(File.stat(bin_setup_path)).to be_executable
   end
 end
