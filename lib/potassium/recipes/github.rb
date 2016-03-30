@@ -10,12 +10,12 @@ class Recipes::Github < Rails::AppBuilder
       end
     end
     set(:github_repo_name, repo_name)
-    set(:github_repo_create, github_repo_create)
+    set(:github_repo, github_repo_create)
     set(:github_repo_private, github_repo_private)
   end
 
   def create
-    github_repo_create(get(:github_repo_name), get(:github_repo_private))
+    github_repo_create(get(:github_repo_name), get(:github_repo_private)) if selected?(:github_repo)
   end
 
   private
