@@ -30,6 +30,20 @@ class Recipes::Pundit < Rails::AppBuilder
     gem_exists?(/pundit/)
   end
 
+  def install_admin_pundit
+    initializer = "config/initializers/active_admin.rb"
+    gsub_file initializer, /# config\.authorization_adapter =[^\n]+\n/ do
+      "config.authorization_adapter = ActiveAdmin::PunditAdapter\n"
+    end
+
+    template "../assets/active_admin/pundit_page_policy.rb",
+      "app/policies/active_admin/page_policy.rb"
+    template "../assets/active_admin/comment_policy.rb",
+      "app/policies/active_admin/comment_policy.rb"
+    template "../assets/active_admin/admin_user_policy.rb",
+      "app/policies/admin_user_policy.rb"
+  end
+
   private
 
   def run_pundit_installer
@@ -43,19 +57,5 @@ class Recipes::Pundit < Rails::AppBuilder
       generate "pundit:install"
       add_readme_section :internal_dependencies, :pundit
     end
-  end
-
-  def install_admin_pundit
-    initializer = "config/initializers/active_admin.rb"
-    gsub_file initializer, /# config\.authorization_adapter =[^\n]+\n/ do
-      "config.authorization_adapter = ActiveAdmin::PunditAdapter\n"
-    end
-
-    template "../assets/active_admin/pundit_page_policy.rb",
-      "app/policies/active_admin/page_policy.rb"
-    template "../assets/active_admin/comment_policy.rb",
-      "app/policies/active_admin/comment_policy.rb"
-    template "../assets/active_admin/admin_user_policy.rb",
-      "app/policies/admin_user_policy.rb"
   end
 end
