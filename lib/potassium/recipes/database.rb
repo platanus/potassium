@@ -1,8 +1,8 @@
 class Recipes::Database < Rails::AppBuilder
   def ask
     databases = {
-      mysql: "MySQL",
       postgresql: "PostgreSQL",
+      mysql: "MySQL",
       none: "None, thanks"
     }
 
@@ -30,8 +30,8 @@ class Recipes::Database < Rails::AppBuilder
 
   def databases(database)
     databases = {
-      mysql: { name: 'mysql', gem_name: 'mysql2', version: '~> 0.3.18', relational: true },
-      postgresql: { name: 'postgresql', gem_name: 'pg', relational: true }
+      postgresql: { name: 'postgresql', gem_name: 'pg', relational: true },
+      mysql: { name: 'mysql', gem_name: 'mysql2', version: '~> 0.3.18', relational: true }
     }
     databases[database]
   end
