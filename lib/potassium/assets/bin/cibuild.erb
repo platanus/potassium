@@ -1,27 +1,92 @@
 #!/usr/bin/env bash
+trap "exit" SIGINT SIGTERM
 
-DOCKE_COMPOSE_ARGS="-f docker-compose.ci.yml run"
-
-<% if(selected?(:database, :mysql) || selected?(:database, :postgresql))-%>
-function test_<%=get(:database).to_s%> {
-  docker-compose $DOCKE_COMPOSE_ARGS test sh -c 'nc -z $<%=get(:database).to_s.upcase%>_HOST $<%=get(:database).to_s.upcase%>_PORT'
+command -v docker >/dev/null 2>&1 && docker info >/dev/null || {
+  printf >&2 "\e[31mI require docker but it's not installed. Aborting.\e[0m\n"; exit 1;
 }
 
-count=0
-# Chain tests together by using &&
-until ( test_<%=get(:database).to_s%> && echo "Services ready" )
-do
-  ((count++))
-  if [ ${count} -gt 50 ]
-  then
-    echo "Services didn't become ready in time"
-    exit 1
-  else
-    echo "Waiting for services to become ready..."
-  fi
-  sleep 0.2
-done
-<% end-%>
+DOCKER_COMPOSE_ARGS="-f docker-compose.ci.yml"
 
-docker-compose $DOCKE_COMPOSE_ARGS test /exec bundle exec rake db:setup
-docker-compose $DOCKE_COMPOSE_ARGS test /exec bundle exec rspec spec
+# Build Image
+build(){
+  docker-compose $DOCKER_COMPOSE_ARGS build test
+}
+
+# Wait services to be ready
+wait_services(){
+  function test_service {
+    docker-compose $DOCKER_COMPOSE_ARGS run test sh -c "nc -z $1 $2"
+  }
+
+  count=0
+  # Chain tests together by using &&
+  until (
+  <% if(selected?(:database, :mysql) || selected?(:database, :postgresql))-%>
+  test_service '$<%=get(:database).to_s.upcase%>_HOST' '$<%=get(:database).to_s.upcase%>_PORT' && \
+  <% end-%>
+  echo "Services ready"
+  )
+  do
+    ((count++))
+    if [ $count -gt 50 ]
+    then
+      echo "Services didn't become ready in time"
+      exit 1
+    else
+      echo "Waiting for services to become ready..."
+    fi
+    sleep 0.5
+  done
+}
+
+# Prepare dependencies
+dependencies(){
+  docker-compose $DOCKER_COMPOSE_ARGS run test bundle install
+}
+
+# Prepare database
+database(){
+  docker-compose $DOCKER_COMPOSE_ARGS run test bundle exec rake db:create db:schema:load
+}
+
+# Run the specs
+tests(){
+  [ -n "$CI" ] && {
+    RSPEC_JUNIT_ARGS="-r rspec_junit_formatter --format RspecJunitFormatter -o $HOME/.rspec_reports/junit.xml"
+    RSPEC_FORMAT_ARGS="--format progress --no-color"
+  }
+  docker-compose $DOCKER_COMPOSE_ARGS run test bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
+}
+
+# Run the complete ci build
+no_ci(){
+  build
+  wait_services
+  dependencies
+  database
+  tests
+}
+
+case "$1" in
+  "")
+    no_ci
+    ;;
+  "services")
+    wait_services
+    ;;
+  "deps"|"dependencies")
+    dependencies
+    ;;
+  "db"|"database")
+    database
+    ;;
+  "specs"|"tests")
+    tests
+    ;;
+  "build")
+    build
+    ;;
+  *)
+    echo "Usage: cibuild [services|deps|db|specs|build]"
+    ;;
+esac

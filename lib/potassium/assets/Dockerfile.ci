@@ -1,4 +1,6 @@
-FROM platanus/buildstep
-EXPOSE 3000
+FROM platanus/ruby:2.2
 
-RUN /exec bundle install --with test
+RUN mkdir /app
+WORKDIR /app
+
+ADD . /app
