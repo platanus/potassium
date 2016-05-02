@@ -35,4 +35,12 @@ RSpec.describe "A new project" do
 
     expect(hound_config_file).to include("config_file: .ruby_style.yml")
   end
+
+  it "configures postgresql" do
+    database_config_file = IO.read("#{project_path}/config/database.yml")
+    gemfile = IO.read("#{project_path}/Gemfile")
+
+    expect(database_config_file).to include(%{adapter: postgresql})
+    expect(gemfile).to include %{gem 'pg'}
+  end
 end

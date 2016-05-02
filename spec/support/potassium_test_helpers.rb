@@ -52,7 +52,7 @@ module PotassiumTestHelpers
 
   def default_arguments
     {
-      "db" => "mysql",
+      "db" => "postgresql",
       "lang" => "es",
       "heroku" => false,
       "admin" => false,
