@@ -9,6 +9,10 @@ class Recipes::Ci < Rails::AppBuilder
 
       copy_file '../assets/docker-compose.ci.yml', 'docker-compose.ci.yml'
 
+      gather_gems(:test) do
+        gather_gem 'rspec_junit_formatter', '0.2.2'
+      end
+
       compose = DockerHelpers.new('docker-compose.ci.yml')
 
       if selected?(:database, :mysql)
