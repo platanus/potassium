@@ -107,12 +107,6 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def add_app_to_pipeline(app_env_name, environment)
-    pipelines_plugin = `heroku plugins | grep pipelines`
-    if pipelines_plugin.empty?
-      puts "You need heroku pipelines plugin. Run: heroku plugins:install heroku-pipelines"
-      exit 1
-    end
-
     pipeline = `heroku pipelines:info \
       #{heroku_pipeline_name} 2>/dev/null | grep #{heroku_pipeline_name}`
     pipeline_command = pipeline.empty? ? "create" : "add"

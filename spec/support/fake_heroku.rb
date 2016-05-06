@@ -8,9 +8,7 @@ class FakeHeroku
   end
 
   def run!
-    if @args.first == "plugins"
-      puts "heroku-pipelines@0.29.0"
-    elsif @args.first == "pipelines:info"
+    if @args.first == "pipelines:info"
       if FakeHeroku.has_created_pipeline?
         puts "=== dummy-app\nstaging:\tpl-dummy-app-staging\nproduction:\tpl-dummy-app-production"
       end
