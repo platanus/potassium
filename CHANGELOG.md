@@ -5,6 +5,8 @@
 - Fix discard_gem helper
 - Adds install command for database recipe
 - Remove check for heroku pipelines plugins, [#88]
+- Use postgresql by default, [#83]
+- Update ruby to `2.3.1` [#89]
 
 ## 2.0.0
 
