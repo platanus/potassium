@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 2.1.0
+
 - Fix discard_gem helper
 - Adds install command for database recipe
 - Remove check for heroku pipelines plugins, [#88]
