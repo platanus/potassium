@@ -29,6 +29,7 @@ run_action(:recipe_loading) do
   create :style
   create :puma
   create :database
+  create :annotate
   create :ruby
   create :env
   create :bower
