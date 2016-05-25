@@ -2,7 +2,7 @@ class Recipes::Puma < Rails::AppBuilder
   def create
     gather_gem 'puma'
 
-    gather_gems(:production, :staging) do
+    gather_gems(:production) do
       gather_gem 'rack-timeout'
     end
 

@@ -34,7 +34,7 @@ class Recipes::Heroku < Rails::AppBuilder
   private
 
   def add_heroku
-    gather_gems(:production, :staging) do
+    gather_gems(:production) do
       gather_gem('rails_stdout_logging')
     end
 
@@ -80,7 +80,7 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def create_app_on_heroku(environment)
-    rack_env = "RACK_ENV=#{environment} RAILS_ENV=#{environment}"
+    rack_env = "RACK_ENV=production RAILS_ENV=production"
     staged_app_name = app_name_for(environment)
 
     run_toolbelt_command "create #{staged_app_name} --remote #{environment}"
