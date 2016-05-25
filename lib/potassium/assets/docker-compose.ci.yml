@@ -6,4 +6,4 @@ test:
     - ./vendor/bundle:/usr/local/bundle
     - $CIRCLE_TEST_REPORTS/rspec:$HOME/.rspec_reports
   environment:
-    RAILS_ENV: test
+    RACK_ENV: test

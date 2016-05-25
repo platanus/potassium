@@ -63,5 +63,5 @@ end
 
 run_action(:database_creation) do
   run "rake db:create db:migrate"
-  run "RAILS_ENV=test rake db:create db:migrate"
+  run "RACK_ENV=test rake db:create db:migrate"
 end
