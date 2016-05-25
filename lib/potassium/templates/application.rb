@@ -44,7 +44,6 @@ run_action(:recipe_loading) do
   create :pundit
   create :testing
   create :production
-  create :staging
   create :secrets
   create :git
   create :api
