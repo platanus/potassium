@@ -80,7 +80,7 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def create_app_on_heroku(environment)
-    rack_env = "RACK_ENV=production RAILS_ENV=production"
+    rack_env = "RACK_ENV=production"
     staged_app_name = app_name_for(environment)
 
     run_toolbelt_command "create #{staged_app_name} --remote #{environment}"
