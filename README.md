@@ -61,17 +61,12 @@ The following optional integrations are added too:
 A few more things are added to the project:
 
 - A [low database connection pool limit][pool]
-- Setup [Rubocop][rubocop] configuration with Platanus [style guides][rubocop-platanus]
-- Setup [Hound CI][platanus-hound] configuration, with Platanus flavour
 - Setup continuous integration in [CircleCI](circle-ci) to run tests.
 - Create the github repository for the project (it used `hub` under the hood)
 - A `bin/setup` script to setup things on a newly cloned project
 - A `bin/cibuild` script to run continuous integration build on CI
 
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
-[rubocop]: https://github.com/bbatsov/rubocop
-[rubocop-platanus]: https://raw.githubusercontent.com/platanus/hound/platanus/config/style_guides/platanus/ruby.yml
-[platanus-hound]: http://monkeyci.platan.us
 
 ### API support
 

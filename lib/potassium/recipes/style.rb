@@ -1,9 +1,8 @@
 class Recipes::Style < Rails::AppBuilder
   def create
-    copy_file '../assets/.rubocop.yml', '.rubocop.yml'
-    copy_file '../assets/.ruby_style.yml', '.ruby_style.yml'
-    copy_file '../assets/.hound.yml', '.hound.yml'
-    append_to_file '.gitignore', ".rubocop-http*\n"
+    append_to_file ".gitignore", ".rubocop.yml\n"
+    append_to_file ".gitignore", ".eslintrc.json\n"
+    append_to_file ".gitignore", ".sscs-lint.yml\n"
     add_readme_header :style_guide
   end
 
