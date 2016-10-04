@@ -49,6 +49,7 @@ run_action(:recipe_loading) do
   create :api
   create :rack_cors
   create :paperclip
+  create :tzinfo
   create :script
   create :github
   create :cleanup
