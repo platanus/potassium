@@ -101,7 +101,7 @@ class Recipes::Heroku < Rails::AppBuilder
 
   def set_app_multi_buildpack(environment)
     run_toolbelt_command(
-      "buildpacks:set https://github.com/ddollar/heroku-buildpack-multi.git",
+      "buildpacks:set https://github.com/heroku/heroku-buildpack-multi.git",
       app_name_for(environment)
     )
   end
