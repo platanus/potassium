@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 2.2.0
+
+- Adds tzinfo-data gem [#101]
+
 ## 2.1.0
 
 - Fix discard_gem helper
