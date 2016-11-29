@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Update [multi buildpack]([multi-buildpack-heroku]) buildback to the heroku version
+
+[multi-buildpack-heroku]: http://github.com/ddollar/heroku-buildpack-multi
+
 ## 2.2.0
 
 - Adds tzinfo-data gem [#101]

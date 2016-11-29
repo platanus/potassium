@@ -130,7 +130,7 @@ Go to https://monkeyci.platan.us, choose the repository from the list and hit
 [heroku-buildpack-ruby-version]: http://github.com/platanus/heroku-buildpack-ruby-version
 [heroku-buildpack-bower]: http://github.com/platanus/heroku-buildpack-bower
 [heroku-buildpack-ruby]: http://github.com/heroku/heroku-buildpack-ruby
-[heroku-buildpack-multi]: http://github.com/ddollar/heroku-buildpack-multi
+[heroku-buildpack-multi]: http://github.com/heroku/heroku-buildpack-multi
 [buildpack-deploy-tasks]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
 [circle-ci]: https://circleci.com
 
