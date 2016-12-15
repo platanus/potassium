@@ -66,6 +66,17 @@ readme:
         in development runing `rubocop` or just using the rubocop integration for your text editor of choice.
 
         You can add custom rules to this project just adding them to the `.ruby-style.yml` file.
+    mailing:
+      title: "Sending Emails"
+      body: |
+        The emails can be send through the gem `<%= get(:mailer_gem_name) %>` using the `<%= get(:mailer_delivery_method) %>` delivery method.
+        All the `action_mailer` configuration can be found at `config/mailer.rb`, which is loaded only on production environments.
+
+        All emails should be sent using background jobs, by default we install `delayed_job` for that purpuse.
+
+        #### Testing in staging
+
+        If you add the `EMAIL_RECIPIENTS=` environmental variable, the emails will be intercepted and redirected to the email in the variable.
     internal_dependencies:
       title: "Internal dependencies"
       sections:
