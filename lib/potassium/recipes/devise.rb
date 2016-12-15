@@ -56,7 +56,7 @@ class Recipes::Devise < Rails::AppBuilder
         "# config.pepper = 'onhcylrat7x8bjyr5o15sxaix3vbu0sl'"
       end
 
-      append_to_file '.env.development', 'DEVISE_SECRET_KEY='
+      append_to_file '.env.development', "DEVISE_SECRET_KEY=\n"
       add_readme_section :internal_dependencies, :devise
     end
   end
