@@ -4,6 +4,7 @@
 
 - Update [multi buildpack]([multi-buildpack-heroku]) buildback to the heroku version
 - Update ruby version on CI docker image
+- Adds mailer support with AWS-SES and Sendgrid [#103]
 
 [multi-buildpack-heroku]: http://github.com/ddollar/heroku-buildpack-multi
 
