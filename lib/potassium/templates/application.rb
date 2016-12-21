@@ -18,6 +18,7 @@ run_action(:asking) do
   ask :i18n
   ask :api
   ask :paperclip
+  ask :mailer
   ask :heroku
   ask :github
 end
@@ -35,6 +36,7 @@ run_action(:recipe_loading) do
   create :bower
   create :editorconfig
   create :aws_sdk
+  create :mailer
   create :i18n
   create :pry
   create :devise
@@ -43,7 +45,6 @@ run_action(:recipe_loading) do
   create :delayed_job
   create :pundit
   create :testing
-  create :production
   create :secrets
   create :git
   create :api
