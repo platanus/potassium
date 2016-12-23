@@ -5,11 +5,14 @@ class Recipes::Paperclip < Rails::AppBuilder
   end
 
   def create
-    add_paperclip if selected?(:paperclip)
+    return unless selected?(:paperclip)
+    add_paperclip
+    config_rspec
   end
 
   def install
     add_paperclip
+    config_rspec if gem_exists?(/rspec-rails/)
   end
 
   def installed?
@@ -33,5 +36,10 @@ class Recipes::Paperclip < Rails::AppBuilder
     append_to_file '.env.development', "S3_BUCKET=\n"
     append_to_file '.gitignore', "/public/system/*\n"
     add_readme_section :internal_dependencies, :paperclip
+  end
+
+  def config_rspec
+    copy_file '../assets/testing/platanus.png', 'spec/assets/platanus.png'
+    copy_file '../assets/testing/paperclip.rb', 'spec/support/paperclip.rb'
   end
 end
