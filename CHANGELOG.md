@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Configure mailer for development environment
 - Configure Rspec to work with Paperclip
 - Update [multi buildpack]([multi-buildpack-heroku]) buildback to the heroku version
 - Update ruby version on CI docker image

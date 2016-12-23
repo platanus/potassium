@@ -91,5 +91,7 @@ class Recipes::Mailer < Rails::AppBuilder
   end
 
   def aws_ses
+    gather_gems(:development) { gather_gem("letter_opener") }
+    application "config.action_mailer.delivery_method = :letter_opener", env: "development"
   end
 end

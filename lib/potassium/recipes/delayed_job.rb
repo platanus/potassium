@@ -23,8 +23,10 @@ class Recipes::DelayedJob < Rails::AppBuilder
   def add_delayed_job
     gather_gem "delayed_job_active_record"
 
-    delayed_job_config = "config.active_job.queue_adapter = :delayed_job"
-    application(delayed_job_config)
+    general_config = "config.active_job.queue_adapter = :delayed_job"
+    application(general_config)
+    dev_config = "config.active_job.queue_adapter = :inline"
+    application dev_config, env: "development"
 
     after(:gem_install) do
       generate "delayed_job:active_record"
@@ -32,9 +34,7 @@ class Recipes::DelayedJob < Rails::AppBuilder
       add_readme_section :internal_dependencies, :delayed_job
 
       if selected?(:heroku)
-        gsub_file "Procfile", /^.*$/m do |match|
-          "#{match}worker: bundle exec rake jobs:work"
-        end
+        gsub_file("Procfile", /^.*$/m) { |match| "#{match}worker: bundle exec rake jobs:work" }
       end
     end
   end
