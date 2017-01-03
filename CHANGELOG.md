@@ -7,6 +7,7 @@
 - Update [multi buildpack]([multi-buildpack-heroku]) buildback to the heroku version
 - Update ruby version on CI docker image
 - Adds mailer support with AWS-SES and Sendgrid [#103]
+- Remove adapter property from database config on production. The adapter is delegated to the protocol in the url propertie `postgres://` or `mysql2://`
 
 FIX:
 - Run db tasks with bundle exec

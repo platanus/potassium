@@ -15,7 +15,6 @@ test:
   database: <%= get(:underscorized_app_name) %>_test
 
 production: &deploy
-  adapter: mysql2
   encoding: utf8
   min_messages: warning
   pool: <%%= [Integer(ENV.fetch("MAX_THREADS", 5)), Integer(ENV.fetch("DB_POOL", 5))].max %>
