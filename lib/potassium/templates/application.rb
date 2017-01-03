@@ -64,6 +64,6 @@ run_action(:gem_install) do
 end
 
 run_action(:database_creation) do
-  run "rake db:create db:migrate"
-  run "RACK_ENV=test rake db:create db:migrate"
+  run "bundle exec rake db:create db:migrate"
+  run "RACK_ENV=test bundle exec rake db:create db:migrate"
 end
