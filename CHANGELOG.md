@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Add seeds by environment
 - Configure mailer for development environment
 - Configure Rspec to work with Paperclip
 - Update [multi buildpack]([multi-buildpack-heroku]) buildback to the heroku version

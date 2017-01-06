@@ -42,6 +42,7 @@ run_action(:recipe_loading) do
   create :devise
   create :admin
   create :angular_admin
+  create :seeds
   create :delayed_job
   create :pundit
   create :testing
