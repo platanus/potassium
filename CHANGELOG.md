@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Run bin/setup after DB creation
 - Add seeds by environment
 - Configure mailer for development environment
 - Configure Rspec to work with Paperclip
