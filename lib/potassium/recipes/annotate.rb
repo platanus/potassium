@@ -7,4 +7,8 @@ class Recipes::Annotate < Rails::AppBuilder
     template '../assets/lib/tasks/auto_annotate_models.rake',
       'lib/tasks/auto_annotate_models.rake'
   end
+
+  def install
+    create
+  end
 end
