@@ -26,7 +26,7 @@ class Recipes::Mailer < Rails::AppBuilder
     config(email_service)
 
     delayed_job = load_recipe(:delayed_job)
-    delayed_job.install unless delayed_job.installed?
+    delayed_job.add_delayed_job unless delayed_job.installed?
   end
 
   def install

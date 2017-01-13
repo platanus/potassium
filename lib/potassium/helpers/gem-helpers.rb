@@ -58,6 +58,7 @@ module GemHelpers
   end
 
   def call_gem_for_gems(gems)
+    gems.sort_by! { |k| k[:name] }
     gems.each(&method(:call_gem_for_gem))
   end
 

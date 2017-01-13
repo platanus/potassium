@@ -18,8 +18,6 @@ class Recipes::DelayedJob < Rails::AppBuilder
     gem_exists?(/delayed_job_active_record/)
   end
 
-  private
-
   def add_delayed_job
     gather_gem "delayed_job_active_record"
 
