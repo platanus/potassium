@@ -58,6 +58,7 @@ module PotassiumTestHelpers
       "admin" => false,
       "pundit" => false,
       "paperclip" => false,
+      "email_service" => "aws_ses",
       "devise" => false,
       "api" => false,
       "delayed-job" => false,
