@@ -21,6 +21,7 @@ class Recipes::Seeds < Rails::AppBuilder
     copy_file '../assets/seeds/common.rb', 'db/seeds/common.rb'
     copy_file '../assets/seeds/development.rb', 'db/seeds/development.rb'
     copy_file '../assets/seeds/production.rb', 'db/seeds/production.rb'
+    add_readme_header :seeds
   end
 
   def override_seed_files
