@@ -7,3 +7,4 @@ machine:
 dependencies:
   override:
     - bundle install
+    - gem install hound-cli
