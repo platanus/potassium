@@ -84,6 +84,15 @@ module TemplateHelpers
     cli_options[:force]
   end
 
+  def procfile(name, command)
+    file = 'Procfile'
+    if File.read(file).index(/^#{name}:.*$/m).nil?
+      append_file file, "#{name}: #{command}\n"
+    else
+      gsub_file file, /^name:.*$/m, "#{name}: #{command}\n"
+    end
+  end
+
   private
 
   def get_recipe_class(recipe_name)
