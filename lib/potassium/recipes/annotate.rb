@@ -10,5 +10,6 @@ class Recipes::Annotate < Rails::AppBuilder
 
   def install
     create
+    run "bundle exec annotate"
   end
 end
