@@ -38,6 +38,8 @@ class Recipes::Heroku < Rails::AppBuilder
       gather_gem('rails_stdout_logging')
     end
 
+    gather_gem 'heroku-stage'
+
     copy_file '../assets/Procfile', 'Procfile'
     copy_file '../assets/.buildpacks', '.buildpacks'
 
@@ -84,6 +86,8 @@ class Recipes::Heroku < Rails::AppBuilder
     staged_app_name = app_name_for(environment)
 
     run_toolbelt_command "create #{staged_app_name} --remote #{environment}"
+    run_toolbelt_command "labs:enable runtime-dyno-metadata", staged_app_name
+    run_toolbelt_command "config:add HEROKU_APP_NAME=#{staged_app_name}", staged_app_name
     run_toolbelt_command "config:add #{rack_env}", staged_app_name
     run_toolbelt_command "config:add DEPLOY_TASKS=db:migrate", staged_app_name
 
