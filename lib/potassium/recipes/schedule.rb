@@ -7,7 +7,7 @@ class Recipes::Schedule < Rails::AppBuilder
   def create
     if selected?(:scheduled)
       gather_gem 'clockwork'
-      copy_file '../assets/config/clock.rb', 'config/clock.rb'
+      template '../assets/config/clock.rb.erb', 'config/clock.rb'
       add_readme_section :internal_dependencies, :clockwork
 
       if selected?(:heroku)

@@ -95,6 +95,9 @@ readme:
         clockwork:
           title: "Scheduled Tasks"
           body: "To schedule recurring work at particular times or dates, this project uses [Clockwork](https://github.com/Rykian/clockwork)"
+        sentry:
+          title: "Error Reporting"
+          body: "To report our errors we use [Sentry](https://github.com/getsentry/raven-ruby)"
     seeds:
       title: "Seeds"
       body: |

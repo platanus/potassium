@@ -15,6 +15,7 @@ run_action(:asking) do
   ask :angular_admin
   ask :delayed_job
   ask :schedule
+  ask :error_reporting
   ask :pundit
   ask :i18n
   ask :api
@@ -45,6 +46,7 @@ run_action(:recipe_loading) do
   create :admin
   create :angular_admin
   create :seeds
+  create :error_reporting
   create :delayed_job
   create :pundit
   create :testing
