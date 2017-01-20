@@ -14,6 +14,7 @@ run_action(:asking) do
   ask :admin
   ask :angular_admin
   ask :delayed_job
+  ask :schedule
   ask :pundit
   ask :i18n
   ask :api
@@ -36,6 +37,7 @@ run_action(:recipe_loading) do
   create :bower
   create :editorconfig
   create :aws_sdk
+  create :schedule
   create :mailer
   create :i18n
   create :pry
