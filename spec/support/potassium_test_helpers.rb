@@ -64,7 +64,9 @@ module PotassiumTestHelpers
       "api" => false,
       "delayed-job" => false,
       "github" => false,
-      "github-private" => false
+      "github-private" => false,
+      "clockwork" => false,
+      "sentry" => false
     }
   end
 

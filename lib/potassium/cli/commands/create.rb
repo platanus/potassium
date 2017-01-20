@@ -58,6 +58,14 @@ module Potassium::CLI
       desc: "Whether to the github repository is private",
       negatable: true,
       default_value: false
+    c.switch "clockwork",
+      desc: "Whether to use clockwork as job scheduler",
+      negatable: true,
+      default_value: "none"
+    c.switch "sentry",
+      desc: "Whether to use Sentry as error reporting tool",
+      negatable: true,
+      default_value: "none"
 
     c.action do |_global_options, options, _args|
       require "potassium/newest_version_ensurer"
