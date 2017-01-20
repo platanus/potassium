@@ -48,6 +48,8 @@ Potassium Rails apps includes the following gems and technologies:
 - [Puma](https://github.com/puma/puma) to serve HTTP requests
 - [Rack Timeout](https://github.com/heroku/rack-timeout) to abort requests that are
   taking too long
+- [Tzinfo-Data](https://github.com/tzinfo/tzinfo-data) for update timezone information
+- [Faker](https://github.com/stympy/faker) for create development data
 
 The following optional integrations are added too:
 
@@ -56,7 +58,9 @@ The following optional integrations are added too:
 - [ActiveAdmin](http://activeadmin.info) for admin interfaces.
 - [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin.
 - [Pundit](https://github.com/elabs/pundit) for role-based authorization.
-- [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.
+- [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.]
+- Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails) 
+  and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
 
 A few more things are added to the project:
 
@@ -65,6 +69,7 @@ A few more things are added to the project:
 - Create the github repository for the project (it used `hub` under the hood)
 - A `bin/setup` script to setup things on a newly cloned project
 - A `bin/cibuild` script to run continuous integration build on CI
+- A `db:fake_data:load` rake task to load fake data for development 
 
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
 
