@@ -31,4 +31,24 @@ RSpec.describe "A new project" do
 
     expect(ruby_version_file).to eq("2.3")
   end
+
+  context "seeds related issues" do
+    it "creates fake data loader module" do
+      content = IO.read("#{project_path}/lib/fake_data_loader.rb")
+
+      expect(content).to include %{module FakeDataLoader}
+    end
+
+    it "creates load fake data task" do
+      content = IO.read("#{project_path}/lib/tasks/db/fake_data.rake")
+
+      expect(content).to include %{FakeDataLoader.load}
+    end
+
+    it "overrides default seed file" do
+      content = IO.read("#{project_path}/db/seeds.rb")
+
+      expect(content).to include %{without duplicating the information}
+    end
+  end
 end

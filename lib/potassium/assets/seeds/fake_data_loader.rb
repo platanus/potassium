@@ -22,20 +22,12 @@
 # Country.create(name: "Chile", locale: "es-CL", currency: "$CLP")
 #
 
+Faker::Config.locale = I18n.locale
+
 module FakeDataLoader
   extend FactoryGirl::Syntax::Methods
 
   def self.load
-    load_admin
-  end
-
-  def self.load_admin
-    email = "admin@example.com"
-    pass = "password"
-    admin = AdminUser.find_by(email: email)
-    AdminUser.create!(email: email, password: pass, password_confirmation: pass) unless admin
+    # Put here the code to generate data with DEVELOPMENT PURPOSES.
   end
 end
-
-Faker::Config.locale = 'es'
-FakeDataLoader.load

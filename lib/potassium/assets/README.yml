@@ -95,8 +95,5 @@ readme:
     seeds:
       title: "Seeds"
       body: |
-        To populate your database with initial data you can add, inside:
-
-        - the `/db/seeds/common.rb` file, the code to generate **the necessary data** to run the application. This will run in all environments.
-        - the `/db/seeds/development.rb` file, the code to generate data with **development puroposes**.
-        - the `/db/seeds/production.rb` file, the code to generate data that will be available in **production environment** only.
+        To populate your database with initial data you can add, inside the `/db/seeds.rb` file, the code to generate **only the necessary data** to run the application.
+        If you need to generate data with **development purposes**, you can customize the `lib/fake_data_loader.rb` module and then to run the `rake load_fake_data` task from your terminal.
