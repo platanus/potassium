@@ -10,8 +10,8 @@ module Potassium::CLI
 
     c.flag [:db, :database],
       desc: "Decides which database to use. Available: mysql, postgresql, none"
-    c.flag [:lang, :language],
-      desc: "Decides which language to use. Available: es, en"
+    c.flag "locale",
+      desc: "Decides which locale to use. Available: es-CL, en"
     c.flag [:email_service, :email],
       desc: "Decides which email adapter to use. Available: aws_ses, sendgrid, none"
     c.switch "devise",
