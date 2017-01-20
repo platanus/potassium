@@ -61,6 +61,8 @@ The following optional integrations are added too:
 - [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.]
 - Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails) 
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
+- [Clockwork](https://github.com/Rykian/clockwork) to run scheduled processes
+- [Sentry](https://sentry.io) to monitor exceptions and errors
 
 A few more things are added to the project:
 
