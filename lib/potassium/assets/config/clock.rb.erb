@@ -1,0 +1,16 @@
+require 'clockwork'
+require_relative './boot'
+require_relative './environment'
+
+module Clockwork
+  <% if selected?(:report_error) -%>
+error_handler do |error|
+    Raven.capture_exception(error)
+  end
+  <% end -%>
+# Example
+  #
+  # every(5.minutes, 'ScheduledJob') do
+  #   ScheduledJob.perform_later
+  # end
+end
