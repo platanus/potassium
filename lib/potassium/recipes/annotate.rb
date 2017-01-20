@@ -10,6 +10,8 @@ class Recipes::Annotate < Rails::AppBuilder
 
   def install
     create
-    run "bundle exec annotate"
+    after(:gem_install) do
+      run "bundle exec annotate"
+    end
   end
 end
