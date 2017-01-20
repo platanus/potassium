@@ -3,7 +3,7 @@
 ## Unreleased
 
 - Run bin/setup after DB creation
-- Add seeds by environment
+- Adds `db:fake_data:load` task for development data. It runs after `db:setup` on development environment
 - Configure mailer for development environment
 - Configure Rspec to work with Paperclip
 - Update [multi buildpack]([multi-buildpack-heroku]) buildback to the heroku version
