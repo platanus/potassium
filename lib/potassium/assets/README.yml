@@ -92,3 +92,8 @@ readme:
         delayed_job:
           title: "Queue System"
           body: "For managing tasks in the background, this project uses [DelayedJob](https://github.com/collectiveidea/delayed_job)"
+    seeds:
+      title: "Seeds"
+      body: |
+        To populate your database with initial data you can add, inside the `/db/seeds.rb` file, the code to generate **only the necessary data** to run the application.
+        If you need to generate data with **development purposes**, you can customize the `lib/fake_data_loader.rb` module and then to run the `rake load_fake_data` task from your terminal.

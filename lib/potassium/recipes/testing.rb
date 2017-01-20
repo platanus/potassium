@@ -3,6 +3,7 @@ class Recipes::Testing < Rails::AppBuilder
     gather_gems(:development, :test) do
       gather_gem('rspec-rails')
       gather_gem('factory_girl_rails')
+      gather_gem('faker')
       gather_gem('guard-rspec', require: false)
       gather_gem('rspec-nc', require: false)
     end

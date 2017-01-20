@@ -2,6 +2,10 @@ class Recipes::Script < Rails::AppBuilder
   def create
     template "../assets/bin/setup.erb", "bin/setup", force: true
     run "chmod a+x bin/setup"
+
+    after(:database_creation) do
+      inside('.') { run('bin/setup') }
+    end
   end
 
   def install
