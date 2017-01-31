@@ -62,7 +62,7 @@ readme:
     style_guide:
       title: "Style Guides"
       body: |
-        The style guides are enforced through a self hosted version of [Hound CI](http://monkyeci.platan.us). The style configuration can also be used locally
+        The style guides are enforced through a self hosted version of [Hound CI](http://monkeyci.platan.us). The style configuration can also be used locally
         in development runing `rubocop` or just using the rubocop integration for your text editor of choice.
 
         You can add custom rules to this project just adding them to the `.ruby-style.yml` file.
