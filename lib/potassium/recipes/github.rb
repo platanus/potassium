@@ -2,7 +2,9 @@ class Recipes::Github < Rails::AppBuilder
   def ask
     repo_name = "platanus/#{get(:dasherized_app_name)}"
     github_repo_create = answer(:github) do
-      Ask.confirm("Do you want to use create the github repository? (#{repo_name})")
+      q = "Do you want to create the Github repository (https://github.com/#{repo_name}) " +
+        "for this project?"
+      Ask.confirm(q)
     end
     if github_repo_create
       github_repo_private = answer(:"github-private") do
