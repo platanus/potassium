@@ -1,4 +1,10 @@
+require 'pathname'
+require 'bundler'
+require 'potassium/cli_options'
+
 module PotassiumTestHelpers
+  include Potassium::CliOptions
+
   APP_NAME = "dummy_app"
 
   def remove_project_directory
@@ -13,7 +19,7 @@ module PotassiumTestHelpers
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
         add_fakes_to_path
-        full_arguments = hash_to_arguments(default_arguments.merge(arguments))
+        full_arguments = hash_to_arguments(create_arguments(true).merge(arguments))
         run_command("#{potassium_bin} create #{APP_NAME} #{full_arguments}")
         on_project { run_command("hound rules update ruby --local") }
       end
@@ -49,26 +55,6 @@ module PotassiumTestHelpers
 
   def potassium_bin
     File.join(root_path, "bin", "potassium")
-  end
-
-  def default_arguments # rubocop:disable Metrics/MethodLength
-    {
-      "db" => "postgresql",
-      "locale" => "es-CL",
-      "heroku" => false,
-      "admin" => false,
-      "pundit" => false,
-      "paperclip" => false,
-      "email_service" => "aws_ses",
-      "devise" => false,
-      "api" => false,
-      "delayed-job" => false,
-      "draper" => false,
-      "github" => false,
-      "github-private" => false,
-      "clockwork" => false,
-      "sentry" => false
-    }
   end
 
   def hash_to_arguments(hash)
