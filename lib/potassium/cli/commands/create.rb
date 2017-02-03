@@ -50,6 +50,10 @@ module Potassium::CLI
       desc: "Whether to use DelayedJob or not",
       negatable: true,
       default_value: "none"
+    c.switch "draper",
+      desc: "Whether to use Draper or not",
+      negatable: true,
+      default_value: "none"
     c.switch "github",
       desc: "Whether to create a github repository",
       negatable: true,

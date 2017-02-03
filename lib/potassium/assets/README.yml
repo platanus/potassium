@@ -98,6 +98,9 @@ readme:
         sentry:
           title: "Error Reporting"
           body: "To report our errors we use [Sentry](https://github.com/getsentry/raven-ruby)"
+        draper:
+          title: "Presentation Layer"
+          body: "This project uses [Draper](https://github.com/drapergem/draper) to add an object-oriented layer of presentation logic"
     seeds:
       title: "Seeds"
       body: |
