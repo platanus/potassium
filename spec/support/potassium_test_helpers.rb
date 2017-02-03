@@ -51,7 +51,7 @@ module PotassiumTestHelpers
     File.join(root_path, "bin", "potassium")
   end
 
-  def default_arguments
+  def default_arguments # rubocop:disable Metrics/MethodLength
     {
       "db" => "postgresql",
       "locale" => "es-CL",
@@ -63,6 +63,7 @@ module PotassiumTestHelpers
       "devise" => false,
       "api" => false,
       "delayed-job" => false,
+      "draper" => false,
       "github" => false,
       "github-private" => false,
       "clockwork" => false,

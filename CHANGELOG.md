@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add draper gem to decorate models
+
 ## 2.3.0
 
 Features:

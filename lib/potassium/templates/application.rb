@@ -19,6 +19,7 @@ run_action(:asking) do
   ask :pundit
   ask :i18n
   ask :api
+  ask :draper
   ask :paperclip
   ask :mailer
   ask :heroku
@@ -53,6 +54,7 @@ run_action(:recipe_loading) do
   create :secrets
   create :git
   create :api
+  create :draper
   create :rack_cors
   create :paperclip
   create :tzinfo
