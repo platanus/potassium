@@ -59,7 +59,7 @@ The following optional integrations are added too:
 - [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin.
 - [Pundit](https://github.com/elabs/pundit) for role-based authorization.
 - [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.]
-- Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails) 
+- Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails)
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
 - [Clockwork](https://github.com/Rykian/clockwork) to run scheduled processes
 - [Sentry](https://sentry.io) to monitor exceptions and errors
@@ -71,7 +71,7 @@ A few more things are added to the project:
 - Create the github repository for the project (it used `hub` under the hood)
 - A `bin/setup` script to setup things on a newly cloned project
 - A `bin/cibuild` script to run continuous integration build on CI
-- A `db:fake_data:load` rake task to load fake data for development 
+- A `db:fake_data:load` rake task to load fake data for development
 
 [pool]: https://devcenter.heroku.com/articles/concurrency-and-database-connections
 
@@ -140,6 +140,23 @@ Go to https://monkeyci.platan.us, choose the repository from the list and hit
 [heroku-buildpack-multi]: http://github.com/heroku/heroku-buildpack-multi
 [buildpack-deploy-tasks]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
 [circle-ci]: https://circleci.com
+
+## Development Tools
+
+### Creating a new **Test** project from scratch
+
+This is useful when you are adding new recipes to Potassium, and you want to use the `potassium create` command, to check the new functionality without pain.
+To achieve this you need to run, **In the Potassium's root path**, the `bin/potassium_test create` instead of `potassium create` command.
+This command, will do the same as `potassium create` but first:
+
+- Will drop any existent database of the test app.
+- Will remove the directory containing a previous version of the test app.
+
+It's important to remember that `bin/potassium_test create`:
+
+- Does not receive an `app_path` param. It always creates the test project inside `/tmp/dummy_app`
+- Can receive the same options as `potassium create`.
+- Runs with options with a default value. This is to avoid the "asking part" of the creation process. You need to enable what you want to test like this: `$ bin/potassium_test create --clockwork`
 
 ## Contributing
 
