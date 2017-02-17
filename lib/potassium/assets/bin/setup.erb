@@ -14,7 +14,7 @@ bundle check || bundle install
 bower install
 
 # Set up database
-bin/rake db:setup
+bin/rails db:setup
 
 # Add binstubs to PATH via export PATH=".git/safe/../../bin:$PATH" in ~/.zshenv
 mkdir -p .git/safe
