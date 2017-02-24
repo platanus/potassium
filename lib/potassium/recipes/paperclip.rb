@@ -22,7 +22,7 @@ class Recipes::Paperclip < Rails::AppBuilder
   private
 
   def add_paperclip
-    gather_gem 'paperclip', '~> 4.3'
+    gather_gem 'paperclip', '~> 5.0'
     paperclip_config =
       <<-RUBY.gsub(/^ {7}/, '')
          config.paperclip_defaults = {

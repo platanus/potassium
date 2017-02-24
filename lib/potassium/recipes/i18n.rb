@@ -19,8 +19,8 @@ class Recipes::I18n < Rails::AppBuilder
       template('../assets/es-CL.yml', 'config/locales/es-CL.yml')
     end
 
-    gsub_file 'config/application.rb', /# config\.i18n\.default_locale =[^\n]+\n/ do
-      "config.i18n.default_locale = '#{get(:lang)}'\n    config.i18n.fallbacks = [:es, :en]\n"
+    gsub_file 'config/application.rb', /< Rails::Application/ do
+      "< Rails::Application\n    config.i18n.default_locale = '#{get(:lang)}'\n    config.i18n.fallbacks = [:es, :en]\n"
     end
   end
 end

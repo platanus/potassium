@@ -4,7 +4,7 @@ class Recipes::RackCors < Rails::AppBuilder
     after(:gem_install) do
       rack_cors_config =
         <<-RUBY.gsub(/^ {7}/, '')
-           config.middleware.insert_before 0, "Rack::Cors" do
+           config.middleware.insert_before 0, Rack::Cors do
              allow do
                origins '*'
                resource '*',

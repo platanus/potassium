@@ -3,6 +3,10 @@ set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 set :dasherized_app_name, get(:app_name).dasherize
 
+run_action(:after_create_rails) do
+  rubocop_revision
+end
+
 run_action(:cleaning) do
   clean_gemfile
   gather_gem("spring")
@@ -71,6 +75,6 @@ run_action(:gem_install) do
 end
 
 run_action(:database_creation) do
-  run "bundle exec rake db:create db:migrate"
-  run "RACK_ENV=test bundle exec rake db:create db:migrate"
+  run "bundle exec rails db:create db:migrate"
+  run "RACK_ENV=test bundle exec rails db:create db:migrate"
 end

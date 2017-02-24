@@ -74,7 +74,7 @@ class Recipes::Mailer < Rails::AppBuilder
       RUBY
 
     prepend_file "config/environments/production.rb", mailer_config
-    copy_file '../assets/app/mailers/application_mailer.rb', 'app/mailers/application_mailer.rb'
+    copy_file '../assets/app/mailers/application_mailer.rb', 'app/mailers/application_mailer.rb', force: true
 
     send(service[:name])
   end

@@ -9,6 +9,7 @@ module TemplateDSL
     require_relative './answer-helpers'
     require_relative './info-helpers'
     require_relative './readme-helpers'
+    require_relative './rubocop-helpers'
 
     object.send :extend, TemplateHelpers
     object.send :extend, VariableHelpers
@@ -18,6 +19,7 @@ module TemplateDSL
     object.send :extend, AnswerHelpers
     object.send :extend, InfoHelpers
     object.send :extend, ReadmeHelpers
+    object.send :extend, RubocopHelpers
 
     object.send :source_path, source_path
     object.load_answers

@@ -21,6 +21,7 @@ class Recipes::Draper < Rails::AppBuilder
   end
 
   def add_draper
+    gather_gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
     gather_gem 'draper'
     add_readme_section :internal_dependencies, :draper
     create_file 'app/decorators/.keep'
