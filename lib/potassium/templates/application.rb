@@ -3,6 +3,10 @@ set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 set :dasherized_app_name, get(:app_name).dasherize
 
+run_action(:after_create_rails) do
+  rubocop_revision
+end
+
 run_action(:cleaning) do
   clean_gemfile
   gather_gem("spring")
