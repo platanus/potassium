@@ -31,7 +31,7 @@ class Recipes::DelayedJob < Rails::AppBuilder
       add_readme_section :internal_dependencies, :delayed_job
 
       if selected?(:heroku)
-        gsub_file("Procfile", /^.*$/m) { |match| "#{match}worker: bundle exec rake jobs:work" }
+        gsub_file("Procfile", /^.*$/m) { |match| "#{match}worker: bundle exec rails jobs:work" }
       end
     end
   end

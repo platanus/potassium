@@ -28,7 +28,7 @@ module PotassiumTestHelpers
 
   def drop_dummy_database
     return unless File.exist?(project_path)
-    on_project { run_command("bundle exec rake db:drop") }
+    on_project { run_command("bundle exec rails db:drop") }
   end
 
   def add_fakes_to_path
