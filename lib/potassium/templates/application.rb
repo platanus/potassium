@@ -47,6 +47,7 @@ run_action(:recipe_loading) do
   create :mailer
   create :i18n
   create :pry
+  create :better_errors
   create :devise
   create :admin
   create :angular_admin
