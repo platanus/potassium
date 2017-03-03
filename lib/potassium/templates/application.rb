@@ -47,7 +47,6 @@ run_action(:recipe_loading) do
   create :mailer
   create :i18n
   create :pry
-  create :quiet_assets
   create :better_errors
   create :devise
   create :admin
