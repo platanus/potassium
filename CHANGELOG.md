@@ -2,8 +2,6 @@
 
 ## Unreleased
 
-- Add draper gem to decorate models
-
 ## 3.0.0
 
 Features:
@@ -11,6 +9,7 @@ Features:
   - `better_errors` and `binding_of_caller` gem in development
   - Update `aws_sdk` to `~> 2.5`
   - Update `paperclip` to `~> 5,0`
+  - Add draper gem to decorate models
 
 ## 2.3.0
 
