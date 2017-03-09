@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Remove heroku dependency from mailer recipe, #124
 
 ## 3.0.0
 

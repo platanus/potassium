@@ -58,12 +58,11 @@ class Recipes::Mailer < Rails::AppBuilder
     else
       gather_gem service[:gem_name]
     end
-    gather_gem 'heroku-stage'
     gather_gem 'recipient_interceptor'
   end
 
   def config(service)
-    template "../assets/config/mailer.rb", 'config/mailer.rb'
+    template "../assets/config/mailer.rb.erb", 'config/mailer.rb'
     gsub_file 'config/environments/production.rb', /$\s*config.action_mailer.*/, ''
     append_to_file '.env.development', "APPLICATION_HOST=localhost:3000\n"
     append_to_file '.env.development', "EMAIL_RECIPIENTS=\n"
