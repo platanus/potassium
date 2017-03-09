@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+Fix:
+- Sentry environment was not being overriden, #123
+
 ## 3.0.0
 
 Features:
