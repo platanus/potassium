@@ -129,6 +129,12 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       negatable: true,
       default_value: "none",
       default_test_value: false
+    },
+    {
+      type: :flag,
+      name: [:front_end, :front_end],
+      desc: "Decides which front-end framework to use. Available: Vue, Angular2, None",
+      default_test_value: "vue"
     }
   ]
 
