@@ -13,6 +13,6 @@ Rails.application.config.action_mailer.asset_host = ASSET_HOST
 if ENV["EMAIL_RECIPIENTS"].present?
   Mail.register_interceptor RecipientInterceptor.new(
     ENV["EMAIL_RECIPIENTS"],
-    subject_prefix: "[#{Heroku.stage.upcase}]"
+    subject_prefix: "[<%= get(:heroku) ? '#{Heroku.stage.upcase}' : '#{Rails.env}' %>]"
   )
 end

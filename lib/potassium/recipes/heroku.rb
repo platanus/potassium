@@ -36,9 +36,8 @@ class Recipes::Heroku < Rails::AppBuilder
   def add_heroku
     gather_gems(:production) do
       gather_gem('rails_stdout_logging')
+      gather_gem('heroku-stage')
     end
-
-    gather_gem 'heroku-stage'
 
     copy_file '../assets/Procfile', 'Procfile'
     copy_file '../assets/.buildpacks', '.buildpacks'

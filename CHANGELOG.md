@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Remove heroku dependency from mailer recipe, #124
 
 Fix:
 - Sentry environment was not being overriden, #123
