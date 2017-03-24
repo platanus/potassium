@@ -41,7 +41,7 @@ run_action(:recipe_loading) do
   create :annotate
   create :ruby
   create :env
-  create :bower
+  create :yarn
   create :editorconfig
   create :aws_sdk
   create :schedule
