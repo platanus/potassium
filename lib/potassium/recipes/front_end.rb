@@ -24,15 +24,13 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install:#{value}" if value
 
       if value == :vue
-        remove_file "app/javascript/packs/application.js"
-        copy_file "app/javascript/packs/hello_vue.js", "app/javascript/packs/application.js",
-          force: true
-        remove_file "app/javascript/packs/hello_vue.js"
+        application_js_file = "app/javascript/packs/application.js"
+        FileUtils.move "app/javascript/packs/hello_vue.js", application_js_file
+        gsub_file application_js_file, /\/\/.*\n/, ""
 
-        line = "<%= csrf_meta_tags %>"
-        insert_into_file "app/views/layouts/application.html.erb", line: line do
-          "<%= javascript_pack_tag 'application' %>\n"
-        end
+        js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
+        layout_file = "app/views/layouts/application.html.erb"
+        insert_into_file layout_file, js_pack_tag, after: "<%= csrf_meta_tags %>"
       end
     end
   end
