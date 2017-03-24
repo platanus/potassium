@@ -22,7 +22,7 @@ RSpec.describe "Heroku" do
     buildpacks_path = "#{project_path}/.buildpacks"
     buildpacks = IO.read(buildpacks_path)
 
-    expect(buildpacks).to include("https://github.com/platanus/heroku-buildpack-bower.git")
+    expect(buildpacks).to include("https://github.com/heroku/heroku-buildpack-nodejs")
     expect(buildpacks).to include("https://github.com/platanus/heroku-buildpack-ruby-version.git")
     expect(buildpacks).to include("https://github.com/heroku/heroku-buildpack-ruby.git")
     expect(buildpacks).to(
