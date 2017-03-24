@@ -33,6 +33,11 @@ class Recipes::DelayedJob < Rails::AppBuilder
       if selected?(:heroku)
         gsub_file("Procfile", /^.*$/m) { |match| "#{match}worker: bundle exec rails jobs:work" }
       end
+
+      file_name = `ls ./db/migrate`.split("\n")
+                                   .find { |i| i['create_delayed_jobs.rb'].present? }
+
+      insert_into_file './db/migrate/' + file_name, "[4.2]", after: "ActiveRecord::Migration"
     end
   end
 end
