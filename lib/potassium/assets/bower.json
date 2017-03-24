@@ -1,4 +1,0 @@
-{
-  "name": "<%= @app_name.camelcase %>",
-  "version": "1.0.0"
-}
