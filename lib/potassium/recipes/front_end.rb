@@ -7,7 +7,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
     }
 
     framework = answer(:front_end) do
-      frameworks.keys[Ask.list("Which front-end framework are you going to use?", frameworks.values)]
+      frameworks.keys[
+        Ask.list("Which front-end framework are you going to use?", frameworks.values)
+      ]
     end
 
     set :front_end, framework.to_sym
@@ -22,8 +24,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install:#{value}" if value
 
       if value == :vue
-        copy_file "app/javascript/packs/hello_vue.js", "app/javascript/packs/application.js", force: true
         remove_file "app/javascript/packs/application.js"
+        copy_file "app/javascript/packs/hello_vue.js", "app/javascript/packs/application.js",
+          force: true
         remove_file "app/javascript/packs/hello_vue.js"
 
         line = "<%= csrf_meta_tags %>"
