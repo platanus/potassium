@@ -2,7 +2,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def ask
     frameworks = {
       vue: "Vue",
-      angular: "Angular",
+      angular: "Angular 2",
       none: "None"
     }
 
