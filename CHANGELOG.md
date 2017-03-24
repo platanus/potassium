@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## 5.1.0
+
+Features:
+  - Rails 5.1.0.rc1
+  - Adds front_end option to include Vue.js and Angular 2 (using `webpacker`)
+  - Replaces `bower` by `yarn`
+
+Bugfixes:
+  - Force `DelayedJobs` migration to use 4.2 `ActiveRecord` class
+  - Fix custom `ActiveAdmin` footer
+
 ## 3.0.0
 
 Features:
