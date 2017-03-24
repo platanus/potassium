@@ -43,7 +43,7 @@ class Recipes::Admin < Rails::AppBuilder
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
         <<-HERE.gsub(/^ {11}/, '')
            class CustomFooter < ActiveAdmin::Component
-             def build
+             def build _arg
                super(id: "footer")
                para "Powered by Platanus"
              end
