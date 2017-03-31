@@ -1,9 +1,9 @@
 class Recipes::Yarn < Rails::AppBuilder
   def create
     template '../assets/package.json', 'package.json' unless get(:front_end)
+    template '../assets/bin/update.erb', 'bin/update', force: true
     application "config.assets.paths << Rails.root.join('node_modules')"
     append_to_file ".gitignore", "node_modules/\n"
-
 
     if get(:heroku)
       node_buildpack_url = 'https://github.com/heroku/heroku-buildpack-nodejs'
