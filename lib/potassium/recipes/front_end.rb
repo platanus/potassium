@@ -15,7 +15,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
-    return if get(:front_end) == :none
+    return if [:none, :None].include? get(:front_end).to_sym
 
     gather_gem 'webpacker', github: 'rails/webpacker'
 
