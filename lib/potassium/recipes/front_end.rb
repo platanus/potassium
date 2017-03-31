@@ -15,6 +15,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
+    return if get(:front_end) == :none
+
     gather_gem 'webpacker', github: 'rails/webpacker'
 
     after(:gem_install) do
