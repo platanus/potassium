@@ -101,6 +101,9 @@ readme:
         draper:
           title: "Presentation Layer"
           body: "This project uses [Draper](https://github.com/drapergem/draper) to add an object-oriented layer of presentation logic"
+        power_types:
+          title: "Rails pattern enforcing types"
+          body: "This projects uses [Power-Types](https://github.com/platanus/power-types) to generate Services, Commands, Utils and Values."
     seeds:
       title: "Seeds"
       body: |

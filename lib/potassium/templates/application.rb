@@ -60,6 +60,7 @@ run_action(:recipe_loading) do
   create :git
   create :api
   create :draper
+  create :power_types
   create :rack_cors
   create :paperclip
   create :tzinfo
