@@ -11,7 +11,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
         Ask.list("Which front-end framework are you going to use?", frameworks.values)
       ]
     end
-
     set :front_end, framework.to_sym
   end
 
@@ -38,6 +37,13 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def install
     ask
     create
+  end
+
+  def installed?
+    package_file = 'package.json'
+    return false unless file_exist?(package_file)
+    package_content = read_file(package_file)
+    package_content.include?("\"@angular/core\"") || package_content.include?("\"vue\"")
   end
 
   private
