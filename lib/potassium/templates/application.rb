@@ -68,6 +68,7 @@ run_action(:recipe_loading) do
   create :script
   create :github
   create :cleanup
+  create :commoner
   create :front_end
 end
 
