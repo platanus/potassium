@@ -135,6 +135,13 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       name: :front_end,
       desc: "Decides which front-end framework to use. Available: Vue, Angular 2, None",
       default_test_value: "None"
+    },
+    {
+      type: :switch,
+      name: :commoner,
+      desc: "Whether to use ES6 -> ES5 transpiling on assets pipeline",
+      default_value: true,
+      default_test_value: false
     }
   ]
 
