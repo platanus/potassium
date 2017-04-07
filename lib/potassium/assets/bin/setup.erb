@@ -10,8 +10,8 @@ set -e
 gem install bundler --conservative
 bundle check || bundle install
 
-# Install bower dependencies
-bower install
+# Install javascript dependencies
+bin/yarn install
 
 # Set up database
 bin/rails db:setup

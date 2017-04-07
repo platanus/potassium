@@ -38,7 +38,7 @@ Potassium Rails apps includes the following gems and technologies:
 
 - [Ruby](https://www.ruby-lang.org) Set the project ruby version based on http://ruby.platan.us/latest
 - [dotenv](https://github.com/bkeepers/dotenv) load environmental variables in development
-- [Bower](http://bower.io) for frontend assets packages.
+- [Yarn](https://yarnpkg.com) for frontend assets packages.
 - [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same.
 - [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience.
 - [RSpec](http://rspec.info) for unit and integration testing.
@@ -63,6 +63,7 @@ The following optional integrations are added too:
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
 - [Clockwork](https://github.com/Rykian/clockwork) to run scheduled processes
 - [Sentry](https://sentry.io) to monitor exceptions and errors
+- [Vue.js](https://vuejs.org) or [Angular 2](https://angular.io/) for frontend development
 
 A few more things are added to the project:
 
@@ -99,7 +100,7 @@ When you choose to deploy to heroku a few extra things are added for the project
 
 | index | buildpack | description |
 |-------|-----------|-------------|
-| 1.    | [bower][heroku-buildpack-bower] | to make sure `bower install` run before the assets precompilation task |
+| 1.    | [nodejs][heroku-buildpack-nodejs] | to support javascript package management with `yarn` and `webpack` based asset compiling |
 | 2.    | [ruby-version][heroku-buildpack-ruby-version] | to support the use of `.ruby-version` file to instruct heroku which ruby version to use |
 | 3.    | [ruby][heroku-buildpack-ruby] | the base buildpack to run ruby applications |
 | 4.    | [ruby-deploy-tasks][buildpack-deploy-tasks] | to run rake task after the deployment is complete, for example `db:migrate` |
@@ -135,7 +136,7 @@ Go to https://monkeyci.platan.us, choose the repository from the list and hit
 [heroku-logging]: https://devcenter.heroku.com/articles/logging#writing-to-your-log
 [procfile]: https://devcenter.heroku.com/articles/procfile
 [heroku-buildpack-ruby-version]: http://github.com/platanus/heroku-buildpack-ruby-version
-[heroku-buildpack-bower]: http://github.com/platanus/heroku-buildpack-bower
+[heroku-buildpack-nodejs]: https://github.com/heroku/heroku-buildpack-nodejs
 [heroku-buildpack-ruby]: http://github.com/heroku/heroku-buildpack-ruby
 [heroku-buildpack-multi]: http://github.com/heroku/heroku-buildpack-multi
 [buildpack-deploy-tasks]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks

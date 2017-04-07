@@ -50,7 +50,7 @@ class Recipes::AngularAdmin < Rails::AppBuilder
     create_file 'app/assets/javascripts/admin/directives/.keep'
 
     inside('.') do
-      run('bower install angular --save')
+      run('bin/yarn add angular --save')
     end
   end
 end

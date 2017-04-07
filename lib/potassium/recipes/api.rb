@@ -29,7 +29,7 @@ class Recipes::Api < Rails::AppBuilder
       insert_into_file "config/routes.rb", after: line do
         <<-HERE.gsub(/^ {8}/, '')
           scope path: '/api' do
-            api_version(module: "Api::V1", path: { value: "v1" }) do
+            api_version(module: "Api::V1", path: { value: "v1" }, defaults: { format: 'json' }) do
             end
           end
         HERE
