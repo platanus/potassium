@@ -64,6 +64,7 @@ The following optional integrations are added too:
 - [Clockwork](https://github.com/Rykian/clockwork) to run scheduled processes
 - [Sentry](https://sentry.io) to monitor exceptions and errors
 - [Vue.js](https://vuejs.org) or [Angular 2](https://angular.io/) for frontend development
+- [sprockets-commoner](sprockets-commoner) adds Babel-powered ES6 to ES5 transpilation to the assets pipeline
 
 A few more things are added to the project:
 
