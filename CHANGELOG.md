@@ -6,7 +6,7 @@
 Fix:
 - Sentry environment was not being overriden, #123
 
-## 5.1.0.rc1
+## 5.1.0
 
 Features:
   - Rails 5.1.0.rc1 (`potassium` version will follow `Rails` version from now on)
