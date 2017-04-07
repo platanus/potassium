@@ -33,7 +33,7 @@ class Recipes::Devise < Rails::AppBuilder
     set(:authentication_model, :user) if create_user_model
   end
 
-  def add_devise
+  def add_devise # rubocop:disable MethodLength
     gather_gem 'devise'
     gather_gem 'devise-i18n'
 
@@ -58,6 +58,13 @@ class Recipes::Devise < Rails::AppBuilder
 
       append_to_file '.env.development', "DEVISE_SECRET_KEY=\n"
       add_readme_section :internal_dependencies, :devise
+
+      temp_append_path = 'config/devise_job_append.rb'
+      template '../assets/config/devise.rb', temp_append_path
+      append_to_file 'config/initializers/devise.rb', File.read(temp_append_path)
+      File.delete temp_append_path
+
+      insert_into_file "app/models/#{auth_model}.rb", ':job_emailable, ', after: "devise "
     end
   end
 end
