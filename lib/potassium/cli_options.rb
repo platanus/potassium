@@ -138,9 +138,9 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
-      name: :commoner,
+      name: "commoner",
       desc: "Whether to use ES6 -> ES5 transpiling on assets pipeline",
-      default_value: true,
+      default_value: "none",
       default_test_value: false
     }
   ]

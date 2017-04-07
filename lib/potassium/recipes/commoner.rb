@@ -1,11 +1,15 @@
 class Recipes::Commoner < Rails::AppBuilder
   def ask
-    use_commoner = answer(:commoner) { Ask.confirm("Do you want to use ES6 to ES5 transpiling?") }
-    set(:commoner, use_commoner)
+    if [:none, :None].include? get(:front_end)
+      use_commoner = answer(:commoner) do
+        Ask.confirm("Do you want ES6 to ES5 transpiling?")
+      end
+      set :commoner, use_commoner
+    end
   end
 
   def create
-    if selected?(:commoner)
+    if ([:none, :None].include? get(:front_end)) && get(:commoner)
       gather_gem('sprockets-commoner')
       copy_file '../assets/config/initializers/sprockets_commoner.rb',
         'config/initializers/sprockets_commoner.rb'
