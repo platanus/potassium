@@ -27,7 +27,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       if value == :vue
         application_js_file = "app/javascript/packs/application.js"
         FileUtils.move "app/javascript/packs/hello_vue.js", application_js_file
-        gsub_file application_js_file, /\/\/.*\n/, ""
+        gsub_file application_js_file, %r{\/\/.*\n}, ""
 
         js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
         layout_file = "app/views/layouts/application.html.erb"
