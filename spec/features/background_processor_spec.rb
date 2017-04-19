@@ -18,6 +18,16 @@ RSpec.describe "BackgroundProcessor" do
       expect(content).to include("config.active_job.queue_adapter = :delayed_job")
     end
 
+    it "adds inline queue_adapter to development.rb" do
+      content = IO.read("#{project_path}/config/environments/development.rb")
+      expect(content).to include("config.active_job.queue_adapter = :inline")
+    end
+
+    it "adds test queue_adapter to test.rb" do
+      content = IO.read("#{project_path}/config/environments/test.rb")
+      expect(content).to include("config.active_job.queue_adapter = :test")
+    end
+
     it "modifies Procfile" do
       content = IO.read("#{project_path}/Procfile")
       expect(content).to include("worker: bundle exec rails jobs:work")
@@ -50,6 +60,16 @@ RSpec.describe "BackgroundProcessor" do
     it "adds queue_adapter to application.rb" do
       content = IO.read("#{project_path}/config/application.rb")
       expect(content).to include("config.active_job.queue_adapter = :sidekiq")
+    end
+
+    it "adds inline queue_adapter to development.rb" do
+      content = IO.read("#{project_path}/config/environments/development.rb")
+      expect(content).to include("config.active_job.queue_adapter = :inline")
+    end
+
+    it "adds test queue_adapter to test.rb" do
+      content = IO.read("#{project_path}/config/environments/test.rb")
+      expect(content).to include("config.active_job.queue_adapter = :test")
     end
 
     it "modifies Procfile" do

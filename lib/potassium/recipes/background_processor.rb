@@ -76,9 +76,8 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
   end
 
   def add_adapters(name)
-    general_config = "config.active_job.queue_adapter = :#{name}"
-    application(general_config)
-    dev_config = "config.active_job.queue_adapter = :inline"
-    application dev_config, env: "development"
+    application("config.active_job.queue_adapter = :#{name}")
+    application "config.active_job.queue_adapter = :inline", env: "development"
+    application "config.active_job.queue_adapter = :test", env: "test"
   end
 end
