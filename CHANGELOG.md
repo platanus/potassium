@@ -3,6 +3,9 @@
 ## Unreleased
 - Remove heroku dependency from mailer recipe, #124
 
+Features:
+  - Add sidekiq as background processor alternative
+
 Fix:
 - Sentry environment was not being overriden, #123
 

@@ -1,0 +1,9 @@
+development: &default
+  host: <%= ENV["BOXEN_REDIS_HOST"] || ENV["REDIS_HOST"] || "127.0.0.1" %>
+  port: <%= ENV["BOXEN_REDIS_PORT"] || ENV["REDIS_PORT"] || 6379 %>
+
+test:
+  <<: *default
+
+production: &deploy
+  url: <%= ENV.fetch("REDIS_URL", "") %>
