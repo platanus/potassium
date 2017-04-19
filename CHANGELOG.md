@@ -5,6 +5,7 @@
 
 Fix:
 - Sentry environment was not being overriden, #123
+- Support for Draper gem
 
 ## 5.1.0.rc1
 
