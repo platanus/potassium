@@ -6,7 +6,7 @@ RSpec.describe "Heroku" do
     remove_project_directory
   end
 
-  fit "creates a project for Heroku" do
+  it "creates a project for Heroku" do
     create_dummy_project("heroku" => true)
     app_name = PotassiumTestHelpers::APP_NAME.dasherize
 
