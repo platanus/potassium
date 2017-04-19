@@ -18,7 +18,7 @@ run_action(:asking) do
   ask :admin
   ask :front_end
   ask :angular_admin
-  ask :delayed_job
+  ask :background_processor
   ask :schedule
   ask :error_reporting
   ask :pundit
@@ -54,7 +54,7 @@ run_action(:recipe_loading) do
   create :angular_admin
   create :seeds
   create :error_reporting
-  create :delayed_job
+  create :background_processor
   create :pundit
   create :testing
   create :secrets

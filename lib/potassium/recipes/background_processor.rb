@@ -1,21 +1,41 @@
-class Recipes::DelayedJob < Rails::AppBuilder
+class Recipes::BackgroundProcessor < Rails::AppBuilder
   def ask
-    use_delayed_job = answer(:"delayed-job") { Ask.confirm("Do you want to use delayed jobs?") }
-    set(:delayed_job, use_delayed_job)
+    options = {
+      sidekiq: "Sidekiq",
+      delayed_job: "Delayed Job",
+      none: "None, thanks"
+    }
+
+    response = answer(:background_processor) do
+      options.keys[Ask.list("Which background processor are you using?", options.values)]
+    end
+
+    set(:background_processor, response.to_sym)
   end
 
   def create
-    add_delayed_job if selected?(:delayed_job)
+    processor = get(:background_processor)
+    return if processor == :none
+    send("add_#{processor}")
   end
 
   def install
+    ask
     heroku = load_recipe(:heroku)
     set(:heroku, heroku.installed?)
-    add_delayed_job
+    create
   end
 
   def installed?
+    delayed_job_installed? || sidekiq_installed?
+  end
+
+  def delayed_job_installed?
     gem_exists?(/delayed_job_active_record/)
+  end
+
+  def sidekiq_installed?
+    gem_exists?(/sidekiq/)
   end
 
   def add_delayed_job
@@ -39,5 +59,9 @@ class Recipes::DelayedJob < Rails::AppBuilder
 
       insert_into_file './db/migrate/' + file_name, "[4.2]", after: "ActiveRecord::Migration"
     end
+  end
+
+  def add_sidekiq
+    puts "TODO: add sidekiq bg processor."
   end
 end

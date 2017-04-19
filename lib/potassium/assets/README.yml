@@ -72,7 +72,7 @@ readme:
         The emails can be send through the gem `<%= get(:mailer_gem_name) %>` using the `<%= get(:mailer_delivery_method) %>` delivery method.
         All the `action_mailer` configuration can be found at `config/mailer.rb`, which is loaded only on production environments.
 
-        All emails should be sent using background jobs, by default we install `delayed_job` for that purpuse.
+        All emails should be sent using background jobs, by default we install `sidekiq` for that purpuse.
 
         #### Testing in staging
 
