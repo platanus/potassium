@@ -1,6 +1,6 @@
 class Recipes::Mailer < Rails::AppBuilder
   def ask
-    info "Note: Emails should be sent on background jobs. We'll install delayed_jobs recipe"
+    info "Note: Emails should be sent on background jobs. We'll install sidekiq"
     email_services = {
       aws_ses: "Amazon SES",
       sendgrid: "Sendgrid (beta)",
@@ -25,8 +25,8 @@ class Recipes::Mailer < Rails::AppBuilder
     dependencies(email_service)
     config(email_service)
 
-    delayed_job = load_recipe(:delayed_job)
-    delayed_job.add_delayed_job unless delayed_job.installed?
+    background_processor = load_recipe(:background_processor)
+    background_processor.add_sidekiq unless background_processor.installed?
   end
 
   def install

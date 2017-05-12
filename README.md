@@ -59,6 +59,7 @@ The following optional integrations are added too:
 - [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin.
 - [Pundit](https://github.com/elabs/pundit) for role-based authorization.
 - [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.]
+- [Sidekiq](https://github.com/mperham/sidekiq) a simple, efficient background processing for Ruby.
 - Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails)
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
 - [Clockwork](https://github.com/Rykian/clockwork) to run scheduled processes
