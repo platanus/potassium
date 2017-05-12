@@ -42,5 +42,8 @@ class Recipes::Ci < Rails::AppBuilder
 
       add_readme_header :ci
     end
+
+    uglifier = "  config.assets.js_compressor = :uglifier\n"
+    insert_into_file 'config/environments/test.rb', uglifier, after: "configure do\n"
   end
 end
