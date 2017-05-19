@@ -114,10 +114,10 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
-      name: "clockwork",
-      desc: "Whether to use clockwork as job scheduler",
+      name: "schedule",
+      desc: "Whether to use sidekiq-scheduler as job scheduler",
       negatable: true,
-      default_value: "none",
+      default_value: false,
       default_test_value: false
     },
     {

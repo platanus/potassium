@@ -60,9 +60,9 @@ The following optional integrations are added too:
 - [Pundit](https://github.com/elabs/pundit) for role-based authorization.
 - [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.]
 - [Sidekiq](https://github.com/mperham/sidekiq) a simple, efficient background processing for Ruby.
+- [Sidekiq-scheduler](https://github.com/moove-it/sidekiq-scheduler) to run scheduled processes
 - Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails)
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
-- [Clockwork](https://github.com/Rykian/clockwork) to run scheduled processes
 - [Sentry](https://sentry.io) to monitor exceptions and errors
 - [Vue.js](https://vuejs.org) or [Angular 2](https://angular.io/) for frontend development
 

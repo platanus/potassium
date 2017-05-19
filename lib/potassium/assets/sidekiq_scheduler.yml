@@ -1,0 +1,9 @@
+production:
+  :concurrency: 5
+:queues:
+  - default
+:schedule:
+  #  an_scheduled_task:
+  #    cron: '0 * * * * *'  # Runs once per minute
+  #    class: ExampleJob
+  #    args: ['a', 'b']
