@@ -18,6 +18,7 @@ run_action(:asking) do
   ask :admin
   ask :front_end
   ask :angular_admin
+  ask :mailer
   ask :background_processor
   ask :schedule
   ask :error_reporting
@@ -26,7 +27,6 @@ run_action(:asking) do
   ask :api
   ask :draper
   ask :paperclip
-  ask :mailer
   ask :heroku
   ask :github
 end
@@ -44,8 +44,9 @@ run_action(:recipe_loading) do
   create :yarn
   create :editorconfig
   create :aws_sdk
-  create :schedule
   create :mailer
+  create :background_processor
+  create :schedule
   create :i18n
   create :pry
   create :better_errors
@@ -54,7 +55,6 @@ run_action(:recipe_loading) do
   create :angular_admin
   create :seeds
   create :error_reporting
-  create :background_processor
   create :pundit
   create :testing
   create :secrets

@@ -1,6 +1,5 @@
 class Recipes::Mailer < Rails::AppBuilder
   def ask
-    info "Note: Emails should be sent on background jobs. We'll install sidekiq"
     email_services = {
       aws_ses: "Amazon SES",
       sendgrid: "Sendgrid (beta)",
