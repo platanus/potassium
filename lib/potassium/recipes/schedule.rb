@@ -1,33 +1,25 @@
 class Recipes::Schedule < Rails::AppBuilder
   def ask
-    use_schedule = answer(:clockwork) { Ask.confirm("Do you need to schedule processes or tasks?") }
-    set(:scheduled, use_schedule)
+    if selected?(:background_processor)
+      response = answer(:schedule) { Ask.confirm("Do you need to schedule jobs?") }
+    end
+    set(:schedule, response)
   end
 
   def create
-    if selected?(:scheduled)
-      gather_gem 'clockwork'
-      template '../assets/config/clock.rb.erb', 'config/clock.rb'
-      add_readme_section :internal_dependencies, :clockwork
-
-      if selected?(:heroku)
-        procfile('scheduler', 'bundle exec clockwork config/clock.rb')
-      end
+    if selected?(:schedule)
+      gather_gem 'sidekiq-scheduler'
+      add_readme_section :internal_dependencies, :sidekiq_scheduler
     end
+    template '../assets/sidekiq_scheduler.yml', 'config/sidekiq.yml', force: true
   end
 
   def install
-    heroku = load_recipe(:heroku)
-    set(:heroku, heroku.installed?)
-
-    error_reporting = load_recipe(:error_reporting)
-    set(:report_error, error_reporting.installed?)
-
-    set(:scheduled, true)
+    set(:schedule, true)
     create
   end
 
   def installed?
-    gem_exists?(/clock/) && file_exist?('config/clock.rb')
+    gem_exists?("sidekiq-scheduler") && file_exist?('config/sidekiq.yml')
   end
 end
