@@ -117,7 +117,7 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       name: "schedule",
       desc: "Whether to use sidekiq-scheduler as job scheduler",
       negatable: true,
-      default_value: false,
+      default_value: "none",
       default_test_value: false
     },
     {

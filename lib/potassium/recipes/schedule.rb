@@ -1,11 +1,9 @@
 class Recipes::Schedule < Rails::AppBuilder
   def ask
-    install = if selected?(:background_processor, :none)
-                false
-              else
-                answer(:schedule) { Ask.confirm("Do you need to schedule processes or tasks?") }
-              end
-    set(:schedule, install)
+    if selected?(:background_processor)
+      response = answer(:schedule) { Ask.confirm("Do you need to schedule jobs?") }
+    end
+    set(:schedule, response)
   end
 
   def create

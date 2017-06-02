@@ -1,21 +1,14 @@
-#
-# 1. Mail
-# if !mail
-# 2. Do you want Sidekiq to process background jobs?
-# if jobs
-# 3. Do you need Sidekiq-Scheduler to schedule background tasks?
-
 class Recipes::BackgroundProcessor < Rails::AppBuilder
   def ask
-    install = if selected?(:email_service, :none)
-                answer(:background_processor) do
-                  Ask.confirm("Do you want to use Sidekiq for background job processing?")
-                end
-              else
-                info "Note: Emails should be sent on background jobs. We'll install sidekiq"
-                true
-              end
-    set(:background_processor, install)
+    response = if selected?(:email_service, :none)
+                 answer(:background_processor) do
+                   Ask.confirm("Do you want to use Sidekiq for background job processing?")
+                 end
+               else
+                 info "Note: Emails should be sent on background jobs. We'll install sidekiq"
+                 true
+               end
+    set(:background_processor, response)
   end
 
   def create
