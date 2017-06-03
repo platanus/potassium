@@ -17,6 +17,7 @@ run_action(:asking) do
   ask :devise
   ask :admin
   ask :front_end
+  ask :commoner
   ask :angular_admin
   ask :mailer
   ask :background_processor
@@ -69,6 +70,7 @@ run_action(:recipe_loading) do
   create :github
   create :cleanup
   create :front_end
+  create :commoner
 end
 
 info "Gathered enough information. Applying the template. Wait a minute."
