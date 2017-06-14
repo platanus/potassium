@@ -44,6 +44,10 @@ dependencies(){
   docker-compose $DOCKER_COMPOSE_ARGS run test bundle install
 }
 
+assets() {
+  docker-compose $DOCKER_COMPOSE_ARGS run test /bin/bash -c "bin/setup && bundle exec rake assets:precompile"
+}
+
 # Prepare database
 database(){
   docker-compose $DOCKER_COMPOSE_ARGS run test bundle exec rake db:create db:schema:load
@@ -63,6 +67,7 @@ no_ci(){
   build
   wait_services
   dependencies
+  assets
   database
   tests
 }
@@ -77,6 +82,9 @@ case "$1" in
   "deps"|"dependencies")
     dependencies
     ;;
+  "assets")
+    assets
+    ;;
   "db"|"database")
     database
     ;;
@@ -87,6 +95,6 @@ case "$1" in
     build
     ;;
   *)
-    echo "Usage: cibuild [services|deps|db|specs|build]"
+    echo "Usage: cibuild [services|deps|assets|db|specs|build]"
     ;;
 esac

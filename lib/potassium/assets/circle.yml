@@ -8,6 +8,7 @@ dependencies:
     - docker-compose -f docker-compose.ci.yml build test
     - bin/cibuild services
     - bin/cibuild deps
+    - bin/cibuild assets
 
 database:
   override:
