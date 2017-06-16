@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- Update rails to 5.1.1, #136
 - Remove heroku dependency from mailer recipe, #124
 
 Features:
