@@ -12,6 +12,10 @@ run_action(:cleaning) do
   gather_gem("spring")
 end
 
+run_action(:add_utils) do
+  gather_gem("enumerize")
+end
+
 run_action(:asking) do
   ask :database
   ask :devise
@@ -58,7 +62,6 @@ run_action(:recipe_loading) do
   create :pundit
   create :testing
   create :secrets
-  create :git
   create :api
   create :draper
   create :power_types
