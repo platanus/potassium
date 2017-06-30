@@ -1,26 +1,21 @@
 # Changelog
 
 ## Unreleased
-- Update rails to 5.1.1, #136
-- Remove heroku dependency from mailer recipe, #124
+
+## 5.1.1
 
 Features:
-  - Add sidekiq as background processor alternative
-
-Fix:
-- Sentry environment was not being overriden, #123
-- Support for Draper gem
-
-## 5.1.0.rc1
-
-Features:
-  - Rails 5.1.0.rc1 (`potassium` version will follow `Rails` version from now on)
+  - Rails 5.1.1 (`potassium` version will follow `Rails` version from now on) #136
   - Adds front_end option to include Vue.js and Angular 2 (using `webpacker`)
   - Replaces `bower` by `yarn`
+  - Add sidekiq as background processor alternative
 
 Bugfixes:
   - Force `DelayedJobs` migration to use 4.2 `ActiveRecord` class
   - Fix custom `ActiveAdmin` footer
+  - Remove heroku dependency from mailer recipe, #124
+  - Sentry environment was not being overriden, #123
+  - Support for Draper gem
 
 ## 3.0.0
 
