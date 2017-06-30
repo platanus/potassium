@@ -2,7 +2,7 @@ require 'sidekiq'
 require 'sidekiq/web'
 
 config_file = "#{Rails.root}/config/redis.yml"
-redis_config = YAML.load(ERB.new(File.read(config_file)).result)[Rails.env]
+redis_config = YAML.safe_load(ERB.new(File.read(config_file)).result)[Rails.env]
 
 redis_conn = proc do
   Redis.new(redis_config)
