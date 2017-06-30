@@ -16,4 +16,9 @@ RSpec.describe "schedule" do
     initializer_content = IO.read("#{project_path}/config/sidekiq.yml")
     expect(initializer_content).to include(":schedule:")
   end
+
+  it "adds scheduler ui to the sidekiq initializer" do
+    content = IO.read("#{project_path}/config/initializers/sidekiq.rb")
+    expect(content).to include("require 'sidekiq-scheduler/web'")
+  end
 end

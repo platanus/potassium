@@ -32,7 +32,7 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
     add_readme_section :internal_dependencies, :sidekiq
     edit_procfile("bundle exec sidekiq")
     append_to_file(".env.development", "DB_POOL=25\n")
-    copy_file("../assets/sidekiq.rb", "config/initializers/sidekiq.rb", force: true)
+    template("../assets/sidekiq.rb.erb", "config/initializers/sidekiq.rb", force: true)
     copy_file("../assets/sidekiq.yml", "config/sidekiq.yml", force: true)
     copy_file("../assets/redis.yml", "config/redis.yml", force: true)
 
