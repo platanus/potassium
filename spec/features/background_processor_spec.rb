@@ -18,9 +18,9 @@ RSpec.describe "BackgroundProcessor" do
       expect(content).to include("config.active_job.queue_adapter = :sidekiq")
     end
 
-    it "adds inline queue_adapter to development.rb" do
+    it "adds async queue_adapter to development.rb" do
       content = IO.read("#{project_path}/config/environments/development.rb")
-      expect(content).to include("config.active_job.queue_adapter = :inline")
+      expect(content).to include("config.active_job.queue_adapter = :async")
     end
 
     it "adds test queue_adapter to test.rb" do

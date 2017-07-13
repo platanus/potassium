@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+Features:
+  - Use `async` instead of `inline` option as `queue_adapter` on development
+
 ## 5.1.2
 
 - Rails 5.1.2
