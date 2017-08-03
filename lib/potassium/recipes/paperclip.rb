@@ -27,6 +27,7 @@ class Recipes::Paperclip < Rails::AppBuilder
       <<-RUBY.gsub(/^ {7}/, '')
          config.paperclip_defaults = {
            storage: :s3,
+           s3_region: ENV.fetch('AWS_REGION', 'us-east-1'),
            s3_credentials: {
              bucket: ENV['S3_BUCKET']
            }
