@@ -4,6 +4,7 @@
 
 Features:
   - Use `async` instead of `inline` option as `queue_adapter` on development
+  - Adds `s3_region` property to paperclip config.
 
 ## 5.1.2
 
