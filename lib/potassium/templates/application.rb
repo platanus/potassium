@@ -36,6 +36,7 @@ run_action(:asking) do
 end
 
 run_action(:recipe_loading) do
+  create :rails
   create :readme
   create :heroku
   create :ci
