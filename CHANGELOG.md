@@ -5,6 +5,9 @@
 Changes:
   - Update ruby to 2.4
 
+Features:
+  - Always use https in production
+
 ## 5.1.3
 
 Features:
