@@ -29,7 +29,7 @@ RSpec.describe "A new project" do
   it "configures the correct ruby version" do
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
 
-    expect(ruby_version_file).to eq("2.3")
+    expect(ruby_version_file).to eq("2.4")
   end
 
   context "seeds related issues" do
