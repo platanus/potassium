@@ -3,7 +3,7 @@ Rails.application.config.action_mailer.delivery_method = :<%= get(:mailer_delive
 
 Rails.application.config.action_mailer.default_url_options = {
   host: ENV.fetch('APPLICATION_HOST'),
-  protocol: ENV['FORCE_SSL'] == 'true' ? 'https' : 'http'
+  protocol: 'https'
 }
 
 Rails.application.config.action_mailer.default_options = { from: ENV['DEFAULT_EMAIL_ADDRESS'] }

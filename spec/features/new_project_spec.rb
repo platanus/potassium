@@ -32,6 +32,12 @@ RSpec.describe "A new project" do
     expect(ruby_version_file).to eq("2.4")
   end
 
+  it "setup ssl" do
+    content = IO.read("#{project_path}/config/environments/production.rb")
+
+    expect(content).to include %{force_ssl = true}
+  end
+
   context "seeds related issues" do
     it "creates fake data loader module" do
       content = IO.read("#{project_path}/lib/fake_data_loader.rb")
