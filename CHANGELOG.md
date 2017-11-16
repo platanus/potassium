@@ -2,11 +2,16 @@
 
 ## Unreleased
 
+## 5.1.3.1
+
 Changes:
   - Update ruby to 2.4
 
 Features:
   - Always use https in production
+
+Fix:
+  - Schedule recipe selection
 
 ## 5.1.3
 
