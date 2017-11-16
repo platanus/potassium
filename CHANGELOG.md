@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 5.1.3.1
+## 5.1.4
 
 Changes:
   - Update ruby to 2.4
