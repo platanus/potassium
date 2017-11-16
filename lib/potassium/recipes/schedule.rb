@@ -20,6 +20,6 @@ class Recipes::Schedule < Rails::AppBuilder
   end
 
   def installed?
-    gem_exists?("sidekiq-scheduler") && file_exist?('config/sidekiq.yml')
+    gem_exists?(/sidekiq-scheduler/) && file_exist?('config/sidekiq.yml')
   end
 end
