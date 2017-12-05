@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+Fix:
+  - Update `ActiveAdmin` to 1.1.0
+  - `FactoryGirl` update to `FactoryBot`
+
 ## 5.1.4
 
 Changes:
