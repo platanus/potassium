@@ -46,7 +46,7 @@ end
 #
 # From your factories:
 #
-# FactoryGirl.define do
+# FactoryBot.define do
 #   factory :ticket do
 #     attachment { fixture_asset("platanus.png", "image/png") }
 #   end
