@@ -32,7 +32,7 @@ class Recipes::Admin < Rails::AppBuilder
   private
 
   def add_active_admin
-    gather_gem 'activeadmin', github: 'activeadmin'
+    gather_gem 'activeadmin', '~> 1.1.0'
     gather_gem 'activeadmin_addons'
     gather_gem 'active_skin'
 

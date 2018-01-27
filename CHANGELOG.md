@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+Fix:
+  - Update `ActiveAdmin` to 1.1.0
+  - Update `draper` to 3.0.1
+  - `FactoryGirl` update to `FactoryBot`
+
 ## 5.1.4
 
 Changes:

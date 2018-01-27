@@ -1,11 +1,11 @@
 # Put, inside the load method, the necessary code to generate data with DEVELOPMENT PURPOSES.
-# Whenever you can, use FactoryGirl's methods to keep this code "self updated".
+# Whenever you can, use FactoryBot's methods to keep this code "self updated".
 #
 # For Example:
 #
 # Having a country factory in /spec/factories/countries.rb
 #
-# FactoryGirl.define do
+# FactoryBot.define do
 #   factory :country do
 #     name "Chile"
 #     locale "es-CL"
@@ -25,7 +25,7 @@
 Faker::Config.locale = I18n.locale
 
 module FakeDataLoader
-  extend FactoryGirl::Syntax::Methods
+  extend FactoryBot::Syntax::Methods
 
   def self.load
     # Put here the code to generate data with DEVELOPMENT PURPOSES.
