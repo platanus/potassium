@@ -29,6 +29,7 @@ run_action(:asking) do
   ask :pundit
   ask :i18n
   ask :api
+  ask :kaminari
   ask :draper
   ask :paperclip
   ask :heroku
@@ -50,6 +51,7 @@ run_action(:recipe_loading) do
   create :editorconfig
   create :aws_sdk
   create :mailer
+  create :kaminari
   create :background_processor
   create :schedule
   create :i18n
