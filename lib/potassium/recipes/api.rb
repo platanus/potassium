@@ -36,8 +36,14 @@ class Recipes::Api < Rails::AppBuilder
       end
 
       copy_file '../assets/api/base_controller.rb', 'app/controllers/api/v1/base_controller.rb'
-      copy_file '../assets/api/api_error_concern.rb', 'app/controllers/concerns/api_error_concern.rb'
+      copy_file '../assets/api/api_error_concern.rb',
+        'app/controllers/concerns/api_error_concern.rb'
+      copy_file '../assets/api/api_versioned.rb', 'app/controllers/concerns/api_versioned.rb'
       copy_file '../assets/api/responder.rb', 'app/responders/api_responder.rb'
+      copy_file '../assets/api/api_deprecated.rb', 'app/controllers/concerns/api_deprecated.rb'
+      copy_file '../assets/api/active_model_serializer.rb',
+        'config/initializers/active_model_serializer.rb'
+      copy_file '../assets/api/api_paged.rb', 'app/controllers/concerns/api_paged.rb'
     end
   end
 end
