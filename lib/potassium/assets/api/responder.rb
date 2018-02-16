@@ -1,26 +1,16 @@
 class ApiResponder < ActionController::Responder
   def respond
     return display_errors if has_errors?
-    return head :no_content if delete?
+    return head(:no_content) if delete?
 
-    display resource, status_code: status_code
+    display(resource, status: status_code)
   end
 
   private
 
-  def display(_resource, given_options = {})
-    controller.render options.merge(given_options).merge(
-      json: serializer.as_json
-    )
-  end
-
-  def serializer
-    serializer_class = ActiveModel::Serializer.serializer_for(resource)
-    if serializer_class.present?
-      serializer_class.new(resource, options)
-    else
-      resource
-    end
+  def display(resource, given_options = {})
+    options[:json] = resource
+    controller.render(options.merge(given_options))
   end
 
   def status_code
@@ -29,10 +19,14 @@ class ApiResponder < ActionController::Responder
   end
 
   def display_errors
-    controller.render(
-      status: :unprocessable_entity,
-      json: { msg: "invalid_attributes", errors: format_errors }
-    )
+    error = {
+      code: 400,
+      status: "error",
+      message: "invalid_attributes",
+      data: resource.errors.as_json
+    }
+
+    controller.render(status: :bad_request, json: error)
   end
 
   def format_errors
