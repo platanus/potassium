@@ -21,7 +21,7 @@ class Recipes::Api < Rails::AppBuilder
   def add_api
     gather_gem 'versionist'
     gather_gem 'responders'
-    gather_gem 'active_model_serializers', '~> 0.9.3'
+    gather_gem 'active_model_serializers', '~> 0.10.0'
     gather_gem 'simple_token_authentication', '~> 1.0'
 
     after(:gem_install) do
