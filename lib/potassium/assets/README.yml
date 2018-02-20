@@ -107,6 +107,9 @@ readme:
         power_types:
           title: "Rails pattern enforcing types"
           body: "This projects uses [Power-Types](https://github.com/platanus/power-types) to generate Services, Commands, Utils and Values."
+        rswag:
+          title: "Api documentation"
+          body: "This projects uses [Rswag](https://github.com/domaindrivendev/rswag) to generate Api documentation"
     seeds:
       title: "Seeds"
       body: |
