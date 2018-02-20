@@ -21,13 +21,19 @@ class Recipes::Rswag < Rails::AppBuilder
   private
 
   def add_rswag
-    gather_gem 'rswag'
+    gather_gem('rswag-ui')
+    gather_gem('rswag-api')
+    gather_gems(:development, :test) do
+      gather_gem('rswag-specs')
+    end
     add_readme_section :internal_dependencies, :rswag
   end
 
   def run_generator
     after(:gem_install) do
-      generate "rswag:install"
+      generate "rswag:ui:install"
+      generate "rswag:api:install"
+      generate "rswag:specs:install"
     end
   end
 end
