@@ -98,6 +98,14 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
+      name: "rswag",
+      desc: "Whether to use Rswag or not",
+      negatable: true,
+      default_value: "none",
+      default_test_value: false
+    },
+    {
+      type: :switch,
       name: "github",
       desc: "Whether to create a github repository",
       negatable: true,
