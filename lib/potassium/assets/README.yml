@@ -107,6 +107,9 @@ readme:
         power_types:
           title: "Rails pattern enforcing types"
           body: "This projects uses [Power-Types](https://github.com/platanus/power-types) to generate Services, Commands, Utils and Values."
+        ransack:
+          title: "Search functionality"
+          body: "To add custom and complex search funtionality this projects uses [Ransack](https://github.com/activerecord-hackery/ransack)."
     seeds:
       title: "Seeds"
       body: |

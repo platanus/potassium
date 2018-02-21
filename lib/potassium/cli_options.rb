@@ -114,6 +114,14 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
+      name: "ransack",
+      desc: "Whether to use Ransack or not",
+      negatable: true,
+      default_value: "none",
+      default_test_value: false
+    },
+    {
+      type: :switch,
       name: "schedule",
       desc: "Whether to use sidekiq-scheduler as job scheduler",
       negatable: true,
