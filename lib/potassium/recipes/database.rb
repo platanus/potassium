@@ -40,6 +40,7 @@ class Recipes::Database < Rails::AppBuilder
     remove_file 'config/database.yml'
     template "../assets/config/database_#{db[:name]}.yml.erb", 'config/database.yml'
     discard_gem 'sqlite3'
+    gather_gem 'strong_migrations'
     if db[:version]
       gather_gem db[:gem_name], db[:version]
     else
