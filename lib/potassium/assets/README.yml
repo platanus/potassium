@@ -108,8 +108,13 @@ readme:
           title: "Rails pattern enforcing types"
           body: "This projects uses [Power-Types](https://github.com/platanus/power-types) to generate Services, Commands, Utils and Values."
         rswag:
-          title: "Api documentation"
-          body: "This projects uses [Rswag](https://github.com/domaindrivendev/rswag) to generate Api documentation"
+          title: "API documentation"
+          body: |
+            This projects uses [Rswag](https://github.com/domaindrivendev/rswag) to generate API documentation based on integration tests.
+            To use this gem:
+            - Add your API tests under `/spec/integration/[:api_controller]_spec.rb`
+            - Run `bundle exec rake rswag:specs:swaggerize` to generate/update docs.
+            - Go to http://localhost:3000/api-docs to see the documentation.
     seeds:
       title: "Seeds"
       body: |

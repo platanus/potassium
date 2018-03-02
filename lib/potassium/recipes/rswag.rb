@@ -26,6 +26,7 @@ class Recipes::Rswag < Rails::AppBuilder
     gather_gems(:development, :test) do
       gather_gem('rswag-specs')
     end
+    empty_directory 'spec/integration'
     add_readme_section :internal_dependencies, :rswag
   end
 

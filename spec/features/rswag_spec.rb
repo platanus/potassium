@@ -20,12 +20,12 @@ RSpec.describe "Rswag" do
     expect(@gemfile_content).to include("gem 'rswag-specs'")
   end
 
-  it "adds Api engine to routes file" do
+  it "adds API engine to routes file" do
     routes = IO.read("#{project_path}/config/routes.rb")
     expect(routes).to include("mount Rswag::Api::Engine => '/api-docs'")
   end
 
-  it "adds Ui engine to routes file" do
+  it "adds UI engine to routes file" do
     routes = IO.read("#{project_path}/config/routes.rb")
     expect(routes).to include("mount Rswag::Ui::Engine => '/api-docs'")
   end
@@ -33,6 +33,11 @@ RSpec.describe "Rswag" do
   it "adds the Rswag brief to README file" do
     readme = IO.read("#{project_path}/README.md")
     expect(readme).to include("Rswag")
+  end
+
+  it "adds the spec/integration directory" do
+    path = "#{project_path}/spec/integration"
+    expect(File.directory?(path)).to be true
   end
 
   it "adds the rswag-api.rb file" do
