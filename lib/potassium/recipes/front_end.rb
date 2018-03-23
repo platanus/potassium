@@ -3,6 +3,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     frameworks = {
       vue: "Vue",
       angular: "Angular 2",
+      react: "React",
       none: "None"
     }
 

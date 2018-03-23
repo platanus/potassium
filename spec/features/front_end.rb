@@ -10,7 +10,7 @@ RSpec.describe "Front end" do
     expect(gemfile).not_to include('webpacker')
   end
 
-  it "creates a project wihtout vue as front end framework" do
+  it "creates a project with angular as front end framework" do
     create_dummy_project("front_end" => "angular")
     gemfile = IO.read("#{project_path}/Gemfile")
     node_modules_file = IO.read("#{project_path}/package.json")
@@ -19,12 +19,22 @@ RSpec.describe "Front end" do
     expect(node_modules_file).to include("\"@angular/core\"")
   end
 
-  it "creates a project wihtout vue as front end framework" do
+  it "creates a project with vue as front end framework" do
     create_dummy_project("front_end" => "vue")
     gemfile = IO.read("#{project_path}/Gemfile")
     node_modules_file = IO.read("#{project_path}/package.json")
 
     expect(gemfile).to include('webpacker')
     expect(node_modules_file).to include("\"vue\"")
+  end
+
+  it "creates a project with react as front end framework" do
+    create_dummy_project("front_end" => "react")
+    gemfile = IO.read("#{project_path}/Gemfile")
+    node_modules_file = IO.read("#{project_path}/package.json")
+
+    expect(gemfile).to include('webpacker')
+    expect(node_modules_file).to include("\"react\"")
+    expect(node_modules_file).to include("\"react-dom\"")
   end
 end
