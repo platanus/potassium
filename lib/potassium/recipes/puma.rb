@@ -7,11 +7,6 @@ class Recipes::Puma < Rails::AppBuilder
     copy_file '../assets/config/puma.rb', 'config/puma.rb', force: true
 
     # Configure rack-timout
-    rack_timeout_config =
-      <<-RUBY.gsub(/^ {9}/, '')
-         Rack::Timeout.timeout = (ENV["RACK_TIMEOUT"] || 10).to_i
-         RUBY
-
-    append_file "config/environments/production.rb", rack_timeout_config
+    application "Rack::Timeout.timeout = (ENV[\"RACK_TIMEOUT\"] || 10).to_i", env: "production"
   end
 end

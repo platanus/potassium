@@ -9,11 +9,11 @@ class Recipes::Env < Rails::AppBuilder
     append_to_file '.gitignore', ".env\n"
 
     env_config =
-      <<-RUBY.gsub(/^ {7}/, '')
-         config.before_configuration do
-           Dotenv.load(Dotenv::Railtie.root.join('.env.development'))
-         end
-         RUBY
-    application env_config.strip, env: 'test'
+      <<~RUBY
+        config.before_configuration do
+          Dotenv.load(Dotenv::Railtie.root.join('.env.development'))
+        end
+      RUBY
+    application env_config, env: 'test'
   end
 end

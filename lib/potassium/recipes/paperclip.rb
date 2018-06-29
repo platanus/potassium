@@ -24,17 +24,17 @@ class Recipes::Paperclip < Rails::AppBuilder
   def add_paperclip
     gather_gem 'paperclip', '~> 5.0'
     paperclip_config =
-      <<-RUBY.gsub(/^ {7}/, '')
-         config.paperclip_defaults = {
-           storage: :s3,
-           s3_protocol: 'https'
-           s3_region: ENV.fetch('AWS_REGION', 'us-east-1'),
-           s3_credentials: {
-             bucket: ENV['S3_BUCKET']
-           }
-         }
-         RUBY
-    application paperclip_config.strip, env: 'production'
+      <<~RUBY
+        config.paperclip_defaults = {
+          storage: :s3,
+          s3_protocol: 'https',
+          s3_region: ENV.fetch('AWS_REGION', 'us-east-1'),
+          s3_credentials: {
+            bucket: ENV['S3_BUCKET']
+          }
+        }
+      RUBY
+    application paperclip_config, env: 'production'
     append_to_file '.env.development', "S3_BUCKET=\n"
     append_to_file '.gitignore', "/public/system/*\n"
     add_readme_section :internal_dependencies, :paperclip

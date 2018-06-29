@@ -16,24 +16,26 @@ class Recipes::Ci < Rails::AppBuilder
       compose = DockerHelpers.new('docker-compose.ci.yml')
 
       if selected?(:database, :mysql)
-        service = <<-YAML
-          image: "mysql:5.6.23"
-          environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
-        YAML
-        compose.add_service("mysql", service)
+        srv =
+          <<~YAML
+            image: "mysql:5.6.23"
+            environment:
+              MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+          YAML
+        compose.add_service("mysql", srv)
         compose.add_link('test', 'mysql')
         compose.add_env('test', 'MYSQL_HOST', 'mysql')
         compose.add_env('test', 'MYSQL_PORT', '3306')
 
       elsif selected?(:database, :postgresql)
-        service = <<-YAML
-          image: "postgres:9.4.5"
-          environment:
-            POSTGRES_USER: postgres
-            POSTGRES_PASSWORD: ''
-        YAML
-        compose.add_service("postgresql", service)
+        srv =
+          <<~YAML
+            image: "postgres:9.4.5"
+            environment:
+              POSTGRES_USER: postgres
+              POSTGRES_PASSWORD: ''
+          YAML
+        compose.add_service("postgresql", srv)
         compose.add_link('test', 'postgresql')
         compose.add_env('test', 'POSTGRESQL_USER', 'postgres')
         compose.add_env('test', 'POSTGRESQL_HOST', 'postgresql')
@@ -43,7 +45,6 @@ class Recipes::Ci < Rails::AppBuilder
       add_readme_header :ci
     end
 
-    uglifier = "  config.assets.js_compressor = :uglifier\n"
-    insert_into_file 'config/environments/test.rb', uglifier, after: "configure do\n"
+    application 'config.assets.js_compressor = :uglifier', env: 'test'
   end
 end
