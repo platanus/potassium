@@ -2,8 +2,11 @@
 
 ## Unreleased
 
+Changes:
+  - Update Rails to 5.2
+  - Update `ActiveAdmin` to 1.3.0
+
 Fix:
-  - Update `ActiveAdmin` to 1.1.0
   - Update `draper` to 3.0.1
   - `FactoryGirl` update to `FactoryBot`
   - `pg` gem has now explicit version: `~> 0.21`
