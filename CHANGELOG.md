@@ -2,7 +2,11 @@
 
 ## Unreleased
 
+Features:
+  - Add Active Storage recipe
+
 Changes:
+  - Update AWS to 3
   - Update Rails to 5.2
   - Update `ActiveAdmin` to 1.3.0
 
