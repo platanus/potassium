@@ -32,7 +32,7 @@ class Recipes::Admin < Rails::AppBuilder
   private
 
   def add_active_admin
-    gather_gem 'activeadmin', '~> 1.1.0'
+    gather_gem 'activeadmin', '~> 1.3.0'
     gather_gem 'activeadmin_addons'
     gather_gem 'active_skin'
 
@@ -41,16 +41,16 @@ class Recipes::Admin < Rails::AppBuilder
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
-        <<-HERE.gsub(/^ {11}/, '')
-           class CustomFooter < ActiveAdmin::Component
-             def build _arg
-               super(id: "footer")
-               para "Powered by Platanus"
-             end
-           end\n
-           ActiveAdmin.setup do |config|
-             config.view_factory.footer = CustomFooter
-           HERE
+        <<~HERE
+          class CustomFooter < ActiveAdmin::Component
+            def build _arg
+              super(id: "footer")
+              para "Powered by Platanus"
+            end
+          end\n
+          ActiveAdmin.setup do |config|
+            config.view_factory.footer = CustomFooter
+        HERE
       end
 
       line = "@import \"active_admin/base\";"
@@ -58,15 +58,15 @@ class Recipes::Admin < Rails::AppBuilder
       style = File.exist?(style) ? style : "app/assets/stylesheets/active_admin.scss"
 
       gsub_file style, /(#{Regexp.escape(line)})/mi do |_match|
-        <<-HERE.gsub(/^ {11}/, '')
-           #{line}
-           $skinActiveColor: #001CEE;
-           $skinHeaderBck: #002744;
-           $panelHeaderBck: #002744;
-           //$skinLogo: $skinHeaderBck image-url("logo_admin.png") no-repeat center center;
+        <<~HERE
+          #{line}
+          $skinActiveColor: #001CEE;
+          $skinHeaderBck: #002744;
+          $panelHeaderBck: #002744;
+          //$skinLogo: $skinHeaderBck image-url("logo_admin.png") no-repeat center center;
 
-           @import "active_skin";
-           HERE
+          @import "active_skin";
+        HERE
       end
 
       generate "activeadmin_addons:install"

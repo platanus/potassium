@@ -4,11 +4,11 @@ module ReadmeHelpers
     add_readme_header(header, iterpolation_values)
 
     insert_into_readme(section_data[:header_title]) do
-      <<-HERE.gsub(/^ {6}/, '')
+      <<~HERE
 
-      ### #{section_data[:title]}
+        ### #{section_data[:title]}
 
-      #{section_data[:body]}
+        #{section_data[:body]}
       HERE
     end
   end
@@ -19,18 +19,18 @@ module ReadmeHelpers
 
     if header_data[:body]
       insert_into_readme do
-        <<-HERE.gsub(/^ {8}/, '')
+        <<~HERE
 
-        ## #{header_data[:title]}
+          ## #{header_data[:title]}
 
-        #{header_data[:body]}
+          #{header_data[:body]}
         HERE
       end
     else
       insert_into_readme do
-        <<-HERE.gsub(/^ {8}/, '')
+        <<~HERE
 
-        ## #{header_data[:title]}
+          ## #{header_data[:title]}
         HERE
       end
     end

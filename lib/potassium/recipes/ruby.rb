@@ -4,7 +4,7 @@ require 'semantic'
 class Recipes::Ruby < Rails::AppBuilder
   def create
     info "Using ruby version #{version_alias}"
-    create_file '.ruby-version', version_alias
+    create_file '.ruby-version', version_alias, force: true
   end
 
   private
