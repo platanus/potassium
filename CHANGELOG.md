@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 5.2.0
+
 Features:
   - Add Active Storage recipe
 
