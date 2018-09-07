@@ -9,6 +9,7 @@ Changes:
   - Update AWS to 3
   - Update Rails to 5.2
   - Update `ActiveAdmin` to 1.3.0
+  - Update ruby to 2.5
 
 Fix:
   - Update `draper` to 3.0.1
