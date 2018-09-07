@@ -1,4 +1,8 @@
 class Recipes::RackCors < Rails::AppBuilder
+  def install
+    create
+  end
+
   def create
     gather_gem('rack-cors', '~> 0.4.0')
     after(:gem_install) do
@@ -13,6 +17,7 @@ class Recipes::RackCors < Rails::AppBuilder
                 methods: [:get, :post, :delete, :put, :options]
             end
           end
+
         RUBY
 
       application rack_cors_config

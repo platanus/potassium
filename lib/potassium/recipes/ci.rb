@@ -2,7 +2,7 @@ class Recipes::Ci < Rails::AppBuilder
   def create
     if get(:heroku)
       copy_file '../assets/Dockerfile.ci', 'Dockerfile.ci'
-      copy_file '../assets/circle.yml', 'circle.yml'
+      copy_file '../assets/.circleci/config.yml', '.circleci/config.yml'
 
       template '../assets/bin/cibuild.erb', 'bin/cibuild'
       run "chmod a+x bin/cibuild"
