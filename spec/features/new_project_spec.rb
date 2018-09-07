@@ -37,7 +37,7 @@ RSpec.describe "A new project" do
   it "configures the correct ruby version" do
     ruby_version_file = IO.read("#{project_path}/.ruby-version")
 
-    expect(ruby_version_file).to eq("2.4")
+    expect(ruby_version_file).to eq("2.5")
   end
 
   it "setup ssl" do
