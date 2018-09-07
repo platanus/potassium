@@ -7,7 +7,7 @@ Features:
 
 Changes:
   - Update AWS to 3
-  - Update Rails to 5.2
+  - Update Rails to 5.2.1
   - Update `ActiveAdmin` to 1.3.0
   - Update ruby to 2.5
 
