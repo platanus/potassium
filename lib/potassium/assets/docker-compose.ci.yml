@@ -1,9 +1,11 @@
-test:
-  build: .
-  dockerfile: Dockerfile.ci
-  working_dir: '/app'
-  volumes:
-    - ./vendor/bundle:/usr/local/bundle
-    - $CIRCLE_TEST_REPORTS/rspec:$HOME/.rspec_reports
-  environment:
-    RACK_ENV: test
+version: '3.4'
+
+services:
+  test:
+    build:
+      context: "."
+      dockerfile: Dockerfile.ci
+    volumes:
+    - "./vendor/bundle:/usr/local/bundle"
+    environment:
+      RACK_ENV: test

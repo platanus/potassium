@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+
+    docker:
+    - image: platanus/compose:1.22.0
+
+    steps:
+    - checkout
+    - setup_remote_docker
+
+    - run: docker info
+    - run: docker-compose -f docker-compose.ci.yml pull
+    - run: docker-compose -f docker-compose.ci.yml build test
+    - run: bin/cibuild services
+    - run: bin/cibuild deps
+
+    - run: bin/cibuild db
+    - run: bin/cibuild tests

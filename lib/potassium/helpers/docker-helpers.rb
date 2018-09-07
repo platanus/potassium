@@ -5,7 +5,7 @@ class DockerHelpers
   end
 
   def add_link(target_service, linked_service)
-    service = @compose[target_service]
+    service = @compose['services'][target_service]
     unless service['links'].is_a? Array
       service['links'] = []
     end
@@ -14,7 +14,7 @@ class DockerHelpers
   end
 
   def add_env(target_service, variable_key, variable_value)
-    service = @compose[target_service]
+    service = @compose['services'][target_service]
     unless service['environment'].is_a? Hash
       service['environment'] = {}
     end
@@ -25,7 +25,7 @@ class DockerHelpers
   def add_service(name, definition)
     service = {}
     service[name] = YAML.load(definition)
-    @compose.merge!(service)
+    @compose['services'].merge!(service)
     save
   end
 
