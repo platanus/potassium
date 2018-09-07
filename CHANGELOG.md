@@ -10,6 +10,7 @@ Changes:
   - Update Rails to 5.2.1
   - Update `ActiveAdmin` to 1.3.0
   - Update ruby to 2.5
+  - Update to circleci 2
 
 Fix:
   - Update `draper` to 3.0.1

@@ -2,9 +2,9 @@ version: '3.4'
 
 services:
   test:
-    build: "."
-    dockerfile: Dockerfile.ci
-    working_dir: "/app"
+    build:
+      context: "."
+      dockerfile: Dockerfile.ci
     volumes:
     - "./vendor/bundle:/usr/local/bundle"
     environment:
