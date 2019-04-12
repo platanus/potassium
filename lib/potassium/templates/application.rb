@@ -45,6 +45,7 @@ run_action(:recipe_loading) do
   create :puma
   create :database
   create :annotate
+  create :listen
   create :ruby
   create :env
   create :yarn
