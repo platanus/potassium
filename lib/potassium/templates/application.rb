@@ -9,7 +9,6 @@ end
 
 run_action(:cleaning) do
   clean_gemfile
-  gather_gem("spring")
 end
 
 run_action(:add_utils) do
