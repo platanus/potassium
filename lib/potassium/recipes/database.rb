@@ -30,7 +30,7 @@ class Recipes::Database < Rails::AppBuilder
 
   def databases(database)
     databases = {
-      postgresql: { name: 'postgresql', gem_name: 'pg', version: '~> 0.21', relational: true },
+      postgresql: { name: 'postgresql', gem_name: 'pg', relational: true },
       mysql: { name: 'mysql', gem_name: 'mysql2', version: '~> 0.3.18', relational: true }
     }
     databases[database]
