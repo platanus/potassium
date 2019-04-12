@@ -6,7 +6,10 @@ class Recipes::Rails < Rails::AppBuilder
     end
 
     environment 'config.force_ssl = true', env: 'production'
+    disable_automatic_nonce_generation
+  end
 
+  def disable_automatic_nonce_generation
     line = "Rails.application.config.content_security_policy_nonce_generator = \
 -> request { SecureRandom.base64(16) }"
     initializer = "config/initializers/content_security_policy.rb"
