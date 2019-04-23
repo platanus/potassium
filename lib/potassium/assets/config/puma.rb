@@ -20,7 +20,11 @@ preload_app!
 
 rackup DefaultRackup
 port ENV.fetch('PORT', 3000)
-environment ENV.fetch("RACK_ENV", "development")
+rack_env = ENV.fetch("RACK_ENV", "development")
+environment rack_env
+
+# Set 1 day timeout for workers while developing
+worker_timeout 1.day.seconds.to_i if rack_env == "development"
 
 on_worker_boot do
   # Worker specific setup for Rails 4.1+
