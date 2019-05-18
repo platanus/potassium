@@ -42,11 +42,12 @@ run_action(:recipe_loading) do
   create :ci
   create :style
   create :puma
+  create :env
+  create :database_container
   create :database
   create :annotate
   create :listen
   create :ruby
-  create :env
   create :yarn
   create :editorconfig
   create :aws_sdk
