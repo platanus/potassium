@@ -17,7 +17,7 @@ class Recipes::Ci < Rails::AppBuilder
     if selected?(:database, :mysql)
       srv =
         <<~YAML
-          image: "mysql:5.6.23"
+          image: mysql:#{Potassium::MYSQL_VERSION}
           environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
         YAML
@@ -29,7 +29,7 @@ class Recipes::Ci < Rails::AppBuilder
     elsif selected?(:database, :postgresql)
       srv =
         <<~YAML
-          image: "postgres:9.4.5"
+          image: "postgres:#{Potassium::POSTGRES_VERSION}"
           environment:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: ''

@@ -6,7 +6,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
 
   POSTGRESQL_SERVICE =
     <<~YAML
-      image: postgres:11
+      image: postgres:#{Potassium::POSTGRES_VERSION}
       ports:
         - #{CONTAINER_VARS[:postgresql][:port]}
       environment:
@@ -18,7 +18,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
 
   MYSQL_SERVICE =
     <<~YAML
-      image: mysql:5
+      image: "mysql:#{Potassium::MYSQL_VERSION}"
       ports:
         - #{CONTAINER_VARS[:mysql][:port]}
       environment:
