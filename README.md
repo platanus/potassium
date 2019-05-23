@@ -42,7 +42,7 @@ Potassium Rails apps includes the following gems and technologies:
 - [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same.
 - [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience.
 - [RSpec](http://rspec.info) for unit and integration testing.
-- [FactoryBot](https://github.com/thoughtbot/factory_bot] for test factories.
+- [FactoryBot](https://github.com/thoughtbot/factory_bot) for test factories.
 - [Guard](http://guardgem.org) for continuous testing and other watch-related tasks.
 - [AWS-SDK](https://github.com/aws/aws-sdk-ruby) for file uploads, sdks, etc and because we use AWS.
 - [Puma](https://github.com/puma/puma) to serve HTTP requests
