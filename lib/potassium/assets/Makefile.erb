@@ -2,7 +2,6 @@ PROJECT ?= <%= get(:underscorized_app_name) %>
 DOCKER_COMPOSE_FILE ?= docker-compose.yml
 
 DOCKER_COMPOSE_ARGS ?= -p $(PROJECT) -f $(DOCKER_COMPOSE_FILE)
-LOGS_SINCE := 3h
 
 SHELL := /bin/bash
 
@@ -19,7 +18,7 @@ help:
 	@echo "  ${BOLD}make services-up${NORMAL}"
 	@echo ""
 	@echo "Reset the environment (rm mysql db):"
-	@echo "  ${BOLD}make services-destroy${NORMAL}"
+	@echo "  ${BOLD}make services-down${NORMAL}"
 	@echo ""
 
 setup:
@@ -36,7 +35,7 @@ services-up:
 services-stop:
 	docker-compose $(DOCKER_COMPOSE_ARGS) stop
 
-services-destroy:
+services-down:
 	docker-compose $(DOCKER_COMPOSE_ARGS) down --volumes
 
 services-logs:
