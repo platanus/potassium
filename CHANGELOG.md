@@ -1,6 +1,21 @@
 # Changelog
 
-## Unreleased
+## 5.2.1
+
+Features:
+  - Databases are now provided as docker containers
+
+Changes:
+  - Update postgres to 11
+  - Update mysql to 5.7
+  - Update rubocop to `~> 0.65.0`
+  - Puma worker timeout is extended to 1 day in development env
+  - Spring is loaded only in development env
+  - Remove version requirement for `pg`
+
+Fix:
+  - Update mysql2 to `~> 0.5.0` (required for rails 5+)
+  - Use `RACK_TIMEOUT` env var instead deprecated setter
 
 ## 5.2.0
 
