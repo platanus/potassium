@@ -8,12 +8,12 @@ readme:
 
             $ ./bin/setup
 
-        It assumes you have a machine equipped with Ruby, <%= get(:database).to_s.titleize %>, etc. If not, set up
-        your machine with [boxen].
+        It assumes you have a machine equipped with Ruby, Node.js, Docker and make.
 
         The script will do the following among other things:
 
         - Install the dependecies
+        - Create a docker container for your database
         - Prepare your database
         - Adds heroku remotes
 
@@ -22,7 +22,6 @@ readme:
             $ heroku local
 
         [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
-        [boxen]: http://github.com/platanus/our-boxen
     ci:
       title: "Continuous Integrations"
       body: |

@@ -1,7 +1,7 @@
 class DockerHelpers
   def initialize(compose_path)
     @compose_path = compose_path
-    @compose = YAML.load(File.read(compose_path))
+    @compose = YAML.safe_load(File.read(compose_path))
   end
 
   def add_link(target_service, linked_service)
@@ -23,13 +23,22 @@ class DockerHelpers
   end
 
   def add_service(name, definition)
-    service = {}
-    service[name] = YAML.load(definition)
-    @compose['services'].merge!(service)
-    save
+    add_leaf('services', name, definition)
+  end
+
+  def add_volume(name, definition = '')
+    add_leaf('volumes', name, definition)
   end
 
   private
+
+  def add_leaf(root_name, leaf_name, definition)
+    leaf = {}
+    leaf[leaf_name] = YAML.safe_load(definition)
+    @compose[root_name] = {} unless @compose[root_name].is_a? Hash
+    @compose[root_name].merge!(leaf)
+    save
+  end
 
   def save
     File.open(@compose_path, 'w') { |f| f.write @compose.to_yaml }

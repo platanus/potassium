@@ -2,9 +2,9 @@ development: &default
   adapter: postgresql
   database: <%= get(:underscorized_app_name) %>_development
   encoding: utf8
-  host: <%%= ENV["BOXEN_POSTGRESQL_HOST"] || ENV["POSTGRESQL_HOST"] || "127.0.0.1" %>
-  port: <%%= ENV["BOXEN_POSTGRESQL_PORT"] || ENV["POSTGRESQL_PORT"] || 5432 %>
-  username: <%%= ENV["POSTGRESQL_USER"] %>
+  host: <%%= ENV["DB_HOST"] || "127.0.0.1" %>
+  port: <%%= ENV["DB_PORT"] || 5432 %>
+  username: <%%= ENV["DB_USER"] || 'postgres' %>
   min_messages: warning
   pool: <%%= Integer(ENV.fetch("DB_POOL", 5)) %>
   reaping_frequency: <%%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
