@@ -36,9 +36,9 @@ class Recipes::Ci < Rails::AppBuilder
         YAML
       compose.add_service("postgresql", srv)
       compose.add_link('test', 'postgresql')
-      compose.add_env('test', 'POSTGRESQL_USER', 'postgres')
-      compose.add_env('test', 'POSTGRESQL_HOST', 'postgresql')
-      compose.add_env('test', 'POSTGRESQL_PORT', '5432')
+      compose.add_env('test', 'DB_USER', 'postgres')
+      compose.add_env('test', 'DB_HOST', 'postgresql')
+      compose.add_env('test', 'DB_PORT', '5432')
     end
 
     add_readme_header :ci
