@@ -22,7 +22,7 @@ wait_services(){
   # Chain tests together by using &&
   until (
   <% if(selected?(:database, :mysql) || selected?(:database, :postgresql))-%>
-  test_service '$<%=get(:database).to_s.upcase%>_HOST' '$<%=get(:database).to_s.upcase%>_PORT' && \
+  test_service '$DB_HOST' '$DB_PORT' && \
   <% end-%>
   echo "Services ready"
   )
