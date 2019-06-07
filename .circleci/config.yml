@@ -1,0 +1,38 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    parallelism: 4
+
+    docker:
+    - image: circleci/ruby:2.5.1-stretch
+
+    steps:
+    - checkout
+    - setup_remote_docker
+
+    - run: docker info >/dev/null 2>&1 || service docker start
+    - run: bundle install
+    - run: gem install hound-cli
+    - save_cache:
+        key: v1-dep-{{ .Branch }}-{{ epoch }}
+        paths:
+        - vendor/bundle
+        - ~/virtualenvs
+        - ~/.m2
+        - ~/.ivy2
+        - ~/.bundle
+        - ~/.go_workspace
+        - ~/.gradle
+        - ~/.cache/bower
+    - run:
+        command: bundle exec rspec --color --require spec_helper --format=doc --format progress $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+    - store_test_results:
+        path: /tmp/circleci-test-results
+    - store_artifacts:
+        path: /tmp/circleci-artifacts
+    - store_artifacts:
+        path: /tmp/circleci-test-results
