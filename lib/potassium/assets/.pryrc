@@ -8,5 +8,5 @@ end
 if defined?(Rails)
   require 'rails/console/app'
   require 'rails/console/helpers'
-  include Rails::ConsoleMethods
+  include Rails::ConsoleMethods # rubocop:disable Style/MixinUsage
 end
