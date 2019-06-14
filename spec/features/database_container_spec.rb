@@ -1,4 +1,5 @@
 require "spec_helper"
+require "yaml"
 
 RSpec.describe "DatabaseContainer" do
   before(:all) do
