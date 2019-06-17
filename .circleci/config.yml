@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/app
+    parallelism: 4
+    shell: /bin/bash --login
+
+    docker:
+    - image: circleci/build-image:ubuntu-14.04-XXL-upstart-1189-5614f37
+      command: /sbin/init
+
+    steps:
+    - checkout
+    - run: rm -f app/.rvmrc; echo 2.5.1 > app/.ruby-version; rvm use 2.5.1 --default
+    - run: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
+    - run: echo 'export rvm_install_on_use_flag=0' >> /home/ubuntu/.rvmrc
+
+    - restore_cache:
+        keys:
+        - v1-dep-{{ .Branch }}-
+        - v1-dep-master-
+    - run: bundle install
+    - run: gem install hound-cli
+    - save_cache:
+        key: v1-dep-{{ .Branch }}-{{ epoch }}
+        paths:
+        - vendor/bundle
+    - run:
+        command: bundle exec rspec --color --require spec_helper --format=doc --format progress $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test

@@ -68,7 +68,7 @@ class Recipes::Mailer < Rails::AppBuilder
 
     mailer_config =
       <<~RUBY
-        require Rails.root.join("config/mailer")
+        require Rails.root.join("config", "mailer")
       RUBY
 
     prepend_file "config/environments/production.rb", mailer_config
