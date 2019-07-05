@@ -81,11 +81,18 @@ class Recipes::Mailer < Rails::AppBuilder
     append_to_file '.env.development', "SENDGRID_API_KEY=\n"
     sendgrid_settings = <<~RUBY
       Rails.application.config.action_mailer.sendgrid_settings = {
-        api_key: ENV['SENDGRID_API']
+        api_key: ENV['SENDGRID_API_KEY']
       }
     RUBY
     inject_into_file 'config/mailer.rb', sendgrid_settings,
       after: "Rails.application.config.action_mailer.delivery_method = :sendgrid\n"
+    sendgrid_dev_settings = <<~RUBY
+      Rails.application.config.action_mailer.sendgrid_dev_settings = {
+        api_key: ENV['SENDGRID_API_KEY']
+      }
+    RUBY
+    application sendgrid_dev_settings, env: "development"
+    application "config.action_mailer.delivery_method = :sendgrid_dev", env: "development"
   end
 
   def aws_ses
