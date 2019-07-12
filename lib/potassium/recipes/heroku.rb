@@ -41,6 +41,8 @@ class Recipes::Heroku < Rails::AppBuilder
 
     copy_file '../assets/Procfile', 'Procfile'
     copy_file '../assets/.buildpacks', '.buildpacks'
+    copy_file '../assets/bin/release', 'bin/release'
+    run 'chmod a+x bin/release'
 
     template "../assets/bin/setup_heroku.erb", "bin/setup_heroku", force: true
     run "chmod a+x bin/setup_heroku"
@@ -88,7 +90,6 @@ class Recipes::Heroku < Rails::AppBuilder
     run_toolbelt_command "labs:enable runtime-dyno-metadata", staged_app_name
     run_toolbelt_command "config:add HEROKU_APP_NAME=#{staged_app_name}", staged_app_name
     run_toolbelt_command "config:add #{rack_env}", staged_app_name
-    run_toolbelt_command "config:add DEPLOY_TASKS=db:migrate", staged_app_name
 
     set_rails_secrets(environment)
     set_app_multi_buildpack(environment)

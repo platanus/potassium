@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+echo 'Release Phase...'
+
+bundle exec rails db:migrate
+
+echo 'Release Phase: OK'

@@ -98,13 +98,13 @@ When you choose to deploy to heroku a few extra things are added for the project
     parity between testing and production environments
   - Adds a `.buildpacks` file with the default buildpacks to use. It use the
     following buildpacks:
+  - Adds a `bin/release` file with the release phase script to run specific tasks before the app is deployed completely, for example `rails db:migrate`.
 
 | index | buildpack | description |
 |-------|-----------|-------------|
 | 1.    | [nodejs][heroku-buildpack-nodejs] | to support javascript package management with `yarn` and `webpack` based asset compiling |
 | 2.    | [ruby-version][heroku-buildpack-ruby-version] | to support the use of `.ruby-version` file to instruct heroku which ruby version to use |
 | 3.    | [ruby][heroku-buildpack-ruby] | the base buildpack to run ruby applications |
-| 4.    | [ruby-deploy-tasks][buildpack-deploy-tasks] | to run rake task after the deployment is complete, for example `db:migrate` |
 
 Also the heroku applications are created
 
@@ -113,7 +113,6 @@ Also the heroku applications are created
     and `production` stages.
   - Setup initial configuration variables
   - Set the application buildpack to the [multi-buildpack][heroku-buildpack-multi]
-  - Set **deploy-tasks** buildpack is setup to run `rake db:migrate` after each deploy
 
 You'll need to manually
 
@@ -140,7 +139,6 @@ Go to https://monkeyci.platan.us, choose the repository from the list and hit
 [heroku-buildpack-nodejs]: https://github.com/heroku/heroku-buildpack-nodejs
 [heroku-buildpack-ruby]: http://github.com/heroku/heroku-buildpack-ruby
 [heroku-buildpack-multi]: http://github.com/heroku/heroku-buildpack-multi
-[buildpack-deploy-tasks]: http://github.com/gunpowderlabs/buildpack-ruby-rake-deploy-tasks
 [circle-ci]: https://circleci.com
 
 ## Development Tools
