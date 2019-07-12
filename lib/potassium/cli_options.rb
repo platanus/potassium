@@ -67,20 +67,10 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       default_test_value: false
     },
     {
-      type: :switch,
-      name: "paperclip",
-      desc: "Whether to include Paperclip as dependency",
-      negatable: true,
-      default_value: "none",
-      default_test_value: false
-    },
-    {
-      type: :switch,
-      name: "active_storage",
-      desc: "Whether to include Active Storage as dependency",
-      negatable: true,
-      default_value: "none",
-      default_test_value: false
+      type: :flag,
+      name: "storage",
+      desc: "Decides which file storage to use. Available: active_storage, paperclip, none",
+      default_test_value: "active_storage"
     },
     {
       type: :switch,
