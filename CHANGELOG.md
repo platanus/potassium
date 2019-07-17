@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+## 5.2.2
+
+Features:
+  - Implement release phase on heroku
+  - Add sendgrid_dev support
+  -
+Fix:
+  - Fix Circle CI
+  - Fix services containers env variables
+
 ## 5.2.1
 
 Features:
