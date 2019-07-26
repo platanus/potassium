@@ -2,7 +2,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   def ask
     storages = {
       active_storage: 'ActiveStorage',
-      paperclip: 'Paperclip',
+      paperclip: '[DEPRECATED] Paperclip',
       none: 'None, thanks'
     }
 
