@@ -85,7 +85,7 @@ readme:
         paperclip:
           title: "Uploads"
           body: "For managing uploads, this project uses [Paperclip](https://github.com/thoughtbot/paperclip), a gem made by the awesome [Thoughbot](https://thoughtbot.com/) team."
-        storage:
+        active_storage:
           title: "Active Storage"
           body: "For managing uploads, this project uses [Active Storage](https://github.com/rails/rails/tree/master/activestorage)."
         pundit:

@@ -29,8 +29,7 @@ run_action(:asking) do
   ask :i18n
   ask :api
   ask :draper
-  ask :active_storage
-  ask :paperclip
+  ask :file_storage
   ask :heroku
   ask :github
 end
@@ -69,8 +68,7 @@ run_action(:recipe_loading) do
   create :draper
   create :power_types
   create :rack_cors
-  create :active_storage
-  create :paperclip
+  create :file_storage
   create :tzinfo
   create :script
   create :github
