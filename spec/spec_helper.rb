@@ -26,6 +26,10 @@ RSpec.configure do |config|
     create_tmp_directory
   end
 
+  config.after(:each) do
+    docker_cleanup
+  end
+
   config.before(:each) do
     FakeGithub.clear!
     FakeHeroku.clear!

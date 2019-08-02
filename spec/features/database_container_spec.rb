@@ -11,10 +11,6 @@ RSpec.describe "DatabaseContainer" do
     create_dummy_project("database" => database)
   end
 
-  after do
-    `docker-compose -f #{project_path}/docker-compose.yml down`
-  end
-
   [:postgresql, :mysql].each do |db_type|
     context "when database is #{db_type}" do
       let!(:database) { db_type }

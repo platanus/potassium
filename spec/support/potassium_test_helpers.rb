@@ -47,6 +47,10 @@ module PotassiumTestHelpers
     end
   end
 
+  def docker_cleanup
+    run_command(`docker-compose -f #{project_path}/docker-compose.yml down --volumes`)
+  end
+
   private
 
   def tmp_path
