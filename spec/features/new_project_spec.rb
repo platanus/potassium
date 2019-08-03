@@ -29,9 +29,6 @@ RSpec.describe "A new project" do
   it "configures aws" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
     expect(gemfile_content).to include("'aws-sdk', '~> 3'")
-
-    initializer = IO.read("#{project_path}/config/initializers/aws.rb")
-    expect(initializer).to include("Aws::VERSION")
   end
 
   it "configures the correct ruby version" do

@@ -48,7 +48,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   end
 
   def add_paperclip
-    gather_gem 'paperclip', '~> 5.0'
+    gather_gem 'paperclip', '~> 6.0'
     application paperclip_config, env: 'production'
     append_to_file '.gitignore', "/public/system/*\n"
   end
