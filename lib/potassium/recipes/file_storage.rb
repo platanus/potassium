@@ -48,7 +48,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   end
 
   def add_paperclip
-    gather_gem 'paperclip', '~> 5.0'
+    gather_gem 'paperclip', '~> 6.0'
     application paperclip_config, env: 'production'
     append_to_file '.gitignore', "/public/system/*\n"
   end
@@ -63,6 +63,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   end
 
   def common_setup
+    gather_gem 'aws-sdk-s3', '~> 1.0'
     add_readme_section :internal_dependencies, get(:storage)
     append_to_file '.env.development', "S3_BUCKET=\n"
   end

@@ -49,7 +49,6 @@ run_action(:recipe_loading) do
   create :ruby
   create :yarn
   create :editorconfig
-  create :aws_sdk
   create :mailer
   create :background_processor
   create :schedule
