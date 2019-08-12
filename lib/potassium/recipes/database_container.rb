@@ -24,7 +24,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
       environment:
         MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
       volumes:
-       - mysql_data:/var/lib/mysql
+        - mysql_data:/var/lib/mysql
     YAML
 
   def create
@@ -58,6 +58,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
       TEXT
 
     insert_into_file 'bin/setup', setup_text, before: "# Set up database"
+    create
     run 'bin/setup'
     info "A new container with a #{get(:database)} database has been created."
   end
