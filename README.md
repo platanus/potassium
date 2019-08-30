@@ -98,7 +98,7 @@ When you choose to deploy to heroku a few extra things are added for the project
     parity between testing and production environments
   - Adds a `.buildpacks` file with the default buildpacks to use. It use the
     following buildpacks:
-  - Adds a `bin/release` file with the release phase script to run specific tasks before the app is deployed completely, for example `rails db:migrate`.
+  - Adds a `bin/release` file with the release phase script to run specific tasks before the app is deployed completely, for example `rails db:migrate:with_data`.
 
 | index | buildpack | description |
 |-------|-----------|-------------|
