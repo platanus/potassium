@@ -45,6 +45,7 @@ run_action(:recipe_loading) do
   create :database_container
   create :database
   create :annotate
+  create :data_migrate
   create :listen
   create :ruby
   create :yarn
