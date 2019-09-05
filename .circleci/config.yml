@@ -6,14 +6,11 @@ jobs:
     shell: /bin/bash --login
 
     docker:
-    - image: circleci/build-image:ubuntu-14.04-XXL-upstart-1189-5614f37
-      command: /sbin/init
+    - image: circleci/ruby:2.5.5-node
 
     steps:
     - checkout
-    - run: rm -f app/.rvmrc; echo 2.5.1 > app/.ruby-version; rvm use 2.5.1 --default
-    - run: 'sudo docker info >/dev/null 2>&1 || sudo service docker start; '
-    - run: echo 'export rvm_install_on_use_flag=0' >> /home/ubuntu/.rvmrc
+    - setup_remote_docker
 
     - restore_cache:
         keys:
