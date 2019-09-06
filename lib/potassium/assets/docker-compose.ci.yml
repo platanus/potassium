@@ -6,6 +6,6 @@ services:
       context: "."
       dockerfile: Dockerfile.ci
     volumes:
-    - "./vendor/bundle:/usr/local/bundle"
+    - "test_data:/usr/local/bundle"
     environment:
       RACK_ENV: test

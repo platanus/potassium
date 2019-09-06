@@ -41,6 +41,8 @@ class Recipes::Ci < Rails::AppBuilder
       compose.add_env('test', 'DB_PORT', '5432')
     end
 
+    compose.add_volume('test_data')
+
     add_readme_header :ci
 
     application 'config.assets.js_compressor = :uglifier', env: 'test'
