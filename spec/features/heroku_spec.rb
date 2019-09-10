@@ -56,7 +56,7 @@ RSpec.describe "Heroku" do
     bin_release = IO.read(bin_release_path)
 
     expect(bin_release).to include('set -e')
-    expect(bin_release).to include('bundle exec rails db:migrate')
+    expect(bin_release).to include('bundle exec rails db:migrate:with_data')
     expect(File.stat(bin_release_path)).to be_executable
   end
 end

@@ -4,6 +4,6 @@ set -e
 
 echo 'Release Phase...'
 
-bundle exec rails db:migrate
+bundle exec rails db:migrate:with_data
 
 echo 'Release Phase: OK'
