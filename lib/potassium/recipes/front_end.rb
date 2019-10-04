@@ -19,15 +19,16 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
     gather_gem 'webpacker'
 
+    recipe = self
     after(:gem_install) do
       value = get(:front_end)
       run "rails webpacker:install"
       run "rails webpacker:install:#{value}" if value
 
       if value == :vue
-        application_js_file = "app/javascript/packs/application.js"
-        FileUtils.move "app/javascript/packs/hello_vue.js", application_js_file
-        gsub_file application_js_file, %r{\/\/.*\n}, ""
+        application_js = 'app/javascript/packs/application.js'
+        remove_file "app/javascript/packs/hello_vue.js"
+        create_file application_js, recipe.application_js_content, force: true
 
         js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
         layout_file = "app/views/layouts/application.html.erb"
@@ -46,6 +47,22 @@ class Recipes::FrontEnd < Rails::AppBuilder
     return false unless file_exist?(package_file)
     package_content = read_file(package_file)
     package_content.include?("\"@angular/core\"") || package_content.include?("\"vue\"")
+  end
+
+  def application_js_content
+    <<~JS
+      import Vue from 'vue/dist/vue.esm';
+      import App from '../app.vue';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const app = new Vue({
+          el: '#vue-app',
+          components: { App },
+        });
+
+        return app;
+      });
+    JS
   end
 
   private
