@@ -33,6 +33,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
         js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
         layout_file = "app/views/layouts/application.html.erb"
         insert_into_file layout_file, js_pack_tag, after: "<%= csrf_meta_tags %>"
+        insert_into_file layout_file, "<div id=\"vue-app\">\n      <app></app>\n      ", before: "<%= yield %>"
+        insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
       end
     end
   end
