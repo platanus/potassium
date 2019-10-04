@@ -25,17 +25,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install"
       run "rails webpacker:install:#{value}" if value
 
-      if value == :vue
-        application_js = 'app/javascript/packs/application.js'
-        remove_file "app/javascript/packs/hello_vue.js"
-        create_file application_js, recipe.application_js_content, force: true
-
-        js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
-        layout_file = "app/views/layouts/application.html.erb"
-        insert_into_file layout_file, js_pack_tag, after: "<%= csrf_meta_tags %>"
-        insert_into_file layout_file, "<div id=\"vue-app\">\n      <app></app>\n      ", before: "<%= yield %>"
-        insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
-      end
+      recipe.setup_vue_with_compiler_build if value == :vue
     end
   end
 
@@ -49,6 +39,33 @@ class Recipes::FrontEnd < Rails::AppBuilder
     return false unless file_exist?(package_file)
     package_content = read_file(package_file)
     package_content.include?("\"@angular/core\"") || package_content.include?("\"vue\"")
+  end
+
+  def setup_vue_with_compiler_build
+    application_js = 'app/javascript/packs/application.js'
+    remove_file "app/javascript/packs/hello_vue.js"
+    create_file application_js, application_js_content, force: true
+
+    js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
+    layout_file = "app/views/layouts/application.html.erb"
+    insert_into_file layout_file, js_pack_tag, after: "<%= csrf_meta_tags %>"
+    insert_into_file(
+      layout_file,
+      "<div id=\"vue-app\">\n      <app></app>\n      ",
+      before: "<%= yield %>"
+    )
+    insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
+  end
+
+  private
+
+  def frameworks(framework)
+    frameworks = {
+      vue: "vue",
+      angular: "angular",
+      none: nil
+    }
+    frameworks[framework]
   end
 
   def application_js_content
@@ -65,16 +82,5 @@ class Recipes::FrontEnd < Rails::AppBuilder
         return app;
       });
     JS
-  end
-
-  private
-
-  def frameworks(framework)
-    frameworks = {
-      vue: "vue",
-      angular: "angular",
-      none: nil
-    }
-    frameworks[framework]
   end
 end
