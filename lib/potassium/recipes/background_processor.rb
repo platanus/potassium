@@ -44,7 +44,10 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
   end
 
   def edit_procfile(cmd)
-    gsub_file("Procfile", /^.*$/m) { |match| "#{match}worker: #{cmd}" } if selected?(:heroku)
+    heroku = load_recipe(:heroku)
+    if selected?(:heroku) || heroku.installed?
+      gsub_file('Procfile', /^.*$/m) { |match| "#{match}worker: #{cmd}" }
+    end
   end
 
   def add_adapters(name)
