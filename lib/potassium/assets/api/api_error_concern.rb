@@ -3,6 +3,7 @@ module ApiErrorConcern
 
   included do
     rescue_from "Exception" do |exception|
+      Raven.capture_exception(exception)
       logger.error exception.message
       logger.error exception.backtrace.join("\n")
       respond_api_error(:internal_server_error, message: "server_error",
