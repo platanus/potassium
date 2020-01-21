@@ -69,7 +69,7 @@ module GemHelpers
   def add_original_rails_gems
     gemfile_entries.each do |entry|
       unless entry.commented_out
-        gather_gem(entry.name, entry.version)
+        gather_gem(entry.name, version: entry[:version])
       end
     end
   end
