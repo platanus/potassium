@@ -69,7 +69,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   end
 
   def add_chosen_storage(check_rspec:)
-    return if get(:storage) == :none
+    return if [:none, :None].include? get(:storage).to_sym
 
     common_setup
     case get(:storage)
