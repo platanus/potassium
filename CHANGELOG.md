@@ -2,12 +2,34 @@
 
 ## Unreleased
 
+## 5.2.3
+
+Features:
+  - Add restore-from commands for pg_restore in makefile [#237](https://github.com/platanus/potassium/pull/237)
+  - Allow usage of vue components in rails views out of the box [#231](https://github.com/platanus/potassium/pull/231)
+  - Add data migrate [#227](https://github.com/platanus/potassium/pull/227)
+  - Add raven capture in error handler if sentry enabled [#226](https://github.com/platanus/potassium/pull/226)
+  - Remove unnecesary aws-sdk gems in favor of specific ones [#221](https://github.com/platanus/potassium/pull/221)
+  - Unify storage options and deprecate paperclip [#211](https://github.com/platanus/potassium/pull/211)
+
+Fix:
+  - Fix gather_gem issue when multiple versions passed as argument [#242](https://github.com/platanus/potassium/pull/242)
+  - Support "None" passed as CLI flag option in file storage [#240](https://github.com/platanus/potassium/pull/240)
+  - Add sidekiq worker to Procfile if installed after project setup (with heroku) [#234](https://github.com/platanus/potassium/pull/234)
+  - Include test_data volume to CI compose for bundler related data [#229](https://github.com/platanus/potassium/pull/229)
+  - Comment out schedule entry in sidekiq.yml [#225](https://github.com/platanus/potassium/pull/225)
+  - Use ruby image for potassium test build [#224](https://github.com/platanus/potassium/pull/224)
+  - Use webpacker from rubygems instead of repo master [#222](https://github.com/platanus/potassium/pull/222)
+  - Add rubocop-rspec for compatibility with updated linters in spec [#218](https://github.com/platanus/potassium/pull/218)
+  - Remove containers after spec run [#216](https://github.com/platanus/potassium/pull/216)
+  - Fix database container install [#214](https://github.com/platanus/potassium/pull/214)
+
 ## 5.2.2
 
 Features:
   - Implement release phase on heroku
   - Add sendgrid_dev support
-  -
+
 Fix:
   - Fix Circle CI
   - Fix services containers env variables
