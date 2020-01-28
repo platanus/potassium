@@ -12,19 +12,9 @@ jobs:
     - checkout
     - setup_remote_docker
 
-    - run: sudo chown -R circleci /usr/local/bundle
-    - restore_cache:
-        keys:
-        - potassium-bundle-{{ .Branch }}-
-        - potassium-bundle-master-
-        - potassium-bundle-
     - run: gem install bundler:2.0.2
     - run: bundle install --jobs=4 --retry=3
     - run: gem install hound-cli
-    - save_cache:
-        key: potassium-bundle-{{ .Branch }}-{{ epoch }}
-        paths:
-        - /usr/local/bundle
     - run:
         command: bundle exec rspec --color --require spec_helper --format=doc --format progress $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
         environment:
