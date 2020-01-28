@@ -28,6 +28,7 @@ module PotassiumTestHelpers
 
   def drop_dummy_database
     return unless File.exist?(project_path)
+
     on_project { run_command("bundle exec rails db:drop") }
   end
 
@@ -53,14 +54,6 @@ module PotassiumTestHelpers
 
   private
 
-  def tmp_path
-    @tmp_path ||= Pathname.new("#{root_path}/tmp")
-  end
-
-  def potassium_bin
-    File.join(root_path, "bin", "potassium")
-  end
-
   def hash_to_arguments(hash)
     hash.map do |key, value|
       if value == true
@@ -73,8 +66,16 @@ module PotassiumTestHelpers
     end.join(" ")
   end
 
+  def potassium_bin
+    File.join(root_path, "bin", "potassium")
+  end
+
   def support_bin
     File.join(root_path, "spec", "fakes", "bin")
+  end
+
+  def tmp_path
+    @tmp_path ||= Pathname.new("#{root_path}/tmp")
   end
 
   def root_path
