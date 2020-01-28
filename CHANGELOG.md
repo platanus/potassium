@@ -4,6 +4,7 @@
 
 Features:
   - Update ActiveAdmin to 2.6 [#246](https://github.com/platanus/potassium/pull/246)
+  - Update bundler to 2.0 [#250](https://github.com/platanus/potassium/pull/250)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCi build [#244](https://github.com/platanus/potassium/pull/244)
