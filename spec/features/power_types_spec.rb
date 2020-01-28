@@ -17,21 +17,10 @@ RSpec.describe "PowerTypes" do
     expect(readme).to include("Power-Types")
   end
 
-  it "adds commands directory" do
-    commands_directory = "#{project_path}/app/commands"
-    expect(File.directory?(commands_directory)).to eq(true)
-  end
-
-  it "adds services directory" do
-    services_directory = "#{project_path}/app/services"
-    expect(File.directory?(services_directory)).to eq(true)
-  end
-  it "adds utils directory" do
-    utils_directory = "#{project_path}/app/utils"
-    expect(File.directory?(utils_directory)).to eq(true)
-  end
-  it "adds values directory" do
-    values_directory = "#{project_path}/app/values"
-    expect(File.directory?(values_directory)).to eq(true)
+  it "adds every power type directory" do
+    [:commands, :services, :observers, :utils, :values].each do |type|
+      commands_directory = "#{project_path}/app/#{type}"
+      expect(File.directory?(commands_directory)).to eq(true)
+    end
   end
 end
