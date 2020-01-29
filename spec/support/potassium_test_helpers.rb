@@ -19,6 +19,7 @@ module PotassiumTestHelpers
     Dir.chdir(tmp_path) do
       Bundler.with_clean_env do
         add_fakes_to_path
+        add_project_bin_to_path
         full_arguments = hash_to_arguments(create_arguments(true).merge(arguments))
         run_command("#{potassium_bin} create #{APP_NAME} #{full_arguments}")
         on_project { run_command("hound rules update ruby --local") }
@@ -28,11 +29,16 @@ module PotassiumTestHelpers
 
   def drop_dummy_database
     return unless File.exist?(project_path)
+
     on_project { run_command("bundle exec rails db:drop") }
   end
 
+  def add_project_bin_to_path
+    add_to_path project_bin, true
+  end
+
   def add_fakes_to_path
-    ENV["PATH"] = "#{support_bin}:#{ENV['PATH']}"
+    add_to_path support_bin
   end
 
   def project_path
@@ -53,14 +59,6 @@ module PotassiumTestHelpers
 
   private
 
-  def tmp_path
-    @tmp_path ||= Pathname.new("#{root_path}/tmp")
-  end
-
-  def potassium_bin
-    File.join(root_path, "bin", "potassium")
-  end
-
   def hash_to_arguments(hash)
     hash.map do |key, value|
       if value == true
@@ -73,8 +71,24 @@ module PotassiumTestHelpers
     end.join(" ")
   end
 
+  def add_to_path(new_path, append = false)
+    ENV['PATH'] = append ? "#{ENV['PATH']}:#{new_path}" : "#{new_path}:#{ENV['PATH']}"
+  end
+
+  def project_bin
+    File.join(project_path, 'bin')
+  end
+
+  def potassium_bin
+    File.join(root_path, "bin", "potassium")
+  end
+
   def support_bin
     File.join(root_path, "spec", "fakes", "bin")
+  end
+
+  def tmp_path
+    @tmp_path ||= Pathname.new("#{root_path}/tmp")
   end
 
   def root_path
