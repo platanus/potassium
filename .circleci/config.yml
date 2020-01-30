@@ -6,7 +6,7 @@ jobs:
     shell: /bin/bash --login
 
     docker:
-    - image: circleci/ruby:2.5.5-node
+    - image: circleci/ruby:2.7.0-node
       environment:
         GEM_HOME: /home/circleci/app/vendor/bundle
         BUNDLE_JOBS: 4
@@ -23,7 +23,7 @@ jobs:
           - potassium-bundle-master-
           - potassium-bundle-
     - run: gem install bundler:2.0.2
-    - run: bundle install
+    - run: bundle _2.0.2_ install
     - run: gem install hound-cli
     - run:
         command: |
