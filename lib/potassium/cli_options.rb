@@ -16,7 +16,7 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       type: :flag,
       name: [:email_service, :email],
       desc: "Decides which email adapter to use. Available: aws_ses, sendgrid, none",
-      default_test_value: "aws_ses"
+      default_test_value: "None"
     },
     {
       type: :switch,
@@ -71,7 +71,7 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       name: "storage",
       desc: "Decides which file storage to use. Available: active_storage, paperclip, none",
       default_value: "none",
-      default_test_value: "active_storage"
+      default_test_value: "None"
     },
     {
       type: :switch,
@@ -85,7 +85,7 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       type: :flag,
       name: "background_processor",
       desc: "Decides which background processor to use. Available: sidekiq, delayed_job, none",
-      default_test_value: "sidekiq"
+      default_test_value: "None"
     },
     {
       type: :switch,
