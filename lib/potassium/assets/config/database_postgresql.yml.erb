@@ -1,6 +1,6 @@
 development: &default
   adapter: postgresql
-  database: <%= get(:underscorized_app_name) %>_development
+  database: <%= get(:dasherized_app_name) %>_development
   encoding: utf8
   host: <%%= ENV["DB_HOST"] || "127.0.0.1" %>
   port: <%%= ENV["DB_PORT"] || 5432 %>
@@ -12,7 +12,7 @@ development: &default
 
 test:
   <<: *default
-  database: <%= get(:underscorized_app_name) %>_test
+  database: <%= get(:dasherized_app_name) %>_test
 
 production: &deploy
   encoding: utf8
