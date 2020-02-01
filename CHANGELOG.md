@@ -8,6 +8,7 @@ Features:
   - Update Rails to 6.0.2 [#251](https://github.com/platanus/potassium/pull/251)
   - Improve specs performance [#259](https://github.com/platanus/potassium/pull/259)
   - Dasherize app name in docker compose related files [#261](https://github.com/platanus/potassium/pull/261)
+  - Split specs by timings in CircleCI [#263](https://github.com/platanus/potassium/pull/263)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)

@@ -26,7 +26,11 @@ jobs:
     - run: bundle install
     - run: gem install hound-cli
     - run:
-        command: bundle exec rspec --color --require spec_helper --format=doc --format progress $(circleci tests glob spec/**/*_spec.rb | circleci tests split)
+        command: |
+          bundle exec rspec --color --require spec_helper --profile 10 \
+                            --format progress --format documentation \
+                            --format RspecJunitFormatter --out test_results/rspec.xml \
+                            $(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -34,3 +38,5 @@ jobs:
         key: potassium-bundle-{{ .Branch }}-{{ epoch }}
         paths:
           - vendor/bundle
+    - store_test_results:
+        path: test_results
