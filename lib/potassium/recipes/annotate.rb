@@ -1,7 +1,7 @@
 class Recipes::Annotate < Rails::AppBuilder
   def create
     gather_gems(:development) do
-      gather_gem('annotate')
+      gather_gem('annotate', '~> 3.0')
     end
 
     template '../assets/lib/tasks/auto_annotate_models.rake',

@@ -10,6 +10,7 @@ Features:
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
+  - Fix model auto annotate [#260](https://github.com/platanus/potassium/pull/260)
 
 ## 5.2.3
 
