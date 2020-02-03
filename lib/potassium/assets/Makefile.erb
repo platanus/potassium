@@ -1,4 +1,4 @@
-PROJECT ?= <%= get(:underscorized_app_name) %>
+PROJECT ?= <%= get(:dasherized_app_name) %>
 DOCKER_COMPOSE_FILE ?= docker-compose.yml
 
 DOCKER_COMPOSE_ARGS ?= -p $(PROJECT) -f $(DOCKER_COMPOSE_FILE)
