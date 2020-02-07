@@ -1,3 +1,6 @@
 {
-  "name": "<%= @app_name.camelcase %>"
+  "name": "<%= @app_name.camelcase %>",
+  "engines": {
+    "node": "<%= get(:node_version) %>"
+  }
 }
