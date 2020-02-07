@@ -19,6 +19,4 @@ class Recipes::Node < Rails::AppBuilder
   def version
     Potassium::NODE_VERSION
   end
-
-
 end
