@@ -24,6 +24,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install:#{value}" if value
 
       recipe.setup_vue_with_compiler_build if value == :vue
+      recipe.setup_tailwind
     end
   end
 
@@ -55,6 +56,13 @@ class Recipes::FrontEnd < Rails::AppBuilder
     insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
   end
 
+  def setup_tailwind
+    run 'bin/yarn add tailwindcss'
+    setup_client_css
+    remove_server_css_requires
+    setup_tailwind_requirements
+  end
+
   private
 
   def frameworks(framework)
@@ -64,6 +72,42 @@ class Recipes::FrontEnd < Rails::AppBuilder
       none: nil
     }
     frameworks[framework]
+  end
+
+  def setup_client_css
+    application_css = 'app/javascript/css/application.css'
+    create_file application_css, "", force: true
+
+    stylesheet_pack_tag = "\n    <%= stylesheet_pack_tag 'application' %>\n  "
+    layout_file = "app/views/layouts/application.html.erb"
+    insert_into_file layout_file, stylesheet_pack_tag, before: "</head>"
+
+    application_js = 'app/javascript/packs/application.js'
+    if get(:front_end) != :vue
+      create_file application_js, "import '../css/application.css';\n", force: true
+    else
+      insert_into_file(
+        application_js,
+        "\nimport '../css/application.css';",
+        after: "import App from '../app.vue';"
+      )
+    end
+  end
+
+  def setup_tailwind_requirements
+    application_css = 'app/javascript/css/application.css'
+    insert_into_file application_css, tailwind_client_css
+
+    tailwind_config = 'tailwind.config.js'
+    create_file tailwind_config, tailwind_config_content, force: true
+
+    postcss_file = 'postcss.config.js'
+    insert_into_file postcss_file, postcss_require_tailwind, after: "plugins: [\n"
+  end
+
+  def remove_server_css_requires
+    assets_css_file = 'app/assets/stylesheets/application.css'
+    gsub_file(assets_css_file, " *= require_tree .\n *= require_self\n", "")
   end
 
   def application_js_content
@@ -79,6 +123,34 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
         return app;
       });
+    JS
+  end
+
+  def tailwind_client_css
+    <<~CSS
+      @import 'tailwindcss/base';
+      @import 'tailwindcss/components';
+      @import 'tailwindcss/utilities';
+    CSS
+  end
+
+  def tailwind_config_content
+    <<~JS
+      /* eslint-disable no-undef */
+      module.exports = {
+        theme: {
+          extend: {},
+        },
+        variants: {},
+        plugins: [],
+      };
+    JS
+  end
+
+  def postcss_require_tailwind
+    <<-JS.gsub(/^ {4}/, '  ')
+      require('tailwindcss'),
+      require('autoprefixer'),
     JS
   end
 end

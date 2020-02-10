@@ -10,6 +10,7 @@ Features:
   - Dasherize app name in docker compose related files [#261](https://github.com/platanus/potassium/pull/261)
   - Split specs by timings in CircleCI [#263](https://github.com/platanus/potassium/pull/263)
   - Update ruby to 2.7.0 [#264](https://github.com/platanus/potassium/pull/264)
+  - Add tailwindcss [#266](https://github.com/platanus/potassium/pull/266)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
