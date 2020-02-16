@@ -16,6 +16,7 @@ Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
   - Fix model auto annotate [#260](https://github.com/platanus/potassium/pull/260)
   - Fix sidekiq repeated installation on potassium create if selecting mailer [#262](https://github.com/platanus/potassium/pull/262)
+  - Include ApiErrorConcern in all environments [#270](https://github.com/platanus/potassium/pull/270)
 
 ## 5.2.3
 
