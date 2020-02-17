@@ -12,6 +12,7 @@ Features:
   - Update ruby to 2.7.0 [#264](https://github.com/platanus/potassium/pull/264)
   - Add tailwindcss [#266](https://github.com/platanus/potassium/pull/266)
   - Update rack-cors to 1.1 [#269](https://github.com/platanus/potassium/pull/269)
+  - Use safer CORS configuration exposing only API and public resources [#271](https://github.com/platanus/potassium/pull/271)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
