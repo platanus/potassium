@@ -16,10 +16,11 @@ class Recipes::RackCors < Rails::AppBuilder
       config.middleware.insert_before 0, Rack::Cors do
         allow do
           origins '*'
-          resource '*',
+          resource '/public/*', headers: :any, methods: :get
+          resource '/api/*',
             headers: :any,
             expose: ['X-Page', 'X-PageTotal'],
-            methods: [:get, :post, :delete, :put, :options]
+            methods: [:get, :post, :patch, :put, :delete, :options]
         end
       end
 
