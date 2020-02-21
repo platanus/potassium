@@ -4,7 +4,7 @@ module TemplateHelpers
   end
 
   def node_version
-    Potassium::NODE_VERSION
+    "#{Potassium::NODE_VERSION}.x"
   end
 
   def load_recipe(recipe_name)

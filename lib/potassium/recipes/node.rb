@@ -1,6 +1,5 @@
 require 'net/http'
 require 'semantic'
-require 'pry'
 require 'json'
 
 class Recipes::Node < Rails::AppBuilder
