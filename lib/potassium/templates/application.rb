@@ -1,4 +1,5 @@
 set :app_name, app_name
+set :node_version, node_version
 set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 set :dasherized_app_name, get(:app_name).dasherize
@@ -47,6 +48,7 @@ run_action(:recipe_loading) do
   create :annotate
   create :data_migrate
   create :listen
+  create :node
   create :ruby
   create :yarn
   create :editorconfig

@@ -5,4 +5,5 @@ module Potassium
   RUBOCOP_VERSION = "~> 0.65.0"
   POSTGRES_VERSION = "11.3"
   MYSQL_VERSION = "5.7"
+  NODE_VERSION = "12"
 end

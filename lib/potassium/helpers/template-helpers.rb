@@ -3,6 +3,10 @@ module TemplateHelpers
     @app_name || app_name_from_file
   end
 
+  def node_version
+    "#{Potassium::NODE_VERSION}.x"
+  end
+
   def load_recipe(recipe_name)
     @recipes ||= {}
     @recipes[recipe_name] ||= get_recipe_class(recipe_name.to_sym).new(self)
