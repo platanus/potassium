@@ -37,5 +37,4 @@ RSpec.describe "VueAdmin" do
     js_package = JSON.parse(json_file)
     expect(js_package).to have_key("vue")
   end
-
 end
