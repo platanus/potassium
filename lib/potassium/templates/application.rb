@@ -22,6 +22,7 @@ run_action(:asking) do
   ask :admin
   ask :front_end
   ask :angular_admin
+  ask :vue_admin
   ask :mailer
   ask :background_processor
   ask :schedule
@@ -61,6 +62,7 @@ run_action(:recipe_loading) do
   create :devise
   create :admin
   create :angular_admin
+  create :vue_admin
   create :seeds
   create :error_reporting
   create :pundit
