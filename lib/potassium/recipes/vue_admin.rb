@@ -5,6 +5,7 @@ class Recipes::VueAdmin < Rails::AppBuilder
         Ask.confirm "Do you want Vue support for ActiveAdmin?"
       end
       set(:vue_admin, vue_admin)
+      set(:front_end, :vue)
     end
   end
 
@@ -32,6 +33,7 @@ class Recipes::VueAdmin < Rails::AppBuilder
   end
 
   def add_vue_admin
+    add_vue_component_library
     add_component_integration
     copy_file '../assets/active_admin/init_activeadmin_vue.rb',
       'config/initializers/init_activeadmin_vue.rb'
@@ -42,21 +44,30 @@ class Recipes::VueAdmin < Rails::AppBuilder
     copy_file '../assets/active_admin/admin-component.vue',
       'app/javascript/components/admin-component.vue',
       force: true
-    inside('.') do
-      run('bin/yarn add vue --save')
-    end
   end
 
   def add_component_integration
-    line = "ActiveAdmin.setup do |config|"
+    line = "class CustomFooter < ActiveAdmin::Component"
     initializer = "config/initializers/active_admin.rb"
     gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
       <<~HERE
-        #{vue_component}
-        #{component_builder}
+        require "vue_component.rb"
+        AUTO_BUILD_ELEMENTS=[:admin_component, :template, :slot]
+        component_creator(AUTO_BUILD_ELEMENTS)
+
         #{line}
       HERE
     end
+  end
+
+  def add_vue_component_library
+    lib_component_path = "lib/vue_component.rb"
+    class_definitions =
+      <<~HERE
+        #{vue_component}
+        #{component_builder}
+      HERE
+    File.open(lib_component_path, "w") { |file| file.write(class_definitions) }
   end
 
   def vue_component
@@ -95,15 +106,16 @@ class Recipes::VueAdmin < Rails::AppBuilder
 
   def component_builder
     <<~HERE
-      AUTO_BUILD_ELEMENTS=[:admin_component,:template,:slot]
-      AUTO_BUILD_ELEMENTS.each do |element|
-        as_string=element.to_s
-        camelized_element = as_string.camelize
-        Object.const_set(camelized_element,Class.new(VueComponent))
-        Object.const_get(camelized_element).class_eval do
-          builder_method as_string.to_sym
-          def tag_name
-            self.class.to_s.underscore
+      def component_creator(auto_build_elements)
+        auto_build_elements.each do |element|
+          as_string=element.to_s
+          camelized_element = as_string.camelize
+          Object.const_set(camelized_element,Class.new(VueComponent))
+          Object.const_get(camelized_element).class_eval do
+            builder_method as_string.to_sym
+            def tag_name
+              self.class.to_s.underscore
+            end
           end
         end
       end
