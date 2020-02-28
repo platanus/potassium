@@ -35,6 +35,7 @@ RSpec.describe "VueAdmin" do
     expect(File).to be_file(package_json_path)
     json_file = File.read(package_json_path)
     js_package = JSON.parse(json_file)
-    expect(js_package).to have_key("vue")
+    expect(js_package).to have_key("dependencies")
+    expect(js_package["dependencies"]).to have_key("vue")
   end
 end
