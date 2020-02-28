@@ -19,6 +19,7 @@ Fix:
   - Fix model auto annotate [#260](https://github.com/platanus/potassium/pull/260)
   - Fix sidekiq repeated installation on potassium create if selecting mailer [#262](https://github.com/platanus/potassium/pull/262)
   - Include ApiErrorConcern in all environments [#270](https://github.com/platanus/potassium/pull/270)
+  - Change stop and down services names in Makefile [#273](https://github.com/platanus/potassium/pull/273)
 
 ## 5.2.3
 

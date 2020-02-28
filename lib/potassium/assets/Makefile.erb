@@ -32,10 +32,10 @@ services-ps:
 services-up:
 	docker-compose $(DOCKER_COMPOSE_ARGS) up -d
 
-services-stop:
+services-down:
 	docker-compose $(DOCKER_COMPOSE_ARGS) stop
 
-services-down:
+services-destroy:
 	docker-compose $(DOCKER_COMPOSE_ARGS) down --volumes
 
 services-logs:
