@@ -35,7 +35,7 @@ class Recipes::Admin < Rails::AppBuilder
     gather_gem 'activeadmin', '~> 2.6'
     gather_gem 'activeadmin_addons'
     gather_gem 'active_skin', github: 'SoftwareBrothers/active_skin'
-
+    add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install"
       line = "ActiveAdmin.setup do |config|"
