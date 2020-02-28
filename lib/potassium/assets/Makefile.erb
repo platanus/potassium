@@ -14,11 +14,14 @@ help:
 	@echo Install dependencies:
 	@echo "  ${BOLD}make setup${NORMAL}"
 	@echo ""
-	@echo Runing the services like mysql:
+	@echo Running the services:
 	@echo "  ${BOLD}make services-up${NORMAL}"
 	@echo ""
-	@echo "Reset the environment (rm mysql db):"
+	@echo "Stopping the services:"
 	@echo "  ${BOLD}make services-down${NORMAL}"
+	@echo ""
+	@echo "Stopping the services and delete data:"
+	@echo "  ${BOLD}make services-destroy${NORMAL}"
 	@echo ""
 
 setup:
