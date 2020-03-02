@@ -92,7 +92,7 @@ class Recipes::VueAdmin < Rails::AppBuilder
             dasherized_key = key.to_s.dasherize
             if value.is_a?(String)
               vue_attributes[dasherized_key] = value
-            elsif dasherized_key.index(':').zero?
+            elsif !dasherized_key.index(':').nil? && dasherized_key.index(':').zero?
               vue_attributes[dasherized_key] = value.to_json
             else
               vue_attributes[":" + dasherized_key] = value.to_json
