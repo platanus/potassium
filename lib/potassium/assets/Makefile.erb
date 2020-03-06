@@ -1,7 +1,6 @@
 PROJECT ?= <%= get(:dasherized_app_name) %>
-DOCKER_COMPOSE_FILE ?= docker-compose.yml
 
-DOCKER_COMPOSE_ARGS ?= -p $(PROJECT) -f $(DOCKER_COMPOSE_FILE)
+DOCKER_COMPOSE_ARGS ?= -p $(PROJECT)
 
 SHELL := /bin/bash
 
