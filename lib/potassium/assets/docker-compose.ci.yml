@@ -7,5 +7,6 @@ services:
       dockerfile: Dockerfile.ci
     volumes:
     - "test_data:/usr/local/bundle"
+    - "./node_modules:/app/node_modules"
     environment:
       RACK_ENV: test

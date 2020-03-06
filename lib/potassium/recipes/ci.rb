@@ -1,7 +1,7 @@
 class Recipes::Ci < Rails::AppBuilder
   def create
     copy_file '../assets/Dockerfile.ci', 'Dockerfile.ci'
-    copy_file '../assets/.circleci/config.yml', '.circleci/config.yml'
+    template '../assets/.circleci/config.yml.erb', 'circleci/config.yml'
 
     template '../assets/bin/cibuild.erb', 'bin/cibuild'
     run "chmod a+x bin/cibuild"

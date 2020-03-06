@@ -23,7 +23,10 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install"
       run "rails webpacker:install:#{value}" if value
 
-      recipe.setup_vue_with_compiler_build if value == :vue
+      if value == :vue
+        recipe.setup_vue_with_compiler_build
+        recipe.setup_jest
+      end
       recipe.setup_tailwind
     end
   end
@@ -61,6 +64,17 @@ class Recipes::FrontEnd < Rails::AppBuilder
     setup_client_css
     remove_server_css_requires
     setup_tailwind_requirements
+  end
+
+  def setup_jest
+    run 'bin/yarn add jest vue-jest babel-jest @vue/test-utils jest-serializer-vue babel-core@^7.0.0-bridge.0 --dev'
+    json_file = File.read(Pathname.new("package.json"))
+    js_package = JSON.parse(json_file)
+    js_package = js_package.merge(jest_config)
+    json_string = JSON.pretty_generate(js_package)
+    create_file 'package.json', json_string, force: true
+
+    copy_file '../assets/app/javascript/app.spec.js', 'app/javascript/app.spec.js'
   end
 
   private
@@ -152,5 +166,38 @@ class Recipes::FrontEnd < Rails::AppBuilder
       require('tailwindcss'),
       require('autoprefixer'),
     JS
+  end
+
+  def jest_config
+    {
+      "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch"
+      },
+      "jest": {
+        "roots": [
+          "app/javascript"
+        ],
+        "moduleDirectories": [
+          "node_modules",
+          "app/javascript"
+        ],
+        "moduleNameMapper": {
+          "^@/(.*)$": "app/javascript/$1"
+        },
+        "moduleFileExtensions": [
+          "js",
+          "json",
+          "vue"
+        ],
+        "transform": {
+          "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+          ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+        },
+        "snapshotSerializers": [
+          "<rootDir>/node_modules/jest-serializer-vue"
+        ]
+      }
+    }
   end
 end
