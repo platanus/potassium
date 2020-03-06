@@ -28,11 +28,12 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
     YAML
 
   def create
-    copy_file '../assets/docker-compose.yml', 'docker-compose.yml'
+    db_type = get(:database)
+    return if [:None, :none].include? db_type.to_sym
 
+    copy_file '../assets/docker-compose.yml', 'docker-compose.yml'
     compose = DockerHelpers.new('docker-compose.yml')
 
-    db_type = get(:database)
     compose.add_service(db_type.to_s, self.class.const_get("#{db_type}_service".upcase))
     compose.add_volume("#{db_type}_data")
     template '../assets/Makefile.erb', 'Makefile'
