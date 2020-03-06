@@ -38,7 +38,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
     compose.add_volume("#{db_type}_data")
     template '../assets/Makefile.erb', 'Makefile'
 
-    run 'make services-up'
+    run "docker-compose -p #{get(:dasherized_app_name)} up -d"
 
     set_env(db_type, CONTAINER_VARS[db_type][:port], CONTAINER_VARS[db_type][:user])
     set_dot_env(db_type, CONTAINER_VARS[db_type][:port], CONTAINER_VARS[db_type][:user])
@@ -54,7 +54,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
     setup_text = # setup file is templated on project creation, manual install is needed
       <<~TEXT
         # Set up required services
-        make services-up
+        docker-compose -p #{get(:dasherized_app_name)} up -d
 
       TEXT
 

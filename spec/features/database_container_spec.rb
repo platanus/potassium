@@ -20,6 +20,7 @@ RSpec.describe "DatabaseContainer" do
         compose_file = IO.read("#{project_path}/docker-compose.yml")
         compose_content = YAML.safe_load(compose_file, symbolize_names: true)
         setup_file = IO.read("#{project_path}/bin/setup")
+        app_name = PotassiumTestHelpers::APP_NAME.dasherize
 
         service_name = compose_content[:services].keys.first
         db_port = compose_content[:services][service_name][:ports].first
@@ -28,7 +29,7 @@ RSpec.describe "DatabaseContainer" do
           .to include("DB_PORT=$(make services-port SERVICE=#{service_name} PORT=#{db_port})")
         expect(env_file).to include("DB_HOST=127.0.0.1")
         expect(File.exist?("#{project_path}/Makefile")).to be true
-        expect(setup_file).to include("make services-up")
+        expect(setup_file).to include("docker-compose -p #{app_name} up -d")
       end
     end
   end
