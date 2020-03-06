@@ -44,6 +44,12 @@ dependencies(){
   docker-compose $DOCKER_COMPOSE_ARGS run --rm test bundle install
 }
 
+<% if selected?(:front_end, :vue) %>
+yarn_dependencies(){
+  docker-compose $DOCKER_COMPOSE_ARGS run --rm test yarn install
+}
+<% end %>
+
 assets() {
   docker-compose $DOCKER_COMPOSE_ARGS run --rm test /bin/bash -c "bin/setup && bundle exec rake assets:precompile"
 }
@@ -61,6 +67,12 @@ tests(){
   }
   docker-compose $DOCKER_COMPOSE_ARGS run --rm test bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 }
+
+<% if selected?(:front_end, :vue) %>
+js_tests(){
+  docker-compose $DOCKER_COMPOSE_ARGS run --rm test yarn run test
+}
+<% end %>
 
 # Run the complete ci build
 no_ci(){
@@ -80,7 +92,7 @@ case "$1" in
     wait_services
     ;;
   "deps"|"dependencies")
-    dependencies
+    dependencies <% if selected?(:front_end, :vue) %>&& yarn_dependencies<% end %>
     ;;
   "assets")
     assets
@@ -88,6 +100,11 @@ case "$1" in
   "db"|"database")
     database
     ;;
+<% if selected?(:front_end, :vue) %>
+  "js_tests")
+    js_tests
+    ;;
+<% end %>
   "specs"|"tests")
     tests
     ;;
