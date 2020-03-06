@@ -14,6 +14,7 @@ Features:
   - Update rack-cors to 1.1 [#269](https://github.com/platanus/potassium/pull/269)
   - Use safer CORS configuration exposing only API and public resources [#271](https://github.com/platanus/potassium/pull/271)
   - Add option to support Vue in ActiveAdmin [#272](https://github.com/platanus/potassium/pull/272)
+  - Add tests for Vue [#273](https://github.com/platanus/potassium/pull/278)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
