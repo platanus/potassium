@@ -1,7 +1,5 @@
 PROJECT ?= <%= get(:dasherized_app_name) %>
 
-DOCKER_COMPOSE_ARGS ?= -p $(PROJECT)
-
 SHELL := /bin/bash
 
 run: help
@@ -19,7 +17,7 @@ help:
 
 services-port:
 	@set -o pipefail; \
-	docker-compose $(DOCKER_COMPOSE_ARGS) port ${SERVICE} ${PORT} 2> /dev/null | cut -d':' -f2 || echo ${PORT}
+	docker-compose port ${SERVICE} ${PORT} 2> /dev/null | cut -d':' -f2 || echo ${PORT}
 
 backup-staging: ROLE=staging
 backup-production: ROLE=production
