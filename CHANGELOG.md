@@ -15,13 +15,13 @@ Features:
   - Use safer CORS configuration exposing only API and public resources [#271](https://github.com/platanus/potassium/pull/271)
   - Add option to support Vue in ActiveAdmin [#272](https://github.com/platanus/potassium/pull/272)
   - Add tests for Vue [#273](https://github.com/platanus/potassium/pull/278)
+  - Remove simple commands and docker-compose args in Makefile [#279](https://github.com/platanus/potassium/pull/279)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
   - Fix model auto annotate [#260](https://github.com/platanus/potassium/pull/260)
   - Fix sidekiq repeated installation on potassium create if selecting mailer [#262](https://github.com/platanus/potassium/pull/262)
   - Include ApiErrorConcern in all environments [#270](https://github.com/platanus/potassium/pull/270)
-  - Change stop and down services names in Makefile [#273](https://github.com/platanus/potassium/pull/273)
 
 ## 5.2.3
 
