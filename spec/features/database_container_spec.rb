@@ -28,7 +28,7 @@ RSpec.describe "DatabaseContainer" do
           .to include("DB_PORT=$(make services-port SERVICE=#{service_name} PORT=#{db_port})")
         expect(env_file).to include("DB_HOST=127.0.0.1")
         expect(File.exist?("#{project_path}/Makefile")).to be true
-        expect(setup_file).to include("make services-up")
+        expect(setup_file).to include("docker-compose up -d")
       end
     end
   end
