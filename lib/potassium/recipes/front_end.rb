@@ -27,6 +27,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
         recipe.setup_vue_with_compiler_build
         recipe.setup_jest
       end
+      recipe.add_responsive_meta_tag
       recipe.setup_tailwind
     end
   end
@@ -57,6 +58,12 @@ class Recipes::FrontEnd < Rails::AppBuilder
       before: "<%= yield %>"
     )
     insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
+  end
+
+  def add_responsive_meta_tag
+    tag = "\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+    layout_file = "app/views/layouts/application.html.erb"
+    insert_into_file layout_file, tag, after: "<%= csrf_meta_tags %>"
   end
 
   def setup_tailwind
