@@ -142,9 +142,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
   def tailwind_client_css
     <<~CSS
-      @import 'tailwindcss/base';
-      @import 'tailwindcss/components';
-      @import 'tailwindcss/utilities';
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
     CSS
   end
 
