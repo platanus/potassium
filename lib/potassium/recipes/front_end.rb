@@ -29,6 +29,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       end
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
+      add_readme_header :webpack
     end
   end
 
