@@ -77,7 +77,7 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     {
       type: :flag,
       name: "storage",
-      desc: "Decides which file storage to use. Available: active_storage, paperclip, none",
+      desc: "Decides which file storage to use. Available: active_storage, none",
       default_value: "none",
       default_test_value: "None"
     },

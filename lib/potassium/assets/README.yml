@@ -96,9 +96,6 @@ readme:
         devise:
           title: "Authentication"
           body: "We are using the great [Devise](https://github.com/plataformatec/devise) library by [PlataformaTec](http://plataformatec.com.br/)"
-        paperclip:
-          title: "Uploads"
-          body: "For managing uploads, this project uses [Paperclip](https://github.com/thoughtbot/paperclip), a gem made by the awesome [Thoughbot](https://thoughtbot.com/) team."
         active_storage:
           title: "Active Storage"
           body: "For managing uploads, this project uses [Active Storage](https://github.com/rails/rails/tree/master/activestorage)."
@@ -129,17 +126,17 @@ readme:
             This project uses [Active Admin](https://github.com/activeadmin/activeadmin) which is a Ruby on Rails framework for creating elegant backends for website administration.
             <% if get(:vue_admin) %>
             This project supports Vue inside ActiveAdmin
-            - The main package is located in `app/javascript/packs/admin_application.js`, here you will declare the components you want to include in your ActiveAdmin views as you would in a normal Vue App. 
+            - The main package is located in `app/javascript/packs/admin_application.js`, here you will declare the components you want to include in your ActiveAdmin views as you would in a normal Vue App.
             - Additionally, to be able to use Vue components as [Arbre](https://github.com/activeadmin/arbre) Nodes the component names are also declared in `config/initializers/active_admin.rb`
-            - The generator includes an example component called `admin_component`, you can use this component inside any ActiveAdmin view by just writing `admin_component` as you would with any `html` tag. 
+            - The generator includes an example component called `admin_component`, you can use this component inside any ActiveAdmin view by just writing `admin_component` as you would with any `html` tag.
               - For example:
-                ``` 
+                ```
                 admin_component(class:"myCustomClass",id:"myCustomId") do
                   admin_component(id:"otherCustomId")
                 end
                 ```
               - (Keep in mind that the example works with ruby blocks because `AdminComponent` has a `<slot>` tag defined, therefore children can be added to the component)
-            - The integration supports passing props to the components and converts them to their corresponing javascript objects. 
+            - The integration supports passing props to the components and converts them to their corresponing javascript objects.
               - For example, the following works
               ```
               admin_component(testList:[1,2,3,4],testObject:{"name":"Vue component"})
