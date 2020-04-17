@@ -2,6 +2,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   def ask
     storages = {
       active_storage: 'ActiveStorage',
+      shrine: 'Shrine',
       none: 'None, thanks'
     }
 
@@ -36,6 +37,11 @@ class Recipes::FileStorage < Rails::AppBuilder
     end
   end
 
+  def add_shrine
+    gather_gem('shrine', '~> 3.0')
+    copy_file('../assets/config/shrine.rb', 'config/initializers/shrine.rb', force: true)
+  end
+
   def common_setup
     gather_gem 'aws-sdk-s3', '~> 1.0'
     add_readme_section :internal_dependencies, get(:storage)
@@ -49,6 +55,8 @@ class Recipes::FileStorage < Rails::AppBuilder
     case get(:storage)
     when :active_storage
       add_active_storage
+    when :shrine
+      add_shrine
     end
   end
 end
