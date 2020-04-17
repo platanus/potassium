@@ -97,8 +97,11 @@ readme:
           title: "Authentication"
           body: "We are using the great [Devise](https://github.com/plataformatec/devise) library by [PlataformaTec](http://plataformatec.com.br/)"
         active_storage:
-          title: "Active Storage"
+          title: "File Storage"
           body: "For managing uploads, this project uses [Active Storage](https://github.com/rails/rails/tree/master/activestorage)."
+        shrine:
+          title: "File Storage"
+          body: "For managing uploads, this project uses [Shrine](https://github.com/shrinerb/shrine)."
         pundit:
           title: "Authorization"
           body: "For defining which parts of the system each user has access to, we have chosen to include the [Pundit](https://github.com/elabs/pundit) gem, by [Elabs](http://elabs.se/)."
