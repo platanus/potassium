@@ -39,7 +39,10 @@ class Recipes::FileStorage < Rails::AppBuilder
 
   def add_shrine
     gather_gem('shrine', '~> 3.0')
+    gather_gem('marcel', '~> 0.3.3')
     copy_file('../assets/config/shrine.rb', 'config/initializers/shrine.rb', force: true)
+    copy_file('../assets/app/uploaders/image_uploader.rb', 'app/uploaders/image_uploader.rb')
+    copy_file('../assets/app/uploaders/base_uploader.rb', 'app/uploaders/base_uploader.rb')
   end
 
   def common_setup

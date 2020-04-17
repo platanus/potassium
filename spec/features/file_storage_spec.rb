@@ -41,10 +41,11 @@ RSpec.describe "File Storage" do
       create_dummy_project(storage: :shrine)
     end
 
-    it "adds the aws-sdk-s3 and shrine gems to Gemfile" do
+    it "adds the aws-sdk-s3, shrine and marcel gems to Gemfile" do
       gemfile_content = IO.read("#{project_path}/Gemfile")
       expect(gemfile_content).to include("gem 'aws-sdk-s3'")
       expect(gemfile_content).to include("gem 'shrine'")
+      expect(gemfile_content).to include("gem 'marcel'")
     end
 
     it "adds brief to README file" do
@@ -54,6 +55,11 @@ RSpec.describe "File Storage" do
 
     it "adds shrine initializer" do
       expect(File.exist?("#{project_path}/config/initializers/shrine.rb")).to be true
+    end
+
+    it "adds base_uploader and image_uploader" do
+      expect(File.exist?("#{project_path}/app/uploaders/base_uploader.rb")).to be true
+      expect(File.exist?("#{project_path}/app/uploaders/image_uploader.rb")).to be true
     end
 
     it "adds S3 bucket ENV vars" do
