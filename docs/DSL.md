@@ -308,7 +308,7 @@ add_readme_header(:style_guide)
 
 ##### | `add_readme_section(header, section, iterpolation_values)`
 
-To add header's sections. Paperclip, for example:
+To add header's sections. Devise, for example:
 
 ```yml
 readme:
@@ -316,11 +316,11 @@ readme:
     internal_dependencies:
       title: "Internal dependencies"
       sections:
-        paperclip:
-          title: "Uploads"
-          body: "For managing uploads, this project uses..."
+        devise:
+          title: "Authentication"
+          body: "We are using the great..."
 ```
 
 ```ruby
-add_readme_section(:internal_dependencies, :paperclip)
+add_readme_section(:internal_dependencies, :devise)
 ```

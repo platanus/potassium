@@ -34,39 +34,35 @@ RSpec.describe "File Storage" do
     end
   end
 
-  context "when selecting paperclip" do
+  context "when selecting shrine" do
     before :all do
       drop_dummy_database
       remove_project_directory
-      create_dummy_project(storage: :paperclip)
+      create_dummy_project(storage: :shrine)
     end
 
-    it "adds the Paperclip gem to Gemfile" do
-      gemfile_content = IO.read("#{project_path}/Gemfile")
-      expect(gemfile_content).to include("gem 'paperclip'")
-    end
-
-    it "adds the aws-sdk-s3 gem to Gemfile" do
+    it "adds the aws-sdk-s3, shrine and marcel gems to Gemfile" do
       gemfile_content = IO.read("#{project_path}/Gemfile")
       expect(gemfile_content).to include("gem 'aws-sdk-s3'")
+      expect(gemfile_content).to include("gem 'shrine'")
+      expect(gemfile_content).to include("gem 'marcel'")
     end
 
     it "adds brief to README file" do
       content = IO.read("#{project_path}/README.md")
-      expect(content).to include("Paperclip")
+      expect(content).to include("Shrine")
     end
 
-    it "adds local file storage path to gitignore" do
-      content = IO.read("#{project_path}/.gitignore")
-      expect(content).to include("/public/system/*")
+    it "adds shrine initializer" do
+      expect(File.exist?("#{project_path}/config/initializers/shrine.rb")).to be true
     end
 
-    it "adds paperclip_defaults config to production" do
-      content = IO.read("#{project_path}/config/environments/production.rb")
-      expect(content).to include("config.paperclip_defaults")
+    it "adds base_uploader and image_uploader" do
+      expect(File.exist?("#{project_path}/app/uploaders/base_uploader.rb")).to be true
+      expect(File.exist?("#{project_path}/app/uploaders/image_uploader.rb")).to be true
     end
 
-    it "adds S3 bucket ENV var" do
+    it "adds S3 bucket ENV vars" do
       content = IO.read("#{project_path}/.env.development")
       expect(content).to include("S3_BUCKET=")
     end
