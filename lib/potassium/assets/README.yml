@@ -75,10 +75,17 @@ readme:
     style_guide:
       title: "Style Guides"
       body: |
-        The style guides are enforced through a self hosted version of [Hound CI](http://monkeyci.platan.us). The style configuration can also be used locally
-        in development runing `rubocop` or just using the rubocop integration for your text editor of choice.
+        Style guides are enforced through a CircleCI [job](.circleci/config.yml) with [reviewdog](https://github.com/reviewdog/reviewdog) as a reporter, using per-project dependencies and style configurations.
+        Please note that this reviewdog implementation requires a GitHub user token to comment on pull requests. A token can be generated [here](https://github.com/settings/tokens), and it should have at least the `repo` option checked.
+        The included `config.yml` assumes your CircleCI organization has a context named `org-global` with the required token under the environment variable `REVIEWDOG_GITHUB_API_TOKEN`.
 
-        You can add custom rules to this project just adding them to the `.ruby-style.yml` file.
+        The project comes bundled with configuration files available in this repository.
+
+        Linting dependencies like `rubocop` or `rubocop-rspec` must be locked in your `Gemfile`. Similarly, packages like `eslint` or `eslint-plugin-vue` must be locked in your `package.json`.
+
+        You can add or modify rules by editing the [`.rubocop.yml`](.rubocop.yml), [`.eslintrc.json`](.eslintrc.json) or [`.stylelintrc.json`](.stylelintrc.json) files.
+
+        You can (and should) use linter integrations for your text editor of choice, using the project's configuration.
     mailing:
       title: "Sending Emails"
       body: |
