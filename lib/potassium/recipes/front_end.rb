@@ -50,9 +50,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     remove_file "app/javascript/packs/hello_vue.js"
     create_file application_js, application_js_content, force: true
 
-    js_pack_tag = "\n    <%= javascript_pack_tag 'application' %>\n"
     layout_file = "app/views/layouts/application.html.erb"
-    insert_into_file layout_file, js_pack_tag, after: "<%= csrf_meta_tags %>"
     insert_into_file(
       layout_file,
       "<div id=\"vue-app\">\n      <app></app>\n      ",
