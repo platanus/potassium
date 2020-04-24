@@ -36,6 +36,10 @@ RSpec.describe "Front end" do
       expect(layout_file).to include('id="vue-app"')
     end
 
+    it "creates a project with only one js pack tag" do
+      expect(layout_file.scan("javascript_pack_tag").length).to eq(1)
+    end
+
     it "creates a vue project with client css" do
       expect(application_js_file).to include("import '../css/application.css';")
       expect(layout_file).to include("<%= stylesheet_pack_tag 'application' %>")
