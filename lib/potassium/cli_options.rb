@@ -44,14 +44,6 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
-      name: "angular-admin",
-      desc: "Whether to use Angular within ActiveAdmin or not",
-      negatable: true,
-      default_value: "none",
-      default_test_value: false
-    },
-    {
-      type: :switch,
       name: :vue_admin,
       desc: "Whether to use Vue within ActiveAdmin or not",
       negatable: true,
