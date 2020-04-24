@@ -18,6 +18,7 @@ Features:
   - Remove simple commands and docker-compose args in Makefile [#279](https://github.com/platanus/potassium/pull/279)
   - Remove Paperclip and add [Shrine](https://github.com/shrinerb/shrine) for file_storage recipe [#291](https://github.com/platanus/potassium/pull/291)
   - Add linting job to CircleCI builds using [reviewdog](https://github.com/reviewdog/reviewdog) and per-project dependencies/configurations for linters [#292](https://github.com/platanus/potassium/pull/292)
+  - Remove angular_admin recipe [#297](https://github.com/platanus/potassium/pull/297)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
