@@ -22,7 +22,7 @@
     "array-callback-return": 2,
     "block-scoped-var": 2,
     "complexity": [1, {
-      "max": 20
+      "max": 6
     }],
     "consistent-return": 2,
     "curly": [2, "multi-line"],
