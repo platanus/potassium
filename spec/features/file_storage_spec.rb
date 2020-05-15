@@ -66,5 +66,10 @@ RSpec.describe "File Storage" do
       content = IO.read("#{project_path}/.env.development")
       expect(content).to include("S3_BUCKET=")
     end
+
+    it "adds filestorage path to gitignore" do
+      content = IO.read("#{project_path}/.gitignore")
+      expect(content).to include("/public/uploads")
+    end
   end
 end
