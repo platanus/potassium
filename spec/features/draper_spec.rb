@@ -4,7 +4,7 @@ RSpec.describe "Draper" do
   before :all do
     drop_dummy_database
     remove_project_directory
-    create_dummy_project("draper" => true, "api" => true)
+    create_dummy_project("draper" => true)
   end
 
   it "adds the Draper gem to Gemfile" do
@@ -15,11 +15,6 @@ RSpec.describe "Draper" do
   it "adds the Draper brief to README file" do
     readme = IO.read("#{project_path}/README.md")
     expect(readme).to include("Draper")
-  end
-
-  it "adds api responder to work with draper" do
-    responder_content = IO.read("#{project_path}/app/responders/api_responder.rb")
-    expect(responder_content).to include("decorated_resource")
   end
 
   it "adds decorators directory" do
