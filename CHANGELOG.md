@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+Fix:
+  - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
+
 ## 6.0.0
 
 Features:
