@@ -43,6 +43,7 @@ class Recipes::FileStorage < Rails::AppBuilder
     copy_file('../assets/config/shrine.rb', 'config/initializers/shrine.rb', force: true)
     copy_file('../assets/app/uploaders/image_uploader.rb', 'app/uploaders/image_uploader.rb')
     copy_file('../assets/app/uploaders/base_uploader.rb', 'app/uploaders/base_uploader.rb')
+    append_to_file('.gitignore', "/public/uploads\n")
   end
 
   def common_setup

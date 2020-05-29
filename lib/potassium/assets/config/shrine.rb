@@ -24,7 +24,10 @@ elsif Rails.env.production?
 else
   require 'shrine/storage/memory'
 
-  Shrine.storages[:store] = Shrine::Storage::Memory.new
+  Shrine.storages = {
+    cache: Shrine::Storage::Memory.new,
+    store: Shrine::Storage::Memory.new
+  }
 end
 
 Shrine.plugin :activerecord
