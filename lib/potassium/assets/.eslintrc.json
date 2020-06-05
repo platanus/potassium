@@ -339,5 +339,14 @@
       "code": 120,
       "ignoreHTMLAttributeValues": true
   }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"],
+      "excludedFiles": "app/**/*.js",
+      "env": {
+        "node": true
+      }
+    }
+  ]
 }
