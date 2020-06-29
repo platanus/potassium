@@ -1,6 +1,22 @@
 module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
   CREATE_OPTIONS = [
     {
+      type: :switch,
+      name: 'version-check',
+      desc: 'Performs a version check before running.',
+      negatable: true,
+      default_value: true,
+      default_test_value: true
+    },
+    {
+      type: :switch,
+      name: 'node-version-check',
+      desc: 'Performs a node version check before running.',
+      negatable: true,
+      default_value: true,
+      default_test_value: true
+    },
+    {
       type: :flag,
       name: [:db, :database],
       desc: "Decides which database to use. Available: mysql, postgresql, none",

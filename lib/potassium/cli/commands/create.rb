@@ -7,15 +7,6 @@ module Potassium::CLI
   arg 'app_path'
   command :create do |c|
     c.default_desc 'Create a new project.'
-    c.switch 'version-check',
-             default_value: true,
-             desc: 'Performs a version check before running.',
-             negatable: true
-    c.switch 'node-version-check',
-             default_value: true,
-             desc: 'Performs a node version check before running.',
-             negatable: true
-
     create_options.each { |opts| c.send(opts.delete(:type), opts.delete(:name), opts) }
 
     c.action do |_global_options, options, _args|
