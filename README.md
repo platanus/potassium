@@ -16,7 +16,10 @@ Use the `potassium create` command to create a new project:
 
     $ potassium create <project-name>
 
-> It's important to note that it will perform a version check before running to ensure that you're using the latest potassium. Also, if you feel that it's too slow, you may need to update rubygems: `gem update --system`.
+> Please note:
+> 1. Potassium will perform a version check before running to ensure that you are using the latest potassium.
+> 2. If you feel that it's too slow, you may need to update rubygems: `gem update --system`.
+> 3. Potassium uses node under the hood, so a check will also be performed to ensure you are running the supported version.
 
 ### Adding recipes to an existing project
 
