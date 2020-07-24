@@ -46,5 +46,9 @@ class Recipes::Database < Rails::AppBuilder
     else
       gather_gem db[:gem_name]
     end
+
+    after(:gem_install) do
+      generate 'strong_migrations:install'
+    end
   end
 end
