@@ -39,30 +39,29 @@ You can run the command on its own to view all the available recipes and select 
 
 Potassium Rails apps includes the following gems and technologies:
 
-- [Ruby](https://www.ruby-lang.org) Set the project ruby version based on http://ruby.platan.us/latest
-- [dotenv](https://github.com/bkeepers/dotenv) load environmental variables in development
-- [Yarn](https://yarnpkg.com) for frontend assets packages.
-- [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same.
-- [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience.
-- [RSpec](http://rspec.info) for unit and integration testing.
-- [FactoryBot](https://github.com/thoughtbot/factory_bot) for test factories.
-- [Guard](http://guardgem.org) for continuous testing and other watch-related tasks.
-- [AWS-SDK](https://github.com/aws/aws-sdk-ruby) for file uploads, sdks, etc and because we use AWS.
+- [dotenv](https://github.com/bkeepers/dotenv) for loading environmental variables in development
+- [Yarn](https://yarnpkg.com) for frontend assets packages
+- [EditorConfig](http://editorconfig.org) for keeping all our editor configurations the same
+- [pry](http://pryrepl.org) and [pry-byebug](https://github.com/deivid-rodriguez/pry-byebug) for a less painful debugging experience
+- [RSpec](http://rspec.info) for unit and integration testing
+- [FactoryBot](https://github.com/thoughtbot/factory_bot) for test factories
+- [Guard](http://guardgem.org) for continuous testing and other watch-related tasks
+- [AWS-SDK](https://github.com/aws/aws-sdk-ruby) for file uploads, sdks, etc and because we use AWS
 - [Puma](https://github.com/puma/puma) to serve HTTP requests
 - [Rack Timeout](https://github.com/heroku/rack-timeout) to abort requests that are
   taking too long
-- [Tzinfo-Data](https://github.com/tzinfo/tzinfo-data) for update timezone information
-- [Faker](https://github.com/stympy/faker) for create development data
+- [Tzinfo-Data](https://github.com/tzinfo/tzinfo-data) for updating timezone information
+- [Faker](https://github.com/stympy/faker) for creating development data
 
 The following optional integrations are added too:
 
-- [PostgreSQL](http://www.postgresql.org) or [MySQL](https://www.mysql.com) for the database.
-- [Devise](https://github.com/plataformatec/devise) for authentication.
-- [ActiveAdmin](http://activeadmin.info) for admin interfaces.
-- [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin.
-- [Pundit](https://github.com/elabs/pundit) for role-based authorization.
-- [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background.]
-- [Sidekiq](https://github.com/mperham/sidekiq) a simple, efficient background processing for Ruby.
+- [PostgreSQL](http://www.postgresql.org) or [MySQL](https://www.mysql.com) for the database
+- [Devise](https://github.com/plataformatec/devise) for authentication
+- [ActiveAdmin](http://activeadmin.info) for admin interfaces
+- [ActiveAdminAddons](https://github.com/platanus/activeadmin_addons) for some help with ActiveAdmin
+- [Pundit](https://github.com/elabs/pundit) for role-based authorization
+- [DelayedJob](https://github.com/collectiveidea/delayed_job) to execute longer tasks in the background
+- [Sidekiq](https://github.com/mperham/sidekiq) a simple, efficient background processing for Ruby
 - [Sidekiq-scheduler](https://github.com/moove-it/sidekiq-scheduler) to run scheduled processes
 - Mailing configuration for [AWS SES](https://github.com/aws/aws-sdk-rails)
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
@@ -72,7 +71,7 @@ The following optional integrations are added too:
 A few more things are added to the project:
 
 - A [low database connection pool limit][pool]
-- Setup continuous integration in [CircleCI](circle-ci) to run tests.
+- Setup continuous integration in [CircleCI](circle-ci) to run tests
 - Create the github repository for the project (it used `hub` under the hood)
 - A `bin/setup` script to setup things on a newly cloned project
 - A `bin/cibuild` script to run continuous integration build on CI
@@ -84,24 +83,20 @@ A few more things are added to the project:
 
 The optional API support includes:
 
-- [Responders](https://github.com/plataformatec/responders) for dry-ing our api controllers.
-- [Versionist](https://github.com/bploetz/versionist) for some flexible api versioning.
-- [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers) for record serialization.
-- [Simple Token Authentication](https://github.com/gonzalo-bulnes/simple_token_authentication) for stateless API authentication.
+- [Responders](https://github.com/plataformatec/responders) for dry-ing our api controllers
+- [Versionist](https://github.com/bploetz/versionist) for some flexible api versioning
+- [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers) for record serialization
+- [Simple Token Authentication](https://github.com/gonzalo-bulnes/simple_token_authentication) for stateless API authentication
 
 ### Heroku
 
 When you choose to deploy to heroku a few extra things are added for the project.
 
-  - Adds the [Rails Stdout Logging][logging-gem] gem
-    to configure the app to log to standard out,
-    which is how [Heroku's logging][heroku-logging] works.
+  - Adds the [Rails Stdout Logging][logging-gem] gem to configure the app to log to standard out, which is how [Heroku's logging][heroku-logging] works
   - Adds a [Procfile][procfile] to define the processes to run in heroku
-  - Setup continuous integration using docker and herokuish to maintain better
-    parity between testing and production environments
-  - Adds a `.buildpacks` file with the default buildpacks to use. It use the
-    following buildpacks:
-  - Adds a `bin/release` file with the release phase script to run specific tasks before the app is deployed completely, for example `rails db:migrate:with_data`.
+  - Setup continuous integration using docker and herokuish to maintain better parity between testing and production environments
+  - Adds a `bin/release` file with the release phase script to run specific tasks before the app is deployed completely, for example `rails db:migrate:with_data`
+  - Adds a `.buildpacks` file with the default buildpacks to use. It use the following buildpacks:
 
 | index | buildpack | description |
 |-------|-----------|-------------|
@@ -113,7 +108,7 @@ Also the heroku applications are created
 
   - Creates a `staging` and `production` applications
   - Creates a pipeline and assign the above application to the `staging`
-    and `production` stages.
+    and `production` stages
   - Setup initial configuration variables
   - Set the application buildpack to the [multi-buildpack][heroku-buildpack-multi]
 
@@ -129,11 +124,9 @@ In order to CicleCI start building the project on each push you need tell circle
 Go to https://circleci.com/add-projects, choose the repository from the list and hit
 **Build Project**
 
-### Hound CI
+#### ReviewDog
 
-In order to Hound start checking your project's PRs you need enable that repository.
-Go to https://monkeyci.platan.us, choose the repository from the list and hit
-**Activate**
+In order to enable code linting via CircleCI and ReviewDog, you need to activate the **Only build pull requests** option under the `Advanced settings` section for your project.
 
 [logging-gem]: https://github.com/heroku/rails_stdout_logging
 [heroku-logging]: https://devcenter.heroku.com/articles/logging#writing-to-your-log
@@ -152,13 +145,13 @@ This is useful when you are adding new recipes to Potassium, and you want to use
 To achieve this you need to run, **In the Potassium's root path**, the `bin/potassium_test create` instead of `potassium create` command.
 This command, will do the same as `potassium create` but first:
 
-- Will drop any existent database of the test app.
-- Will remove the directory containing a previous version of the test app.
+- Will drop any existent database of the test app
+- Will remove the directory containing a previous version of the test app
 
 It's important to remember that `bin/potassium_test create`:
 
 - Does not receive an `app_path` param. It always creates the test project inside `/tmp/dummy_app`
-- Can receive the same options as `potassium create`.
+- Can receive the same options as `potassium create`
 - Runs with options with a default value. This is to avoid the "asking part" of the creation process. You need to enable what you want to test like this: `$ bin/potassium_test create --clockwork`
 
 ## Contributing
@@ -176,4 +169,4 @@ potassium is maintained by [platanus](http://platan.us).
 
 ## License
 
-Potassium is © 2014 platanus, spa. It is free software and may be redistributed under the terms specified in the LICENSE file.
+Potassium is © 2014 Platanus, SPA. It is free software and may be redistributed under the terms specified in the LICENSE file.
