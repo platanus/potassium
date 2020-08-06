@@ -24,7 +24,7 @@ rack_env = ENV.fetch("RACK_ENV", "development")
 environment rack_env
 
 # Set 1 day timeout for workers while developing
-worker_timeout 1.day.seconds.to_i if rack_env == "development"
+worker_timeout 24 * 60 * 60 if rack_env == "development"
 
 on_worker_boot do
   # Worker specific setup for Rails 4.1+
