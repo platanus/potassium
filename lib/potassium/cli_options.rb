@@ -121,11 +121,25 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
-      name: "github-private",
-      desc: "Whether to the github repository is private",
+      name: "github_private",
+      desc: "Whether the github repository is private or not",
       negatable: true,
       default_value: false,
       default_test_value: false
+    },
+    {
+      type: :flag,
+      name: "github_org",
+      desc: "The github organization where the repository will be created",
+      default_value: "none",
+      default_test_value: "none"
+    },
+    {
+      type: :flag,
+      name: "github_name",
+      desc: "The github repository name",
+      default_value: "none",
+      default_test_value: "none"
     },
     {
       type: :switch,
