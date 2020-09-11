@@ -1,18 +1,23 @@
 class Recipes::Github < Rails::AppBuilder
   def ask
-    repo_name = "platanus/#{get(:dasherized_app_name)}"
     github_repo_create = answer(:github) do
-      q = "Do you want to create the Github repository (https://github.com/#{repo_name}) " +
-        "for this project?"
-      Ask.confirm(q)
+      Ask.confirm('Do you want to create a Github repository?')
     end
-    if github_repo_create
-      github_repo_private = answer(:"github-private") do
-        Ask.confirm("Should the repository be private?")
-      end
-    end
-    set(:github_repo_name, repo_name)
     set(:github_repo, github_repo_create)
+    setup_repo if github_repo_create
+  end
+
+  def setup_repo
+    github_repo_private = answer(:github_private) do
+      Ask.confirm('Should the repository be private?')
+    end
+    github_repo_organization = answer(:github_org) do
+      Ask.input('What is the organization or user for this repository?', default: 'platanus')
+    end
+    github_repo_name = answer(:github_name) do
+      Ask.input('What is the name for this repository?', default: get(:dasherized_app_name))
+    end
+    set(:github_repo_name, "#{github_repo_organization}/#{github_repo_name}")
     set(:github_repo_private, github_repo_private)
   end
 
