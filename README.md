@@ -53,7 +53,7 @@ Potassium Rails apps includes the following gems and technologies:
 - [Tzinfo-Data](https://github.com/tzinfo/tzinfo-data) for updating timezone information
 - [Faker](https://github.com/stympy/faker) for creating development data
 
-The following optional integrations are added too:
+The following optional integrations are also added:
 
 - [PostgreSQL](http://www.postgresql.org) or [MySQL](https://www.mysql.com) for the database
 - [Devise](https://github.com/plataformatec/devise) for authentication
@@ -67,12 +67,12 @@ The following optional integrations are added too:
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
 - [Sentry](https://sentry.io) to monitor exceptions and errors
 - [Vue.js](https://vuejs.org) or [Angular 2](https://angular.io/) for frontend development
+- Creates the Github repository of your choice for the project (it uses `hub` under the hood). A local git repository will always be created.
 
 A few more things are added to the project:
 
 - A [low database connection pool limit][pool]
 - Setup continuous integration in [CircleCI](circle-ci) to run tests
-- Create the github repository for the project (it used `hub` under the hood)
 - A `bin/setup` script to setup things on a newly cloned project
 - A `bin/cibuild` script to run continuous integration build on CI
 - A `db:fake_data:load` rake task to load fake data for development
