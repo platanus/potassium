@@ -3,6 +3,7 @@ require "spec_helper"
 RSpec.describe "GitHub" do
   let(:github_org) { "platanus" }
   let(:repo_name) { PotassiumTestHelpers::APP_NAME.dasherize }
+  let(:pr_template_file) { IO.read("#{project_path}/.github/pull_request_template.md") }
 
   before do
     drop_dummy_database
@@ -18,6 +19,7 @@ RSpec.describe "GitHub" do
     )
 
     expect(FakeGithub).to have_created_repo("#{github_org}/#{repo_name}")
+    expect(pr_template_file).to include('Contexto')
   end
 
   it "creates the private github repository" do
@@ -29,5 +31,6 @@ RSpec.describe "GitHub" do
     )
 
     expect(FakeGithub).to have_created_private_repo("#{github_org}/#{repo_name}")
+    expect(pr_template_file).to include('Contexto')
   end
 end
