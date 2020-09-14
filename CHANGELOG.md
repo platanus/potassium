@@ -6,6 +6,7 @@ Features:
   - Check node version before project creation [#305](https://github.com/platanus/potassium/pull/305)
   - Disable observers in test environment [#319](https://github.com/platanus/potassium/pull/319)
   - Allow user to select custom Github repository [#318](https://github.com/platanus/potassium/pull/318)
+  - Add pull request template to github enabled projects [#320](https://github.com/platanus/potassium/pull/320)
 
 Fix:
   - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
