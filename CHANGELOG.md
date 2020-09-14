@@ -4,6 +4,7 @@
 
 Features:
   - Check node version before project creation [#305](https://github.com/platanus/potassium/pull/305)
+  - Disable observers in test environment [#319](https://github.com/platanus/potassium/pull/319)
 
 Fix:
   - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
