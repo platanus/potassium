@@ -22,7 +22,10 @@ class Recipes::Github < Rails::AppBuilder
   end
 
   def create
-    github_repo_create(get(:github_repo_name), get(:github_repo_private)) if selected?(:github_repo)
+    return unless selected?(:github_repo)
+
+    github_repo_create(get(:github_repo_name), get(:github_repo_private))
+    copy_file '../assets/.github/pull_request_template.md', '.github/pull_request_template.md'
   end
 
   private
