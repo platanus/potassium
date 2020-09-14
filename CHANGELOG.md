@@ -5,6 +5,7 @@
 Features:
   - Check node version before project creation [#305](https://github.com/platanus/potassium/pull/305)
   - Disable observers in test environment [#319](https://github.com/platanus/potassium/pull/319)
+  - Allow user to select custom Github repository [#318](https://github.com/platanus/potassium/pull/318)
 
 Fix:
   - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
@@ -30,7 +31,6 @@ Features:
   - Remove Paperclip and add [Shrine](https://github.com/shrinerb/shrine) for file_storage recipe [#291](https://github.com/platanus/potassium/pull/291)
   - Add linting job to CircleCI builds using [reviewdog](https://github.com/reviewdog/reviewdog) and per-project dependencies/configurations for linters [#292](https://github.com/platanus/potassium/pull/292)
   - Remove angular_admin recipe [#297](https://github.com/platanus/potassium/pull/297)
-  - Allow user to select custom Github repository [#318](https://github.com/platanus/potassium/pull/318)
 
 Fix:
   - Correctly use cache for bundle dependencies in CircleCI build [#244](https://github.com/platanus/potassium/pull/244) and [#258](https://github.com/platanus/potassium/pull/258)
