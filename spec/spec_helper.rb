@@ -33,5 +33,6 @@ RSpec.configure do |config|
   config.before(:each) do
     FakeGithub.clear!
     FakeHeroku.clear!
+    FakeOctokit.clear!
   end
 end
