@@ -13,6 +13,7 @@ class Recipes::Github < Rails::AppBuilder
     setup_repo_private
     setup_repo_org
     setup_repo_name
+    set(:github_access_token, get_access_token)
   end
 
   def create
@@ -56,9 +57,11 @@ class Recipes::Github < Rails::AppBuilder
     options[:organization] = get(:github_org) if get(:github_has_org)
     repo_name = get(:github_repo_name)
 
+    is_retry = false
     begin
-      github_client.create_repository(repo_name, options)
+      github_client(is_retry).create_repository(repo_name, options)
     rescue Octokit::Unauthorized
+      is_retry = true
       retry if retry_create_repo
     end
   end
@@ -70,10 +73,8 @@ class Recipes::Github < Rails::AppBuilder
     Ask.confirm("Do you want to retry?")
   end
 
-  def github_client
-    access_token = answer(:github_access_token) do
-      Ask.input('Enter a GitHub personal access token', password: true)
-    end
+  def github_client(is_retry = false)
+    access_token = is_retry ? set_access_token : get(:github_access_token)
     octokit_client.new(access_token: access_token)
   end
 
@@ -84,5 +85,23 @@ class Recipes::Github < Rails::AppBuilder
     else
       Octokit::Client
     end
+  end
+
+  def get_access_token
+    return File.open(config_filename, 'r').read if File.exists?(config_filename)
+
+    set_access_token
+  end
+
+  def set_access_token
+    access_token = answer(:github_access_token) do
+      Ask.input('Enter a GitHub personal access token', password: true)
+    end
+    File.open(config_filename, 'w') { |f| f.write(access_token) }
+    access_token
+  end
+
+  def config_filename
+    @config_filename ||= File.expand_path('~/.potassium')
   end
 end
