@@ -18,7 +18,7 @@ class Recipes::Github < Rails::AppBuilder
   def create
     return unless selected?(:github_repo)
 
-    github_repo_create
+    create_github_repo
     copy_file '../assets/.github/pull_request_template.md', '.github/pull_request_template.md'
   end
 
@@ -51,7 +51,7 @@ class Recipes::Github < Rails::AppBuilder
     set(:github_repo_name, repo_name)
   end
 
-  def github_repo_create
+  def create_github_repo
     options = { private: get(:github_repo_private) }
     options[:organization] = get(:github_org) if get(:github_has_org)
     repo_name = get(:github_repo_name)
