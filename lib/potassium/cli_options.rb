@@ -124,7 +124,15 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       name: "github_private",
       desc: "Whether the github repository is private or not",
       negatable: true,
-      default_value: false,
+      default_value: "none",
+      default_test_value: false
+    },
+    {
+      type: :switch,
+      name: "github_has_org",
+      desc: "Whether the github repository should belong to an organization",
+      negatable: true,
+      default_value: "none",
       default_test_value: false
     },
     {
@@ -138,6 +146,13 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       type: :flag,
       name: "github_name",
       desc: "The github repository name",
+      default_value: "none",
+      default_test_value: "none"
+    },
+    {
+      type: :flag,
+      name: "github_access_token",
+      desc: "Github personal access token used to auth to Github API",
       default_value: "none",
       default_test_value: "none"
     },
@@ -162,6 +177,14 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       name: :front_end,
       desc: "Decides which front-end framework to use. Available: Vue, Angular 2, None",
       default_test_value: "None"
+    },
+    {
+      type: :switch,
+      name: "test",
+      desc: "Whether or not it is a test project creation",
+      negatable: true,
+      default_value: false,
+      default_test_value: true
     }
   ]
 

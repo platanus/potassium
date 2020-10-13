@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "gli", "~> 2.12.2"
   spec.add_runtime_dependency "inquirer", "~> 0.2"
   spec.add_runtime_dependency "levenshtein", "~> 0.2"
+  spec.add_runtime_dependency "octokit", "~> 4.18"
   spec.add_runtime_dependency "rails", Potassium::RAILS_VERSION
   spec.add_runtime_dependency "semantic", "~> 1.4"
 end
