@@ -128,7 +128,6 @@ Go to https://circleci.com/add-projects, choose the repository from the list and
 
 In order to enable code linting via CircleCI and ReviewDog, you need to activate the **Only build pull requests** option under the `Advanced settings` section for your project.
 
-[logging-gem]: https://github.com/heroku/rails_stdout_logging
 [heroku-logging]: https://devcenter.heroku.com/articles/logging#writing-to-your-log
 [procfile]: https://devcenter.heroku.com/articles/procfile
 [heroku-buildpack-ruby-version]: http://github.com/platanus/heroku-buildpack-ruby-version
