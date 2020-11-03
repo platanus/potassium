@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+Fixes
+  - Remove rails_stdout_logging gem because it is no longer needed after Rails 5 and it was generating a deprecation warning [#325](https://github.com/platanus/potassium/pull/325)
+
 ## 6.4.0
 
 Features

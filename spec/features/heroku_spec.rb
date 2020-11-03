@@ -10,10 +10,6 @@ RSpec.describe "Heroku" do
     create_dummy_project("heroku" => true)
     app_name = PotassiumTestHelpers::APP_NAME.dasherize
 
-    expect(FakeHeroku).to(
-      have_gem_included(project_path, "rails_stdout_logging")
-    )
-
     procfile_path = "#{project_path}/Procfile"
     procfile = IO.read(procfile_path)
 
