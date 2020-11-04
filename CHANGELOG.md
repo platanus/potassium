@@ -13,6 +13,7 @@ Fix:
   - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
   - Fix database recipe not running recommended generator for strong_migrations gem [#310](https://github.com/platanus/potassium/pull/310)
   - Fix puma config that was causing it to crash on server start while on development [#313](https://github.com/platanus/potassium/pull/313)
+  - Remove rails_stdout_logging gem because it is no longer needed after Rails 5 and it was generation a deprecation warning [#325](https://github.com/platanus/potassium/pull/325)
 
 ## 6.0.0
 
