@@ -179,6 +179,14 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
     },
     {
       type: :switch,
+      name: 'google_tag_manager',
+      desc: 'Whether to use google tag manager',
+      negatable: true,
+      default_value: 'none',
+      default_test_value: false
+    },
+    {
+      type: :switch,
       name: "test",
       desc: "Whether or not it is a test project creation",
       negatable: true,
