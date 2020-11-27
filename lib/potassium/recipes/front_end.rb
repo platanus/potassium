@@ -164,7 +164,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
         variants: {},
         plugins: [],
         purge: {
-          enabled: true,
+          enabled: process.env.NODE_ENV === 'production',
           content: [
             './app/**/*.html',
             './app/**/*.vue',
