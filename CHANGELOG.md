@@ -13,6 +13,7 @@ Fix:
   - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
   - Fix database recipe not running recommended generator for strong_migrations gem [#310](https://github.com/platanus/potassium/pull/310)
   - Fix puma config that was causing it to crash on server start while on development [#313](https://github.com/platanus/potassium/pull/313)
+  - Fix purge css being enabled in development [#327](https://github.com/platanus/potassium/pull/327)
 
 ## 6.0.0
 
