@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'yaml'
 
 RSpec.describe "BackgroundProcessor" do
   context "working with sidekiq" do
@@ -41,6 +42,9 @@ RSpec.describe "BackgroundProcessor" do
     it "adds ENV vars" do
       content = IO.read("#{project_path}/.env.development")
       expect(content).to include("DB_POOL=25")
+      expect(content).to include('REDIS_HOST=127.0.0.1')
+      expect(content).to include('REDIS_PORT=$(make services-port SERVICE=redis PORT=6379)')
+      expect(content).to include('REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}/1')
     end
 
     it "adds sidekiq.rb file" do
@@ -55,12 +59,19 @@ RSpec.describe "BackgroundProcessor" do
 
     it "adds redis.yml file" do
       content = IO.read("#{project_path}/config/redis.yml")
-      expect(content).to include("REDIS_HOST")
+      expect(content).to include("REDIS_URL")
     end
 
     it "mounts sidekiq app" do
       content = IO.read("#{project_path}/config/routes.rb")
       expect(content).to include("mount Sidekiq::Web => '/queue'")
+    end
+
+    it 'adds redis to docker-compose' do
+      compose_file = IO.read("#{project_path}/docker-compose.yml")
+      compose_content = YAML.safe_load(compose_file, symbolize_names: true)
+
+      expect(compose_content[:services]).to include(:redis)
     end
   end
 end
