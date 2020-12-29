@@ -1,15 +1,27 @@
 class Recipes::Api < Rails::AppBuilder
   def ask
-    api_support = answer(:api) { Ask.confirm("Do you want to enable API support?") }
-    set(:api_support, api_support)
+    api_interfaces = {
+      rest: "REST (with Power API)",
+      graphql: "GraphQL (beta)",
+      none: "None, thanks"
+    }
+    api_interface = answer(:api) do
+      api_interfaces.keys[Ask.list("Which API interface are you using?", api_interfaces.values)]
+    end
+    set :api, api_interface.to_sym
   end
 
   def create
-    add_api if get(:api_support)
+    if get(:api) == :graphql
+      add_graphql
+    elsif get(:api) == :rest
+      add_power_api
+    end
   end
 
   def install
-    add_api
+    ask
+    create
   end
 
   def installed?
@@ -18,7 +30,7 @@ class Recipes::Api < Rails::AppBuilder
 
   private
 
-  def add_api
+  def add_power_api
     gather_gem 'power_api'
 
     gather_gems(:development, :test) do
@@ -29,6 +41,27 @@ class Recipes::Api < Rails::AppBuilder
 
     after(:gem_install) do
       generate "power_api:install"
+    end
+  end
+
+  def add_graphql
+    gather_gem 'graphql'
+    gather_gems(:development) do
+      gather_gem 'graphql_playground-rails'
+    end
+
+    after(:gem_install) do
+      generate "graphql:install --skip_graphiql"
+      playground_route = <<~HEREDOC
+      \n
+        if Rails.env.development?
+          mount GraphqlPlayground::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+        end
+      HEREDOC
+      inject_into_file('config/routes.rb',
+        playground_route,
+        after: 'post "/graphql", to: "graphql#execute"'
+      )
     end
   end
 end

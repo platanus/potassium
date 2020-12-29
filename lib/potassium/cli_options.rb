@@ -75,12 +75,10 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       default_test_value: false
     },
     {
-      type: :switch,
+      type: :flag,
       name: "api",
-      desc: "Whether to apply the API mode or not",
-      negatable: true,
-      default_value: "none",
-      default_test_value: false
+      desc: "Which API interface to use",
+      default_value: "none"
     },
     {
       type: :flag,
