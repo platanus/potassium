@@ -62,6 +62,13 @@ class Recipes::Api < Rails::AppBuilder
         playground_route,
         after: 'post "/graphql", to: "graphql#execute"'
       )
+      copy_file(
+        "../assets/config/graphql_playground.rb",
+        "config/initializers/graphql_playground.rb"
+      )
+      remove_dir 'app/graphql/types'
+      directory '../assets/app/graphql/types', 'app/graphql/types'
+      gsub_file 'app/graphql/mutations/base_mutation.rb', 'Types::Base', 'Types::Base::'
     end
   end
 end
