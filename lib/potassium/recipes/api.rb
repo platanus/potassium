@@ -69,6 +69,7 @@ class Recipes::Api < Rails::AppBuilder
       remove_dir 'app/graphql/types'
       directory '../assets/app/graphql/types', 'app/graphql/types'
       gsub_file 'app/graphql/mutations/base_mutation.rb', 'Types::Base', 'Types::Base::'
+      directory '../assets/app/graphql/queries', 'app/graphql/queries'
     end
   end
 end
