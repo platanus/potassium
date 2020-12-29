@@ -70,6 +70,8 @@ class Recipes::Api < Rails::AppBuilder
       directory '../assets/app/graphql/types', 'app/graphql/types'
       gsub_file 'app/graphql/mutations/base_mutation.rb', 'Types::Base', 'Types::Base::'
       directory '../assets/app/graphql/queries', 'app/graphql/queries'
+      gsub_file 'app/graphql/mutations/base_mutation.rb', 'RelayClassic', ''
+      gsub_file 'app/graphql/mutations/base_mutation.rb', '    input_object_class Types::Base::InputObject\n', ''
     end
   end
 end
