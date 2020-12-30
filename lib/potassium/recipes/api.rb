@@ -46,6 +46,9 @@ class Recipes::Api < Rails::AppBuilder
 
   def add_graphql
     gather_gem 'graphql'
+    if get(:authentication)
+      gather_gem 'jwt'
+    end
     gather_gems(:development) do
       gather_gem 'graphql_playground-rails'
     end
@@ -72,6 +75,22 @@ class Recipes::Api < Rails::AppBuilder
       directory '../assets/app/graphql/queries', 'app/graphql/queries'
       gsub_file 'app/graphql/mutations/base_mutation.rb', 'RelayClassic', ''
       gsub_file 'app/graphql/mutations/base_mutation.rb', '    input_object_class Types::Base::InputObject\n', ''
+
+      if get(:authentication)
+        copy_file(
+          '../assets/app/graphql/graphql_controller.rb',
+          'app/controllers/graphql_controller.rb',
+          force: true
+        )
+        copy_file(
+          '../assets/app/graphql/mutations/login_mutation.rb',
+          'app/graphql/mutations/login_mutation.rb'
+        )
+        inject_into_file('app/graphql/types/mutation_type.rb',
+          "\n    field :login, mutation: Mutations::LoginMutation",
+          after: 'class MutationType < Types::Base::BaseObject'
+        )
+      end
     end
   end
 end
