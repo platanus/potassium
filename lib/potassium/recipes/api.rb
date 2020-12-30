@@ -25,7 +25,7 @@ class Recipes::Api < Rails::AppBuilder
   end
 
   def installed?
-    gem_exists?(/power_api/)
+    gem_exists?(/power_api/) || gem_exists?(/graphql/)
   end
 
   private
@@ -49,7 +49,7 @@ class Recipes::Api < Rails::AppBuilder
     if get(:authentication)
       gather_gem 'jwt'
     end
-    gather_gems(:development) do
+    gather_gems(:development, :test) do
       gather_gem 'graphql_playground-rails'
     end
 
