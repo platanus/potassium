@@ -71,16 +71,21 @@ class Recipes::Api < Rails::AppBuilder
       )
       remove_dir 'app/graphql/types'
       directory '../assets/app/graphql/types', 'app/graphql/types'
-      gsub_file 'app/graphql/mutations/base_mutation.rb', 'Types::Base', 'Types::Base::'
+      gsub_file 'app/graphql/mutations/base_mutation.rb', 'Types::Base', 'Types::Base::Base'
       directory '../assets/app/graphql/queries', 'app/graphql/queries'
       gsub_file 'app/graphql/mutations/base_mutation.rb', 'RelayClassic', ''
-      gsub_file 'app/graphql/mutations/base_mutation.rb', '    input_object_class Types::Base::InputObject\n', ''
+      gsub_file 'app/graphql/mutations/base_mutation.rb', "    input_object_class Types::Base::BaseInputObject\n", ''
 
       if get(:authentication)
         copy_file(
           '../assets/app/graphql/graphql_controller.rb',
           'app/controllers/graphql_controller.rb',
           force: true
+        )
+        gsub_file(
+          'app/controllers/graphql_controller.rb',
+          'GqlSampleSchema',
+          "#{get(:titleized_app_name).delete(' ')}Schema"
         )
         copy_file(
           '../assets/app/graphql/mutations/login_mutation.rb',
