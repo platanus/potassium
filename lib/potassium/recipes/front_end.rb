@@ -104,7 +104,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     apollo_loading = <<~HEREDOC
     \n
     const httpLink = createHttpLink({
-      uri: 'http://localhost:3000/graphql',
+      uri: `${window.location.origin}/graphql`,
     })
     const cache = new InMemoryCache()
     const apolloClient = new ApolloClient({
