@@ -78,7 +78,8 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       type: :flag,
       name: "api",
       desc: "Which API interface to use",
-      default_value: "none"
+      default_value: "none",
+      default_test_value: "None"
     },
     {
       type: :flag,

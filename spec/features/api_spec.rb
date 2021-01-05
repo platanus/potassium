@@ -4,7 +4,7 @@ RSpec.describe "Api" do
   before :all do
     drop_dummy_database
     remove_project_directory
-    create_dummy_project("api" => true)
+    create_dummy_project("api" => :rest)
   end
 
   it "adds power_api related gems to Gemfile" do
