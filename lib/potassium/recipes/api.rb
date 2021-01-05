@@ -96,6 +96,12 @@ class Recipes::Api < Rails::AppBuilder
           after: 'class MutationType < Types::Base::BaseObject'
         )
       end
+
+      inject_into_file(
+        'app/controllers/graphql_controller.rb',
+        "\n\n  skip_before_action :verify_authenticity_token",
+        after: '# protect_from_forgery with: :null_session'
+      )
     end
   end
 end
