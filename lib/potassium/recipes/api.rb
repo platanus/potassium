@@ -107,6 +107,8 @@ class Recipes::Api < Rails::AppBuilder
         "\n\n  skip_before_action :verify_authenticity_token",
         after: '# protect_from_forgery with: :null_session'
       )
+
+      add_readme_section :internal_dependencies, :graphql
     end
   end
 end
