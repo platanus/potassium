@@ -61,7 +61,8 @@ class Recipes::Api < Rails::AppBuilder
           mount GraphqlPlayground::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
         end
       HEREDOC
-      inject_into_file('config/routes.rb',
+      inject_into_file(
+        'config/routes.rb',
         playground_route,
         after: 'post "/graphql", to: "graphql#execute"'
       )
@@ -74,7 +75,10 @@ class Recipes::Api < Rails::AppBuilder
       gsub_file 'app/graphql/mutations/base_mutation.rb', 'Types::Base', 'Types::Base::Base'
       directory '../assets/app/graphql/queries', 'app/graphql/queries'
       gsub_file 'app/graphql/mutations/base_mutation.rb', 'RelayClassic', ''
-      gsub_file 'app/graphql/mutations/base_mutation.rb', "    input_object_class Types::Base::BaseInputObject\n", ''
+      gsub_file(
+        'app/graphql/mutations/base_mutation.rb',
+        "    input_object_class Types::Base::BaseInputObject\n", ''
+      )
 
       if get(:authentication)
         copy_file(
@@ -91,7 +95,8 @@ class Recipes::Api < Rails::AppBuilder
           '../assets/app/graphql/mutations/login_mutation.rb',
           'app/graphql/mutations/login_mutation.rb'
         )
-        inject_into_file('app/graphql/types/mutation_type.rb',
+        inject_into_file(
+          'app/graphql/types/mutation_type.rb',
           "\n    field :login, mutation: Mutations::LoginMutation",
           after: 'class MutationType < Types::Base::BaseObject'
         )
