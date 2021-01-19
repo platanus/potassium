@@ -8,7 +8,9 @@ Features:
   - Allow user to select custom Github repository [#318](https://github.com/platanus/potassium/pull/318)
   - Add pull request template to github enabled projects [#320](https://github.com/platanus/potassium/pull/320)
   - Use a Ruby gem instead of hub to create Github repositories [#323](https://github.com/platanus/potassium/pull/323)
+  - Add dockerized redis configuration when using background processor [#329](https://github.com/platanus/potassium/pull/329)
   - Add beta support for GraphQL. [#330](https://github.com/platanus/potassium/pull/330)
+
 
 Fix:
   - Fix shrine issues related to configuration and uploader validation [#302](https://github.com/platanus/potassium/pull/302)
