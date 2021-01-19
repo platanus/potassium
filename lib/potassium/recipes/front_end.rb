@@ -26,6 +26,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
       if value == :vue
         recipe.setup_vue_with_compiler_build
         recipe.setup_jest
+        if get(:api) == :graphql
+          recipe.setup_apollo
+        end
       end
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
@@ -83,6 +86,27 @@ class Recipes::FrontEnd < Rails::AppBuilder
     copy_file '../assets/app/javascript/app.spec.js', 'app/javascript/app.spec.js'
   end
 
+  def setup_apollo
+    run 'bin/yarn add vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag'
+
+    inject_into_file(
+      'app/javascript/packs/application.js',
+      apollo_imports,
+      after: "import App from '../app.vue';"
+    )
+
+    inject_into_file(
+      'app/javascript/packs/application.js',
+      apollo_loading,
+      after: "import VueApollo from 'vue-apollo';"
+    )
+    inject_into_file(
+      'app/javascript/packs/application.js',
+      "\n    apolloProvider,",
+      after: "components: { App },"
+    )
+  end
+
   private
 
   def frameworks(framework)
@@ -92,6 +116,35 @@ class Recipes::FrontEnd < Rails::AppBuilder
       none: nil
     }
     frameworks[framework]
+  end
+
+  def apollo_imports
+    <<~JS
+      \n
+      import { ApolloClient } from 'apollo-client';
+      import { createHttpLink } from 'apollo-link-http';
+      import { InMemoryCache } from 'apollo-cache-inmemory';
+      import VueApollo from 'vue-apollo';
+    JS
+  end
+
+  def apollo_loading
+    <<~JS
+      \n
+      const httpLink = createHttpLink({
+        uri: `${window.location.origin}/graphql`,
+      })
+      const cache = new InMemoryCache()
+      const apolloClient = new ApolloClient({
+        link: httpLink,
+        cache,
+      })
+
+      Vue.use(VueApollo)
+      const apolloProvider = new VueApollo({
+        defaultClient: apolloClient,
+      })
+    JS
   end
 
   def setup_client_css

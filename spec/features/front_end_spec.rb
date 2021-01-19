@@ -54,6 +54,20 @@ RSpec.describe "Front end" do
       )
       expect(tailwind_config_file).to include('module.exports')
     end
+
+    context "with graphql" do
+      before(:all) do
+        remove_project_directory
+        create_dummy_project("front_end" => "vue", "api" => "graphql")
+      end
+
+      it "creates a vue project with apollo" do
+        expect(node_modules_file).to include("\"vue-apollo\"")
+        expect(application_js_file).to include("import { ApolloClient } from 'apollo-client';")
+        expect(application_js_file).to include("Vue.use(VueApollo)")
+        expect(application_js_file).to include("apolloProvider,")
+      end
+    end
   end
 
   context "with angular" do

@@ -133,6 +133,9 @@ readme:
         power_api:
           title: "API Support"
           body: "This projects uses [Power API](https://github.com/platanus/power_api). It's a Rails engine that gathers a set of gems and configurations designed to build incredible REST APIs."
+        graphql:
+          title: "API Support"
+          body: "This projects uses [graphql-ruby](https://graphql-ruby.org/) to generate a GraphQL API."
         active_admin:
           title: "Administration"
           body: |
