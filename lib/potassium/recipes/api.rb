@@ -100,6 +100,7 @@ class Recipes::Api < Rails::AppBuilder
           "\n    field :login, mutation: Mutations::LoginMutation",
           after: 'class MutationType < Types::Base::BaseObject'
         )
+        append_to_file(".env.development", "HMAC_SECRET=\n")
       end
 
       inject_into_file(
