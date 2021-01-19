@@ -3,7 +3,6 @@ require 'jwt'
 class Mutations::LoginMutation < Mutations::BaseMutation
   null true
 
-  # argument :user_id, ID, required: true, loads: Types::UserType
   argument :email, String, required: true
   argument :password, String, required: true
 
