@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 6.1.0
+
 Features:
   - Check node version before project creation [#305](https://github.com/platanus/potassium/pull/305)
   - Disable observers in test environment [#319](https://github.com/platanus/potassium/pull/319)
@@ -10,6 +12,7 @@ Features:
   - Use a Ruby gem instead of hub to create Github repositories [#323](https://github.com/platanus/potassium/pull/323)
   - Add dockerized redis configuration when using background processor [#329](https://github.com/platanus/potassium/pull/329)
   - Add beta support for GraphQL. [#330](https://github.com/platanus/potassium/pull/330)
+  - Add power_api [#301](https://github.com/platanus/potassium/pull/301)
 
 
 Fix:
