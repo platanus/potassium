@@ -13,10 +13,10 @@ class Recipes::Style < Rails::AppBuilder
 
   def add_linters
     gather_gems(:development, :test) do
-      gather_gem 'rubocop', '~> 0.82.0'
+      gather_gem 'rubocop', Potassium::RUBOCOP_VERSION
       gather_gem 'rubocop-performance'
       gather_gem 'rubocop-rails'
-      gather_gem 'rubocop-rspec'
+      gather_gem 'rubocop-rspec', Potassium::RUBOCOP_RSPEC_VERSION
     end
     run 'bin/yarn add --dev stylelint eslint eslint-plugin-import'
     run 'bin/yarn add --dev eslint-plugin-vue' if selected?(:front_end, :vue)
