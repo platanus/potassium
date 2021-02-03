@@ -1,42 +1,82 @@
-version: 2
-jobs:
-  build:
-    working_directory: ~/app
-    parallelism: 4
-    shell: /bin/bash --login
+version: 2.1
 
+ruby-image: &ruby-image circleci/ruby:2.7.0-node
+env-vars: &env-vars
+  BUNDLE_JOBS: 4
+  RAILS_ENV: test
+  RAKE_ENV: test
+
+executors:
+  ruby-executor:
     docker:
-    - image: circleci/ruby:2.7.0-node
-      environment:
-        GEM_HOME: /home/circleci/app/vendor/bundle
-        BUNDLE_JOBS: 4
-        BUNDLE_RETRY: 3
-        BUNDLE_PATH: /home/circleci/app/vendor/bundle
+      - image: *ruby-image
+        environment: *env-vars
 
+commands:
+  setup:
+    description: checkout code, restore cache, install dependencies, save cache
     steps:
-    - checkout
-    - setup_remote_docker
+      - checkout
 
-    - restore_cache:
-        keys:
-          - potassium-bundle-{{ .Branch }}-
-          - potassium-bundle-master-
-          - potassium-bundle-
-    - run: gem install bundler:2.0.2
-    - run: bundle _2.0.2_ install
-    - run: gem install hound-cli
-    - run:
-        command: |
-          bundle exec rspec --color --require spec_helper --profile 10 \
-                            --format progress --format documentation \
-                            --format RspecJunitFormatter --out test_results/rspec.xml \
-                            $(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)
-        environment:
-          RAILS_ENV: test
-          RACK_ENV: test
-    - save_cache:
-        key: potassium-bundle-{{ .Branch }}-{{ epoch }}
-        paths:
-          - vendor/bundle
-    - store_test_results:
-        path: test_results
+      - restore_cache:
+          keys:
+          - potassium-bundle-{{ .Branch }}
+          - potassium-bundle-master
+          - potassium-bundle
+
+      - run:
+          name: Install bundle dependencies
+          command: |
+            gem install bundler:2.1.4
+            bundle _2.1.4_ install
+
+      - save_cache:
+          key: potassium-bundle-{{ .Branch }}
+          paths:
+            - /usr/local/bundle
+
+jobs:
+  test:
+    parallelism: 6
+    executor: ruby-executor
+    steps:
+      - setup
+
+      - run:
+          name: Run rspec
+          command: |
+            RSPEC_JUNIT_ARGS="-r rspec_junit_formatter -f RspecJunitFormatter -o test_results/rspec.xml"
+            RSPEC_GENERAL_ARGS="-f progress --no-color -p 10"
+            SPLIT_ARGS="$(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)"
+            bundle exec rspec spec $RSPEC_GENERAL_ARGS $RSPEC_JUNIT_ARGS $SPLIT_ARGS
+
+      - store_test_results:
+          path: test_results
+
+  lint:
+    executor: ruby-executor
+    steps:
+      - setup
+
+      - run:
+          name: Install reviewdog
+          command: |
+            curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ./bin
+
+      - run:
+          name: Get files to lint
+          command: git diff origin/master --name-only --diff-filter=d > tmp/files_to_lint
+
+      - run:
+          name: Run rubocop
+          shell: /bin/bash
+          command: |
+            cat tmp/files_to_lint | grep -E '.+\.(rb)$' | xargs bundle exec rubocop --force-exclusion \
+            | ./bin/reviewdog -reporter=github-pr-review -f=rubocop
+
+workflows:
+  test_and_lint:
+    jobs:
+      - test
+      - lint:
+          context: org-global

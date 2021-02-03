@@ -24,6 +24,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.4.0"
   spec.add_development_dependency "rspec_junit_formatter"
   spec.add_development_dependency "rubocop", Potassium::RUBOCOP_VERSION
+  spec.add_development_dependency "rubocop-performance"
+  spec.add_development_dependency "rubocop-rails"
   spec.add_development_dependency "rubocop-rspec"
   spec.add_runtime_dependency "gems", "~> 0.8"
   spec.add_runtime_dependency "gli", "~> 2.12.2"

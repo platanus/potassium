@@ -22,7 +22,6 @@ module PotassiumTestHelpers
         add_project_bin_to_path
         full_arguments = hash_to_arguments(create_arguments(true).merge(arguments))
         run_command("#{potassium_bin} create #{APP_NAME} #{full_arguments}")
-        on_project { run_command("hound rules update ruby --local") }
       end
     end
   end
