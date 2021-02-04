@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rubocop", Potassium::RUBOCOP_VERSION
   spec.add_development_dependency "rubocop-performance"
   spec.add_development_dependency "rubocop-rails"
-  spec.add_development_dependency "rubocop-rspec"
+  spec.add_development_dependency "rubocop-rspec", Potassium::RUBOCOP_RSPEC_VERSION
   spec.add_runtime_dependency "gems", "~> 0.8"
   spec.add_runtime_dependency "gli", "~> 2.12.2"
   spec.add_runtime_dependency "inquirer", "~> 0.2"
