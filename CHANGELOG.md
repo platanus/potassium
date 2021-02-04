@@ -1,7 +1,7 @@
 # Changelog
 
 ## Unreleased
-
+  - Add Google Tag Manager [#326](https://github.com/platanus/potassium/pull/326)
 ## 6.1.0
 
 Features:

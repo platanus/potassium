@@ -67,6 +67,7 @@ The following optional integrations are also added:
   and [Sendgrid](https://github.com/platanus/send_grid_mailer) with recipient interceptor support
 - [Sentry](https://sentry.io) to monitor exceptions and errors
 - [Vue.js](https://vuejs.org) or [Angular 2](https://angular.io/) for frontend development
+- [Google Tag Manager](https://tagmanager.google.com/) for analytics
 - Creates the Github repository of your choice for the project. A local git repository will always be created.
 
 A few more things are added to the project:
