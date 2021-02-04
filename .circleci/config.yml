@@ -5,6 +5,8 @@ env-vars: &env-vars
   BUNDLE_JOBS: 4
   RAILS_ENV: test
   RAKE_ENV: test
+  BUNDLE_PATH: /home/circleci/project/vendor/bundle
+  GEM_PATH: /home/circleci/project/vendor/bundle/ruby/2.7.0
 
 executors:
   ruby-executor:
@@ -20,9 +22,9 @@ commands:
 
       - restore_cache:
           keys:
-          - potassium-bundle-{{ .Branch }}
-          - potassium-bundle-master
-          - potassium-bundle
+          - potassium-vendor-bundle-{{ .Branch }}
+          - potassium-vendor-bundle-master
+          - potassium-vendor-bundle
 
       - run:
           name: Install bundle dependencies
@@ -31,9 +33,9 @@ commands:
             bundle _2.1.4_ install
 
       - save_cache:
-          key: potassium-bundle-{{ .Branch }}
+          key: potassium-vendor-bundle-{{ .Branch }}
           paths:
-            - /usr/local/bundle
+            - vendor/bundle
 
 jobs:
   test:
