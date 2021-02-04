@@ -50,7 +50,7 @@ jobs:
             RSPEC_JUNIT_ARGS="-r rspec_junit_formatter -f RspecJunitFormatter -o test_results/rspec.xml"
             RSPEC_GENERAL_ARGS="-f progress --no-color -p 10"
             SPLIT_ARGS="$(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)"
-            bundle exec rspec spec $RSPEC_GENERAL_ARGS $RSPEC_JUNIT_ARGS $SPLIT_ARGS
+            bundle exec rspec $RSPEC_GENERAL_ARGS $RSPEC_JUNIT_ARGS $SPLIT_ARGS
 
       - store_test_results:
           path: test_results
