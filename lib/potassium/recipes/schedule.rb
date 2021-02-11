@@ -10,8 +10,8 @@ class Recipes::Schedule < Rails::AppBuilder
     if selected?(:schedule)
       gather_gem 'sidekiq-scheduler', '>= 3.0.1'
       add_readme_section :internal_dependencies, :sidekiq_scheduler
+      template '../assets/sidekiq_scheduler.yml', 'config/sidekiq.yml', force: true
     end
-    template '../assets/sidekiq_scheduler.yml', 'config/sidekiq.yml', force: true
   end
 
   def install
