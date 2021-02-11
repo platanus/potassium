@@ -4,7 +4,7 @@ RSpec.describe "schedule" do
   before :all do
     drop_dummy_database
     remove_project_directory
-    create_dummy_project("schedule" => true)
+    create_dummy_project("schedule" => true, "background_processor" => true)
   end
 
   it "adds the sidekiq-scheduler gem to Gemfile" do

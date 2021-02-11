@@ -1,6 +1,6 @@
 class Recipes::BackgroundProcessor < Rails::AppBuilder
   def ask
-    response = if selected?(:email_service, :none)
+    response = if [:none, :None].include?(get(:email_service).to_sym)
                  answer(:background_processor) do
                    Ask.confirm("Do you want to use Sidekiq for background job processing?")
                  end
