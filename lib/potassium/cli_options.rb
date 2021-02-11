@@ -97,10 +97,10 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       default_test_value: false
     },
     {
-      type: :flag,
+      type: :switch,
       name: "background_processor",
-      desc: "Decides which background processor to use. Available: sidekiq, delayed_job, none",
-      default_test_value: "None"
+      desc: "Whether to use Sidekiq for background processing or not",
+      default_test_value: false
     },
     {
       type: :switch,
