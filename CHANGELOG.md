@@ -6,6 +6,9 @@ Features:
   - Add Google Tag Manager [#326](https://github.com/platanus/potassium/pull/326)
   - Update rubocop and rubocop-rspec for potassium and generated projects [#337](https://github.com/platanus/potassium/pull/337)
 
+Fixes:
+  - Change `backgroud_processor` cli option to a switch. As of [#137](https://github.com/platanus/potassium/pull/137) we no longer have `delayed_jobs` as an option, it's only `sidekiq` now [#340](https://github.com/platanus/potassium/pull/340)
+
 ## 6.1.0
 
 Features:
