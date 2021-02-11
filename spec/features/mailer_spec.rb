@@ -4,6 +4,7 @@ RSpec.describe "Mailer" do
   let(:gemfile) { IO.read("#{project_path}/Gemfile") }
   let(:mailer_config) { IO.read("#{project_path}/config/mailer.rb") }
   let(:dev_config) { IO.read("#{project_path}/config/environments/development.rb") }
+  let(:sidekiq_config) { IO.read("#{project_path}/config/sidekiq.yml") }
 
   before(:all) { drop_dummy_database }
 
@@ -25,6 +26,10 @@ RSpec.describe "Mailer" do
       expect(dev_config).to include("delivery_method = :sendgrid_dev")
       expect(dev_config).to include("sendgrid_dev_settings = {")
       expect(dev_config).to include("api_key: ENV['SENDGRID_API_KEY']")
+    end
+
+    it 'adds mailers queue to sidekiq config' do
+      expect(sidekiq_config).to include("- mailers")
     end
   end
 

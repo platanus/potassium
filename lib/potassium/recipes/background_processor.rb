@@ -1,12 +1,12 @@
 class Recipes::BackgroundProcessor < Rails::AppBuilder
   def ask
-    response = if [:none, :None].include?(get(:email_service).to_sym)
+    response = if enabled_mailer?
+                 info "Note: Emails should be sent on background jobs. We'll install sidekiq"
+                 true
+               else
                  answer(:background_processor) do
                    Ask.confirm("Do you want to use Sidekiq for background job processing?")
                  end
-               else
-                 info "Note: Emails should be sent on background jobs. We'll install sidekiq"
-                 true
                end
     set(:background_processor, response)
   end
@@ -28,6 +28,28 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
 
   def installed?
     gem_exists?(/sidekiq/)
+  end
+
+  def add_sidekiq
+    gather_gem("sidekiq")
+    add_adapters("sidekiq")
+    add_readme_section :internal_dependencies, :sidekiq
+    edit_procfile("bundle exec sidekiq")
+    append_to_file(".env.development", "DB_POOL=25\n")
+    template("../assets/sidekiq.rb.erb", "config/initializers/sidekiq.rb", force: true)
+    copy_file("../assets/sidekiq.yml", "config/sidekiq.yml", force: true)
+    add_mailer_queue if enabled_mailer?
+    copy_file("../assets/redis.yml", "config/redis.yml", force: true)
+
+    insert_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
+      <<-HERE.gsub(/^ {6}/, '')
+        mount Sidekiq::Web => '/queue'
+      HERE
+    end
+  end
+
+  def add_mailer_queue
+    insert_into_file "config/sidekiq.yml", "  - mailers", after: "- default\n"
   end
 
   private
@@ -59,23 +81,6 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
     )
   end
 
-  def add_sidekiq
-    gather_gem("sidekiq")
-    add_adapters("sidekiq")
-    add_readme_section :internal_dependencies, :sidekiq
-    edit_procfile("bundle exec sidekiq")
-    append_to_file(".env.development", "DB_POOL=25\n")
-    template("../assets/sidekiq.rb.erb", "config/initializers/sidekiq.rb", force: true)
-    copy_file("../assets/sidekiq.yml", "config/sidekiq.yml", force: true)
-    copy_file("../assets/redis.yml", "config/redis.yml", force: true)
-
-    insert_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
-      <<-HERE.gsub(/^ {6}/, '')
-        mount Sidekiq::Web => '/queue'
-      HERE
-    end
-  end
-
   def edit_procfile(cmd)
     heroku = load_recipe(:heroku)
     if selected?(:heroku) || heroku.installed?
@@ -87,5 +92,10 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
     application("config.active_job.queue_adapter = :#{name}")
     application "config.active_job.queue_adapter = :async", env: "development"
     application "config.active_job.queue_adapter = :test", env: "test"
+  end
+
+  def enabled_mailer?
+    mailer_answer = get(:email_service)
+    mailer_answer && ![:none, :None].include?(mailer_answer.to_sym)
   end
 end

@@ -27,8 +27,11 @@ class Recipes::Mailer < Rails::AppBuilder
     background_processor_recipe = load_recipe(:background_processor)
     background_processor_answer = get(:background_processor)
 
-    background_processor_recipe.add_sidekiq unless background_processor_recipe.installed? ||
-      background_processor_answer
+    if background_processor_recipe.installed?
+      background_processor_recipe.add_mailer_queue
+    elsif !background_processor_answer
+      background_processor_recipe.add_sidekiq
+    end
   end
 
   def install
