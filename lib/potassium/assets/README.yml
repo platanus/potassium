@@ -112,9 +112,6 @@ readme:
         pundit:
           title: "Authorization"
           body: "For defining which parts of the system each user has access to, we have chosen to include the [Pundit](https://github.com/elabs/pundit) gem, by [Elabs](http://elabs.se/)."
-        delayed_job:
-          title: "Queue System"
-          body: "For managing tasks in the background, this project uses [DelayedJob](https://github.com/collectiveidea/delayed_job)"
         sidekiq:
           title: "Queue System"
           body: "For managing tasks in the background, this project uses [Sidekiq](https://github.com/mperham/sidekiq)"
