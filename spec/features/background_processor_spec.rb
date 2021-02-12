@@ -6,7 +6,7 @@ RSpec.describe "BackgroundProcessor" do
     before :all do
       drop_dummy_database
       remove_project_directory
-      create_dummy_project("background_processor" => "sidekiq", "heroku" => true)
+      create_dummy_project("background_processor" => true, "heroku" => true)
     end
 
     it "adds sidekiq gem to Gemfile" do
