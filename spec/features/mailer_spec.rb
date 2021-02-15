@@ -28,9 +28,7 @@ RSpec.describe "Mailer" do
       expect(dev_config).to include("api_key: ENV['SENDGRID_API_KEY']")
     end
 
-    it 'adds mailers queue to sidekiq config' do
-      expect(sidekiq_config).to include("- mailers")
-    end
+    it { expect(sidekiq_config).to include("- mailers") }
   end
 
   context "when selecting aws_ses as mailer" do
@@ -43,5 +41,18 @@ RSpec.describe "Mailer" do
     it { expect(gemfile).to include("letter_opener") }
     it { expect(mailer_config).to include("delivery_method = :aws_sdk") }
     it { expect(dev_config).to include("delivery_method = :letter_opener") }
+    it { expect(sidekiq_config).to include("- mailers") }
+  end
+
+  context "when selecting a mailer and sidekiq" do
+    before :all do
+      drop_dummy_database
+      remove_project_directory
+      create_dummy_project(
+        "background_processor" => true, "email_service" => 'sendgrid'
+      )
+    end
+
+    it { expect(sidekiq_config).to include("- mailers") }
   end
 end

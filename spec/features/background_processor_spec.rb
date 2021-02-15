@@ -76,19 +76,4 @@ RSpec.describe "BackgroundProcessor" do
       expect(compose_content[:services]).to include(:redis)
     end
   end
-
-  context "when working with sidekiq and a mailer" do
-    before :all do
-      drop_dummy_database
-      remove_project_directory
-      create_dummy_project(
-        "background_processor" => true, "heroku" => true, "email_service" => 'sendgrid'
-      )
-    end
-
-    it "adds sidekiq.yml file with mailers queue" do
-      content = IO.read("#{project_path}/config/sidekiq.yml")
-      expect(content).to include("- mailers")
-    end
-  end
 end

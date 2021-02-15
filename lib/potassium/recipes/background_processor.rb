@@ -31,25 +31,39 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
   end
 
   def add_sidekiq
-    gather_gem("sidekiq")
-    add_adapters("sidekiq")
-    add_readme_section :internal_dependencies, :sidekiq
-    edit_procfile("bundle exec sidekiq")
-    append_to_file(".env.development", "DB_POOL=25\n")
-    template("../assets/sidekiq.rb.erb", "config/initializers/sidekiq.rb", force: true)
-    copy_file("../assets/sidekiq.yml", "config/sidekiq.yml", force: true)
-    add_mailer_queue if enabled_mailer?
-    copy_file("../assets/redis.yml", "config/redis.yml", force: true)
+    recipe = self
+    run_action(:install_sidekiq) do
+      gather_gem("sidekiq")
+      recipe.add_adapters("sidekiq")
+      add_readme_section :internal_dependencies, :sidekiq
+      recipe.edit_procfile("bundle exec sidekiq")
+      append_to_file(".env.development", "DB_POOL=25\n")
+      template("../assets/sidekiq.rb.erb", "config/initializers/sidekiq.rb", force: true)
+      copy_file("../assets/sidekiq.yml", "config/sidekiq.yml", force: true)
+      copy_file("../assets/redis.yml", "config/redis.yml", force: true)
+      recipe.mount_sidekiq_routes
+    end
+  end
 
+  def edit_procfile(cmd)
+    heroku = load_recipe(:heroku)
+    if selected?(:heroku) || heroku.installed?
+      gsub_file('Procfile', /^.*$/m) { |match| "#{match}worker: #{cmd}" }
+    end
+  end
+
+  def add_adapters(name)
+    application("config.active_job.queue_adapter = :#{name}")
+    application "config.active_job.queue_adapter = :async", env: "development"
+    application "config.active_job.queue_adapter = :test", env: "test"
+  end
+
+  def mount_sidekiq_routes
     insert_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
       <<-HERE.gsub(/^ {6}/, '')
         mount Sidekiq::Web => '/queue'
       HERE
     end
-  end
-
-  def add_mailer_queue
-    insert_into_file "config/sidekiq.yml", "  - mailers", after: "- default\n"
   end
 
   private
@@ -79,19 +93,6 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
         REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}/1
       TEXT
     )
-  end
-
-  def edit_procfile(cmd)
-    heroku = load_recipe(:heroku)
-    if selected?(:heroku) || heroku.installed?
-      gsub_file('Procfile', /^.*$/m) { |match| "#{match}worker: #{cmd}" }
-    end
-  end
-
-  def add_adapters(name)
-    application("config.active_job.queue_adapter = :#{name}")
-    application "config.active_job.queue_adapter = :async", env: "development"
-    application "config.active_job.queue_adapter = :test", env: "test"
   end
 
   def enabled_mailer?
