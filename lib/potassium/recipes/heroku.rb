@@ -65,7 +65,7 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def heroku_pipeline_name
-    @heroku_pipeline_name ||= valid_heroku_name(app_name.dasherize, 'pipeline')
+    @heroku_pipeline_name ||= valid_heroku_name(app_name.dasherize, 'pipeline', false)
   end
 
   def set_app_name_for(environment)
@@ -133,10 +133,16 @@ class Recipes::Heroku < Rails::AppBuilder
     end
   end
 
-  def valid_heroku_name(name, element)
+  def valid_heroku_name(name, element, force_suffix = true)
+    suffix = "-#{element}"
     while name.length > HEROKU_NAMES_MAX_CHARS
       puts "Heroku names must be shorter than #{HEROKU_NAMES_MAX_CHARS} chars."
+      if force_suffix
+        puts "Potassium uses the heroku-stage gem, because of that '#{suffix}' will be "\
+             "added to your app name. The suffix, #{suffix}, counts towards the app name length."
+      end
       name = Ask.input("Please enter a valid name for #{element}:")
+      name += suffix if force_suffix && !name.end_with?(suffix)
     end
     name
   end
