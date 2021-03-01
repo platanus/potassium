@@ -1,10 +1,14 @@
 require "spec_helper"
 
 RSpec.describe "schedule" do
+  let(:sidekiq_config) { IO.read("#{project_path}/config/sidekiq.yml") }
+
   before :all do
     drop_dummy_database
     remove_project_directory
-    create_dummy_project("schedule" => true)
+    create_dummy_project(
+      "schedule" => true, "background_processor" => true, "email_service" => "sendgrid"
+    )
   end
 
   it "adds the sidekiq-scheduler gem to Gemfile" do
@@ -12,9 +16,12 @@ RSpec.describe "schedule" do
     expect(gemfile_content).to include("gem 'sidekiq-scheduler'")
   end
 
-  it "creates the config with schedule" do
-    initializer_content = IO.read("#{project_path}/config/sidekiq.yml")
-    expect(initializer_content).to include(":schedule:")
+  it "adds schedule section to sidekiq config" do
+    expect(sidekiq_config).to include(":schedule:")
+  end
+
+  it "doesn't remove mailers queue" do
+    expect(sidekiq_config).to include("- mailers")
   end
 
   it "adds scheduler ui to the sidekiq initializer" do

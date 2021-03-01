@@ -2,7 +2,7 @@ require "spec_helper"
 require 'yaml'
 
 RSpec.describe "BackgroundProcessor" do
-  context "working with sidekiq" do
+  context "when working with sidekiq and no mailer" do
     before :all do
       drop_dummy_database
       remove_project_directory
@@ -52,9 +52,11 @@ RSpec.describe "BackgroundProcessor" do
       expect(content).to include("require 'sidekiq'")
     end
 
-    it "adds sidekiq.yml file" do
-      content = IO.read("#{project_path}/config/sidekiq.yml")
-      expect(content).to include("concurrency: 5")
+    it "adds sidekiq.yml file with no mailer queue" do
+      yml_path = "#{project_path}/config/sidekiq.yml"
+      content = IO.read(yml_path)
+      expect(File.exist?(yml_path)).to be true
+      expect(content).not_to include("- mailers")
     end
 
     it "adds redis.yml file" do

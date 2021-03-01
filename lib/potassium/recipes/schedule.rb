@@ -10,8 +10,8 @@ class Recipes::Schedule < Rails::AppBuilder
     if selected?(:schedule)
       gather_gem 'sidekiq-scheduler', '>= 3.0.1'
       add_readme_section :internal_dependencies, :sidekiq_scheduler
+      append_schedule_section_to_yml
     end
-    template '../assets/sidekiq_scheduler.yml', 'config/sidekiq.yml', force: true
   end
 
   def install
@@ -21,5 +21,20 @@ class Recipes::Schedule < Rails::AppBuilder
 
   def installed?
     gem_exists?(/sidekiq-scheduler/) && file_exist?('config/sidekiq.yml')
+  end
+
+  private
+
+  def append_schedule_section_to_yml
+    append_to_file(
+      'config/sidekiq.yml',
+      <<-HERE.gsub(/^ {8}/, '')
+        # :schedule:
+          #  an_scheduled_task:
+          #    cron: '0 * * * * *'  # Runs once per minute
+          #    class: ExampleJob
+          #    args: ['a', 'b']
+      HERE
+    )
   end
 end
