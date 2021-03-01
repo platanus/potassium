@@ -8,6 +8,7 @@ Features:
 
 Fixes:
   - Change `backgroud_processor` cli option to a switch. As of [#137](https://github.com/platanus/potassium/pull/137) we no longer have `delayed_jobs` as an option, it's only `sidekiq` now [#340](https://github.com/platanus/potassium/pull/340)
+  - Update `heroku` recipe to check if an app or pipeline name is valid before creating it on Heroku [#344](https://github.com/platanus/potassium/pull/344)
 
 ## 6.1.0
 
