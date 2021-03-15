@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 6.2.0
+
 Features:
   - Add Google Tag Manager [#326](https://github.com/platanus/potassium/pull/326)
   - Update rubocop and rubocop-rspec for potassium and generated projects [#337](https://github.com/platanus/potassium/pull/337)
