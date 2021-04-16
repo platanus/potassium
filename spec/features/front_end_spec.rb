@@ -19,7 +19,6 @@ RSpec.describe "Front end" do
     remove_project_directory
     create_dummy_project("front_end" => "None")
     expect(gemfile).to include('webpacker')
-    expect(File).not_to exist(application_css_path)
   end
 
   def expect_to_have_tailwind_compatibility_build
