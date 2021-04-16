@@ -34,10 +34,9 @@ class Recipes::Admin < Rails::AppBuilder
   def add_active_admin
     gather_gem 'activeadmin', '~> 2.6'
     gather_gem 'activeadmin_addons'
-    gather_gem 'active_skin', github: 'SoftwareBrothers/active_skin'
     add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
-      generate "active_admin:install"
+      generate "active_admin:install --use_webpacker"
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
@@ -50,22 +49,6 @@ class Recipes::Admin < Rails::AppBuilder
           end\n
           ActiveAdmin.setup do |config|
             config.view_factory.footer = CustomFooter
-        HERE
-      end
-
-      line = "@import \"active_admin/base\";"
-      style = "app/assets/stylesheets/active_admin.css.scss"
-      style = File.exist?(style) ? style : "app/assets/stylesheets/active_admin.scss"
-
-      gsub_file style, /(#{Regexp.escape(line)})/mi do |_match|
-        <<~HERE
-          #{line}
-          $skinActiveColor: #001CEE;
-          $skinHeaderBck: #002744;
-          $panelHeaderBck: #002744;
-          //$skinLogo: $skinHeaderBck image-url("logo_admin.png") no-repeat center center;
-
-          @import "active_skin";
         HERE
       end
 
