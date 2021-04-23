@@ -24,7 +24,7 @@ jobs:
 
   lint:
     docker:
-      - image: circleci/ruby:2.7-node
+      - image: circleci/ruby:2.7
         environment:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
@@ -56,7 +56,12 @@ jobs:
 
       - run:
           name: Install yarn dependencies
-          command: yarn install --frozen-lockfile
+          command: |
+            curl -sL https://deb.nodesource.com/setup_$(cat .node-version).x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            curl -o- -sL https://yarnpkg.com/install.sh | bash
+            sudo ln -s $HOME/.yarn/bin/yarn /usr/local/bin/yarn
+            yarn install --frozen-lockfile
 
       - save_cache:
           key: yarn-dependencies-{{ checksum "yarn.lock" }}

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+Features:
+
+Fixes:
+  - Explicitly install project specified node version in CircleCI build [#352](https://github.com/platanus/potassium/pull/352)
+
 ## 6.2.0
 
 Features:
