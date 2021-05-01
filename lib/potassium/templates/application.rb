@@ -59,6 +59,7 @@ run_action(:recipe_loading) do
   create :i18n
   create :pry
   create :better_errors
+  create :monitoring
   create :devise
   create :admin
   create :vue_admin

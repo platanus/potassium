@@ -3,6 +3,7 @@
 ## Unreleased
 
 Features:
+  - Add `monitoring` recipe with scout gem [#353](https://github.com/platanus/potassium/pull/353)
 
 Fixes:
   - Explicitly install project specified node version in CircleCI build [#352](https://github.com/platanus/potassium/pull/352)
