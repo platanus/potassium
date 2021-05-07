@@ -49,10 +49,37 @@ class Recipes::Admin < Rails::AppBuilder
           end\n
           ActiveAdmin.setup do |config|
             config.view_factory.footer = CustomFooter
+            meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
+            config.meta_tags = meta_tags_options
+            config.meta_tags_for_logged_out_pages = meta_tags_options
         HERE
       end
 
       generate "activeadmin_addons:install"
+
+      run "bin/yarn add arctic_admin @fortawesome/fontawesome-free"
+
+      aa_style = "app/javascript/stylesheets/active_admin.scss"
+
+      gsub_file(
+        aa_style,
+        "@import \"~@activeadmin/activeadmin/src/scss/mixins\";\n" +
+        "@import \"~@activeadmin/activeadmin/src/scss/base\";",
+        "@import '~arctic_admin/src/scss/main'; \n"
+      )
+
+      aa_js = "app/javascript/packs/active_admin.js"
+      js_line = "import \"@activeadmin/activeadmin\";\n"
+
+      gsub_file(
+        aa_js,
+        js_line,
+        <<~HERE
+          #{js_line}
+          import '@fortawesome/fontawesome-free/css/all.css';
+          import 'arctic_admin';
+        HERE
+      )
     end
   end
 end
