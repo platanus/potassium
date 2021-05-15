@@ -22,6 +22,12 @@ RSpec.describe "Front end" do
     expect(File).not_to exist(application_css_path)
   end
 
+  def expect_to_have_tailwind_compatibility_build
+    expect(node_modules_file).to include("\"tailwindcss\": \"npm:@tailwindcss/postcss7-compat\"")
+    expect(node_modules_file).to include("\"autoprefixer\": \"^9\"")
+    expect(node_modules_file).to include("\"postcss\": \"^7\"")
+  end
+
   context "with vue" do
     before(:all) do
       remove_project_directory
@@ -55,6 +61,10 @@ RSpec.describe "Front end" do
       expect(tailwind_config_file).to include('module.exports')
     end
 
+    it 'includes correct packages for tailwind, postcss and autoprefixer compatibility build' do
+      expect_to_have_tailwind_compatibility_build
+    end
+
     context "with graphql" do
       before(:all) do
         remove_project_directory
@@ -83,6 +93,10 @@ RSpec.describe "Front end" do
 
     it "creates application_js_file for tailwind without vue" do
       expect(application_js_file).to include("import '../css/application.css';")
+    end
+
+    it 'includes correct packages for tailwind, postcss and autoprefixer compatibility build' do
+      expect_to_have_tailwind_compatibility_build
     end
   end
 end

@@ -69,7 +69,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_tailwind
-    run 'bin/yarn add tailwindcss'
+    run "bin/yarn add tailwindcss@#{Potassium::TAILWINDCSS}"
+    specify_autoprefixer_postcss_compatibility_versions
     setup_client_css
     remove_server_css_requires
     setup_tailwind_requirements
@@ -145,6 +146,10 @@ class Recipes::FrontEnd < Rails::AppBuilder
         defaultClient: apolloClient,
       })
     JS
+  end
+
+  def specify_autoprefixer_postcss_compatibility_versions
+    run 'bin/yarn -D add postcss@^7 autoprefixer@^9'
   end
 
   def setup_client_css
