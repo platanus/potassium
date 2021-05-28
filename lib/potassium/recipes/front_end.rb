@@ -26,6 +26,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       if value == :vue
         recipe.setup_vue_with_compiler_build
         recipe.setup_jest
+        recipe.setup_vue_aliases
         if get(:api) == :graphql
           recipe.setup_apollo
         end
@@ -104,6 +105,15 @@ class Recipes::FrontEnd < Rails::AppBuilder
       'app/javascript/packs/application.js',
       "\n    apolloProvider,",
       after: "components: { App },"
+    )
+  end
+
+  def setup_vue_aliases
+    webpack_env_file = 'config/webpack/environment.js'
+    insert_into_file(
+      webpack_env_file,
+      webpack_vue_aliases,
+      before: "module.exports = environment"
     )
   end
 
@@ -195,6 +205,18 @@ class Recipes::FrontEnd < Rails::AppBuilder
         });
 
         return app;
+      });
+    JS
+  end
+
+  def webpack_vue_aliases
+    <<~JS
+      environment.config.merge({
+        resolve: {
+          alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+          },
+        },
       });
     JS
   end

@@ -14,6 +14,7 @@ RSpec.describe "Front end" do
   let(:application_css_file) { IO.read(application_css_path) }
   let(:tailwind_config_file) { IO.read("#{project_path}/tailwind.config.js") }
   let(:rails_css_file) { IO.read("#{project_path}/app/assets/stylesheets/application.css") }
+  let(:environment_file) { IO.read("#{project_path}/config/webpack/environment.js") }
 
   it "creates a project without a front end framework" do
     remove_project_directory
@@ -44,6 +45,11 @@ RSpec.describe "Front end" do
       expect(application_js_file).to include("import '../css/application.css';")
       expect(layout_file).to include("<%= stylesheet_pack_tag 'application' %>")
       expect(rails_css_file).not_to include('*= require_tree', '*= require_self')
+    end
+
+    it "creates project with a vue module alias included" do
+      expect(environment_file).to include("environment.config.merge({")
+      expect(environment_file).to include("'vue$': 'vue/dist/vue.esm.js',")
     end
 
     it "creates a vue project with tailwindcss" do

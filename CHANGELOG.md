@@ -8,6 +8,7 @@ Features:
 Fixes:
   - Explicitly install project specified node version in CircleCI build [#352](https://github.com/platanus/potassium/pull/352)
   - Update marcel gem (shrine's mime type analyzer) to avoid mimemagic dependency [#357](https://github.com/platanus/potassium/pull/357)
+  - Add Vue alias in the Webpacker config to avoid strange behaviors of external packages [#360](https://github.com/platanus/potassium/pull/358)
 
 ## 6.2.0
 
