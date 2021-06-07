@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe "Node" do
-  let(:version) { "12" }
+  let(:version) { "14" }
 
   before(:all) do
     drop_dummy_database

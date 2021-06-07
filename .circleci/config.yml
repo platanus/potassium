@@ -1,12 +1,12 @@
 version: 2.1
 
-ruby-image: &ruby-image circleci/ruby:2.7.0-node
+ruby-image: &ruby-image circleci/ruby:2.7.3-node
 env-vars: &env-vars
   BUNDLE_JOBS: 4
   RAILS_ENV: test
   RAKE_ENV: test
   BUNDLE_PATH: /home/circleci/project/vendor/bundle
-  GEM_PATH: /home/circleci/project/vendor/bundle/ruby/2.7.0
+  GEM_PATH: /home/circleci/project/vendor/bundle/ruby/2.7.3
 
 executors:
   ruby-executor:
