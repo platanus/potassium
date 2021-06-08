@@ -17,10 +17,4 @@ class Recipes::Ci < Rails::AppBuilder
   def installed?
     file_exist?('.circleci/config.yml')
   end
-
-  private
-
-  def ruby_version
-    Semantic::Version.new(Potassium::RUBY_VERSION).instance_eval { "#{major}.#{minor}" }
-  end
 end
