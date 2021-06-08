@@ -10,6 +10,14 @@ class Recipes::Ci < Rails::AppBuilder
     application 'config.assets.js_compressor = :uglifier', env: 'test'
   end
 
+  def install
+    create
+  end
+
+  def installed?
+    file_exist?('.circleci/config.yml')
+  end
+
   private
 
   def ruby_version
