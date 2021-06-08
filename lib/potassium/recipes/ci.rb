@@ -3,7 +3,7 @@ class Recipes::Ci < Rails::AppBuilder
     template '../assets/.circleci/config.yml.erb', '.circleci/config.yml'
 
     gather_gems(:test) do
-      gather_gem 'rspec_junit_formatter', '0.2.2'
+      gather_gem 'rspec_junit_formatter', '~> 0.4'
     end
 
     add_readme_header :ci
