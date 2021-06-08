@@ -4,6 +4,7 @@
 
 Features:
   - Add `monitoring` recipe with scout gem [#353](https://github.com/platanus/potassium/pull/353)
+  - Change CircleCI config to use cache in tests, and remove old cibuild flow [#366](https://github.com/platanus/potassium/pull/366)
 
 Fixes:
   - Explicitly install project specified node version in CircleCI build [#352](https://github.com/platanus/potassium/pull/352)
