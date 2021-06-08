@@ -1,8 +1,12 @@
 version: 2.1
 
 ruby-image: &ruby-image circleci/ruby:<%= ruby_version %>
+<% if selected?(:database, :postgresql) %>
 postgres-image: &postgres-image postgres:<%= Potassium::POSTGRES_VERSION %>
+<% end %>
+<% if selected?(:background_processor) %>
 redis-image: &redis-image redis
+<% end %>
 env-vars: &env-vars
   BUNDLE_JOBS: 4
   BUNDLE_PATH: vendor/bundle
@@ -13,8 +17,12 @@ executors:
     docker:
       - image: *ruby-image
         environment: *env-vars
+      <% if selected?(:database, :postgresql) %>
       - image: *postgres-image
+      <% end %>
+      <% if selected?(:background_processor) %>
       - image: *redis-image
+      <% end %>
 
   lint-executor:
     docker:
@@ -69,17 +77,23 @@ jobs:
     steps:
       - setup
 
+      <% if selected?(:database, :postgresql) %>
       - run:
           name: Wait for postgres service
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      <% end %>
 
+      <% if selected?(:background_processor) %>
       - run:
           name: Wait for redis service
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
+      <% end %>
 
+      <% if selected?(:database, :postgresql) %>
       - run:
           name: Setup database
           command: bundle exec rails db:create db:schema:load
+      <% end %>
 
       - run:
           name: Run rspec
@@ -92,8 +106,8 @@ jobs:
       - run:
           name: Run jest
           command: yarn run test
-
     <% end %>
+
       - store_test_results:
           path: test_results
 
