@@ -47,4 +47,10 @@ class Recipes::Ci < Rails::AppBuilder
 
     application 'config.assets.js_compressor = :uglifier', env: 'test'
   end
+
+  private
+
+  def ruby_version
+    Semantic::Version.new(Potassium::RUBY_VERSION).instance_eval { "#{major}.#{minor}" }
+  end
 end
