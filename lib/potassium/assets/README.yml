@@ -42,10 +42,7 @@ readme:
         The project is setup to run tests
         in [CircleCI](https://circleci.com/gh/platanus/<%= get(:dasherized_app_name) %>/tree/master)
 
-        You can also run the test locally simulating the production environment using docker.
-        Just make sure you have docker installed and run:
-
-            bin/cibuild
+        You can also run the test locally simulating the production environment using [CircleCI's method](https://circleci.com/docs/2.0/local-cli/).
     deployment:
       title: "Deployment"
       body: |
