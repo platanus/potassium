@@ -1,34 +1,37 @@
-version: 2
-jobs:
-  test:
-    working_directory: ~/app
+version: 2.1
 
+ruby-image: &ruby-image circleci/ruby:<%= ruby_version %>
+<%- if selected?(:database, :postgresql) -%>
+postgres-image: &postgres-image postgres:<%= Potassium::POSTGRES_VERSION %>
+<%- end -%>
+<%- if selected?(:background_processor) -%>
+redis-image: &redis-image redis
+<%- end -%>
+env-vars: &env-vars
+  BUNDLE_JOBS: 4
+  BUNDLE_PATH: vendor/bundle
+  RAILS_ENV: test
+
+executors:
+  test-executor:
     docker:
-    - image: platanus/compose:1.22.0
+      - image: *ruby-image
+        environment: *env-vars
+      <%- if selected?(:database, :postgresql) -%>
+      - image: *postgres-image
+      <%- end -%>
+      <%- if selected?(:background_processor) -%>
+      - image: *redis-image
+      <%- end -%>
 
-    steps:
-    - checkout
-    - setup_remote_docker
-
-    - run: docker info
-    - run: docker-compose -f docker-compose.ci.yml pull
-    - run: docker-compose -f docker-compose.ci.yml build test
-    - run: bin/cibuild services
-    - run: bin/cibuild deps
-
-    - run: bin/cibuild db
-    - run: bin/cibuild tests
-    <% if selected?(:front_end, :vue) %>
-    - run: bin/cibuild js_tests
-    <% end %>
-
-  lint:
+  lint-executor:
     docker:
-      - image: circleci/ruby:2.7
-        environment:
-          BUNDLE_JOBS: 4
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
+      - image: *ruby-image
+        environment: *env-vars
+
+commands:
+  setup:
+    description: checkout code, restore cache, install dependencies, save cache
     steps:
       - checkout
 
@@ -49,11 +52,6 @@ jobs:
             gem install bundler:$BUNDLER_VERSION
             bundle _$(echo $BUNDLER_VERSION)_ install
 
-      - save_cache:
-          key: bundle-dependencies-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
       - run:
           name: Install yarn dependencies
           command: |
@@ -64,9 +62,56 @@ jobs:
             yarn install --frozen-lockfile
 
       - save_cache:
+          key: bundle-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - save_cache:
           key: yarn-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
+
+jobs:
+  test:
+    executor: test-executor
+    steps:
+      - setup
+
+      <%- if selected?(:background_processor) -%>
+      - run:
+          name: Wait for redis service
+          command: dockerize -wait tcp://localhost:6379 -timeout 1m
+      <%- end -%>
+      <%- if selected?(:database, :postgresql) -%>
+      - run:
+          name: Wait for postgres service
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Setup database
+          command: bundle exec rails db:create db:schema:load
+      <%- end -%>
+
+      - run:
+          name: Run rspec
+          command: |
+            RSPEC_JUNIT_ARGS="-r rspec_junit_formatter -f RspecJunitFormatter -o test_results/rspec.xml"
+            RSPEC_FORMAT_ARGS="-f progress --no-color -p 10"
+            bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
+
+      <%- if selected?(:front_end, :vue) -%>
+      - run:
+          name: Run jest
+          command: yarn run test
+      <%- end -%>
+
+      - store_test_results:
+          path: test_results
+
+  lint:
+    executor: lint-executor
+    steps:
+      - setup
 
       - run:
           name: Install reviewdog
@@ -99,7 +144,6 @@ jobs:
             | ./bin/reviewdog -reporter=github-pr-review -f=stylelint
 
 workflows:
-  version: 2
   test_and_lint:
     jobs:
       - test

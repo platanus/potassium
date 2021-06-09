@@ -7,6 +7,10 @@ module TemplateHelpers
     "#{Potassium::NODE_VERSION}.x"
   end
 
+  def ruby_version
+    Semantic::Version.new(Potassium::RUBY_VERSION).instance_eval { "#{major}.#{minor}" }
+  end
+
   def load_recipe(recipe_name)
     @recipes ||= {}
     @recipes[recipe_name] ||= get_recipe_class(recipe_name.to_sym).new(self)
