@@ -10,6 +10,7 @@ Fixes:
   - Explicitly install project specified node version in CircleCI build [#352](https://github.com/platanus/potassium/pull/352)
   - Fixes `tailwindCSS@^2` incompatibility with `postcss@^7` [#356](https://github.com/platanus/potassium/pull/356)
   - Update marcel gem (shrine's mime type analyzer) to avoid mimemagic dependency [#357](https://github.com/platanus/potassium/pull/357)
+  - Explicitly set the frontend test environment to `jsdom` [#367](https://github.com/platanus/potassium/pull/367)
 
 ## 6.2.0
 

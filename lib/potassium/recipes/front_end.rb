@@ -269,7 +269,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
         },
         "snapshotSerializers": [
           "<rootDir>/node_modules/jest-serializer-vue"
-        ]
+        ],
+        "testEnvironment": "jsdom"
       }
     }
   end
