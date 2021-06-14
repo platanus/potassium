@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+Features
+  - Update node to latest LTS version, 14 [#363](https://github.com/platanus/potassium/pull/363)
+
 Fixes
   - Remove rails_stdout_logging gem because it is no longer needed after Rails 5 and it was generating a deprecation warning [#325](https://github.com/platanus/potassium/pull/325)
 
