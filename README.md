@@ -155,6 +155,15 @@ It's important to remember that `bin/potassium_test create`:
 - Can receive the same options as `potassium create`
 - Runs with options with a default value. This is to avoid the "asking part" of the creation process. You need to enable what you want to test like this: `$ bin/potassium_test create --clockwork`
 
+## Publishing
+On master branch.
+
+1. Change `VERSION` in `lib/potassium/version.rb`
+2. Change `Unreleased` title to current version in `CHANGELOG.md`
+3. Commit new release. For example: `Releasing v6.3.0`
+4. Create tag. For example: `git tag v6.3.0`
+5. Push tag: `git push origin v6.3.0`
+
 ## Contributing
 
 If you want to add functionality please go to
