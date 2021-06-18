@@ -89,7 +89,8 @@ jobs:
           name: Publish to rubygems
           command: |
             gem build potassium.gemspec
-            gem push potassium-${$(git describe --tags)#*v}.gem
+            version_tag=$(git describe --tags)
+            gem push potassium-${version_tag#v}.gem
 
 workflows:
   test_and_lint:
