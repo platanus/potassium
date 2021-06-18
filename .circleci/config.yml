@@ -76,9 +76,31 @@ jobs:
             cat tmp/files_to_lint | grep -E '.+\.(rb)$' | xargs bundle exec rubocop --force-exclusion \
             | ./bin/reviewdog -reporter=github-pr-review -f=rubocop
 
+  deploy:
+    executor: ruby-executor
+    steps:
+      - setup
+
+      - run:
+          name: Setup rubygems
+          command: bash .circleci/setup-rubygems.sh
+
+      - run:
+          name: Publish to rubygems
+          command: |
+            gem build potassium.gemspec
+            gem push potassium-$(git describe --tags).gem
+
 workflows:
   test_and_lint:
     jobs:
       - test
       - lint:
           context: org-global
+      - deploy:
+          context: org-global
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
