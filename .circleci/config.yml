@@ -89,7 +89,7 @@ jobs:
           name: Publish to rubygems
           command: |
             gem build potassium.gemspec
-            gem push potassium-$(git describe --tags).gem
+            gem push potassium-${$(git describe --tags)#*v}.gem
 
 workflows:
   test_and_lint:
