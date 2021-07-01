@@ -15,13 +15,11 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
-    return if [:none, :None].include? get(:front_end).to_sym
-
     recipe = self
     after(:gem_install) do
       value = get(:front_end)
       run "rails webpacker:install"
-      run "rails webpacker:install:#{value}" if value
+      run "rails webpacker:install:#{value}" unless [:none, :None].include? value.to_sym
 
       if value == :vue
         recipe.setup_vue_with_compiler_build

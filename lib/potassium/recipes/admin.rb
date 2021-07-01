@@ -34,10 +34,9 @@ class Recipes::Admin < Rails::AppBuilder
   def add_active_admin
     gather_gem 'activeadmin', '~> 2.6'
     gather_gem 'activeadmin_addons'
-    gather_gem 'active_skin', github: 'SoftwareBrothers/active_skin'
     add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
-      generate "active_admin:install"
+      generate "active_admin:install --use_webpacker"
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
@@ -50,26 +49,37 @@ class Recipes::Admin < Rails::AppBuilder
           end\n
           ActiveAdmin.setup do |config|
             config.view_factory.footer = CustomFooter
-        HERE
-      end
-
-      line = "@import \"active_admin/base\";"
-      style = "app/assets/stylesheets/active_admin.css.scss"
-      style = File.exist?(style) ? style : "app/assets/stylesheets/active_admin.scss"
-
-      gsub_file style, /(#{Regexp.escape(line)})/mi do |_match|
-        <<~HERE
-          #{line}
-          $skinActiveColor: #001CEE;
-          $skinHeaderBck: #002744;
-          $panelHeaderBck: #002744;
-          //$skinLogo: $skinHeaderBck image-url("logo_admin.png") no-repeat center center;
-
-          @import "active_skin";
+            meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
+            config.meta_tags = meta_tags_options
+            config.meta_tags_for_logged_out_pages = meta_tags_options
         HERE
       end
 
       generate "activeadmin_addons:install"
+
+      run "bin/yarn add arctic_admin @fortawesome/fontawesome-free"
+
+      aa_style = "app/javascript/stylesheets/active_admin.scss"
+
+      gsub_file(
+        aa_style,
+        "@import \"~@activeadmin/activeadmin/src/scss/mixins\";\n" +
+        "@import \"~@activeadmin/activeadmin/src/scss/base\";",
+        "@import '~arctic_admin/src/scss/main'; \n"
+      )
+
+      aa_js = "app/javascript/packs/active_admin.js"
+      js_line = "import \"@activeadmin/activeadmin\";\n"
+
+      gsub_file(
+        aa_js,
+        js_line,
+        <<~HERE
+          #{js_line}
+          import '@fortawesome/fontawesome-free/css/all.css';
+          import 'arctic_admin';
+        HERE
+      )
     end
   end
 end

@@ -61,8 +61,6 @@ run_action(:recipe_loading) do
   create :better_errors
   create :monitoring
   create :devise
-  create :admin
-  create :vue_admin
   create :seeds
   create :error_reporting
   create :pundit
@@ -78,6 +76,8 @@ run_action(:recipe_loading) do
   create :github
   create :cleanup
   create :front_end
+  create :admin
+  create :vue_admin
   create :google_tag_manager
 end
 
