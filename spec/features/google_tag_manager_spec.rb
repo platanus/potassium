@@ -31,29 +31,6 @@ RSpec.describe "Google Tag Manager" do
 
   it 'add content security policy' do
     expect(content_security_policy_file)
-      .to include(content_security_policy_code)
-  end
-
-  def content_security_policy_code
-    <<~HERE
-      Rails.application.config.content_security_policy do |policy|
-        if Rails.env.development?
-          policy.connect_src :self, :https, 'http://localhost:3035', 'ws://localhost:3035'
-          policy.script_src :self, :https, :unsafe_eval
-        else
-          policy.script_src :self, :https
-          # google tag manager requires to enable unsafe inline:
-          # https://developers.google.com/tag-manager/web/csp
-          policy.connect_src :self, :https, 'https://www.google-analytics.com'
-          policy.script_src :self,
-            :https,
-            :unsafe_inline,
-            'https://www.googletagmanager.com',
-            'https://www.google-analytics.com',
-            'https://ssl.google-analytics.com'
-          policy.img_src :self, :https, 'https://www.googletagmanager.com', 'https://www.google-analytics.com'
-        end
-      end
-    HERE
+      .to include("\nRails.application.config.content_security_policy do |policy|")
   end
 end
