@@ -1,4 +1,6 @@
 class Recipes::FrontEnd < Rails::AppBuilder
+  VUE_LOADER_VERSION = Potassium::VUE_LOADER_VERSION
+
   def ask
     frameworks = {
       vue: "Vue",
@@ -100,7 +102,12 @@ class Recipes::FrontEnd < Rails::AppBuilder
     )
   end
 
+  def foce_vue_loader_version
+    run "bin/yarn add vue-loader@#{VUE_LOADER_VERSION}"
+  end
+
   def setup_vue
+    foce_vue_loader_version
     setup_vue_with_compiler_build
     setup_jest
     if get(:api) == :graphql
