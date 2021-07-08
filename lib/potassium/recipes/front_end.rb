@@ -1,4 +1,6 @@
 class Recipes::FrontEnd < Rails::AppBuilder
+  VUE_LOADER_VERSION = Potassium::VUE_LOADER_VERSION
+
   def ask
     frameworks = {
       vue: "Vue",
@@ -21,13 +23,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install"
       run "rails webpacker:install:#{value}" unless [:none, :None].include? value.to_sym
 
-      if value == :vue
-        recipe.setup_vue_with_compiler_build
-        recipe.setup_jest
-        if get(:api) == :graphql
-          recipe.setup_apollo
-        end
-      end
+      recipe.setup_vue if value == :vue
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
       add_readme_header :webpack
@@ -104,6 +100,19 @@ class Recipes::FrontEnd < Rails::AppBuilder
       "\n    apolloProvider,",
       after: "components: { App },"
     )
+  end
+
+  def foce_vue_loader_version
+    run "bin/yarn add vue-loader@#{VUE_LOADER_VERSION}"
+  end
+
+  def setup_vue
+    foce_vue_loader_version
+    setup_vue_with_compiler_build
+    setup_jest
+    if get(:api) == :graphql
+      setup_apollo
+    end
   end
 
   private

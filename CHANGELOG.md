@@ -6,6 +6,12 @@ Features
   - Updates ActiveAdmin installation to use webpacker [#350](https://github.com/platanus/potassium/pull/350)
   - Replaces Active Skin with Arctic Admin [#350](https://github.com/platanus/potassium/pull/350)
 
+Fixes
+  - Forces `vue-loader` version to 15, as 16 requires `@vue/compiler-sfc`, which is a part of Vue 3
+  - Changes Content Security Policy added by GTM recipe to:
+    - Include the same config regardless of environment
+    - Include `unsafe_eval` in `script_src`, as it is required for Vue's compiler build
+
 ## 6.3.0
 
 Features:

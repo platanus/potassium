@@ -64,6 +64,10 @@ RSpec.describe "Front end" do
       expect_to_have_tailwind_compatibility_build
     end
 
+    it 'includes correct version of vue-loader in package' do
+      expect(node_modules_file).to include("\"vue-loader\": \"#{Potassium::VUE_LOADER_VERSION}\"")
+    end
+
     context "with graphql" do
       before(:all) do
         remove_project_directory
