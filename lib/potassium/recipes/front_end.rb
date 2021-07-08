@@ -21,13 +21,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       run "rails webpacker:install"
       run "rails webpacker:install:#{value}" unless [:none, :None].include? value.to_sym
 
-      if value == :vue
-        recipe.setup_vue_with_compiler_build
-        recipe.setup_jest
-        if get(:api) == :graphql
-          recipe.setup_apollo
-        end
-      end
+      recipe.setup_vue if value == :vue
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
       add_readme_header :webpack
@@ -104,6 +98,14 @@ class Recipes::FrontEnd < Rails::AppBuilder
       "\n    apolloProvider,",
       after: "components: { App },"
     )
+  end
+
+  def setup_vue
+    setup_vue_with_compiler_build
+    setup_jest
+    if get(:api) == :graphql
+      setup_apollo
+    end
   end
 
   private
