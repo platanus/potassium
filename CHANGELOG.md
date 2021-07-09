@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 6.4.0
+
 Features
   - Updates ActiveAdmin installation to use webpacker [#350](https://github.com/platanus/potassium/pull/350)
   - Replaces Active Skin with Arctic Admin [#350](https://github.com/platanus/potassium/pull/350)
