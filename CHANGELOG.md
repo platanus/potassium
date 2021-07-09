@@ -7,8 +7,8 @@ Features
   - Replaces Active Skin with Arctic Admin [#350](https://github.com/platanus/potassium/pull/350)
 
 Fixes
-  - Forces `vue-loader` version to 15, as 16 requires `@vue/compiler-sfc`, which is a part of Vue 3
-  - Changes Content Security Policy added by GTM recipe to:
+  - Forces `vue-loader` version to 15, as 16 requires `@vue/compiler-sfc`, which is a part of Vue 3 [#375](https://github.com/platanus/potassium/pull/375)
+  - Changes Content Security Policy added by GTM recipe to: [#375](https://github.com/platanus/potassium/pull/375)
     - Include the same config regardless of environment
     - Include `unsafe_eval` in `script_src`, as it is required for Vue's compiler build
   - Changes the front-end test to avoid using the deprecated method `isVueInstance` [#376](https://github.com/platanus/potassium/pull/376)
