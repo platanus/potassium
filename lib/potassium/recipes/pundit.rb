@@ -31,20 +31,39 @@ class Recipes::Pundit < Rails::AppBuilder
   end
 
   def install_admin_pundit
-    initializer = "config/initializers/active_admin.rb"
-    gsub_file initializer, /# config\.authorization_adapter =[^\n]+\n/ do
-      "config.authorization_adapter = ActiveAdmin::PunditAdapter\n"
-    end
-
-    template "../assets/active_admin/pundit_page_policy.rb",
-      "app/policies/active_admin/page_policy.rb"
-    template "../assets/active_admin/comment_policy.rb",
-      "app/policies/active_admin/comment_policy.rb"
-    template "../assets/active_admin/admin_user_policy.rb",
-      "app/policies/admin_user_policy.rb"
+    configure_active_admin_initializer
+    copy_policies
   end
 
   private
+
+  def configure_active_admin_initializer
+    config_active_admin_option("authorization_adapter", "ActiveAdmin::PunditAdapter")
+    config_active_admin_option("pundit_default_policy", "'BackOffice::DefaultPolicy'")
+    config_active_admin_option("pundit_policy_namespace", ":back_office")
+  end
+
+  def copy_policies
+    copy_policy("default_policy")
+    copy_policy("admin_user_policy")
+    copy_policy("page_policy", "active_admin")
+    copy_policy("comment_policy", "active_admin")
+  end
+
+  def config_active_admin_option(option, value)
+    initializer = "config/initializers/active_admin.rb"
+    gsub_file initializer, /# config\.#{option} =[^\n]+\n/ do
+      "config.#{option} = #{value}\n"
+    end
+  end
+
+  def copy_policy(policy_name, model_namespace = nil)
+    destination_path = [model_namespace, policy_name].compact.join("/")
+    template(
+      "../assets/active_admin/policies/#{policy_name}.rb",
+      "app/policies/back_office/#{destination_path}.rb"
+    )
+  end
 
   def run_pundit_installer
     gather_gem 'pundit'
