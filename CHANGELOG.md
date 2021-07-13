@@ -5,6 +5,7 @@
 Features
   - Updates ActiveAdmin installation to use webpacker [#350](https://github.com/platanus/potassium/pull/350)
   - Replaces Active Skin with Arctic Admin [#350](https://github.com/platanus/potassium/pull/350)
+  - Separates Pundit's configuration for Active Admin from Application's configuration
 
 Fixes
   - Forces `vue-loader` version to 15, as 16 requires `@vue/compiler-sfc`, which is a part of Vue 3
