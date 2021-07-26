@@ -3,6 +3,7 @@
 ## Unreleased
 
 Features
+  - Include `run_test` as a valid example group [#379](https://github.com/platanus/potassium/pull/379)
   - Updates ActiveAdmin installation to use webpacker [#350](https://github.com/platanus/potassium/pull/350)
   - Replaces Active Skin with Arctic Admin [#350](https://github.com/platanus/potassium/pull/350)
 

@@ -38,6 +38,7 @@ class Recipes::Api < Rails::AppBuilder
     end
 
     add_readme_section :internal_dependencies, :power_api
+    append_to_file('.rubocop.yml', "RSpec:\n  Includes:\n    Examples:\n      - run_test!")
 
     after(:gem_install) do
       generate "power_api:install"
