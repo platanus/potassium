@@ -6,7 +6,7 @@ module Potassium
   RUBOCOP_RSPEC_VERSION = "~> 2.2"
   POSTGRES_VERSION = "11.3"
   MYSQL_VERSION = "5.7"
-  NODE_VERSION = "12"
+  NODE_VERSION = "14"
   TAILWINDCSS = "npm:@tailwindcss/postcss7-compat"
   VUE_LOADER_VERSION = "^15.9.7"
 end
