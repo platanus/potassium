@@ -24,14 +24,13 @@ class Recipes::Heroku < Rails::AppBuilder
   end
 
   def installed?
-    gem_exists?(/rails_stdout_logging/)
+    gem_exists?(/heroku-stage/)
   end
 
   private
 
   def add_heroku
     gather_gems(:production) do
-      gather_gem('rails_stdout_logging')
       gather_gem('heroku-stage')
     end
 

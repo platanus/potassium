@@ -93,7 +93,6 @@ The optional API support includes:
 
 When you choose to deploy to heroku a few extra things are added for the project.
 
-  - Adds the [Rails Stdout Logging][logging-gem] gem to configure the app to log to standard out, which is how [Heroku's logging][heroku-logging] works
   - Adds a [Procfile][procfile] to define the processes to run in heroku
   - Setup continuous integration using docker and herokuish to maintain better parity between testing and production environments
   - Adds a `bin/release` file with the release phase script to run specific tasks before the app is deployed completely, for example `rails db:migrate:with_data`
@@ -129,7 +128,6 @@ Go to https://circleci.com/add-projects, choose the repository from the list and
 
 In order to enable code linting via CircleCI and ReviewDog, you need to activate the **Only build pull requests** option under the `Advanced settings` section for your project.
 
-[logging-gem]: https://github.com/heroku/rails_stdout_logging
 [heroku-logging]: https://devcenter.heroku.com/articles/logging#writing-to-your-log
 [procfile]: https://devcenter.heroku.com/articles/procfile
 [heroku-buildpack-ruby-version]: http://github.com/platanus/heroku-buildpack-ruby-version
