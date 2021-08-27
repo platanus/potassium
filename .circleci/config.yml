@@ -1,6 +1,6 @@
 version: 2.1
 
-ruby-image: &ruby-image circleci/ruby:2.7.4-node
+ruby-image: &ruby-image cimg/ruby:2.7.4-node
 env-vars: &env-vars
   BUNDLE_JOBS: 4
   RAILS_ENV: test

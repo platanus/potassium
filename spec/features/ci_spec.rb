@@ -12,6 +12,6 @@ RSpec.describe 'CI' do
     yml_path = "#{project_path}/.circleci/config.yml"
     content = IO.read(yml_path)
     expect(File.exist?(yml_path)).to be true
-    expect(content).to include('circleci/ruby', 'cache', 'rspec', 'reviewdog')
+    expect(content).to include('cimg/ruby', 'cache', 'rspec', 'reviewdog')
   end
 end

@@ -1,6 +1,6 @@
 version: 2.1
 
-ruby-image: &ruby-image circleci/ruby:<%= ruby_version %>
+ruby-image: &ruby-image cimg/ruby:<%= ruby_version %>
 <%- if selected?(:database, :postgresql) -%>
 postgres-image: &postgres-image postgres:<%= Potassium::POSTGRES_VERSION %>
 <%- end -%>
