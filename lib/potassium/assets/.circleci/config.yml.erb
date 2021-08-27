@@ -37,12 +37,12 @@ commands:
 
       - restore_cache:
           keys:
-          - bundle-dependencies-{{ checksum "Gemfile.lock" }}
+          - bundle-dependencies-{{ .Environment.BUNDLE_CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
           - bundle-dependencies-
 
       - restore_cache:
           keys:
-          - yarn-dependencies-{{ checksum "yarn.lock" }}
+          - yarn-dependencies-{{ .Environment.YARN_CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           - yarn-dependencies-
 
       - run:
@@ -62,12 +62,12 @@ commands:
             yarn install --frozen-lockfile
 
       - save_cache:
-          key: bundle-dependencies-{{ checksum "Gemfile.lock" }}
+          key: bundle-dependencies-{{ .Environment.BUNDLE_CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
       - save_cache:
-          key: yarn-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-dependencies-{{ .Environment.YARN_CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
