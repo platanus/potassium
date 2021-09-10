@@ -32,7 +32,7 @@ class Recipes::Admin < Rails::AppBuilder
   private
 
   def add_active_admin
-    gather_gem 'activeadmin', '~> 2.6'
+    gather_gem 'activeadmin', '~> 2.9'
     gather_gem 'activeadmin_addons'
     add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
