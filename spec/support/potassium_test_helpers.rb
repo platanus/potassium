@@ -17,7 +17,7 @@ module PotassiumTestHelpers
 
   def create_dummy_project(arguments = {})
     Dir.chdir(tmp_path) do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         add_fakes_to_path
         add_project_bin_to_path
         full_arguments = hash_to_arguments(create_arguments(true).merge(arguments))
@@ -46,7 +46,7 @@ module PotassiumTestHelpers
 
   def on_project(&block)
     Dir.chdir(project_path) do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         block.call
       end
     end
