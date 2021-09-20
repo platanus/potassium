@@ -38,6 +38,7 @@ end
 
 run_action(:recipe_loading) do
   create :rails
+  create :spring
   create :readme
   create :heroku
   create :ci

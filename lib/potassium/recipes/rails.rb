@@ -1,10 +1,6 @@
 class Recipes::Rails < Rails::AppBuilder
   def create
     gather_gem("bootsnap", require: false)
-    gather_gems(:development) do
-      gather_gem("spring")
-    end
-
     environment 'config.force_ssl = true', env: 'production'
     disable_automatic_nonce_generation
   end

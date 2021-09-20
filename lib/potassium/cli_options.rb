@@ -192,6 +192,14 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       negatable: true,
       default_value: false,
       default_test_value: true
+    },
+    {
+      type: :switch,
+      name: "spring",
+      desc: "Whether to use Spring",
+      negatable: true,
+      default_value: true,
+      default_test_value: false
     }
   ]
 
