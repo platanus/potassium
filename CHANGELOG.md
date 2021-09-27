@@ -5,7 +5,8 @@
 Features
   - Update node to latest LTS version, 14 [#363](https://github.com/platanus/potassium/pull/363)
   - Update ActiveAdmin to 2.9 to fix CSV streaming issues [#384](https://github.com/platanus/potassium/pull/384)
-  - Separates Pundit's configuration for Active Admin from Application's configuration
+  - Separates Pundit's configuration for Active Admin from Application's configuration [#378](https://github.com/platanus/potassium/pull/378)
+  - Add SimpleCov recipe [#387](https://github.com/platanus/potassium/pull/387)
 
 Fixes
   - Remove rails_stdout_logging gem because it is no longer needed after Rails 5 and it was generating a deprecation warning [#325](https://github.com/platanus/potassium/pull/325)

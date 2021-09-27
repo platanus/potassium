@@ -66,6 +66,7 @@ run_action(:recipe_loading) do
   create :error_reporting
   create :pundit
   create :testing
+  create :coverage
   create :secrets
   create :api
   create :draper
