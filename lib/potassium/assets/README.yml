@@ -153,6 +153,26 @@ readme:
               ```
               - You can also use **any** vue bindings such as `v-for` , `:key` etc.
             <% end %>
+            <% if get(:authorization) %>
+            It uses the [ActiveAdmin's Pundit adapter](https://activeadmin.info/13-authorization-adapter.html).
+            - Policies for admin resources must inherit from `BackOffice::DefaultPolicy` and be placed inside the `app/policies/back_office` directory.
+              - For example:
+
+                `app/admin/clients.rb`:
+
+                ```ruby
+                ActiveAdmin.register Client do
+                  # ...
+                end
+                ```
+
+                `app/policies/back_office/client_policy.rb`:
+
+                ```ruby
+                class BackOffice::ClientPolicy < BackOffice::DefaultPolicy
+                end
+                ```
+            <% end %>
     seeds:
       title: "Seeds"
       body: |
