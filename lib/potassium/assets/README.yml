@@ -123,7 +123,7 @@ readme:
           body: "This project uses [Draper](https://github.com/drapergem/draper) to add an object-oriented layer of presentation logic"
         power_types:
           title: "Rails pattern enforcing types"
-          body: "This projects uses [Power-Types](https://github.com/platanus/power-types) to generate Services, Commands, Utils and Values."
+          body: "This project uses [Power-Types](https://github.com/platanus/power-types) to generate Services, Commands, Utils and Values."
         power_api:
           title: "API Support"
           body: "This projects uses [Power API](https://github.com/platanus/power_api). It's a Rails engine that gathers a set of gems and configurations designed to build incredible REST APIs."
@@ -178,3 +178,26 @@ readme:
       body: |
         To populate your database with initial data you can add, inside the `/db/seeds.rb` file, the code to generate **only the necessary data** to run the application.
         If you need to generate data with **development purposes**, you can customize the `lib/fake_data_loader.rb` module and then to run the `rake load_fake_data` task from your terminal.
+    testing:
+      title: "Testing"
+      body: |
+        We use:
+        - [RSpec](https://github.com/rspec/rspec-rails): the testing framework.
+        - [Shoulda Matchers](https://github.com/thoughtbot/shoulda-matchers): one-liners to test common Rails functionality that, if written by hand, would be much longer, more complex, and error-prone.
+        - [Factory Bot](https://github.com/thoughtbot/factory_bot_rails): a fixtures replacement with a straightforward definition syntax, support for multiple build strategies (saved instances, unsaved instances, attribute hashes, and stubbed objects), and support for multiple factories for the same class (user, admin_user, and so on), including factory inheritance.
+        - [Faker](https://github.com/faker-ruby/faker): a port of Perl's Data::Faker library that generates fake data.
+        - [Guard](https://github.com/guard/guard): automates various tasks by running custom rules whenever file or directories are modified. We use it to run RSpec when files change.
+
+        Place your unit tests inside the `spec` directory.
+
+        To run unit tests: `bin/guard`
+
+        #### System tests
+
+        We use, in addition to the previous gems:
+        - [Capybara](https://github.com/teamcapybara/capybara): helps you test web applications by simulating how a real user would interact with your app. It is agnostic about the driver running your tests and comes with Rack::Test and Selenium support built in. WebKit is supported through an external gem.
+        - [Webdrivers](https://github.com/titusfortner/webdrivers): run Selenium tests more easily with automatic installation and updates for all supported webdrivers.
+
+        Place your system tests inside the `spec/system` directory.
+
+        To run system tests: `bin/rspec --tag type:system`

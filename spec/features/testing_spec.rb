@@ -21,6 +21,7 @@ RSpec.describe "Testing" do
       shoulda_matchers_config.rb
       devise_config.rb
       system_tests_config.rb
+      faker_config.rb
     }
   end
 
@@ -50,4 +51,6 @@ RSpec.describe "Testing" do
   it { expect(IO.read("#{project_path}/bin/rspec")).to include('path("rspec-core", "rspec")') }
   it { expect(IO.read("#{project_path}/Guardfile")).to include(':rspec, cmd: "bin/rspec"') }
   it { expect(IO.read("#{project_path}/bin/guard")).to include('path("guard", "guard")') }
+
+  it { expect(IO.read("#{project_path}/README.md")).to include("To run unit test") }
 end

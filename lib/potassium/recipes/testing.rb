@@ -1,6 +1,7 @@
 class Recipes::Testing < Rails::AppBuilder
   def create
     add_gems
+    add_readme_header(:testing)
     recipe = self
 
     after(:gem_install) do
@@ -41,6 +42,7 @@ class Recipes::Testing < Rails::AppBuilder
 
   def add_support_configuration_modules
     files = %w{
+      faker_config
       factory_bot_config
       power_types_config
       shoulda_matchers_config
