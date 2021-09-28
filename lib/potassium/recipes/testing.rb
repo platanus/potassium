@@ -19,6 +19,7 @@ class Recipes::Testing < Rails::AppBuilder
     copy_file '../assets/testing/rails_helper.rb', 'spec/rails_helper.rb'
     remove_file '.rspec'
     copy_file '../assets/testing/.rspec', '.rspec'
+    create_file 'spec/system/.keep'
     create_support_directories
   end
 
@@ -28,6 +29,7 @@ class Recipes::Testing < Rails::AppBuilder
       shared_examples
       configurations
       helpers
+      helpers/system
     }.each do |directory|
       path = "spec/support/#{directory}"
       empty_directory(path)
@@ -42,6 +44,7 @@ class Recipes::Testing < Rails::AppBuilder
       factory_bot_config
       power_types_config
       shoulda_matchers_config
+      system_tests_config
     }
     files << "devise_config" if selected?(:authentication)
     files.each do |config_module|
@@ -76,6 +79,8 @@ class Recipes::Testing < Rails::AppBuilder
 
     gather_gems(:test) do
       gather_gem('shoulda-matchers', require: false)
+      gather_gem('capybara')
+      gather_gem('webdrivers')
     end
   end
 

@@ -20,6 +20,7 @@ RSpec.describe "Testing" do
       power_types_config.rb
       shoulda_matchers_config.rb
       devise_config.rb
+      system_tests_config.rb
     }
   end
 
@@ -36,6 +37,8 @@ RSpec.describe "Testing" do
   it { expect(gemfile_content).to include('guard-rspec') }
   it { expect(gemfile_content).to include('rspec-nc') }
   it { expect(gemfile_content).to include('shoulda-matchers') }
+  it { expect(gemfile_content).to include('capybara') }
+  it { expect(gemfile_content).to include('webdrivers') }
 
   it { expect(rails_helper_content).to include("require 'spec_helper'") }
   it { expect(rails_helper_content).to include("config.filter_run_when_matching :focus") }
