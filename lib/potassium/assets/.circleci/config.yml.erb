@@ -46,6 +46,11 @@ commands:
           - yarn-dependencies-
 
       - run:
+          name: Install reviewdog
+          command: |
+            curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ./bin
+
+      - run:
           name: Install bundle dependencies
           command: |
             BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")
@@ -99,6 +104,12 @@ jobs:
             RSPEC_FORMAT_ARGS="-f progress --no-color -p 10"
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 
+      - run:
+          name: Run simplecov
+          shell: /bin/bash
+          command: |
+            cat coverage/coverage.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
+
       <%- if selected?(:front_end, :vue) -%>
       - run:
           name: Run jest
@@ -112,11 +123,6 @@ jobs:
     executor: lint-executor
     steps:
       - setup
-
-      - run:
-          name: Install reviewdog
-          command: |
-            curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b ./bin
 
       - run:
           name: Get files to lint
