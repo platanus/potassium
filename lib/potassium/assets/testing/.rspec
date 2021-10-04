@@ -2,3 +2,4 @@
 --require rails_helper
 --format=doc
 --format=Nc
+--tag ~type:system

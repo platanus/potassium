@@ -2,12 +2,32 @@ require 'simplecov'
 require 'simplecov_text_formatter'
 require 'simplecov_linter_formatter'
 
-SimpleCovLinterFormatter.scope = ENV.fetch(
-  "SIMPLE_COV_LINTER_SCOPE", "own_changes"
-).to_sym
-SimpleCovLinterFormatter.json_filename = ENV.fetch(
-  "SIMPLE_COV_LINTER_JSON_FILENAME", ".resultset.json"
-)
+SimpleCovLinterFormatter.setup do |config|
+  config.scope = ENV.fetch(
+    "SIMPLE_COV_LINTER_SCOPE", :own_changes
+  )
+  config.json_filename = ENV.fetch(
+    "SIMPLE_COV_LINTER_JSON_FILENAME", ".resultset.json"
+  )
+  config.summary_enabled = ENV.fetch(
+    "SIMPLE_COV_LINTER_SUMMARY_ENABLED", true
+  )
+  config.summary_enabled_bg = ENV.fetch(
+    "SIMPLE_COV_LINTER_SUMMARY_BG_ENABLED", true
+  )
+  config.summary_covered_bg_color = ENV.fetch(
+    "SIMPLE_COV_LINTER_SUMMARY_COVERED_BG_COLOR", :darkgreen
+  )
+  config.summary_not_covered_bg_color = ENV.fetch(
+    "SIMPLE_COV_LINTER_SUMMARY_NOT_COVERED_BG_COLOR", :firebrick
+  )
+  config.summary_text_color = ENV.fetch(
+    "SIMPLE_COV_LINTER_SUMMARY_TEXT_COLOR", :white
+  )
+  config.summary_files_sorting = ENV.fetch(
+    "SIMPLE_COV_LINTER_SUMMARY_FILES_SORTING", :coverage
+  )
+end
 
 SimpleCov.start 'rails' do
   add_group 'Commands', 'app/commands'
