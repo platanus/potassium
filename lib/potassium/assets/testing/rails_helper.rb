@@ -96,7 +96,7 @@ Support
   ----------------------------------------------------------------------------
 
 * spec/support/helpers/system: place here helpers created by you
-  to use in yoursystem tests.
+  to use in your system tests.
 
   For example: spec/support/helpers/login_helpers.rb
 
