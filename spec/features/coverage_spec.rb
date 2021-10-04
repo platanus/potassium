@@ -16,7 +16,7 @@ RSpec.describe "Coverage" do
 
   it "requires simplecov config file before rails" do
     content = IO.read("#{project_path}/spec/rails_helper.rb")
-    expect(content).to include("require 'simplecov_config'\nrequire 'rspec/rails")
+    expect(content).to include("ENV['RACK_ENV'] ||= 'test'\nrequire 'simplecov_config'")
   end
 
   it "adds simplecov config file" do

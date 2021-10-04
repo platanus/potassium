@@ -18,7 +18,7 @@ class Recipes::Coverage < Rails::AppBuilder
   def load_gems
     gather_gems(:test) do
       gather_gem 'simplecov'
-      gather_gem 'simplecov_linter_formatter'
+      gather_gem 'simplecov_linter_formatter', '~> 0.2'
       gather_gem 'simplecov_text_formatter'
     end
   end
@@ -27,8 +27,8 @@ class Recipes::Coverage < Rails::AppBuilder
     copy_file '../assets/testing/simplecov_config.rb', 'spec/simplecov_config.rb'
 
     after(:gem_install) do
-      gsub_file 'spec/rails_helper.rb', "require 'rspec/rails'" do |match|
-        "require 'simplecov_config'\n#{match}"
+      gsub_file 'spec/rails_helper.rb', "ENV['RACK_ENV'] ||= 'test'" do |match|
+        "#{match}\nrequire 'simplecov_config'"
       end
     end
   end
