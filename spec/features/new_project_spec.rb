@@ -38,7 +38,7 @@ RSpec.describe "A new project" do
     expect(content).to include %{force_ssl = true}
   end
 
-  context "seeds related issues" do
+  context "with seeds related issues" do
     it "creates fake data loader module" do
       content = IO.read("#{project_path}/lib/fake_data_loader.rb")
 
