@@ -60,14 +60,15 @@ module ReadmeHelpers
 
   def interpolate_text(text, iterpolation_values)
     return unless text
+
     b = binding
     iterpolation_values.each { |k, v| singleton_class.send(:define_method, k) { v } }
     ERB.new(text).result(b)
   end
 
   def get_readme
-    file = File.expand_path("../../assets/README.yml", __FILE__)
-    YAML.load(File.read(file))
+    file = File.expand_path('../assets/README.yml', __dir__)
+    YAML.safe_load(File.read(file))
   end
 
   def insert_into_readme(after_text = nil, &block)

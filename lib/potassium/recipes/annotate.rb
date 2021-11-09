@@ -5,7 +5,7 @@ class Recipes::Annotate < Rails::AppBuilder
     end
 
     template '../assets/lib/tasks/auto_annotate_models.rake',
-      'lib/tasks/auto_annotate_models.rake'
+             'lib/tasks/auto_annotate_models.rake'
   end
 
   def install

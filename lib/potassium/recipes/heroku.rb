@@ -49,18 +49,18 @@ class Recipes::Heroku < Rails::AppBuilder
 
   def create_apps
     ENVIRONMENTS.each { |environment| create_app_on_heroku(environment) }
-    puts "Remember to connect the github repository to the new pipeline"
+    Rails.logger.debug "Remember to connect the github repository to the new pipeline"
     open_pipeline_command = "\e[33mheroku pipelines:open #{heroku_pipeline_name}\e[0m"
-    puts "run #{open_pipeline_command} to open the dashboard"
+    Rails.logger.debug "run #{open_pipeline_command} to open the dashboard"
   end
 
   def puts_not_logged_in_msg
-    puts "You are not logged in into heroku"
+    Rails.logger.debug "You are not logged in into heroku"
     login_command = "\e[33mheroku login\e[0m"
-    puts "Run #{login_command} and enter your credentials"
-    puts "You can install the heroku recipe again to create the app in heroku"
+    Rails.logger.debug "Run #{login_command} and enter your credentials"
+    Rails.logger.debug "You can install the heroku recipe again to create the app in heroku"
     install_command = "\e[33mpostassium install heroku --force\e[0m"
-    puts "Just run #{install_command}"
+    Rails.logger.debug "Just run #{install_command}"
   end
 
   def heroku_pipeline_name
@@ -135,9 +135,9 @@ class Recipes::Heroku < Rails::AppBuilder
   def valid_heroku_name(name, element, force_suffix = true)
     suffix = "-#{element}"
     while name.length > HEROKU_NAMES_MAX_CHARS
-      puts "Heroku names must be shorter than #{HEROKU_NAMES_MAX_CHARS} chars."
+      Rails.logger.debug "Heroku names must be shorter than #{HEROKU_NAMES_MAX_CHARS} chars."
       if force_suffix
-        puts "Potassium uses the heroku-stage gem, because of that '#{suffix}' will be "\
+        Rails.logger.debug "Potassium uses the heroku-stage gem, because of that '#{suffix}' will be "\
              "added to your app name. The suffix, #{suffix}, counts towards the app name length."
       end
       name = Ask.input("Please enter a valid name for #{element}:")

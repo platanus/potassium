@@ -36,14 +36,14 @@ class Recipes::VueAdmin < Rails::AppBuilder
     add_vue_component_library
     add_component_integration
     copy_file '../assets/active_admin/init_activeadmin_vue.rb',
-      'config/initializers/init_activeadmin_vue.rb'
+              'config/initializers/init_activeadmin_vue.rb'
     copy_file '../assets/active_admin/admin_application.js',
-      'app/javascript/packs/admin_application.js',
-      force: true
+              'app/javascript/packs/admin_application.js',
+              force: true
     empty_directory 'app/javascript/components'
     copy_file '../assets/active_admin/admin-component.vue',
-      'app/javascript/components/admin-component.vue',
-      force: true
+              'app/javascript/components/admin-component.vue',
+              force: true
   end
 
   def add_component_integration

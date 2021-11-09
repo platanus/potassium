@@ -1,18 +1,20 @@
 require 'active_support/all'
 
 class FakeHeroku
-  RECORDER = File.expand_path(File.join('..', '..', 'tmp', 'heroku_commands'), File.dirname(__FILE__))
+  RECORDER = File.expand_path(File.join('..', '..', 'tmp', 'heroku_commands'),
+                              File.dirname(__FILE__))
 
   def initialize(args)
     @args = args
   end
 
   def run!
-    if @args.first == "pipelines:info"
+    case @args.first
+    when "pipelines:info"
       if FakeHeroku.has_created_pipeline?
         puts "=== dummy-app\nstaging:\tpl-dummy-app-staging\nproduction:\tpl-dummy-app-production"
       end
-    elsif @args.first == "auth:whoami"
+    when "auth:whoami"
       puts "foo@bar.com"
     end
     File.open(RECORDER, 'a') do |file|

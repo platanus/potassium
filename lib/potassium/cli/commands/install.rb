@@ -7,8 +7,8 @@ module Potassium::CLI
   desc "Installs a new feature or library"
   command :install do |c|
     c.switch "force",
-      desc: "Whether to force the recipe installation",
-      default_value: false
+             desc: "Whether to force the recipe installation",
+             default_value: false
     c.action do |_global_options, options, args|
       if args.first.nil?
         index = Ask.list('Select a recipe to install', recipe_name_list)
@@ -22,7 +22,7 @@ module Potassium::CLI
         template.start
       else
         guess = guess_recipe_name(args)
-        puts "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess}"
+        Rails.logger.debug "Oops! Sorry, that recipe doesn't exist. Were you looking for this?: #{guess}"
       end
     end
   end
@@ -42,7 +42,7 @@ module Potassium::CLI
   def self.recipe_name_list
     list = []
 
-    source_root = File.expand_path('../../../recipes', __FILE__)
+    source_root = File.expand_path('../../recipes', __dir__)
     Dir.entries(source_root).each do |file_name|
       if file_name.end_with?('.rb')
         recipe_name = file_name.gsub('.rb', '')
@@ -57,6 +57,7 @@ module Potassium::CLI
 
   def self.find_closest_recipe(recipe_list, possible_recipe)
     return nil unless possible_recipe
+
     highest_distance = 100
     closest_match = nil
     recipe_list.each do |recipe|

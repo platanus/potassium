@@ -2,7 +2,7 @@ module Potassium
   # TODO: I don't know if this is a concern of this gem. Maybe we should move this later
   class TextSpinner
     attr_accessor :wait_condition, :base_message, :interval, :message_continuations,
-      :counter, :started
+                  :counter, :started
 
     DEFAULT_ATTRIBUTES = {
       wait_condition: -> {},
@@ -21,11 +21,13 @@ module Potassium
 
     def start
       fail already_started_message if started
+
       self.started = true
 
       Thread.new do
         loop do
           break if wait_condition.call(counter)
+
           print_message
           sleep interval
           self.counter += 1
@@ -40,7 +42,7 @@ module Potassium
       message_continuation = message_continuations[counter] || begin
         message_continuations[counter % message_continuations.size]
       end
-      print "\r#{base_message}#{message_continuation}"
+      Rails.logger.debug "\r#{base_message}#{message_continuation}"
     end
 
     def already_started_message

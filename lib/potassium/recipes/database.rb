@@ -14,10 +14,8 @@ class Recipes::Database < Rails::AppBuilder
   end
 
   def create
-    if db = databases(get(:database))
-      if db[:relational]
-        activate_for_active_record(db)
-      end
+    if db = databases(get(:database)) && (db[:relational])
+      activate_for_active_record(db)
     end
   end
 

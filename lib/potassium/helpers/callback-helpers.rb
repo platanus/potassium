@@ -32,6 +32,7 @@ module CallbackHelpers
 
   def wrap_action(action, wrap_in_action)
     return action unless wrap_in_action
+
     -> { run_action(wrap_in_action, &action) }
   end
 
