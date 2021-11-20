@@ -8,6 +8,7 @@ Features
   - Separates Pundit's configuration for Active Admin from Application's configuration [#378](https://github.com/platanus/potassium/pull/378)
   - Add SimpleCov recipe [#387](https://github.com/platanus/potassium/pull/387)
   - Update Rails to 6.1 [#389](https://github.com/platanus/potassium/pull/389)
+  - Include `run_test` as a valid example group [#379](https://github.com/platanus/potassium/pull/379). This was added incorrectly in this [PR](https://github.com/platanus/potassium/pull/379).
 
 Fixes
   - Remove rails_stdout_logging gem because it is no longer needed after Rails 5 and it was generating a deprecation warning [#325](https://github.com/platanus/potassium/pull/325)
