@@ -1,7 +1,6 @@
 require "potassium/version"
 require "gli"
 
-# rubocop:disable Rails/Exit
 module Potassium::CLI
   extend GLI::App
 
@@ -12,4 +11,3 @@ module Potassium::CLI
 
   exit Potassium::CLI.run(ARGV)
 end
-# rubocop:enable Rails/Exit

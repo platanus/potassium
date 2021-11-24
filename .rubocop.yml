@@ -3,7 +3,6 @@ require:
   - rubocop-rails
   - rubocop-performance
 AllCops:
-  SuggestExtensions: false
   Exclude:
   - "vendor/**/*"
   - "db/**/*"
@@ -235,7 +234,7 @@ Metrics/MethodLength:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#short-methods
   Enabled: true
   CountComments: true
-  Max: 65
+  Max: 15
   Exclude:
   - "spec/**/*"
 Metrics/ParameterLists:
@@ -253,7 +252,7 @@ Layout/LineLength:
   Description: Limit lines to 100 characters.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#100-character-limits
   Enabled: true
-  Max: 120
+  Max: 100
   AllowURI: true
   URISchemes:
   - http
@@ -517,11 +516,11 @@ Style/RedundantFileExtensionInRequire:
                   the filename provided to `require` and `require_relative`.
   Enabled: false
 RSpec/MultipleExpectations:
-  Max: 25
+  Max: 5
 RSpec/NestedGroups:
   Max: 5
 RSpec/ExampleLength:
-  Max: 35
+  Max: 10
 RSpec/LetSetup:
   Enabled: false
 RSpec/ExpectChange:
@@ -529,5 +528,3 @@ RSpec/ExpectChange:
   EnforcedStyle: block
 RSpec/BeforeAfterAll:
   Enabled: false
-RSpec/MultipleMemoizedHelpers:
-  Max: 8

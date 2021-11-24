@@ -4,7 +4,6 @@ require './spec/support/potassium_test_helpers'
 require "term/ansicolor"
 require "gli"
 
-# rubocop:disable Rails/Exit
 module Potassium::TestCLI
   extend self
   extend GLI::App
@@ -32,4 +31,3 @@ module Potassium::TestCLI
 
   exit Potassium::TestCLI.run(ARGV)
 end
-# rubocop:enable Rails/Exit

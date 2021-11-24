@@ -47,7 +47,6 @@ class Recipes::Api < Rails::AppBuilder
     end
   end
 
-  # rubocop:disable Metrics/AbcSize
   def add_graphql
     gather_gem 'graphql'
     if get(:authentication)
@@ -116,5 +115,4 @@ class Recipes::Api < Rails::AppBuilder
       add_readme_section :internal_dependencies, :graphql
     end
   end
-  # rubocop:enable Metrics/AbcSize
 end
