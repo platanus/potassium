@@ -7,7 +7,7 @@ Features
   - Update ActiveAdmin to 2.9 to fix CSV streaming issues [#384](https://github.com/platanus/potassium/pull/384)
   - Separates Pundit's configuration for Active Admin from Application's configuration [#378](https://github.com/platanus/potassium/pull/378)
   - Add SimpleCov recipe [#387](https://github.com/platanus/potassium/pull/387)
-  - Update Rails to 6.1 [#389](https://github.com/platanus/potassium/pull/389)
+  - Update Rails to 6.1 [#389](https://github.com/platanus/potassium/pull/389) & [#392](https://github.com/platanus/potassium/pull/392)
   - Include `run_test` as a valid example group [#379](https://github.com/platanus/potassium/pull/379). This was added incorrectly in this [PR](https://github.com/platanus/potassium/pull/379).
 
 Fixes

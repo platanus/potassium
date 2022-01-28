@@ -1,7 +1,7 @@
 module Potassium
   VERSION = "6.4.0"
   RUBY_VERSION = "2.7.0"
-  RAILS_VERSION = "~> 6.1.4.1"
+  RAILS_VERSION = "~> 6.1.4.4"
   RUBOCOP_VERSION = "~> 1.9"
   RUBOCOP_RSPEC_VERSION = "~> 2.2"
   POSTGRES_VERSION = "11.3"
