@@ -1,5 +1,5 @@
 module Potassium
-  VERSION = "6.4.0"
+  VERSION = "6.5.0"
   RUBY_VERSION = "2.7.0"
   RAILS_VERSION = "~> 6.1.4.4"
   RUBOCOP_VERSION = "~> 1.9"

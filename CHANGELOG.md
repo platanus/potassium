@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 6.5.0
 
 Features
   - Update node to latest LTS version, 14 [#363](https://github.com/platanus/potassium/pull/363)
