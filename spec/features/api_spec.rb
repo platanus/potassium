@@ -22,4 +22,9 @@ RSpec.describe "Api" do
     content = IO.read("#{project_path}/app/controllers/api/base_controller.rb")
     expect(content).to include("Api::BaseController < PowerApi::BaseController")
   end
+
+  it "installs internal API mode" do
+    content = IO.read("#{project_path}/app/controllers/api/internal/base_controller.rb")
+    expect(content).to include("Api::Internal::BaseController < Api::BaseController")
+  end
 end
