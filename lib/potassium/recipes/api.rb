@@ -31,7 +31,7 @@ class Recipes::Api < Rails::AppBuilder
   private
 
   def add_power_api
-    gather_gem 'power_api'
+    gather_gem 'power_api', '~> 2.0'
 
     gather_gems(:development, :test) do
       gather_gem 'rswag-specs'
@@ -43,6 +43,7 @@ class Recipes::Api < Rails::AppBuilder
 
     after(:gem_install) do
       generate "power_api:install"
+      generate "power_api:internal_api_config"
     end
   end
 

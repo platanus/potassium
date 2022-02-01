@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+Features
+  - Update power api gem to use v2.0.0. Install "internal" API mode [#394](https://github.com/platanus/potassium/pull/394)
 ## 6.5.0
 
 Features
