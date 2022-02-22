@@ -5,6 +5,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   POSTCSS_VERSION = Potassium::POSTCSS_VERSION
   TAILWINDCSS_VERSION = Potassium::TAILWINDCSS_VERSION
   AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
+  VUE_JEST_VERSION = Potassium::VUE_JEST_VERSION
 
   def ask
     frameworks = {
@@ -83,8 +84,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_jest
-    run "bin/yarn add jest vue-jest babel-jest @vue/test-utils@#{VUE_TEST_UTILS_VERSION} "\
-     "jest-serializer-vue babel-core@^7.0.0-bridge.0 --dev"
+    run "bin/yarn add jest @vue/vue3-jest@#{VUE_JEST_VERSION} babel-jest "\
+    "@vue/test-utils@#{VUE_TEST_UTILS_VERSION} jest-serializer-vue babel-core@bridge --dev"
     json_file = File.read(Pathname.new("package.json"))
     js_package = JSON.parse(json_file)
     js_package = js_package.merge(jest_config)
@@ -116,8 +117,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_vue
-    run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION} "\
-      "vue-template-compiler@#{VUE_VERSION}"
+    run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION}"
     gsub_file(
       'config/webpack/webpack.config.js',
       ' merge(cssConfig, jQueryConfig, webpackConfig);',
@@ -205,14 +205,14 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
   def application_js_content
     <<~JS
-      import Vue from 'vue';
+      import { createApp } from 'vue';
       import App from './components/app.vue';
 
       document.addEventListener('DOMContentLoaded', () => {
-        const app = new Vue({
-          el: '#vue-app',
+        const app = createApp({
           components: { App },
         });
+        app.mount('#vue-app');
 
         return app;
       });
@@ -273,7 +273,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
         ],
         "transform": {
           "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-          ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+          ".*\\.(vue)$": "<rootDir>/node_modules/@vue/vue3-jest"
         },
         "snapshotSerializers": [
           "<rootDir>/node_modules/jest-serializer-vue"

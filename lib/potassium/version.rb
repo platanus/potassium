@@ -9,8 +9,9 @@ module Potassium
   NODE_VERSION = "14"
   TAILWINDCSS_VERSION = "npm:@tailwindcss/postcss7-compat"
   POSTCSS_VERSION = "^7"
-  VUE_VERSION = "^2"
-  VUE_LOADER_VERSION = "^15.9.7"
+  VUE_VERSION = "^3"
+  VUE_LOADER_VERSION = "^16"
   AUTOPREFIXER_VERSION = "^9"
-  VUE_TEST_UTILS_VERSION = "^1"
+  VUE_TEST_UTILS_VERSION = "^2.0.0-rc.18"
+  VUE_JEST_VERSION = "^27.0.0-alpha.1"
 end

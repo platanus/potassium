@@ -127,16 +127,15 @@ class Recipes::VueAdmin < Rails::AppBuilder
 
   def active_admin_js
     <<~HERE
-      import Vue from 'vue';
+      import { createApp } from 'vue';
       import AdminComponent from './components/admin-component';
 
       Vue.component('admin_component', AdminComponent);
 
       document.addEventListener('DOMContentLoaded', () => {
         if (document.getElementById('wrapper') !== null) {
-          return new Vue({
-            el: '#wrapper',
-          });
+          const app = createApp();
+          app.mount('#wrapper');
         }
 
         return null;
