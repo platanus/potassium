@@ -236,15 +236,12 @@ class Recipes::FrontEnd < Rails::AppBuilder
         },
         variants: {},
         plugins: [],
-        purge: {
-          enabled: process.env.NODE_ENV === 'production',
-          content: [
-            './app/**/*.html',
-            './app/**/*.vue',
-            './app/**/*.js',
-            './app/**/*.erb',
-          ],
-        }
+        content: [
+          './app/**/*.html',
+          './app/**/*.vue',
+          './app/**/*.js',
+          './app/**/*.erb',
+        ],
       };
     JS
   end
