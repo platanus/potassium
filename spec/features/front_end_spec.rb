@@ -9,7 +9,7 @@ RSpec.describe "Front end" do
   let(:application_css_path) { "#{project_path}/app/javascript/css/application.css" }
   let(:gemfile) { IO.read("#{project_path}/Gemfile") }
   let(:node_modules_file) { IO.read("#{project_path}/package.json") }
-  let(:application_js_file) { IO.read("#{project_path}/app/javascript/packs/application.js") }
+  let(:application_js_file) { IO.read("#{project_path}/app/javascript/packs/application.ts") }
   let(:layout_file) { IO.read("#{project_path}/app/views/layouts/application.html.erb") }
   let(:application_css_file) { IO.read(application_css_path) }
   let(:tailwind_config_file) { IO.read("#{project_path}/tailwind.config.js") }

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import App from './app';
+import App from './app.vue';
 
 describe('App', () => {
   test('is a Vue instance', () => {

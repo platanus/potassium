@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    "jsx": "preserve",
+    "noImplicitThis": true,
+    "strict": true,
+    "isolatedModules": true,
+    "preserveValueImports": true,
+    "importsNotUsedAsValues": "error",
+    "target": "esnext",
+    "allowJs": true,
+
+    // Recommended
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    // See <https://github.com/vuejs/vue-cli/pull/5688>
+    "skipLibCheck": true,
+    "baseUrl": "app/javascript/",
+    "types": ["@types/jest", "@types/node"],
+  },
+  "include": [
+    "app/javascript/**/*.ts",
+    "app/javascript/**/*.vue"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

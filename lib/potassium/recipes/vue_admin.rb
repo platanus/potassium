@@ -128,18 +128,27 @@ class Recipes::VueAdmin < Rails::AppBuilder
   def active_admin_js
     <<~HERE
       import { createApp } from 'vue';
-      import AdminComponent from './components/admin-component';
+      import AdminComponent from './components/admin-component.vue';
 
-      Vue.component('admin_component', AdminComponent);
-
-      document.addEventListener('DOMContentLoaded', () => {
+      function onLoad() {
         if (document.getElementById('wrapper') !== null) {
-          const app = createApp();
+          const app = createApp({
+            mounted() {
+              // We need to re-trigger DOMContentLoaded for ArcticAdmin after Vue replaces DOM elements
+              window.document.dispatchEvent(new Event('DOMContentLoaded', {
+                bubbles: true,
+                cancelable: true,
+              }));
+            },
+          });
+          app.component('AdminComponent', AdminComponent);
           app.mount('#wrapper');
         }
 
         return null;
-      });
+      }
+
+      document.addEventListener('DOMContentLoaded', onLoad, { once: true });
     HERE
   end
 end

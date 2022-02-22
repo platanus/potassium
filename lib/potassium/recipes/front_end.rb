@@ -29,11 +29,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
     end
     after(:webpacker_install) do
       value = get(:front_end)
-      copy_file '../assets/config/webpack/webpack.config.js', 'config/webpack/webpack.config.js', force: true
-      copy_file '../assets/config/webpack/rules/index.js', 'config/webpack/rules/index.js'
-      copy_file '../assets/config/webpack/rules/css.js', 'config/webpack/rules/css.js'
-      copy_file '../assets/config/webpack/rules/vue.js', 'config/webpack/rules/vue.js'
-      copy_file '../assets/config/webpack/rules/jquery.js', 'config/webpack/rules/jquery.js'
+      recipe.copy_webpack_rules
+      recipe.setup_typescript
       recipe.setup_vue if value == :vue
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
@@ -54,9 +51,25 @@ class Recipes::FrontEnd < Rails::AppBuilder
     package_content.include?("\"vue\"")
   end
 
+  def copy_webpack_rules
+    copy_file '../assets/config/webpack/webpack.config.js',
+              'config/webpack/webpack.config.js',
+              force: true
+    copy_file '../assets/config/webpack/rules/index.js', 'config/webpack/rules/index.js'
+    copy_file '../assets/config/webpack/rules/css.js', 'config/webpack/rules/css.js'
+    copy_file '../assets/config/webpack/rules/vue.js', 'config/webpack/rules/vue.js'
+    copy_file '../assets/config/webpack/rules/jquery.js', 'config/webpack/rules/jquery.js'
+    copy_file '../assets/config/webpack/rules/typescript.js', 'config/webpack/rules/typescript.js'
+  end
+
+  def setup_typescript
+    run "bin/yarn add typescript fork-ts-checker-webpack-plugin ts-loader @types/node"
+    copy_file '../assets/tsconfig.json', 'tsconfig.json'
+  end
+
   def setup_vue_with_compiler_build
-    application_js = 'app/javascript/application.js'
-    create_file application_js, application_js_content, force: true
+    application_ts = 'app/javascript/application.ts'
+    create_file application_ts, application_ts_content, force: true
 
     layout_file = "app/views/layouts/application.html.erb"
     insert_into_file(
@@ -74,7 +87,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_tailwind
-    run "bin/yarn add css-loader style-loader mini-css-extract-plugin "\
+    run "bin/yarn add css-loader style-loader mini-css-extract-plugin @types/tailwindcss "\
       "css-minimizer-webpack-plugin postcss@#{POSTCSS_VERSION} postcss-loader "\
       "tailwindcss@#{TAILWINDCSS_VERSION} autoprefixer@#{AUTOPREFIXER_VERSION} sass sass-loader"
     run "npx tailwindcss init -p"
@@ -85,45 +98,48 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
   def setup_jest
     run "bin/yarn add jest @vue/vue3-jest@#{VUE_JEST_VERSION} babel-jest "\
-    "@vue/test-utils@#{VUE_TEST_UTILS_VERSION} jest-serializer-vue babel-core@bridge --dev"
+    "@vue/test-utils@#{VUE_TEST_UTILS_VERSION} ts-jest"
     json_file = File.read(Pathname.new("package.json"))
     js_package = JSON.parse(json_file)
     js_package = js_package.merge(jest_config)
     json_string = JSON.pretty_generate(js_package)
     create_file 'package.json', json_string, force: true
 
-    copy_file '../assets/app/javascript/components/app.spec.js', 'app/javascript/components/app.spec.js'
+    copy_file '../assets/app/javascript/components/app.spec.ts',
+              'app/javascript/components/app.spec.ts'
   end
 
   def setup_apollo
     run 'bin/yarn add vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag'
 
     inject_into_file(
-      'app/javascript/application.js',
+      'app/javascript/application.ts',
       apollo_imports,
       after: "import App from '../app.vue';"
     )
 
     inject_into_file(
-      'app/javascript/application.js',
+      'app/javascript/application.ts',
       apollo_loading,
       after: "import VueApollo from 'vue-apollo';"
     )
     inject_into_file(
-      'app/javascript/application.js',
+      'app/javascript/application.ts',
       "\n    apolloProvider,",
       after: "components: { App },"
     )
   end
 
   def setup_vue
-    run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION}"
+    run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION} "\
+        "babel-preset-typescript-vue3"
     gsub_file(
       'config/webpack/webpack.config.js',
-      ' merge(cssConfig, jQueryConfig, webpackConfig);',
-      ' merge(vueConfig, cssConfig, jQueryConfig, webpackConfig);'
+      ' merge(typescriptConfig, cssConfig, jQueryConfig, webpackConfig);',
+      ' merge(vueConfig, typescriptConfig, cssConfig, jQueryConfig, webpackConfig);'
     )
     copy_file '../assets/app/javascript/components/app.vue', 'app/javascript/components/app.vue'
+    copy_file '../assets/app/javascript/types/vue.d.ts', 'app/javascript/types/vue.d.ts'
     setup_vue_with_compiler_build
     setup_jest
     if get(:api) == :graphql
@@ -178,12 +194,12 @@ class Recipes::FrontEnd < Rails::AppBuilder
     layout_file = "app/views/layouts/application.html.erb"
     insert_into_file layout_file, stylesheet_pack_tag, before: "</head>"
 
-    application_js = 'app/javascript/application.js'
+    application_ts = 'app/javascript/application.ts'
     if get(:front_end) != :vue
-      create_file application_js, "import './css/application.css';\n", force: true
+      create_file application_ts, "import './css/application.css';\n", force: true
     else
       insert_into_file(
-        application_js,
+        application_ts,
         "\nimport './css/application.css';",
         after: "import App from './components/app.vue';"
       )
@@ -203,7 +219,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     gsub_file(assets_css_file, " *= require_tree .\n *= require_self\n", "")
   end
 
-  def application_js_content
+  def application_ts_content
     <<~JS
       import { createApp } from 'vue';
       import App from './components/app.vue';
@@ -265,16 +281,14 @@ class Recipes::FrontEnd < Rails::AppBuilder
         },
         "moduleFileExtensions": [
           "js",
+          "ts",
           "json",
           "vue"
         ],
         "transform": {
-          "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-          ".*\\.(vue)$": "<rootDir>/node_modules/@vue/vue3-jest"
+          "^.+\\.ts$": "ts-jest",
+          ".*\\.(vue)$": "@vue/vue3-jest"
         },
-        "snapshotSerializers": [
-          "<rootDir>/node_modules/jest-serializer-vue"
-        ],
         "testEnvironment": "jsdom"
       }
     }

@@ -37,6 +37,7 @@ class Recipes::Admin < Rails::AppBuilder
     add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install --use_webpacker"
+      run 'bin/yarn add @activeadmin/activeadmin'
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
