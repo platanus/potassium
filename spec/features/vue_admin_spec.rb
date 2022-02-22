@@ -21,11 +21,6 @@ RSpec.describe "VueAdmin" do
     expect(vue_component_lib).to include("VueComponent")
   end
 
-  it "adds admin_application pack to packs" do
-    application_pack_path = "#{project_path}/app/javascript/admin_application.js"
-    expect(File).to be_file(application_pack_path)
-  end
-
   it "adds admin_component to vue components" do
     application_pack_path = "#{project_path}/app/javascript/components/admin-component.vue"
     expect(File).to be_file(application_pack_path)

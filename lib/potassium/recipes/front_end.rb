@@ -115,7 +115,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     inject_into_file(
       'app/javascript/application.ts',
       apollo_imports,
-      after: "import App from '../app.vue';"
+      after: "import { createApp } from 'vue';"
     )
 
     inject_into_file(
@@ -127,6 +127,11 @@ class Recipes::FrontEnd < Rails::AppBuilder
       'app/javascript/application.ts',
       "\n    apolloProvider,",
       after: "components: { App },"
+    )
+    inject_into_file(
+      'app/javascript/application.ts',
+      apollo_config,
+      before: "app.mount('#vue-app');"
     )
   end
 
@@ -178,11 +183,17 @@ class Recipes::FrontEnd < Rails::AppBuilder
         link: httpLink,
         cache,
       })
+    JS
+  end
 
-      Vue.use(VueApollo)
+  def apollo_config
+    <<~JS
+      \n
+      app.use(VueApollo)
       const apolloProvider = new VueApollo({
         defaultClient: apolloClient,
       })
+      \n
     JS
   end
 
