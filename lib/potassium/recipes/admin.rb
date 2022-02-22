@@ -80,6 +80,16 @@ class Recipes::Admin < Rails::AppBuilder
           import 'arctic_admin';
         HERE
       )
+
+      run "mv app/javascript/packs/active_admin.js app/javascript/active_admin.js"
+      gsub_file(
+        "app/javascript/active_admin.js",
+        'import "../stylesheets/active_admin";',
+        'import "./stylesheets/active_admin.scss";'
+      )
+
+      run 'rm -rf config/webpack/plugins'
+      run 'rm -rf app/javascript/packs/active_admin'
     end
   end
 end

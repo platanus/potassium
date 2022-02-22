@@ -1,10 +1,14 @@
 class Recipes::FrontEnd < Rails::AppBuilder
   VUE_LOADER_VERSION = Potassium::VUE_LOADER_VERSION
+  VUE_VERSION = Potassium::VUE_VERSION
+  VUE_TEST_UTILS_VERSION = Potassium::VUE_TEST_UTILS_VERSION
+  POSTCSS_VERSION = Potassium::POSTCSS_VERSION
+  TAILWINDCSS_VERSION = Potassium::TAILWINDCSS_VERSION
+  AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
 
   def ask
     frameworks = {
       vue: "Vue",
-      angular: "Angular 2",
       none: "None"
     }
 
@@ -17,12 +21,18 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
+    gather_gem('shakapacker', '~> 6.0')
     recipe = self
-    after(:gem_install) do
-      value = get(:front_end)
+    after(:gem_install, wrap_in_action: :webpacker_install) do
       run "rails webpacker:install"
-      run "rails webpacker:install:#{value}" unless [:none, :None].include? value.to_sym
-
+    end
+    after(:webpacker_install) do
+      value = get(:front_end)
+      copy_file '../assets/config/webpack/webpack.config.js', 'config/webpack/webpack.config.js', force: true
+      copy_file '../assets/config/webpack/rules/index.js', 'config/webpack/rules/index.js'
+      copy_file '../assets/config/webpack/rules/css.js', 'config/webpack/rules/css.js'
+      copy_file '../assets/config/webpack/rules/vue.js', 'config/webpack/rules/vue.js'
+      copy_file '../assets/config/webpack/rules/jquery.js', 'config/webpack/rules/jquery.js'
       recipe.setup_vue if value == :vue
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
@@ -38,13 +48,13 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def installed?
     package_file = 'package.json'
     return false unless file_exist?(package_file)
+
     package_content = read_file(package_file)
-    package_content.include?("\"@angular/core\"") || package_content.include?("\"vue\"")
+    package_content.include?("\"vue\"")
   end
 
   def setup_vue_with_compiler_build
-    application_js = 'app/javascript/packs/application.js'
-    remove_file "app/javascript/packs/hello_vue.js"
+    application_js = 'app/javascript/application.js'
     create_file application_js, application_js_content, force: true
 
     layout_file = "app/views/layouts/application.html.erb"
@@ -63,51 +73,57 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_tailwind
-    run "bin/yarn add tailwindcss@#{Potassium::TAILWINDCSS}"
-    specify_autoprefixer_postcss_compatibility_versions
+    run "bin/yarn add css-loader style-loader mini-css-extract-plugin "\
+      "css-minimizer-webpack-plugin postcss@#{POSTCSS_VERSION} postcss-loader "\
+      "tailwindcss@#{TAILWINDCSS_VERSION} autoprefixer@#{AUTOPREFIXER_VERSION} sass sass-loader"
+    run "npx tailwindcss init -p"
     setup_client_css
     remove_server_css_requires
     setup_tailwind_requirements
   end
 
   def setup_jest
-    run 'bin/yarn add jest vue-jest babel-jest @vue/test-utils jest-serializer-vue babel-core@^7.0.0-bridge.0 --dev'
+    run "bin/yarn add jest vue-jest babel-jest @vue/test-utils@#{VUE_TEST_UTILS_VERSION} "\
+     "jest-serializer-vue babel-core@^7.0.0-bridge.0 --dev"
     json_file = File.read(Pathname.new("package.json"))
     js_package = JSON.parse(json_file)
     js_package = js_package.merge(jest_config)
     json_string = JSON.pretty_generate(js_package)
     create_file 'package.json', json_string, force: true
 
-    copy_file '../assets/app/javascript/app.spec.js', 'app/javascript/app.spec.js'
+    copy_file '../assets/app/javascript/components/app.spec.js', 'app/javascript/components/app.spec.js'
   end
 
   def setup_apollo
     run 'bin/yarn add vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag'
 
     inject_into_file(
-      'app/javascript/packs/application.js',
+      'app/javascript/application.js',
       apollo_imports,
       after: "import App from '../app.vue';"
     )
 
     inject_into_file(
-      'app/javascript/packs/application.js',
+      'app/javascript/application.js',
       apollo_loading,
       after: "import VueApollo from 'vue-apollo';"
     )
     inject_into_file(
-      'app/javascript/packs/application.js',
+      'app/javascript/application.js',
       "\n    apolloProvider,",
       after: "components: { App },"
     )
   end
 
-  def foce_vue_loader_version
-    run "bin/yarn add vue-loader@#{VUE_LOADER_VERSION}"
-  end
-
   def setup_vue
-    foce_vue_loader_version
+    run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION} "\
+      "vue-template-compiler@#{VUE_VERSION}"
+    gsub_file(
+      'config/webpack/webpack.config.js',
+      ' merge(cssConfig, jQueryConfig, webpackConfig);',
+      ' merge(vueConfig, cssConfig, jQueryConfig, webpackConfig);'
+    )
+    copy_file '../assets/app/javascript/components/app.vue', 'app/javascript/components/app.vue'
     setup_vue_with_compiler_build
     setup_jest
     if get(:api) == :graphql
@@ -120,7 +136,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def frameworks(framework)
     frameworks = {
       vue: "vue",
-      angular: "angular",
       none: nil
     }
     frameworks[framework]
@@ -155,10 +170,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
     JS
   end
 
-  def specify_autoprefixer_postcss_compatibility_versions
-    run 'bin/yarn -D add postcss@^7 autoprefixer@^9'
-  end
-
   def setup_client_css
     application_css = 'app/javascript/css/application.css'
     create_file application_css, "", force: true
@@ -167,14 +178,14 @@ class Recipes::FrontEnd < Rails::AppBuilder
     layout_file = "app/views/layouts/application.html.erb"
     insert_into_file layout_file, stylesheet_pack_tag, before: "</head>"
 
-    application_js = 'app/javascript/packs/application.js'
+    application_js = 'app/javascript/application.js'
     if get(:front_end) != :vue
-      create_file application_js, "import '../css/application.css';\n", force: true
+      create_file application_js, "import './css/application.css';\n", force: true
     else
       insert_into_file(
         application_js,
-        "\nimport '../css/application.css';",
-        after: "import App from '../app.vue';"
+        "\nimport './css/application.css';",
+        after: "import App from './components/app.vue';"
       )
     end
   end
@@ -185,9 +196,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
     tailwind_config = 'tailwind.config.js'
     create_file tailwind_config, tailwind_config_content, force: true
-
-    postcss_file = 'postcss.config.js'
-    insert_into_file postcss_file, postcss_require_tailwind, after: "plugins: [\n"
   end
 
   def remove_server_css_requires
@@ -197,8 +205,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
   def application_js_content
     <<~JS
-      import Vue from 'vue/dist/vue.esm';
-      import App from '../app.vue';
+      import Vue from 'vue';
+      import App from './components/app.vue';
 
       document.addEventListener('DOMContentLoaded', () => {
         const app = new Vue({
@@ -213,9 +221,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
 
   def tailwind_client_css
     <<~CSS
-      @import 'tailwindcss/base';
-      @import 'tailwindcss/components';
-      @import 'tailwindcss/utilities';
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
     CSS
   end
 
@@ -238,13 +246,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
           ],
         }
       };
-    JS
-  end
-
-  def postcss_require_tailwind
-    <<-JS.gsub(/^ {4}/, '  ')
-      require('tailwindcss'),
-      require('autoprefixer'),
     JS
   end
 

@@ -7,6 +7,10 @@ module Potassium
   POSTGRES_VERSION = "11.3"
   MYSQL_VERSION = "5.7"
   NODE_VERSION = "14"
-  TAILWINDCSS = "npm:@tailwindcss/postcss7-compat"
+  TAILWINDCSS_VERSION = "npm:@tailwindcss/postcss7-compat"
+  POSTCSS_VERSION = "^7"
+  VUE_VERSION = "^2"
   VUE_LOADER_VERSION = "^15.9.7"
+  AUTOPREFIXER_VERSION = "^9"
+  VUE_TEST_UTILS_VERSION = "^1"
 end

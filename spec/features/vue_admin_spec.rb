@@ -14,11 +14,6 @@ RSpec.describe "VueAdmin" do
     expect(initializer_file).to include("AUTO_BUILD_ELEMENTS")
   end
 
-  it "adds layout tags to active admin layout initializer" do
-    initializer_path = "#{project_path}/config/initializers/init_activeadmin_vue.rb"
-    expect(File).to be_file(initializer_path)
-  end
-
   it "adds vue_component to library" do
     vue_component_lib_path = "#{project_path}/lib/vue_component.rb"
     expect(File).to be_file(vue_component_lib_path)
@@ -27,7 +22,7 @@ RSpec.describe "VueAdmin" do
   end
 
   it "adds admin_application pack to packs" do
-    application_pack_path = "#{project_path}/app/javascript/packs/admin_application.js"
+    application_pack_path = "#{project_path}/app/javascript/admin_application.js"
     expect(File).to be_file(application_pack_path)
   end
 

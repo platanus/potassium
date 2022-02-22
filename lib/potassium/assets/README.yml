@@ -27,7 +27,7 @@ readme:
       body: |
         For hot-reloading and fast webpacker compilation you need to run webpack's dev server along with the rails server:
 
-            $ ./bin/webpack-dev-server
+            $ ./bin/webpacker-dev-server
 
         Running the dev server will also solve problems with the cache not refreshing between changes and provide better error messages if something fails to compile.
 
