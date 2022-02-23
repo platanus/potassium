@@ -2,9 +2,9 @@ require "bundler/setup"
 
 Bundler.require(:default, :test)
 
-require (Pathname.new(__FILE__).dirname + "../lib/potassium").expand_path
+require "#{Pathname.new(__FILE__).dirname}../lib/potassium".expand_path
 
-Dir["./spec/support/**/*.rb"].each { |file| require file }
+Dir["./spec/support/**/*.rb"].sort.each { |file| require file }
 
 RSpec.configure do |config|
   config.include PotassiumTestHelpers
@@ -26,11 +26,11 @@ RSpec.configure do |config|
     create_tmp_directory
   end
 
-  config.after(:each) do
+  config.after do
     docker_cleanup
   end
 
-  config.before(:each) do
+  config.before do
     FakeGithub.clear!
     FakeHeroku.clear!
     FakeOctokit.clear!

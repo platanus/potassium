@@ -91,7 +91,7 @@ module PotassiumTestHelpers
   end
 
   def root_path
-    File.expand_path("../../../", __FILE__)
+    File.expand_path('../..', __dir__)
   end
 
   def run_command(command)

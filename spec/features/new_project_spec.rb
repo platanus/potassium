@@ -9,13 +9,13 @@ RSpec.describe "A new project" do
   end
 
   it "is correctly bundled" do
-    expect { on_project { `bundle exec rails -v` } }.to_not output.to_stderr
+    expect { on_project { `bundle exec rails -v` } }.not_to output.to_stderr
   end
 
   # it "is a valid rubocop project" do
-    # on_project do
-    #   expect(run_rubocop).to eq(true)
-    # end
+  # on_project do
+  #   expect(run_rubocop).to eq(true)
+  # end
   # end
 
   it "configures postgresql" do

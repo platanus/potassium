@@ -63,7 +63,7 @@ module TemplateHelpers
     gsub_file file, /^\s*#[^\n]*\n/ do |match|
       if match.size > limit
         match.partition(/[\w\W]{#{limit - 1}}/).reject(&:blank?).map do |line|
-          (line.size == limit - 1) ? "#{line}-" : "# #{line}"
+          line.size == limit - 1 ? "#{line}-" : "# #{line}"
         end.join("\n")
       else
         match
@@ -81,6 +81,7 @@ module TemplateHelpers
 
   def read_file(file_path)
     fail "#{file_path} does not exist in destination" unless file_exist?(file_path)
+
     File.read(file_path)
   end
 

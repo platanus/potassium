@@ -6,7 +6,6 @@ class Mutations::LoginMutation < Mutations::BaseMutation
   argument :email, String, required: true
   argument :password, String, required: true
 
-
   field :token, String, null: true
 
   def resolve(email:, password:)

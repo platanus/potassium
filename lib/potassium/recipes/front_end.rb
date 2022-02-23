@@ -38,6 +38,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def installed?
     package_file = 'package.json'
     return false unless file_exist?(package_file)
+
     package_content = read_file(package_file)
     package_content.include?("\"@angular/core\"") || package_content.include?("\"vue\"")
   end

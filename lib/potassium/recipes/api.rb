@@ -12,9 +12,10 @@ class Recipes::Api < Rails::AppBuilder
   end
 
   def create
-    if get(:api) == :graphql
+    case get(:api)
+    when :graphql
       add_graphql
-    elsif get(:api) == :rest
+    when :rest
       add_power_api
     end
   end
@@ -59,10 +60,10 @@ class Recipes::Api < Rails::AppBuilder
     after(:gem_install) do
       generate "graphql:install --skip_graphiql"
       playground_route = <<~HEREDOC
-      \n
-        if Rails.env.development?
-          mount GraphqlPlayground::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
-        end
+        \n
+          if Rails.env.development?
+            mount GraphqlPlayground::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+          end
       HEREDOC
       inject_into_file(
         'config/routes.rb',

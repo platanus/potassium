@@ -6,6 +6,7 @@ class Recipes::Draper < Rails::AppBuilder
 
   def create
     return unless selected?(:draper)
+
     add_draper
   end
 

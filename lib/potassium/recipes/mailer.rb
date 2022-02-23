@@ -75,7 +75,8 @@ class Recipes::Mailer < Rails::AppBuilder
       RUBY
 
     prepend_file "config/environments/production.rb", mailer_config
-    copy_file '../assets/app/mailers/application_mailer.rb', 'app/mailers/application_mailer.rb', force: true
+    copy_file '../assets/app/mailers/application_mailer.rb', 'app/mailers/application_mailer.rb',
+              force: true
 
     send(service[:name])
   end
@@ -88,7 +89,7 @@ class Recipes::Mailer < Rails::AppBuilder
       }
     RUBY
     inject_into_file 'config/mailer.rb', sendgrid_settings,
-      after: "Rails.application.config.action_mailer.delivery_method = :sendgrid\n"
+                     after: "Rails.application.config.action_mailer.delivery_method = :sendgrid\n"
     sendgrid_dev_settings = <<~RUBY
       Rails.application.config.action_mailer.sendgrid_dev_settings = {
         api_key: ENV['SENDGRID_API_KEY']

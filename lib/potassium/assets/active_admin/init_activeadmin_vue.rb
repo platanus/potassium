@@ -7,4 +7,4 @@ module AdminPageLayoutOverride
   end
 end
 
-ActiveAdmin::Views::Pages::Base.send :prepend, AdminPageLayoutOverride
+ActiveAdmin::Views::Pages::Base.prepend AdminPageLayoutOverride

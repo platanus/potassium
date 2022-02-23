@@ -25,7 +25,7 @@ module Potassium::TestCLI
       drop_dummy_database
       remove_project_directory
       create_dummy_project(options)
-      puts green("Your test app was created inside the #{project_path} directory")
+      Rails.logger.debug green("Your test app was created inside the #{project_path} directory")
     end
   end
 

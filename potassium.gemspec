@@ -1,5 +1,4 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'potassium/version'
 
@@ -18,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  gem.required_ruby_version = "ruby", "~> 2.7.2"
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "pry", "~> 0.10.3"
   spec.add_development_dependency "rake", "~> 13.0"

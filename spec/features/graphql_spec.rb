@@ -17,7 +17,8 @@ RSpec.describe "GraphQL" do
 
     it 'installs and sets up graphql' do
       schema = IO.read(
-        "#{project_path}/app/graphql/#{PotassiumTestHelpers::APP_NAME.dasherize.tr('-', '_')}_schema.rb"
+        "#{project_path}/app/graphql/#{PotassiumTestHelpers::APP_NAME.dasherize.tr('-',
+                                                                                   '_')}_schema.rb"
       )
       expect(schema).to include(
         "class #{PotassiumTestHelpers::APP_NAME.titleize.delete(' ')}Schema < GraphQL::Schema"

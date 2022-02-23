@@ -67,9 +67,9 @@ class Recipes::Github < Rails::AppBuilder
   end
 
   def retry_create_repo
-    puts "Bad credentials, information on Personal Access Tokens here:"
-    puts "https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token"
-    puts "Make sure to give repo access to the personal access token"
+    Rails.logger.debug "Bad credentials, information on Personal Access Tokens here:"
+    Rails.logger.debug "https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token"
+    Rails.logger.debug "Make sure to give repo access to the personal access token"
     Ask.confirm("Do you want to retry?")
   end
 
