@@ -4,13 +4,6 @@ const message = 'Hello Vue!';
 
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <p class="text-center text-lg">{{ message }}</p>
   </div>
 </template>
-
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
-</style>
