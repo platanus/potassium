@@ -344,6 +344,14 @@
     "vue/max-len": ["error", {
       "code": 120,
       "ignoreHTMLAttributeValues": true
-  }]
-  }
+    }]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.vue"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
 }
