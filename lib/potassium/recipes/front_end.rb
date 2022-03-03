@@ -30,6 +30,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     after(:webpacker_install) do
       value = get(:front_end)
       recipe.copy_webpack_rules
+      recipe.add_assets_path
       recipe.setup_typescript
       recipe.setup_vue if value == :vue
       recipe.add_responsive_meta_tag
@@ -60,6 +61,14 @@ class Recipes::FrontEnd < Rails::AppBuilder
     copy_file '../assets/config/webpack/rules/vue.js', 'config/webpack/rules/vue.js'
     copy_file '../assets/config/webpack/rules/jquery.js', 'config/webpack/rules/jquery.js'
     copy_file '../assets/config/webpack/rules/typescript.js', 'config/webpack/rules/typescript.js'
+  end
+
+  def add_assets_path
+    gsub_file(
+      'config/webpacker.yml',
+      'additional_paths: []',
+      "additional_paths: ['app/assets']"
+    )
   end
 
   def setup_typescript
