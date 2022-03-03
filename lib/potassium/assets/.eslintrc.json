@@ -1,12 +1,16 @@
 {
   "env": {
-    "es6": true
+    "browser": true,
+    "es2021": true,
+    "node": true,
+    "jest/globals": true,
+    "vue/setup-compiler-macros": true
   },
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["import"],
+  "plugins": ["import", "jest", "tailwindcss"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -15,7 +19,10 @@
     }
   },
   "extends": [
-    "plugin:vue/strongly-recommended"
+    "plugin:vue/vue3-recommended",
+    "@vue/typescript/recommended",
+    "@vue/eslint-config-typescript",
+    "plugin:tailwindcss/recommended"
   ],
   "rules": {
     "accessor-pairs": 0,
@@ -338,14 +345,13 @@
     "vue/max-len": ["error", {
       "code": 120,
       "ignoreHTMLAttributeValues": true
-  }]
+    }]
   },
   "overrides": [
     {
-      "files": ["**/*.js"],
-      "excludedFiles": "app/**/*.js",
-      "env": {
-        "node": true
+      "files": ["*.ts", "*.vue"],
+      "rules": {
+        "no-undef": "off"
       }
     }
   ]

@@ -22,7 +22,7 @@ module Potassium::CLI
         template = template_finder.default_template
         template.cli_options = options
         template.source_paths << Rails::Generators::AppGenerator.source_root
-        ARGV.push('--skip-webpack-install', '--skip-bundle')
+        ARGV.push('--skip-javascript', '--skip-bundle')
         template.start
       rescue VersionError => e
         print "\nError: #{e.message}" # rubocop:disable Rails/Output

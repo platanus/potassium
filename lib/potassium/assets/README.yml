@@ -27,7 +27,7 @@ readme:
       body: |
         For hot-reloading and fast webpacker compilation you need to run webpack's dev server along with the rails server:
 
-            $ ./bin/webpack-dev-server
+            $ ./bin/webpacker-dev-server
 
         Running the dev server will also solve problems with the cache not refreshing between changes and provide better error messages if something fails to compile.
 
@@ -136,7 +136,7 @@ readme:
             This project uses [Active Admin](https://github.com/activeadmin/activeadmin) which is a Ruby on Rails framework for creating elegant backends for website administration.
             <% if get(:vue_admin) %>
             This project supports Vue inside ActiveAdmin
-            - The main package is located in `app/javascript/packs/admin_application.js`, here you will declare the components you want to include in your ActiveAdmin views as you would in a normal Vue App.
+            - The main package is located in `app/javascript/active_admin.js`, here you will declare the components you want to include in your ActiveAdmin views as you would in a normal Vue App.
             - Additionally, to be able to use Vue components as [Arbre](https://github.com/activeadmin/arbre) Nodes the component names are also declared in `config/initializers/active_admin.rb`
             - The generator includes an example component called `admin_component`, you can use this component inside any ActiveAdmin view by just writing `admin_component` as you would with any `html` tag.
               - For example:

@@ -35,15 +35,18 @@ class Recipes::VueAdmin < Rails::AppBuilder
   def add_vue_admin
     add_vue_component_library
     add_component_integration
-    copy_file '../assets/active_admin/init_activeadmin_vue.rb',
-      'config/initializers/init_activeadmin_vue.rb'
-    copy_file '../assets/active_admin/admin_application.js',
-      'app/javascript/packs/admin_application.js',
-      force: true
-    empty_directory 'app/javascript/components'
+    js_line = 'import "activeadmin_addons"'
+    gsub_file(
+      'app/javascript/active_admin.js',
+      js_line,
+      <<~HERE
+        #{js_line}
+        #{active_admin_js}
+      HERE
+    )
     copy_file '../assets/active_admin/admin-component.vue',
-      'app/javascript/components/admin-component.vue',
-      force: true
+              'app/javascript/components/admin-component.vue',
+              force: true
   end
 
   def add_component_integration
@@ -119,6 +122,33 @@ class Recipes::VueAdmin < Rails::AppBuilder
           end
         end
       end
+    HERE
+  end
+
+  def active_admin_js
+    <<~HERE
+      import { createApp } from 'vue';
+      import AdminComponent from './components/admin-component.vue';
+
+      function onLoad() {
+        if (document.getElementById('wrapper') !== null) {
+          const app = createApp({
+            mounted() {
+              // We need to re-trigger DOMContentLoaded for ArcticAdmin after Vue replaces DOM elements
+              window.document.dispatchEvent(new Event('DOMContentLoaded', {
+                bubbles: true,
+                cancelable: true,
+              }));
+            },
+          });
+          app.component('AdminComponent', AdminComponent);
+          app.mount('#wrapper');
+        }
+
+        return null;
+      }
+
+      document.addEventListener('DOMContentLoaded', onLoad, { once: true });
     HERE
   end
 end

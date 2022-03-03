@@ -1,35 +1,27 @@
+<script setup lang="ts">
+interface Props {
+  test?: string
+  testNumber?: number
+  testObject?: {[key: string]: string},
+  testList?: number[],
+}
+
+const props = withDefaults(
+  defineProps<Props>(),
+  {
+    test: undefined,
+    testNumber: 0,
+    testObject: undefined,
+    testList: undefined,
+  },
+);
+
+const message = 'Hello World';
+</script>
+
 <template>
   <div>
-    I am a Vue Component {{ test }} {{ message }}
+    I am a Vue Component {{ props.test }} {{ message }}
     <slot />
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    test: {
-      type: String,
-      default: '',
-    },
-    testNumber: {
-      type: Number,
-      default: 0,
-    },
-    testObject: {
-      type: Object,
-      default: null,
-    },
-    testList: {
-      type: Array,
-      default: null,
-    },
-  },
-
-  data() {
-    return {
-      message: 'Hello World',
-    };
-  },
-};
-</script>

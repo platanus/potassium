@@ -87,7 +87,7 @@ class Recipes::GoogleTagManager < Rails::AppBuilder
           'https://www.google-analytics.com',
           'https://ssl.google-analytics.com'
         )
-        policy.img_src :self, :https, 'https://www.googletagmanager.com', 'https://www.google-analytics.com'
+        policy.img_src :self, 'data:', :https, 'https://www.googletagmanager.com', 'https://www.google-analytics.com'
       end
     HERE
   end

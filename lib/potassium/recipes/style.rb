@@ -18,8 +18,14 @@ class Recipes::Style < Rails::AppBuilder
       gather_gem 'rubocop-rails'
       gather_gem 'rubocop-rspec', Potassium::RUBOCOP_RSPEC_VERSION
     end
-    run 'bin/yarn add --dev stylelint eslint eslint-plugin-import'
-    run 'bin/yarn add --dev eslint-plugin-vue' if selected?(:front_end, :vue)
+
+    after(:webpacker_install) do
+      run "yarn add --dev stylelint eslint eslint-plugin-import "\
+        "@typescript-eslint/eslint-plugin  @types/jest @typescript-eslint/parser eslint-plugin-jest"
+      if selected?(:front_end, :vue)
+        run 'yarn add --dev eslint-plugin-vue @vue/eslint-config-typescript'
+      end
+    end
   end
 
   def add_config_files
