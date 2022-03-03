@@ -68,8 +68,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_vue_with_compiler_build
-    application_ts = 'app/javascript/application.ts'
-    create_file application_ts, application_ts_content, force: true
+    application_js = 'app/javascript/application.js'
+    create_file application_js, application_js_content, force: true
 
     layout_file = "app/views/layouts/application.html.erb"
     insert_into_file(
@@ -113,23 +113,23 @@ class Recipes::FrontEnd < Rails::AppBuilder
     run 'bin/yarn add vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag'
 
     inject_into_file(
-      'app/javascript/application.ts',
+      'app/javascript/application.js',
       apollo_imports,
       after: "import { createApp } from 'vue';"
     )
 
     inject_into_file(
-      'app/javascript/application.ts',
+      'app/javascript/application.js',
       apollo_loading,
       after: "import VueApollo from 'vue-apollo';"
     )
     inject_into_file(
-      'app/javascript/application.ts',
+      'app/javascript/application.js',
       "\n    apolloProvider,",
       after: "components: { App },"
     )
     inject_into_file(
-      'app/javascript/application.ts',
+      'app/javascript/application.js',
       apollo_config,
       before: "app.mount('#vue-app');"
     )
@@ -205,12 +205,12 @@ class Recipes::FrontEnd < Rails::AppBuilder
     layout_file = "app/views/layouts/application.html.erb"
     insert_into_file layout_file, stylesheet_pack_tag, before: "</head>"
 
-    application_ts = 'app/javascript/application.ts'
+    application_js = 'app/javascript/application.js'
     if get(:front_end) != :vue
-      create_file application_ts, "import './css/application.css';\n", force: true
+      create_file application_js, "import './css/application.css';\n", force: true
     else
       insert_into_file(
-        application_ts,
+        application_js,
         "\nimport './css/application.css';",
         after: "import App from './components/app.vue';"
       )
@@ -230,7 +230,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     gsub_file(assets_css_file, " *= require_tree .\n *= require_self\n", "")
   end
 
-  def application_ts_content
+  def application_js_content
     <<~JS
       import { createApp } from 'vue';
       import App from './components/app.vue';

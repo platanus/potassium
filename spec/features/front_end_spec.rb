@@ -9,7 +9,7 @@ RSpec.describe "Front end" do
   let(:application_css_path) { "#{project_path}/app/javascript/css/application.css" }
   let(:gemfile) { IO.read("#{project_path}/Gemfile") }
   let(:node_modules_file) { IO.read("#{project_path}/package.json") }
-  let(:application_ts_file) { IO.read("#{project_path}/app/javascript/application.ts") }
+  let(:application_js_file) { IO.read("#{project_path}/app/javascript/application.js") }
   let(:layout_file) { IO.read("#{project_path}/app/views/layouts/application.html.erb") }
   let(:application_css_file) { IO.read(application_css_path) }
   let(:tailwind_config_file) { IO.read("#{project_path}/tailwind.config.js") }
@@ -36,8 +36,8 @@ RSpec.describe "Front end" do
     it "creates a project with vue as frontend framework" do
       expect(gemfile).to include('shakapacker')
       expect(node_modules_file).to include("\"vue\"")
-      expect(application_ts_file).to include('vue')
-      expect(application_ts_file).to include("app.mount('#vue-app')")
+      expect(application_js_file).to include('vue')
+      expect(application_js_file).to include("app.mount('#vue-app')")
       expect(layout_file).to include('id="vue-app"')
     end
 
@@ -46,7 +46,7 @@ RSpec.describe "Front end" do
     end
 
     it "creates a vue project with client css" do
-      expect(application_ts_file).to include("import './css/application.css';")
+      expect(application_js_file).to include("import './css/application.css';")
       expect(layout_file).to include("<%= stylesheet_pack_tag 'application' %>")
       expect(rails_css_file).not_to include('*= require_tree', '*= require_self')
     end
@@ -76,9 +76,9 @@ RSpec.describe "Front end" do
 
       it "creates a vue project with apollo" do
         expect(node_modules_file).to include("\"vue-apollo\"")
-        expect(application_ts_file).to include("import { ApolloClient } from 'apollo-client';")
-        expect(application_ts_file).to include("app.use(VueApollo)")
-        expect(application_ts_file).to include("apolloProvider,")
+        expect(application_js_file).to include("import { ApolloClient } from 'apollo-client';")
+        expect(application_js_file).to include("app.use(VueApollo)")
+        expect(application_js_file).to include("apolloProvider,")
       end
     end
   end
