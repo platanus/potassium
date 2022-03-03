@@ -89,7 +89,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def setup_tailwind
     run "bin/yarn add css-loader style-loader mini-css-extract-plugin @types/tailwindcss "\
       "css-minimizer-webpack-plugin postcss@#{POSTCSS_VERSION} postcss-loader "\
-      "tailwindcss@#{TAILWINDCSS_VERSION} autoprefixer@#{AUTOPREFIXER_VERSION} sass sass-loader"
+      "tailwindcss@#{TAILWINDCSS_VERSION} autoprefixer@#{AUTOPREFIXER_VERSION} sass sass-loader "\
+      "eslint-plugin-tailwindcss"
     run "npx tailwindcss init -p"
     setup_client_css
     remove_server_css_requires

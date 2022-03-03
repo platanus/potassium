@@ -10,7 +10,7 @@
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
-  "plugins": ["import", "jest"],
+  "plugins": ["import", "jest", "tailwindcss"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -21,7 +21,8 @@
   "extends": [
     "plugin:vue/vue3-recommended",
     "@vue/typescript/recommended",
-    "@vue/eslint-config-typescript"
+    "@vue/eslint-config-typescript",
+    "plugin:tailwindcss/recommended"
   ],
   "rules": {
     "accessor-pairs": 0,
