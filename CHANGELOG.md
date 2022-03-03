@@ -3,6 +3,7 @@
 ## Unreleased
 Features
   - Update power api gem to use v2.0.0. Install "internal" API mode [#394](https://github.com/platanus/potassium/pull/394)
+  - Updates Webpacker to Shakapacker, upgrading Vue and TailwindCSS to their latest versions [#395](https://github.com/platanus/potassium/pull/395)
 ## 6.5.0
 
 Features
