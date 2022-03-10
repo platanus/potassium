@@ -177,4 +177,4 @@ potassium is maintained by [platanus](http://platan.us).
 
 ## License
 
-Potassium is © 2014 Platanus, SPA. It is free software and may be redistributed under the terms specified in the LICENSE file.
+Potassium is © 2014 Platanus, SPA. It is free software and may be redistributed under the terms specified in the [LICENSE](/LICENSE.txt) file.
