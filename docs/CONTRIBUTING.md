@@ -54,7 +54,7 @@ This method is used if you need to ask something to the user before doing someth
     ```ruby
     def ask
       use_banana_split = answer(:banana_split) do
-        Ask.confirm("Do you wan to use Banana Split?")
+        Ask.confirm("Do you want to use Banana Split?")
       end
       set(:use_banana_split, true) if use_banana_split
     end
@@ -103,7 +103,7 @@ For example if you run `portassium install devise` this will use
 [the recipe template](/lib/potassium/templates/recipe.rb) to load an execute the
 `install` method for the **devise** recipe.
 
-You can defined the main functionallity of a recipe in a private method and call
+You can define the main functionallity of a recipe in a private method and call
 it from the `create` and `install` methods.
 
 ```ruby
