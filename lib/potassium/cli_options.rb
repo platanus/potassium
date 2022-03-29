@@ -200,6 +200,14 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       negatable: true,
       default_value: true,
       default_test_value: false
+    },
+    {
+      type: :switch,
+      name: 'platanus-config',
+      desc: 'Wheter to use the Platanus configuration.',
+      negatable: true,
+      default_value: false,
+      default_test_value: false
     }
   ]
 
@@ -218,5 +226,9 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       memo[opt.to_s] = opts[:default_value]
       memo
     end
+  end
+
+  def self.option_names
+    CREATE_OPTIONS.map { |option| option[:name] }.flatten.map(&:to_sym)
   end
 end
