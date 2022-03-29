@@ -21,6 +21,34 @@ Use the `potassium create` command to create a new project:
 > 2. If you feel that it's too slow, you may need to update rubygems: `gem update --system`.
 > 3. Potassium uses node under the hood, so a check will also be performed to ensure you are running the supported version.
 
+#### Platanus Configutarion
+
+In case you want to use the Platanus Configuration you should use the following command:
+
+    $ potassium create <project-name> --platanus-config
+
+This will create a project with the following configuration:
+  1. `database`: `'postgresql'`
+  2. `local`: `'es-CL'`
+  3. `email_service`: `'sendgrid'`
+  4. `devise`: `true`
+  5. `devise-user-model`: `true`
+  6. `admin`: `true`
+  7. `vue_admin`: `true`
+  8. `pundit`: `true`
+  9. `api`: `'rest'`
+  10. `storage`: `'shrine'`
+  11. `heroku`: `true`
+  12. `background_processor`: `true`
+  13. `draper`: `true`
+  14. `schedule`: `true`
+  15. `sentry`: `true`
+  16. `front_end`: `'vue'`
+  17. `google_tag_manager`: `true`
+  18. `test`: `true`
+  19. `spring`: `true`
+
+The remaining question will be asked as usual.
 ### Adding recipes to an existing project
 
 Use the `potassium install` command to add a recipe to a project:
