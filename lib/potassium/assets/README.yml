@@ -105,7 +105,34 @@ readme:
           body: "For managing uploads, this project uses [Active Storage](https://github.com/rails/rails/tree/master/activestorage)."
         shrine:
           title: "File Storage"
-          body: "For managing uploads, this project uses [Shrine](https://github.com/shrinerb/shrine)."
+          body: |
+            For managing uploads, this project uses [Shrine](https://github.com/shrinerb/shrine). When generated, this project includes the following files and configurations:
+
+            - `ImageUploader` that includes file type validation
+            - `CoverImageUploader`, inheriting from `ImageUploader`. It does a couple of things:
+              - Generates derivatives in `jpg` and `webp` format, for three different sizes. For an attachment of name `image`, to get the url for a derivative, let's say `sm`, you would do `record.image_url(:sm)`
+              - Saves a [blurhash](https://blurha.sh/) code to the attachment metadata
+            - `ImageHandlingUtilities`, a shrine plugin in the initializers folder that is used in the `CoverImageUploader`. Given a model with an attachment of name `image`, it adds the following methods to the model:
+              - `image_blurhash`: returns blurhash from metadata
+              - `generate_image_derivatives`: It generates all derivatives defined in Uploader. If file already had derivatives, it replaces them with newly generated ones. Associated class method: `generate_all_image_derivatives`
+              - `generate_image_metadata`: refreshes all metadata for attachment. Associated class method: `generate_all_image_metadata`
+              - `generate_image_derivatives_and_metadata`: does both previous things. Useful because it does so opening the file only once. Associated class method: `generate_all_image_derivatives_and_metadata`
+
+              Class methods are the same as their instance counterparts, but for collections. They also allow error handling on an individual record by passing a block to handle each error. If no block is given, attachments that throw errors are ignored and the iteration continues
+            - `ImageHandlingAttributes` serializer concern. It adds a method `add_image_handling_attributes` to all serializers that inherit from `BaseSerializer`. Considering an attachment of name `image`, this method adds two attributes to the serialized record:
+              - `image_blurhash`
+              - `image`. This is a hash that includes urls for all derivatives passed to the method. For example:
+              ```
+                add_image_handling_attributes(attachment_name: :image, derivatives: [:sm, :md], include_original_image: true)
+
+                # results in the following hash for the image attribute:
+                # {
+                #   sm: { url: 'someurl.com/bla' },
+                #   md: { url: 'someurl.com/ble' },
+                #   original: { url: 'someurl.com/ble' }
+                # }
+              ```
+            - `SHRINE_SECRET_KEY` environment variable. It comes witha value set in `.env.development`, but you'll need to set one for it in staging and production. It can be any random value, generating it with `SecureRandom.hex` for instance
         pundit:
           title: "Authorization"
           body: "For defining which parts of the system each user has access to, we have chosen to include the [Pundit](https://github.com/elabs/pundit) gem, by [Elabs](http://elabs.se/)."
