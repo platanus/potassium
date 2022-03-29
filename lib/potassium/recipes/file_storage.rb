@@ -51,7 +51,7 @@ class Recipes::FileStorage < Rails::AppBuilder
     gather_gem('image_processing', '~> 1.8')
     gather_gem('blurhash', '~> 0.1')
     gather_gem('ruby-vips', '~> 2.1')
-    append_to_file('.env.development', "SHRINE_SECRET_KEY=\n")
+    append_to_file('.env.development', "SHRINE_SECRET_KEY=#{SecureRandom.hex}\n")
     copy_file('../assets/app/jobs/shrine_promote_job.rb', 'app/jobs/shrine_promote_job.rb')
     add_image_handling_plugin
     add_cover_image_uploader
