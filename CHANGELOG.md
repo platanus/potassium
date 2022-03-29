@@ -14,9 +14,12 @@ Features
   - Add SimpleCov recipe [#387](https://github.com/platanus/potassium/pull/387)
   - Update Rails to 6.1 [#389](https://github.com/platanus/potassium/pull/389) & [#392](https://github.com/platanus/potassium/pull/392)
   - Include `run_test` as a valid example group [#379](https://github.com/platanus/potassium/pull/379). This was added incorrectly in this [PR](https://github.com/platanus/potassium/pull/379).
+  - Add system tests configuration [#388](https://github.com/platanus/potassium/pull/388)
+  - Allow CircleCI cache clearing [#383](https://github.com/platanus/potassium/pull/383)
 
 Fixes
   - Remove rails_stdout_logging gem because it is no longer needed after Rails 5 and it was generating a deprecation warning [#325](https://github.com/platanus/potassium/pull/325)
+  - Fix default action dissapearance when using `binding.pry` in generated projects [#385](https://github.com/platanus/potassium/pull/385)
 
 ## 6.4.0
 
