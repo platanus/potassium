@@ -34,3 +34,18 @@ Shrine.plugin :activerecord
 Shrine.plugin :cached_attachment_data
 Shrine.plugin :restore_cached_data
 Shrine.plugin :determine_mime_type, analyzer: :marcel
+Shrine.plugin :derivatives
+Shrine.plugin :default_url
+Shrine.plugin :derivation_endpoint, secret_key: ENV.fetch('SHRINE_SECRET_KEY')
+Shrine.plugin :refresh_metadata
+Shrine.plugin :backgrounding
+
+Shrine::Attacher.promote_block do |attacher|
+  ShrinePromoteJob.perform_later(
+    attacher.class.name,
+    attacher.record.class.name,
+    attacher.record.id,
+    attacher.name,
+    attacher.file_data
+  )
+end

@@ -44,6 +44,56 @@ class Recipes::FileStorage < Rails::AppBuilder
     copy_file('../assets/app/uploaders/image_uploader.rb', 'app/uploaders/image_uploader.rb')
     copy_file('../assets/app/uploaders/base_uploader.rb', 'app/uploaders/base_uploader.rb')
     append_to_file('.gitignore', "/public/uploads\n")
+    add_image_handling_and_cover_image_uploader
+  end
+
+  def add_image_handling_and_cover_image_uploader
+    gather_gem('image_processing', '~> 1.8')
+    gather_gem('blurhash', '~> 0.1')
+    gather_gem('ruby-vips', '~> 2.1')
+    append_to_file('.env.development', "SHRINE_SECRET_KEY=#{SecureRandom.hex}\n")
+    copy_file('../assets/app/jobs/shrine_promote_job.rb', 'app/jobs/shrine_promote_job.rb')
+    add_image_handling_plugin
+    add_cover_image_uploader
+    add_image_handling_serializer_concern if get(:api) == :rest
+    add_image_handling_heroku_setup if get(:heroku)
+  end
+
+  def add_cover_image_uploader
+    copy_file(
+      '../assets/app/uploaders/cover_image_uploader.rb', 'app/uploaders/cover_image_uploader.rb'
+    )
+    insert_into_file "config/routes.rb", after: "Rails.application.routes.draw do\n" do
+      <<~HERE.indent(2)
+        mount CoverImageUploader.derivation_endpoint => "/derivations/cover_image"
+      HERE
+    end
+  end
+
+  def add_image_handling_plugin
+    copy_file(
+      '../assets/config/initializers/shrine/plugins/image_handling_utilities.rb',
+      'config/initializers/shrine/plugins/image_handling_utilities.rb'
+    )
+  end
+
+  def add_image_handling_serializer_concern
+    copy_file(
+      '../assets/app/serializers/concerns/image_handling_attributes.rb',
+      'app/serializers/concerns/image_handling_attributes.rb'
+    )
+    copy_file('../assets/app/serializers/base_serializer.rb', 'app/serializers/base_serializer.rb')
+  end
+
+  def add_image_handling_heroku_setup
+    append_to_file(
+      '.buildpacks',
+      <<~HERE
+        https://github.com/heroku/heroku-buildpack-apt
+        https://github.com/brandoncc/heroku-buildpack-vips
+      HERE
+    )
+    copy_file('../assets/Aptfile', 'Aptfile')
   end
 
   def common_setup
