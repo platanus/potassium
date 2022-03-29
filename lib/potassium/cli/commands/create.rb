@@ -12,12 +12,14 @@ module Potassium::CLI
     c.action do |_global_options, options, _args|
       require 'potassium/newest_version_ensurer'
       require 'potassium/node_version_ensurer'
+      require 'potassium/platanus_config'
       require 'potassium/generators/application'
       require 'potassium/template_finder'
 
       begin
         Potassium::NewestVersionEnsurer.new.ensure! if options['version-check']
         Potassium::NodeVersionEnsurer.new.ensure! if options['node-version-check']
+        options = Potassium::PlatanusConfig.new(options).generate! if options['platanus-config']
         template_finder = Potassium::TemplateFinder.new
         template = template_finder.default_template
         template.cli_options = options
