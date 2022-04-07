@@ -23,4 +23,16 @@ RSpec.describe "Coverage" do
     content = IO.read("#{project_path}/spec/simplecov_config.rb")
     expect(content).to include("SimpleCov.start 'rails'")
   end
+
+  context "with vue" do
+    before(:all) do
+      remove_project_directory
+      create_dummy_project("front_end" => "vue")
+    end
+
+    it "adds jest coverage configuration" do
+      node_modules_file = IO.read("#{project_path}/package.json")
+      expect(node_modules_file).to include('"collectCoverage": true')
+    end
+  end
 end

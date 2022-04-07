@@ -156,10 +156,11 @@ class Recipes::FrontEnd < Rails::AppBuilder
     copy_file '../assets/app/javascript/components/app.vue', 'app/javascript/components/app.vue'
     copy_file '../assets/app/javascript/types/vue.d.ts', 'app/javascript/types/vue.d.ts'
     setup_vue_with_compiler_build
-    setup_jest
-    if get(:api) == :graphql
-      setup_apollo
+    recipe = self
+    run_action(:setup_jest) do
+      recipe.setup_jest
     end
+    setup_apollo if get(:api) == :graphql
   end
 
   private
