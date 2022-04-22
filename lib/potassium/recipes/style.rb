@@ -17,6 +17,7 @@ class Recipes::Style < Rails::AppBuilder
       gather_gem 'rubocop-performance'
       gather_gem 'rubocop-rails'
       gather_gem 'rubocop-rspec', Potassium::RUBOCOP_RSPEC_VERSION
+      gather_gem 'rubocop-platanus'
     end
 
     after(:webpacker_install) do
