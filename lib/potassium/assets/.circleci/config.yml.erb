@@ -78,6 +78,13 @@ commands:
           key: yarn-dependencies-{{ .Environment.YARN_CACHE_VERSION }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
+      <%- if selected?(:storage, :shrine) -%>
+      - run:
+          name: Install apt and vips buildpack dependencies
+          command: |
+            xargs -a Aptfile sudo apt-get install
+            sudo apt-get install libvips
+      <%- end -%>
 
 jobs:
   test:

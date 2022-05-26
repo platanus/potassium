@@ -32,6 +32,11 @@ RSpec.describe "File Storage" do
       content = IO.read("#{project_path}/.env.development")
       expect(content).to include("S3_BUCKET=")
     end
+
+    it "does not add vips install step to ci config" do
+      content = IO.read("#{project_path}/.circleci/config.yml")
+      expect(content).not_to include("Install apt and vips buildpack dependencies")
+    end
   end
 
   context "when selecting shrine" do
@@ -65,6 +70,11 @@ RSpec.describe "File Storage" do
       it "adds filestorage path to gitignore" do
         content = IO.read("#{project_path}/.gitignore")
         expect(content).to include("/public/uploads")
+      end
+
+      it "adds vips install step to ci config" do
+        content = IO.read("#{project_path}/.circleci/config.yml")
+        expect(content).to include("Install apt and vips buildpack dependencies")
       end
     end
 
