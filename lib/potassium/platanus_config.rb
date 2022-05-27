@@ -9,7 +9,7 @@ module Potassium
       default_options = {
         'db': 'postgresql', 'locale': 'es-CL', 'email_service': 'sendgrid', 'devise': true,
         'devise-user-model': true, 'admin': true, 'vue_admin': true, 'pundit': true,
-        'api': 'rest', 'storage': 'shrine', 'heroku': true, 'background_processor': true,
+        'api': true, 'storage': 'shrine', 'heroku': true, 'background_processor': true,
         'draper': true, 'schedule': true, 'sentry': true, 'front_end': 'vue',
         'google_tag_manager': true, 'test': true, 'spring': true
       }

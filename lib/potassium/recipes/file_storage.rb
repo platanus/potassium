@@ -55,7 +55,7 @@ class Recipes::FileStorage < Rails::AppBuilder
     copy_file('../assets/app/jobs/shrine_promote_job.rb', 'app/jobs/shrine_promote_job.rb')
     add_image_handling_plugin
     add_cover_image_uploader
-    add_image_handling_serializer_concern if get(:api) == :rest
+    add_image_handling_serializer_concern if get(:api)
     add_image_handling_heroku_setup if get(:heroku)
   end
 

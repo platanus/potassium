@@ -36,7 +36,7 @@ This will create a project with the following configuration:
   6. `admin`: `true`
   7. `vue_admin`: `true`
   8. `pundit`: `true`
-  9. `api`: `'rest'`
+  9. `api`: `true`
   10. `storage`: `'shrine'`
   11. `heroku`: `true`
   12. `background_processor`: `true`
