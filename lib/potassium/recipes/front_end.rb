@@ -22,7 +22,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
-    gather_gem('shakapacker', '~> 6.0')
+    gather_gem('shakapacker', '~> 6.2.0')
     recipe = self
     after(:gem_install, wrap_in_action: :webpacker_install) do
       run "rails webpacker:install"
