@@ -7,6 +7,8 @@ Features
   - Add some image handling and processing in shrine file storage option [#398](https://github.com/platanus/potassium/pull/398)
   - Include `--platanus-config` option to skip most of the instalation options [#399](https://github.com/platanus/potassium/pull/399).
   - Add [`rubocop-platanus`](https://github.com/platanus/rubocop-platanus) gem for linting platanus' best practices [#402](https://github.com/platanus/potassium/pull/402).
+  - Remove graphql option [#404](https://github.com/platanus/potassium/pull/404)
+
 ## 6.5.0
 
 Features
