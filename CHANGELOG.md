@@ -9,6 +9,9 @@ Features
   - Add [`rubocop-platanus`](https://github.com/platanus/rubocop-platanus) gem for linting platanus' best practices [#402](https://github.com/platanus/potassium/pull/402).
   - Remove graphql option [#404](https://github.com/platanus/potassium/pull/404)
 
+Fixes
+  - Fix shakapacker to version 6.2.x to avoid [this bug](https://github.com/shakacode/shakapacker/issues/123) [#404](https://github.com/platanus/potassium/pull/404)
+
 ## 6.5.0
 
 Features
