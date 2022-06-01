@@ -75,11 +75,11 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       default_test_value: false
     },
     {
-      type: :flag,
+      type: :switch,
       name: "api",
-      desc: "Which API interface to use",
+      desc: "Whether to include power_api for API support or not",
       default_value: "none",
-      default_test_value: "None"
+      default_test_value: false
     },
     {
       type: :flag,

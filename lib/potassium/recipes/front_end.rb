@@ -22,7 +22,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
-    gather_gem('shakapacker', '~> 6.0')
+    gather_gem('shakapacker', '~> 6.2.0')
     recipe = self
     after(:gem_install, wrap_in_action: :webpacker_install) do
       run "rails webpacker:install"
@@ -119,32 +119,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
               'app/javascript/components/app.spec.ts'
   end
 
-  def setup_apollo
-    run 'bin/yarn add vue-apollo graphql apollo-client apollo-link apollo-link-http apollo-cache-inmemory graphql-tag'
-
-    inject_into_file(
-      'app/javascript/application.js',
-      apollo_imports,
-      after: "import { createApp } from 'vue';"
-    )
-
-    inject_into_file(
-      'app/javascript/application.js',
-      apollo_loading,
-      after: "import VueApollo from 'vue-apollo';"
-    )
-    inject_into_file(
-      'app/javascript/application.js',
-      "\n    apolloProvider,",
-      after: "components: { App },"
-    )
-    inject_into_file(
-      'app/javascript/application.js',
-      apollo_config,
-      before: "app.mount('#vue-app');"
-    )
-  end
-
   def setup_vue
     run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION} "\
         "babel-preset-typescript-vue3"
@@ -160,7 +134,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
     run_action(:setup_jest) do
       recipe.setup_jest
     end
-    setup_apollo if get(:api) == :graphql
   end
 
   private
@@ -171,41 +144,6 @@ class Recipes::FrontEnd < Rails::AppBuilder
       none: nil
     }
     frameworks[framework]
-  end
-
-  def apollo_imports
-    <<~JS
-      \n
-      import { ApolloClient } from 'apollo-client';
-      import { createHttpLink } from 'apollo-link-http';
-      import { InMemoryCache } from 'apollo-cache-inmemory';
-      import VueApollo from 'vue-apollo';
-    JS
-  end
-
-  def apollo_loading
-    <<~JS
-      \n
-      const httpLink = createHttpLink({
-        uri: `${window.location.origin}/graphql`,
-      })
-      const cache = new InMemoryCache()
-      const apolloClient = new ApolloClient({
-        link: httpLink,
-        cache,
-      })
-    JS
-  end
-
-  def apollo_config
-    <<~JS
-      \n
-      app.use(VueApollo)
-      const apolloProvider = new VueApollo({
-        defaultClient: apolloClient,
-      })
-      \n
-    JS
   end
 
   def setup_client_css

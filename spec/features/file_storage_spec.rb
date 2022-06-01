@@ -118,11 +118,11 @@ RSpec.describe "File Storage" do
       end
     end
 
-    context 'with rest api' do
+    context 'with api' do
       before :all do
         drop_dummy_database
         remove_project_directory
-        create_dummy_project(storage: :shrine, api: :rest)
+        create_dummy_project(storage: :shrine, api: true)
       end
 
       it_behaves_like 'common shrine setup'
