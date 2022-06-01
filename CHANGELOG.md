@@ -10,6 +10,7 @@ Features
   - Remove graphql option [#404](https://github.com/platanus/potassium/pull/404)
 
 Fixes
+  - Add missing vips CI config when selecting shrine [#403](https://github.com/platanus/potassium/pull/403).
   - Fix shakapacker to version 6.2.x to avoid [this bug](https://github.com/shakacode/shakapacker/issues/123) [#404](https://github.com/platanus/potassium/pull/404)
 
 ## 6.5.0
