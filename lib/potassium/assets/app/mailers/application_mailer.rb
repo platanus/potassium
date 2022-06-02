@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-  layout 'mailer'
+  layout 'default_mail'
 end
