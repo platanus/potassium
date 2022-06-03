@@ -10,6 +10,7 @@ module TemplateDSL
     require_relative './info-helpers'
     require_relative './readme-helpers'
     require_relative './rubocop-helpers'
+    require_relative './json-helpers'
 
     object.send :extend, TemplateHelpers
     object.send :extend, VariableHelpers
@@ -20,6 +21,7 @@ module TemplateDSL
     object.send :extend, InfoHelpers
     object.send :extend, ReadmeHelpers
     object.send :extend, RubocopHelpers
+    object.send :extend, JsonHelpers
 
     object.send :source_path, source_path
     object.load_answers

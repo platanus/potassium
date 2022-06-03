@@ -22,6 +22,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def create
+    return
+
     gather_gem('shakapacker', '~> 6.2.0')
     recipe = self
     after(:gem_install, wrap_in_action: :webpacker_install) do
@@ -109,10 +111,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def setup_jest
     run "bin/yarn add jest @vue/vue3-jest@#{VUE_JEST_VERSION} babel-jest "\
     "@vue/test-utils@#{VUE_TEST_UTILS_VERSION} ts-jest"
-    json_file = File.read(Pathname.new("package.json"))
-    js_package = JSON.parse(json_file)
-    js_package = js_package.merge(jest_config)
-    json_string = JSON.pretty_generate(js_package)
+    merge_to_json_file('package.json', jest_config)
     create_file 'package.json', json_string, force: true
 
     copy_file '../assets/app/javascript/components/app.spec.ts',

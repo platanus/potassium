@@ -12,6 +12,7 @@ class Recipes::Heroku < Rails::AppBuilder
       set(:heroku, heroku)
 
       ENVIRONMENTS.each { |environment| set_app_name_for(environment) }
+      set(:heroku_pipeline_name, heroku_pipeline_name)
     end
   end
 
@@ -42,7 +43,7 @@ class Recipes::Heroku < Rails::AppBuilder
     template "../assets/bin/setup_heroku.erb", "bin/setup_heroku", force: true
     run "chmod a+x bin/setup_heroku"
 
-    logged_in? ? create_apps : puts_not_logged_in_msg
+    # logged_in? ? create_apps : puts_not_logged_in_msg
 
     add_readme_header :deployment
   end

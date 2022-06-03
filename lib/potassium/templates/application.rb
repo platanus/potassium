@@ -33,6 +33,7 @@ run_action(:asking) do
   ask :draper
   ask :file_storage
   ask :heroku
+  ask :review_apps
   ask :github
 end
 
@@ -76,6 +77,7 @@ run_action(:recipe_loading) do
   create :tzinfo
   create :script
   create :github
+  create :review_apps
   create :cleanup
   create :front_end
   create :admin

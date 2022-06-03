@@ -7,11 +7,12 @@ module Potassium
 
     def generate!
       default_options = {
-        'db': 'postgresql', 'locale': 'es-CL', 'email_service': 'sendgrid', 'devise': true,
-        'devise-user-model': true, 'admin': true, 'vue_admin': true, 'pundit': true,
-        'api': true, 'storage': 'shrine', 'heroku': true, 'background_processor': true,
-        'draper': true, 'schedule': true, 'sentry': true, 'front_end': 'vue',
-        'google_tag_manager': true, 'test': true, 'spring': true
+        'db': 'postgresql', 'locale': 'es-CL', 'email_service': 'aws_ses', 'devise': false,
+        'devise-user-model': false, 'admin': false, 'vue_admin': false, 'pundit': false,
+        'api': false, 'storage': 'shrine', 'heroku': true, 'background_processor': true,
+        'draper': false, 'schedule': false, 'sentry': false, 'front_end': 'None',
+        'google_tag_manager': false, 'test': false, 'spring': false, 'review_apps': true,
+        'github': true
       }
       default_options = default_options.filter { |key, _| @option_key_names.include?(key) }
       @options.merge(default_options, default_options.stringify_keys)
