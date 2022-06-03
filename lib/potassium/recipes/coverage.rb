@@ -6,6 +6,7 @@ class Recipes::Coverage < Rails::AppBuilder
     recipe = self
     after(:setup_jest) do
       recipe.configure_jest_coverage
+      recipe.setup_jest_text_formatter
     end
   end
 
@@ -23,6 +24,10 @@ class Recipes::Coverage < Rails::AppBuilder
     js_package = add_coverage_config(js_package)
     json_string = JSON.pretty_generate(js_package)
     create_file 'package.json', json_string, force: true
+  end
+
+  def setup_jest_text_formatter
+    run "bin/yarn add jest-text-formatter@1.0.2 --dev"
   end
 
   private
