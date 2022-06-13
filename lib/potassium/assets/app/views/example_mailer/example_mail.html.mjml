@@ -1,0 +1,7 @@
+<mj-section>
+  <mj-column>
+    <mj-text>
+      Hello <%= @email %>, welcome to Potassium
+    </mj-text>
+  </mj-column>
+</mj-section>

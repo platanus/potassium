@@ -81,6 +81,7 @@ Potassium Rails apps includes the following gems and technologies:
 - [Tzinfo-Data](https://github.com/tzinfo/tzinfo-data) for updating timezone information
 - [Faker](https://github.com/stympy/faker) for creating development data
 - [Scout](https://github.com/scoutapp/scout_apm_ruby) for monitoring performance
+- [Mjml](https://github.com/sighmon/mjml-rails) for mails style
 
 The following optional integrations are also added:
 

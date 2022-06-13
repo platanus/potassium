@@ -81,6 +81,7 @@ run_action(:recipe_loading) do
   create :admin
   create :vue_admin
   create :google_tag_manager
+  create :mjml
 end
 
 info "Gathered enough information. Applying the template. Wait a minute."

@@ -7,8 +7,6 @@ Rails.application.config.action_mailer.default_url_options = {
 }
 
 Rails.application.config.action_mailer.default_options = { from: ENV['DEFAULT_EMAIL_ADDRESS'] }
-ASSET_HOST = ENV.fetch("ASSET_HOST", ENV.fetch("APPLICATION_HOST"))
-Rails.application.config.action_mailer.asset_host = ASSET_HOST
 
 if ENV["EMAIL_RECIPIENTS"].present?
   Mail.register_interceptor RecipientInterceptor.new(

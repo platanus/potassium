@@ -63,20 +63,32 @@ class Recipes::Mailer < Rails::AppBuilder
     gather_gem 'recipient_interceptor'
   end
 
+  def config_environments
+    gsub_file 'config/environments/production.rb', /$\s*config.action_mailer.*/, ''
+    asset_host_dev = <<~RUBY
+      config.action_mailer.asset_host = "http://\#{ENV.fetch('APPLICATION_HOST')}"
+    RUBY
+    application asset_host_dev, env: "development"
+    asset_host_prod = <<~RUBY
+      config.action_mailer.asset_host = "https://\#{ENV.fetch('APPLICATION_HOST')}"
+    RUBY
+    application asset_host_prod, env: "production"
+    mailer_config = <<~RUBY
+      require Rails.root.join("config", "mailer")
+    RUBY
+
+    prepend_file "config/environments/production.rb", mailer_config
+  end
+
   def config(service)
     template "../assets/config/mailer.rb.erb", 'config/mailer.rb'
-    gsub_file 'config/environments/production.rb', /$\s*config.action_mailer.*/, ''
+
     append_to_file '.env.development', "APPLICATION_HOST=localhost:3000\n"
     append_to_file '.env.development', "EMAIL_RECIPIENTS=\n"
 
-    mailer_config =
-      <<~RUBY
-        require Rails.root.join("config", "mailer")
-      RUBY
-
-    prepend_file "config/environments/production.rb", mailer_config
-    copy_file '../assets/app/mailers/application_mailer.rb', 'app/mailers/application_mailer.rb', force: true
-
+    copy_file '../assets/app/mailers/application_mailer.rb', 'app/mailers/application_mailer.rb',
+              force: true
+    config_environments
     send(service[:name])
   end
 
@@ -88,7 +100,7 @@ class Recipes::Mailer < Rails::AppBuilder
       }
     RUBY
     inject_into_file 'config/mailer.rb', sendgrid_settings,
-      after: "Rails.application.config.action_mailer.delivery_method = :sendgrid\n"
+                     after: "Rails.application.config.action_mailer.delivery_method = :sendgrid\n"
     sendgrid_dev_settings = <<~RUBY
       Rails.application.config.action_mailer.sendgrid_dev_settings = {
         api_key: ENV['SENDGRID_API_KEY']

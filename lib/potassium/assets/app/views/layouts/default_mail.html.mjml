@@ -1,0 +1,49 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-all>
+      <mj-text font-weight="400" font-size="16px" color="#000000" line-height="24px" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"></mj-text>
+    </mj-attributes>
+    <mj-style inline="inline">
+      .body-section {
+        -webkit-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 1px 4px 11px 0px rgba(0, 0, 0, 0.15);
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .text-link {
+        color: #5e6ebf
+      }
+    </mj-style>
+    <mj-style inline="inline">
+      .footer-link {
+        color: #888888
+      }
+    </mj-style>
+
+  </mj-head>
+  <mj-body width="600px">
+    <mj-section full-width="full-width" background-color="#71717A" padding-bottom="0">
+      <mj-column width="100%" background-color="#A1A1AA">
+        <mj-spacer height="25px" />
+      </mj-column>
+    </mj-section>
+    <mj-section background-color="#A1A1AA" padding-bottom="0" padding-top="0">
+      <mj-column>
+        <mj-image width="100px" src="<%= image_url('/mails/platanus-logo.png') %>" align="center">
+      </mj-column>
+      <mj-column width="100%">
+        <mj-spacer height="25px" />
+      </mj-column>
+    </mj-section>
+    <mj-wrapper padding-top="0" padding-bottom="0" css-class="body-section" background-color="#ffffff" padding-left="15px" padding-right="15px">
+      <%= yield %>
+    </mj-wrapper>
+    <mj-section background-color="#A1A1AA" padding-bottom="0" padding-top="0">
+      <mj-column width="100%">
+        <mj-spacer height="25px" />
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
