@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased
+
+## 6.6.0
 Features
   - Update power api gem to use v2.0.0. Install "internal" API mode [#394](https://github.com/platanus/potassium/pull/394)
   - Updates Webpacker to Shakapacker, upgrading Vue and TailwindCSS to their latest versions [#395](https://github.com/platanus/potassium/pull/395)
@@ -8,6 +10,8 @@ Features
   - Include `--platanus-config` option to skip most of the instalation options [#399](https://github.com/platanus/potassium/pull/399).
   - Add [`rubocop-platanus`](https://github.com/platanus/rubocop-platanus) gem for linting platanus' best practices [#402](https://github.com/platanus/potassium/pull/402).
   - Remove graphql option [#404](https://github.com/platanus/potassium/pull/404)
+  - Add frontend testing coverage for Jest [#401](https://github.com/platanus/potassium/pull/401) and associated reviewdog comments [#406](https://github.com/platanus/potassium/pull/406)
+  - Add MJML to handle mail templates, with example [#405](https://github.com/platanus/potassium/pull/405)
 
 Fixes
   - Add missing vips CI config when selecting shrine [#403](https://github.com/platanus/potassium/pull/403).
