@@ -86,7 +86,7 @@ class Recipes::FileStorage < Rails::AppBuilder
   end
 
   def add_image_handling_heroku_setup
-    append_to_file(
+    prepend_file(
       '.buildpacks',
       <<~HERE
         https://github.com/heroku/heroku-buildpack-apt
