@@ -5,7 +5,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   POSTCSS_VERSION = Potassium::POSTCSS_VERSION
   TAILWINDCSS_VERSION = Potassium::TAILWINDCSS_VERSION
   AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
-  VUE_JEST_VERSION = Potassium::VUE_JEST_VERSION
+  JEST_VERSION = Potassium::JEST_VERSION
 
   def ask
     frameworks = {
@@ -107,8 +107,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_jest
-    run "bin/yarn add jest @vue/vue3-jest@#{VUE_JEST_VERSION} babel-jest "\
-    "@vue/test-utils@#{VUE_TEST_UTILS_VERSION} ts-jest"
+    run "bin/yarn add jest@#{JEST_VERSION} @vue/vue3-jest@#{JEST_VERSION} "\
+    "babel-jest@#{JEST_VERSION} @vue/test-utils@#{VUE_TEST_UTILS_VERSION} ts-jest@#{JEST_VERSION} "\
+    "jest-environment-jsdom@#{JEST_VERSION} --dev"
     json_file = File.read(Pathname.new("package.json"))
     js_package = JSON.parse(json_file)
     js_package = js_package.merge(jest_config)
@@ -238,6 +239,9 @@ class Recipes::FrontEnd < Rails::AppBuilder
         ],
         "moduleNameMapper": {
           "^@/(.*)$": "app/javascript/$1"
+        },
+        "testEnvironmentOptions": {
+          "customExportConditions": ["node", "node-addons"]
         },
         "moduleFileExtensions": [
           "js",
