@@ -122,6 +122,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def setup_vue
     run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION} "\
         "babel-preset-typescript-vue3"
+    run "bin/yarn add vue-tsc --dev"
     gsub_file(
       'config/webpack/webpack.config.js',
       ' merge(typescriptConfig, cssConfig, jQueryConfig, webpackConfig);',
