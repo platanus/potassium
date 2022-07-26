@@ -110,6 +110,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
     run "bin/yarn add jest@#{JEST_VERSION} @vue/vue3-jest@#{JEST_VERSION} "\
     "babel-jest@#{JEST_VERSION} @vue/test-utils@#{VUE_TEST_UTILS_VERSION} ts-jest@#{JEST_VERSION} "\
     "jest-environment-jsdom@#{JEST_VERSION} --dev"
+    run "bin/yarn add @types/jest@#{JEST_VERSION}"
     json_file = File.read(Pathname.new("package.json"))
     js_package = JSON.parse(json_file)
     js_package = js_package.merge(jest_config)
