@@ -35,6 +35,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
       recipe.setup_vue if value == :vue
       recipe.add_responsive_meta_tag
       recipe.setup_tailwind
+      recipe.setup_api_client
       add_readme_header :webpack
     end
   end
@@ -137,6 +138,13 @@ class Recipes::FrontEnd < Rails::AppBuilder
     run_action(:setup_jest) do
       recipe.setup_jest
     end
+  end
+
+  def setup_api_client
+    run "bin/yarn add axios humps"
+    copy_file '../assets/app/javascript/api/index.ts', 'app/javascript/api/index.ts'
+    copy_file '../assets/app/javascript/utils/case-converter.ts',
+              'app/javascript/utils/case-converter.ts'
   end
 
   private
