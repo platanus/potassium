@@ -66,7 +66,45 @@ class Recipes::Admin < Rails::AppBuilder
         aa_style,
         "@import \"~@activeadmin/activeadmin/src/scss/mixins\";\n" +
         "@import \"~@activeadmin/activeadmin/src/scss/base\";",
-        "@import '~arctic_admin/src/scss/main'; \n"
+        <<~HERE
+          @import '~arctic_admin/src/scss/main';
+
+          // Fix for sidebar when there are too many filters
+          #sidebar {
+            height: 100vh;
+            top: 0;
+            z-index: 10;
+          }
+
+          #sidebar::before {
+            top: 200px !important;
+          }
+
+          #filters_sidebar_section {
+            height: 100vh;
+            overflow: auto;
+          }
+
+          // Fix for invisible datepicker calendar
+          #ui-datepicker-div {
+            z-index: 11 !important;
+          }
+
+          // Fix for backwards date range input
+          #sidebar .sidebar_section .filter_date_range input:nth-child(2) {
+            float: none;
+          }
+
+          #sidebar .sidebar_section .filter_date_range {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between
+          }
+
+          #sidebar .sidebar_section .filter_date_range label {
+            width: 100%;
+          }
+        HERE
       )
 
       aa_js = "app/javascript/packs/active_admin.js"
