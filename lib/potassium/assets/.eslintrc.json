@@ -22,7 +22,8 @@
     "plugin:vue/vue3-recommended",
     "@vue/typescript/recommended",
     "@vue/eslint-config-typescript",
-    "plugin:tailwindcss/recommended"
+    "plugin:tailwindcss/recommended",
+    "plugin:platanus/recommended"
   ],
   "rules": {
     "accessor-pairs": 0,

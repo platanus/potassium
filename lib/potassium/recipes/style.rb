@@ -22,7 +22,8 @@ class Recipes::Style < Rails::AppBuilder
 
     after(:webpacker_install) do
       run "yarn add --dev stylelint eslint eslint-plugin-import "\
-        "@typescript-eslint/eslint-plugin  @types/jest @typescript-eslint/parser eslint-plugin-jest"
+        "@typescript-eslint/eslint-plugin  @types/jest @typescript-eslint/parser "\
+        "eslint-plugin-jest eslint-plugin-platanus"
       if selected?(:front_end, :vue)
         run 'yarn add --dev eslint-plugin-vue @vue/eslint-config-typescript'
       end
