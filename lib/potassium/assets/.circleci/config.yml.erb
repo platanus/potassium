@@ -168,15 +168,13 @@ jobs:
           name: Run tsc
           shell: /bin/bash
           command: |
-            cat tmp/files_to_lint | grep -E '.+\.(ts)$' | xargs yarn run tsc --noEmit ./app/javascript/types/*.d.ts  \
-            | ./bin/reviewdog -reporter=github-pr-review -f=tsc
+            yarn run tsc --noEmit | ./bin/reviewdog -reporter=github-pr-review -f=tsc
 
       - run:
           name: Run vue-tsc
           shell: /bin/bash
           command: |
-            cat tmp/files_to_lint | grep -E '.+\.(vue)$' | xargs yarn run vue-tsc --noEmit \
-            | ./bin/reviewdog -reporter=github-pr-review -f=tsc
+            yarn run vue-tsc --noEmit | ./bin/reviewdog -reporter=github-pr-review -f=tsc
 
       - run:
           name: Run stylelint
