@@ -67,5 +67,10 @@ RSpec.describe "Front end" do
     it 'includes correct version of vue-loader in package' do
       expect(node_modules_file).to include("\"vue-loader\": \"#{Potassium::VUE_LOADER_VERSION}\"")
     end
+
+    it 'includes correct packages for basic api client' do
+      expect(node_modules_file).to include("\"axios\"")
+      expect(node_modules_file).to include("\"humps\"")
+    end
   end
 end
