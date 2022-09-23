@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+Fixes
+  - Fix monkeyci commenting because of uncovered lines when tests do exist [#416](https://github.com/platanus/potassium/pull/416)
+
 ## 6.6.0
 Features
   - Update power api gem to use v2.0.0. Install "internal" API mode [#394](https://github.com/platanus/potassium/pull/394)
