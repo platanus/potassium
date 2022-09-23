@@ -117,17 +117,17 @@ jobs:
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 
       - run:
+          name: Run simplecov
+          shell: /bin/bash
+          command: |
+            cat coverage/coverage.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
+
+      - run:
           name: Run RSpec system tests
           command: |
             RSPEC_JUNIT_ARGS="-r rspec_junit_formatter -f RspecJunitFormatter -o test_results/rspec-system.xml"
             RSPEC_FORMAT_ARGS="--tag type:system -f progress --no-color -p 10"
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
-
-      - run:
-          name: Run simplecov
-          shell: /bin/bash
-          command: |
-            cat coverage/coverage.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
 
       <%- if selected?(:front_end, :vue) -%>
       - run:
