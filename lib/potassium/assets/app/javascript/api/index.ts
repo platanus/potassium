@@ -12,6 +12,8 @@ const api = axios.create({
   ],
 });
 
+export default api;
+
 /*
 // Example to use the api object in the path ´app/javascript/api/users.ts´
 
