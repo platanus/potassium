@@ -1,9 +1,20 @@
 # Changelog
 
-## Unreleased
+## 6.7.0
+
+Features
+  - Add type checking to reviewdog [#411](https://github.com/platanus/potassium/pull/411)
+  - Add initial api files [#412](https://github.com/platanus/potassium/pull/412)
+  - Add eslint-plugin-platanus [#415](https://github.com/platanus/potassium/pull/415)
 
 Fixes
+  - Prepend vips installation [#407](https://github.com/platanus/potassium/pull/407)
+  - Fix jest install [#408](https://github.com/platanus/potassium/pull/408)
+  - Fix circle ci config. Provide global context to test job [#409](https://github.com/platanus/potassium/pull/409)
+  - Fix admin css (arctic_skin) [#413](https://github.com/platanus/potassium/pull/413)
+  - Fix tsc check [#414](https://github.com/platanus/potassium/pull/414)
   - Fix monkeyci commenting because of uncovered lines when tests do exist [#416](https://github.com/platanus/potassium/pull/416)
+  - Typescript fixes [#417](https://github.com/platanus/potassium/pull/417)
 
 ## 6.6.0
 Features
