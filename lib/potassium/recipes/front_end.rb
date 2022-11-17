@@ -7,6 +7,48 @@ class Recipes::FrontEnd < Rails::AppBuilder
   AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
   JEST_VERSION = Potassium::JEST_VERSION
 
+  DEPENDENCIES = {
+    api: [
+      "axios",
+      "humps",
+      "@types/humps"
+    ],
+    jest: [
+      "jest@#{JEST_VERSION}",
+      "@vue/vue3-jest@#{JEST_VERSION}",
+      "babel-jest@#{JEST_VERSION}",
+      "@vue/test-utils@#{VUE_TEST_UTILS_VERSION}",
+      "ts-jest@#{JEST_VERSION}",
+      "jest-environment-jsdom@#{JEST_VERSION}",
+      "@types/jest@#{JEST_VERSION}"
+    ],
+    tailwind: [
+      "css-loader",
+      "style-loader",
+      "mini-css-extract-plugin",
+      "@types/tailwindcss",
+      "css-minimizer-webpack-plugin",
+      "postcss@#{POSTCSS_VERSION}",
+      "postcss-loader",
+      "tailwindcss@#{TAILWINDCSS_VERSION}",
+      "autoprefixer@#{AUTOPREFIXER_VERSION}",
+      "sass",
+      "sass-loader",
+      "eslint-plugin-tailwindcss"
+    ],
+    typescript: [
+      "typescript",
+      "fork-ts-checker-webpack-plugin",
+      "ts-loader",
+      "@types/node"
+    ],
+    vue: [
+      "vue@#{VUE_VERSION}",
+      "vue-loader@#{VUE_LOADER_VERSION}",
+      "babel-preset-typescript-vue3"
+    ]
+  }
+
   def ask
     frameworks = {
       vue: "Vue",
@@ -73,7 +115,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_typescript
-    run "bin/yarn add typescript fork-ts-checker-webpack-plugin ts-loader @types/node"
+    run "bin/yarn add #{DEPENDENCIES[:typescript].join(' ')}"
     copy_file '../assets/tsconfig.json', 'tsconfig.json'
   end
 
@@ -97,10 +139,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_tailwind
-    run "bin/yarn add css-loader style-loader mini-css-extract-plugin @types/tailwindcss "\
-      "css-minimizer-webpack-plugin postcss@#{POSTCSS_VERSION} postcss-loader "\
-      "tailwindcss@#{TAILWINDCSS_VERSION} autoprefixer@#{AUTOPREFIXER_VERSION} sass sass-loader "\
-      "eslint-plugin-tailwindcss"
+    run "bin/yarn add #{DEPENDENCIES[:tailwind].join(' ')}"
     run "npx tailwindcss init -p"
     setup_client_css
     remove_server_css_requires
@@ -108,10 +147,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_jest
-    run "bin/yarn add jest@#{JEST_VERSION} @vue/vue3-jest@#{JEST_VERSION} "\
-    "babel-jest@#{JEST_VERSION} @vue/test-utils@#{VUE_TEST_UTILS_VERSION} ts-jest@#{JEST_VERSION} "\
-    "jest-environment-jsdom@#{JEST_VERSION} --dev"
-    run "bin/yarn add @types/jest@#{JEST_VERSION}"
+    run "bin/yarn add #{DEPENDENCIES[:jest].join(' ')} --dev"
     json_file = File.read(Pathname.new("package.json"))
     js_package = JSON.parse(json_file)
     js_package = js_package.merge(jest_config)
@@ -123,9 +159,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_vue
-    run "bin/yarn add vue@#{VUE_VERSION} vue-loader@#{VUE_LOADER_VERSION} "\
-        "babel-preset-typescript-vue3 @types/humps"
-    run "bin/yarn add vue-tsc --dev"
+    run "bin/yarn add #{DEPENDENCIES[:vue].join(' ')}"
     gsub_file(
       'config/webpack/webpack.config.js',
       ' merge(typescriptConfig, cssConfig, jQueryConfig, webpackConfig);',
@@ -141,7 +175,7 @@ class Recipes::FrontEnd < Rails::AppBuilder
   end
 
   def setup_api_client
-    run "bin/yarn add axios humps"
+    run "bin/yarn add #{DEPENDENCIES[:api].join(' ')}"
     copy_file '../assets/app/javascript/api/index.ts', 'app/javascript/api/index.ts'
     copy_file '../assets/app/javascript/utils/case-converter.ts',
               'app/javascript/utils/case-converter.ts'

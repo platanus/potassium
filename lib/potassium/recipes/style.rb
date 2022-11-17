@@ -25,7 +25,7 @@ class Recipes::Style < Rails::AppBuilder
         "@typescript-eslint/eslint-plugin  @types/jest @typescript-eslint/parser "\
         "eslint-plugin-jest eslint-plugin-platanus"
       if selected?(:front_end, :vue)
-        run 'yarn add --dev eslint-plugin-vue @vue/eslint-config-typescript'
+        run 'yarn add --dev eslint-plugin-vue @vue/eslint-config-typescript vue-tsc'
       end
     end
   end
