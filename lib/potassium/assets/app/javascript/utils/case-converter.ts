@@ -3,7 +3,7 @@
 /* eslint-disable max-statements */
 import { camelize, decamelize } from 'humps';
 
-type objectToConvert = File | FormData | Blob | Record<string, unknown> | Array<objectToConvert>;
+export type objectToConvert = File | FormData | Blob | Record<string, unknown> | Array<objectToConvert>;
 
 function convertKeys(
   object: objectToConvert,
