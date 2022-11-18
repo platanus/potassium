@@ -82,6 +82,7 @@ Potassium Rails apps includes the following gems and technologies:
 - [Faker](https://github.com/stympy/faker) for creating development data
 - [Scout](https://github.com/scoutapp/scout_apm_ruby) for monitoring performance
 - [Mjml](https://github.com/sighmon/mjml-rails) for mails style
+- [Bullet](https://github.com/flyerhzm/bullet) to identify eager loading (N+1 queries)
 
 The following optional integrations are also added:
 

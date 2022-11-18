@@ -102,3 +102,4 @@ RSpec.describe "Mailer" do
     end
   end
 end
+# rubocop:enable Rspec/MultipleMemoizedHelpers
