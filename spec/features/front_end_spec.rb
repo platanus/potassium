@@ -6,14 +6,14 @@ RSpec.describe "Front end" do
     remove_project_directory
   end
 
-  let(:application_css_path) { "#{project_path}/app/javascript/css/application.css" }
   let(:gemfile) { IO.read("#{project_path}/Gemfile") }
   let(:node_modules_file) { IO.read("#{project_path}/package.json") }
   let(:application_js_file) { IO.read("#{project_path}/app/javascript/application.js") }
   let(:layout_file) { IO.read("#{project_path}/app/views/layouts/application.html.erb") }
-  let(:application_css_file) { IO.read(application_css_path) }
+  let(:application_css_file) { IO.read("#{project_path}/app/javascript/css/application.css") }
   let(:tailwind_config_file) { IO.read("#{project_path}/tailwind.config.js") }
   let(:rails_css_file) { IO.read("#{project_path}/app/assets/stylesheets/application.css") }
+  let(:mock_example_file) { IO.read("#{project_path}/app/javascript/api/__mocks__/index.mock.ts") }
 
   it "creates a project without a front end framework" do
     remove_project_directory
@@ -71,6 +71,10 @@ RSpec.describe "Front end" do
     it 'includes correct packages for basic api client' do
       expect(node_modules_file).to include("\"axios\"")
       expect(node_modules_file).to include("\"humps\"")
+    end
+
+    it 'includes mock example' do
+      expect(mock_example_file).to include('jest.fn()')
     end
   end
 end

@@ -177,6 +177,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
   def setup_api_client
     run "bin/yarn add #{DEPENDENCIES[:api].join(' ')}"
     copy_file '../assets/app/javascript/api/index.ts', 'app/javascript/api/index.ts'
+    copy_file '../assets/app/javascript/api/__mocks__/index.mock.ts',
+              'app/javascript/api/__mocks__/index.mock.ts'
     copy_file '../assets/app/javascript/utils/case-converter.ts',
               'app/javascript/utils/case-converter.ts'
   end
