@@ -8,7 +8,7 @@ class Recipes::ErrorReporting < Rails::AppBuilder
 
   def create
     if selected?(:report_error)
-      gather_gem 'sentry-raven'
+      gather_gem 'sentry-rails'
       template '../assets/config/sentry.rb.erb', 'config/initializers/sentry.rb'
       append_to_file '.env.development', "SENTRY_DSN=\n"
       add_readme_section :internal_dependencies, :sentry
@@ -21,6 +21,6 @@ class Recipes::ErrorReporting < Rails::AppBuilder
   end
 
   def installed?
-    gem_exists?(/sentry-raven/) && file_exist?('config/initializers/sentry.rb')
+    gem_exists?(/sentry-rails/) && file_exist?('config/initializers/sentry.rb')
   end
 end

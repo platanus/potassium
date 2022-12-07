@@ -10,13 +10,13 @@ RSpec.describe "Error Reporting" do
   it "adds the Sentry gem to Gemfile" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
 
-    expect(gemfile_content).to include("gem 'sentry-raven'")
+    expect(gemfile_content).to include("gem 'sentry-rails'")
   end
 
   it "creates the initializer" do
     initializer_content = IO.read("#{project_path}/config/initializers/sentry.rb")
 
-    expect(initializer_content).to include("Raven.configure")
+    expect(initializer_content).to include("Sentry.init")
   end
 
   it "adds the environment variable to .env.development" do
