@@ -181,6 +181,8 @@ class Recipes::FrontEnd < Rails::AppBuilder
               'app/javascript/api/__mocks__/index.mock.ts'
     copy_file '../assets/app/javascript/utils/case-converter.ts',
               'app/javascript/utils/case-converter.ts'
+    copy_file '../assets/app/javascript/utils/csrf-token.ts',
+              'app/javascript/utils/csrf-token.ts'
   end
 
   private

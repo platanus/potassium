@@ -6,14 +6,21 @@ RSpec.describe "Front end" do
     remove_project_directory
   end
 
-  let(:gemfile) { IO.read("#{project_path}/Gemfile") }
-  let(:node_modules_file) { IO.read("#{project_path}/package.json") }
-  let(:application_js_file) { IO.read("#{project_path}/app/javascript/application.js") }
-  let(:layout_file) { IO.read("#{project_path}/app/views/layouts/application.html.erb") }
-  let(:application_css_file) { IO.read("#{project_path}/app/javascript/css/application.css") }
-  let(:tailwind_config_file) { IO.read("#{project_path}/tailwind.config.js") }
-  let(:rails_css_file) { IO.read("#{project_path}/app/assets/stylesheets/application.css") }
-  let(:mock_example_file) { IO.read("#{project_path}/app/javascript/api/__mocks__/index.mock.ts") }
+  def read_file(file_path)
+    IO.read("#{project_path}/#{file_path}")
+  end
+
+  let(:gemfile) { read_file('Gemfile') }
+  let(:node_modules_file) { read_file('package.json') }
+  let(:application_js_file) { read_file('app/javascript/application.js') }
+  let(:layout_file) { read_file('app/views/layouts/application.html.erb') }
+  let(:application_css_file) { read_file('app/javascript/css/application.css') }
+  let(:tailwind_config_file) { read_file('tailwind.config.js') }
+  let(:rails_css_file) { read_file('app/assets/stylesheets/application.css') }
+  let(:api_index_file) { read_file('app/javascript/api/index.ts') }
+  let(:case_converter_file) { read_file('app/javascript/utils/case-converter.ts') }
+  let(:csrf_token_file) { read_file('app/javascript/utils/csrf-token.ts') }
+  let(:mock_example_file) { read_file('app/javascript/api/__mocks__/index.mock.ts') }
 
   it "creates a project without a front end framework" do
     remove_project_directory
@@ -71,6 +78,12 @@ RSpec.describe "Front end" do
     it 'includes correct packages for basic api client' do
       expect(node_modules_file).to include("\"axios\"")
       expect(node_modules_file).to include("\"humps\"")
+    end
+
+    it 'includes api client files' do
+      expect(api_index_file).to include('axios.create')
+      expect(case_converter_file).to include('humps')
+      expect(csrf_token_file).to include('meta[name=csrf-token]')
     end
 
     it 'includes mock example' do

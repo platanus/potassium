@@ -1,5 +1,6 @@
 import axios, { type AxiosRequestTransformer, type AxiosResponseTransformer } from 'axios';
 import convertKeys, { type objectToConvert } from '../utils/case-converter';
+import csrfToken from '../utils/csrf-token';
 
 const api = axios.create({
   transformRequest: [
@@ -10,6 +11,11 @@ const api = axios.create({
     ...(axios.defaults.transformResponse as AxiosResponseTransformer[]),
     (data: objectToConvert) => convertKeys(data, 'camelize'),
   ],
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'X-CSRF-Token': csrfToken(),
+  },
 });
 
 export default api;
