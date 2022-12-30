@@ -36,4 +36,4 @@ function convertKeys(
   return object;
 }
 
-export default convertKeys;
+export { convertKeys };
