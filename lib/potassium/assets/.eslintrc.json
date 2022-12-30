@@ -209,7 +209,7 @@
       "newlines-between": "never"
     }],
     "import/newline-after-import": 2,
-    "import/prefer-default-export": 2,
+    "import/no-default-export": 2,
     "array-bracket-spacing": [2, "never"],
     "block-spacing": [2, "always"],
     "brace-style": [2, "1tbs", {
