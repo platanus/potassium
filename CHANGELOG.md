@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+Features
+  - Removes enumerize in favor of built-in enums [#428](https://github.com/platanus/potassium/pull/428)
+
 ## 6.7.0
 
 Features
