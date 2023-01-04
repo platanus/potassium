@@ -12,10 +12,6 @@ run_action(:cleaning) do
   clean_gemfile
 end
 
-run_action(:add_utils) do
-  gather_gem("enumerize")
-end
-
 run_action(:asking) do
   ask :database
   ask :devise
