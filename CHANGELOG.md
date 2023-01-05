@@ -4,6 +4,7 @@
 
 Features
   - Removes enumerize in favor of built-in enums [#428](https://github.com/platanus/potassium/pull/428)
+  - Add linter rule to enforce the use of named exports [#427](https://github.com/platanus/potassium/pull/427)
 
 ## 6.7.0
 
