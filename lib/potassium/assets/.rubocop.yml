@@ -282,6 +282,59 @@ Style/SymbolArray:
 Layout/ExtraSpacing:
   Description: Do not use unnecessary spacing.
   Enabled: false
+Layout/ClassStructure:
+  Enabled: true
+  Categories:
+    validation:
+      - validate
+      - validates
+    association:
+      - belongs_to
+      - has_one
+      - has_many
+      - has_and_belongs_to_many
+    attribute_macros:
+      - attribute
+      - attr_accessor
+      - attr_reader
+      - attr_writer
+    callbacks:
+      - before_validation
+      - after_validation
+      - before_save
+      - before_create
+      - after_create
+      - after_save
+      - after_commit
+      - after_create_commit
+    other_macros:
+      - devise
+      - acts_as_token_authenticatable
+      - accepts_nested_attributes_for
+      - humanize
+      - monetize
+    scope:
+      - scope
+      - pg_search_scope
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - public_attribute_macros
+    - association
+    - validation
+    - enum
+    - aasm
+    - scope
+    - public_delegate
+    - other_macros
+    - class_methods
+    - initializer
+    - public_methods
+    - protected_attribute_macros
+    - protected_methods
+    - private_attribute_macros
+    - private_delegate
+    - private_methods
 Naming/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.
   Enabled: false
@@ -498,7 +551,15 @@ Lint/StructNewOverride:
   Enabled: true
 Rails/Delegate:
   Description: Prefer delegate method for delegations.
-  Enabled: false
+  Enabled: true
+Rails/I18nLocaleAssignment:
+  Enabled: true
+Rails/WhereEquals:
+  Enabled: true
+Rails/WhereNot:
+  Enabled: true
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: true
 Performance/RedundantBlockCall:
   Description: Use `yield` instead of `block.call`.
   Reference: https://github.com/JuanitoFatas/fast-ruby#proccall-vs-yield-code
