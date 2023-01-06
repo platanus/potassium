@@ -5,6 +5,17 @@
 Features
   - Removes enumerize in favor of built-in enums [#428](https://github.com/platanus/potassium/pull/428)
   - Add linter rule to enforce the use of named exports [#427](https://github.com/platanus/potassium/pull/427)
+  - Enable new rubocop rules [#429](https://github.com/platanus/potassium/pull/429)
+    <details>
+      <summary>See rules</summary>
+
+      - [Rails/Delegate](https://docs.rubocop.org/rubocop-rails/2.17/cops_rails.html#railsdelegate)
+      - [Rails/I18nLocaleAssignment](https://docs.rubocop.org/rubocop-rails/2.17/cops_rails.html#railsi18nlocaleassignment)
+      - [Rails/WhereEquals](https://docs.rubocop.org/rubocop-rails/2.17/cops_rails.html#railswhereequals)
+      - [Rails/WhereNot](https://docs.rubocop.org/rubocop-rails/2.17/cops_rails.html#railswherenot)
+      - [Rails/RedundantPresenceValidationOnBelongsTo](https://docs.rubocop.org/rubocop-rails/cops_rails.html#railsredundantpresencevalidationonbelongsto)
+      - [Layout/ClassStructure](https://docs.rubocop.org/rubocop/1.24/cops_layout.html#layoutclassstructure)
+    </details>
 
 ## 6.7.0
 
