@@ -6,4 +6,4 @@ function csrfToken() {
   return token ?? false;
 }
 
-export default csrfToken;
+export { csrfToken };

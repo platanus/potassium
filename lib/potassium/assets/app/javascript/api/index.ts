@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestTransformer, type AxiosResponseTransformer } from 'axios';
-import convertKeys, { type objectToConvert } from '../utils/case-converter';
-import csrfToken from '../utils/csrf-token';
+import { convertKeys, type objectToConvert } from '../utils/case-converter';
+import { csrfToken } from '../utils/csrf-token';
 
 const api = axios.create({
   transformRequest: [
@@ -18,44 +18,46 @@ const api = axios.create({
   },
 });
 
-export default api;
+export { api };
 
 /*
 // Example to use the api object in the path ´app/javascript/api/users.ts´
 
-import api from './index';
+import { api } from './index';
 
-export default {
-  index() {
-    const path = '/api/internal/users';
+function index() {
+  const path = '/api/internal/users';
 
-    return api({
-      method: 'get',
-      url: path,
-    });
-  },
-  create(data: Partial<User>) {
-    const path = '/api/internal/users';
+  return api({
+    method: 'get',
+    url: path,
+  });
+}
 
-    return api({
-      method: 'post',
-      url: path,
-      data: {
-        user: data,
-      },
-    });
-  },
-  update(data: Partial<User>) {
-    const path = `/api/internal/users/${data.id}`;
+function create(data: Partial<User>) {
+  const path = '/api/internal/users';
 
-    return api({
-      method: 'put',
-      url: path,
-      data: {
-        user: data,
-      },
-    });
-  },
-};
+  return api({
+    method: 'post',
+    url: path,
+    data: {
+      user: data,
+    },
+  });
+}
+
+function update(data: Partial<User>) {
+  const path = `/api/internal/users/${data.id}`;
+
+  return api({
+    method: 'put',
+    url: path,
+    data: {
+      user: data,
+    },
+  });
+}
+
+export { index, create, update };
 
 */

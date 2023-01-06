@@ -1,3 +1,3 @@
 const api = jest.fn();
 
-export default api;
+export { api };
