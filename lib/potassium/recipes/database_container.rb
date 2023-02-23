@@ -81,7 +81,7 @@ class Recipes::DatabaseContainer < Rails::AppBuilder
 
         # Database
         DB_HOST=127.0.0.1
-        DB_PORT=$(make services-port SERVICE=#{_service_name} PORT=#{_port})
+        DB_PORT=COMMAND_EXPAND(make services-port SERVICE=#{_service_name} PORT=#{_port})
         DB_USER=#{_user}
 
       TEXT

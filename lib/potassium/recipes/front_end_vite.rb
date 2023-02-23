@@ -17,6 +17,17 @@ class Recipes::FrontEndVite < Rails::AppBuilder
     after(:gem_install, wrap_in_action: :vite_install) do
       run "yarn install"
       run "bundle exec vite install"
+      recipe.copy_dotenv_monkeypatch
     end
+  end
+
+  def copy_dotenv_monkeypatch
+    copy_file '../assets/lib/dotenv_monkeypatch.rb',
+              'lib/dotenv_monkeypatch.rb', force: true
+    insert_into_file(
+      "config/application.rb",
+      "\nrequire_relative '../lib/dotenv_monkeypatch'\n",
+      after: "Bundler.require(*Rails.groups)"
+    )
   end
 end

@@ -43,7 +43,7 @@ RSpec.describe "BackgroundProcessor" do
       content = IO.read("#{project_path}/.env.development")
       expect(content).to include("DB_POOL=25")
       expect(content).to include('REDIS_HOST=127.0.0.1')
-      expect(content).to include('REDIS_PORT=$(make services-port SERVICE=redis PORT=6379)')
+      expect(content).to include('REDIS_PORT=COMMAND_EXPAND(make services-port SERVICE=redis PORT=6379)')
       expect(content).to include('REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}/1')
     end
 
