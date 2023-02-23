@@ -3,17 +3,19 @@ class Recipes::FrontEndVite < Rails::AppBuilder
   POSTCSS_VERSION = Potassium::POSTCSS_VERSION
   TAILWINDCSS_VERSION = Potassium::TAILWINDCSS_VERSION
   AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
+  VUE_TEST_UTILS_VERSION = Potassium::VUE_TEST_UTILS_VERSION
 
   DEPENDENCIES = {
     tailwind: [
       "postcss@#{POSTCSS_VERSION}",
       "tailwindcss@#{TAILWINDCSS_VERSION}",
       "autoprefixer@#{AUTOPREFIXER_VERSION}",
-      "sass",
-      "eslint-plugin-tailwindcss"
+      "sass"
     ],
     typescript: [
-      "typescript",
+      "typescript"
+    ],
+    typescript_dev: [
       "@types/node"
     ],
     vue: [
@@ -24,10 +26,17 @@ class Recipes::FrontEndVite < Rails::AppBuilder
       "@vue/tsconfig",
       "vue-tsc"
     ],
-    vitest: [
+    vitest_dev: [
       "vitest",
       "@vue/test-utils@#{VUE_TEST_UTILS_VERSION}",
       "jsdom"
+    ],
+    api: [
+      "axios",
+      "humps"
+    ],
+    api_dev: [
+      "@types/humps"
     ]
   }
 
@@ -49,35 +58,37 @@ class Recipes::FrontEndVite < Rails::AppBuilder
     after(:gem_install, wrap_in_action: :vite_install) do
       run "yarn install"
       run "bundle exec vite install"
-      recipe.add_vite_dev_ws_content_security_policy
-      recipe.copy_dotenv_monkeypatch
-      recipe.install_tailwind
-      recipe.install_typescript
-      recipe.install_vue
-      recipe.copy_vite_config
+      recipe.install_packages
+      recipe.setup_tailwind
+      recipe.copy_config_files
+      recipe.setup_vite
       recipe.copy_default_assets
       recipe.insert_vue_into_layout
+      recipe.setup_api_client
     end
   end
 
-  def install_tailwind
-    run "yarn add --dev #{DEPENDENCIES[:tailwind].join(' ')}"
-    copy_file '../assets/tailwind.config.js', 'tailwind.config.js', force: true
+  def install_packages
+    packages, dev_packages = DEPENDENCIES.partition { |k, _| !k.to_s.end_with?('_dev') }.map(&:to_h)
+
+    run "yarn add #{packages.values.flatten.join(' ')}"
+    run "yarn add --dev #{dev_packages.values.flatten.join(' ')}"
   end
 
-  def install_typescript
-    run "yarn add --dev #{DEPENDENCIES[:typescript].join(' ')}"
+  def setup_tailwind
+    run "npx tailwindcss init -p"
+  end
+
+  def copy_config_files
+    copy_file '../assets/vite.config.ts', 'vite.config.ts', force: true
+    copy_file '../assets/tailwind.config.js', 'tailwind.config.js', force: true
     copy_file '../assets/tsconfig.json', 'tsconfig.json', force: true
     copy_file '../assets/tsconfig.config.json', 'tsconfig.config.json', force: true
   end
 
-  def install_vue
-    run "yarn add #{DEPENDENCIES[:vue].join(' ')}"
-    run "yarn add --dev #{DEPENDENCIES[:vue_dev].join(' ')}"
-  end
-
-  def copy_vite_config
-    copy_file '../assets/vite.config.ts', 'vite.config.ts', force: true
+  def setup_vite
+    add_vite_dev_ws_content_security_policy
+    copy_dotenv_monkeypatch
   end
 
   def copy_default_assets
@@ -88,6 +99,8 @@ class Recipes::FrontEndVite < Rails::AppBuilder
     copy_file '../assets/app/frontend/components/app.vue', 'app/frontend/components/app.vue',
               force: true
     copy_file '../assets/app/frontend/types/vue.d.ts', 'app/frontend/types/vue.d.ts'
+    copy_file '../assets/app/frontend/components/app.spec.ts',
+              'app/frontend/components/app.spec.ts'
   end
 
   def insert_vue_into_layout
@@ -100,8 +113,14 @@ class Recipes::FrontEndVite < Rails::AppBuilder
     insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
   end
 
-  def install_vitest
-    run "yarn add #{DEPENDENCIES[:vitest].join(' ')} --dev"
+  def setup_api_client
+    copy_file '../assets/app/frontend/api/index.ts', 'app/frontend/api/index.ts'
+    copy_file '../assets/app/frontend/api/__mocks__/index.mock.ts',
+              'app/frontend/api/__mocks__/index.mock.ts'
+    copy_file '../assets/app/frontend/utils/case-converter.ts',
+              'app/frontend/utils/case-converter.ts'
+    copy_file '../assets/app/frontend/utils/csrf-token.ts',
+              'app/frontend/utils/csrf-token.ts'
   end
 
   def add_vite_dev_ws_content_security_policy
