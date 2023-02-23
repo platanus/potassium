@@ -27,7 +27,7 @@ class Recipes::Coverage < Rails::AppBuilder
   end
 
   def setup_jest_text_formatter
-    run "bin/yarn add jest-text-formatter@1.0.2 --dev"
+    run "yarn add jest-text-formatter@1.0.2 --dev"
   end
 
   private

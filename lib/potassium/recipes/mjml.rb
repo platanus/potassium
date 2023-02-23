@@ -4,7 +4,7 @@ class Recipes::Mjml < Rails::AppBuilder
 
     gather_gem 'mjml-rails'
     after(:gem_install) do
-      run 'bin/yarn add mjml'
+      run 'yarn add mjml'
       mjml_config
     end
   end
