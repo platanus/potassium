@@ -1,6 +1,7 @@
 class Recipes::Ci < Rails::AppBuilder
   def create
     template '../assets/.circleci/config.yml.erb', '.circleci/config.yml'
+    gather_gem 'repo_analyzer'
 
     gather_gems(:test) do
       gather_gem 'rspec_junit_formatter', '~> 0.4'

@@ -117,6 +117,14 @@ jobs:
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 
       - run:
+          name: Update repo analyzer gem
+          command: bundle update --conservative repo_analyzer
+
+      - run:
+          name: POST extracted data to nest
+          command: bin/rake "repo_analyzer:analyze[platanus/<%= get(:app_name) %>]"
+
+      - run:
           name: Run simplecov
           shell: /bin/bash
           command: |

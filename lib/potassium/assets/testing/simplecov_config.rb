@@ -1,6 +1,7 @@
 require 'simplecov'
 require 'simplecov_text_formatter'
 require 'simplecov_linter_formatter'
+require 'simplecov_json_formatter'
 
 SimpleCovLinterFormatter.setup do |config|
   config.scope = ENV.fetch(
@@ -50,7 +51,14 @@ SimpleCov.start 'rails' do
   add_filter 'lib/vue_component.rb'
 
   if ENV["CIRCLECI"]
-    formatter(SimpleCov::Formatter::TextFormatter)
+    formatter(
+      SimpleCov::Formatter::MultiFormatter.new(
+        [
+          SimpleCov::Formatter::TextFormatter,
+          SimpleCov::Formatter::JSONFormatter
+        ]
+      )
+    )
   else
     formatter(
       SimpleCov::Formatter::MultiFormatter.new(
