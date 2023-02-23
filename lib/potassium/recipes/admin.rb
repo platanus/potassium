@@ -32,7 +32,7 @@ class Recipes::Admin < Rails::AppBuilder
   def add_active_admin
     recipe = self
     gather_gem 'activeadmin', '~> 2.9'
-    gather_gem 'activeadmin_addons', github: 'platanus/activeadmin_addons', branch: 'remove-select2'
+    gather_gem 'activeadmin_addons', '~> 2.0.0.beta.0'
     add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install --use_webpacker"
