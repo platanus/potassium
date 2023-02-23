@@ -4,6 +4,5 @@ class Recipes::Cleanup < Rails::AppBuilder
     erase_comments "config/environments/production.rb"
     erase_comments "config/environments/test.rb"
     erase_comments "config/environments/development.rb"
-    cut_comments "config/initializers/backtrace_silencers.rb", limit: 100
   end
 end
