@@ -1,4 +1,31 @@
 class Recipes::FrontEndVite < Rails::AppBuilder
+  VUE_VERSION = Potassium::VUE_VERSION
+  POSTCSS_VERSION = Potassium::POSTCSS_VERSION
+  TAILWINDCSS_VERSION = Potassium::TAILWINDCSS_VERSION
+  AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
+
+  DEPENDENCIES = {
+    tailwind: [
+      "postcss@#{POSTCSS_VERSION}",
+      "tailwindcss@#{TAILWINDCSS_VERSION}",
+      "autoprefixer@#{AUTOPREFIXER_VERSION}",
+      "sass",
+      "eslint-plugin-tailwindcss"
+    ],
+    typescript: [
+      "typescript",
+      "@types/node"
+    ],
+    vue: [
+      "vue@#{VUE_VERSION}"
+    ],
+    vue_dev: [
+      "@vitejs/plugin-vue",
+      "@vue/tsconfig",
+      "vue-tsc"
+    ]
+  }
+
   def installed?
     gem_exists?(/vite_rails/)
   end
@@ -19,7 +46,31 @@ class Recipes::FrontEndVite < Rails::AppBuilder
       run "bundle exec vite install"
       recipe.add_vite_dev_ws_content_security_policy
       recipe.copy_dotenv_monkeypatch
+      recipe.install_tailwind
+      recipe.install_typescript
+      recipe.install_vue
+      recipe.copy_vite_config
     end
+  end
+
+  def install_tailwind
+    run "yarn add --dev #{DEPENDENCIES[:tailwind].join(' ')}"
+    copy_file '../assets/tailwind.config.js', 'tailwind.config.js', force: true
+  end
+
+  def install_typescript
+    run "yarn add --dev #{DEPENDENCIES[:typescript].join(' ')}"
+    copy_file '../assets/tsconfig.json', 'tsconfig.json', force: true
+    copy_file '../assets/tsconfig.config.json', 'tsconfig.config.json', force: true
+  end
+
+  def install_vue
+    run "yarn add #{DEPENDENCIES[:vue].join(' ')}"
+    run "yarn add --dev #{DEPENDENCIES[:vue_dev].join(' ')}"
+  end
+
+  def copy_vite_config
+    copy_file '../assets/vite.config.ts', 'vite.config.ts', force: true
   end
 
   def add_vite_dev_ws_content_security_policy
