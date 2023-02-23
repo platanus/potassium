@@ -1,5 +1,6 @@
 {
   "name": "<%= @app_name.camelcase %>",
+  "private": true,
   "engines": {
     "node": "<%= get(:node_version) %>"
   }
