@@ -23,6 +23,11 @@ class Recipes::FrontEndVite < Rails::AppBuilder
       "@vitejs/plugin-vue",
       "@vue/tsconfig",
       "vue-tsc"
+    ],
+    vitest: [
+      "vitest",
+      "@vue/test-utils@#{VUE_TEST_UTILS_VERSION}",
+      "jsdom"
     ]
   }
 
@@ -50,6 +55,8 @@ class Recipes::FrontEndVite < Rails::AppBuilder
       recipe.install_typescript
       recipe.install_vue
       recipe.copy_vite_config
+      recipe.copy_default_assets
+      recipe.insert_vue_into_layout
     end
   end
 
@@ -71,6 +78,30 @@ class Recipes::FrontEndVite < Rails::AppBuilder
 
   def copy_vite_config
     copy_file '../assets/vite.config.ts', 'vite.config.ts', force: true
+  end
+
+  def copy_default_assets
+    copy_file '../assets/app/frontend/entrypoints/application.js',
+              'app/frontend/entrypoints/application.js', force: true
+    copy_file '../assets/app/frontend/css/application.css', 'app/frontend/css/application.css',
+              force: true
+    copy_file '../assets/app/frontend/components/app.vue', 'app/frontend/components/app.vue',
+              force: true
+    copy_file '../assets/app/frontend/types/vue.d.ts', 'app/frontend/types/vue.d.ts'
+  end
+
+  def insert_vue_into_layout
+    layout_file = "app/views/layouts/application.html.erb"
+    insert_into_file(
+      layout_file,
+      "<div id=\"vue-app\">\n      <app></app>\n      ",
+      before: "<%= yield %>"
+    )
+    insert_into_file layout_file, "\n    </div>", after: "<%= yield %>"
+  end
+
+  def install_vitest
+    run "yarn add #{DEPENDENCIES[:vitest].join(' ')} --dev"
   end
 
   def add_vite_dev_ws_content_security_policy
