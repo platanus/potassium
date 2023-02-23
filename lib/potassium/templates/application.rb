@@ -17,7 +17,6 @@ run_action(:asking) do
   ask :devise
   ask :admin
   ask :google_tag_manager
-  ask :front_end
   ask :vue_admin
   ask :mailer
   ask :background_processor
@@ -73,12 +72,12 @@ run_action(:recipe_loading) do
   create :script
   create :github
   create :cleanup
-  create :front_end
-  create :admin
-  create :vue_admin
   create :google_tag_manager
   create :mjml
   create :bullet
+  create :front_end_vite
+  create :admin
+  create :vue_admin
 end
 
 info "Gathered enough information. Applying the template. Wait a minute."
