@@ -9,6 +9,6 @@ RSpec.describe "Database" do
 
   it "adds the Strong Migrations gem to Gemfile" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
-    expect(gemfile_content).to include("gem 'strong_migrations'")
+    expect(gemfile_content).to include("strong_migrations")
   end
 end

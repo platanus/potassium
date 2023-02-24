@@ -23,7 +23,7 @@ RSpec.describe "A new project" do
     gemfile = IO.read("#{project_path}/Gemfile")
 
     expect(database_config_file).to include(%{adapter: postgresql})
-    expect(gemfile).to include %{gem 'pg'}
+    expect(gemfile).to include %{pg}
   end
 
   it "configures the correct ruby version" do

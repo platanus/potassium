@@ -31,7 +31,6 @@ RSpec.describe "Testing" do
     create_dummy_project(devise: true)
   end
 
-  it { expect(gemfile_content).to include("gem 'rspec-rails'") }
   it { expect(gemfile_content).to include('rspec-rails') }
   it { expect(gemfile_content).to include('factory_bot_rails') }
   it { expect(gemfile_content).to include('faker') }

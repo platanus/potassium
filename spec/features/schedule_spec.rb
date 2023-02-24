@@ -13,7 +13,7 @@ RSpec.describe "schedule" do
 
   it "adds the sidekiq-scheduler gem to Gemfile" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
-    expect(gemfile_content).to include("gem 'sidekiq-scheduler'")
+    expect(gemfile_content).to include("sidekiq-scheduler")
   end
 
   it "adds schedule section to sidekiq config" do

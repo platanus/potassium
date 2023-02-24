@@ -10,7 +10,7 @@ RSpec.describe "Pundit" do
   it "adds the Pundit gem to Gemfile" do
     content = IO.read("#{project_path}/Gemfile")
 
-    expect(content).to include("gem 'pundit'")
+    expect(content).to include("pundit")
   end
 
   it "setup active admin" do

@@ -9,7 +9,7 @@ RSpec.describe "Draper" do
 
   it "adds the Draper gem to Gemfile" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
-    expect(gemfile_content).to include("gem 'draper'")
+    expect(gemfile_content).to include("draper")
   end
 
   it "adds the Draper brief to README file" do

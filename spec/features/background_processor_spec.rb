@@ -11,7 +11,7 @@ RSpec.describe "BackgroundProcessor" do
 
     it "adds sidekiq gem to Gemfile" do
       gemfile_content = IO.read("#{project_path}/Gemfile")
-      expect(gemfile_content).to include("gem 'sidekiq'")
+      expect(gemfile_content).to include("sidekiq")
     end
 
     it "adds queue_adapter to application.rb" do

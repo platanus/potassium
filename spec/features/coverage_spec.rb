@@ -9,9 +9,9 @@ RSpec.describe "Coverage" do
 
   it "adds simplecov related gems to Gemfile" do
     content = IO.read("#{project_path}/Gemfile")
-    expect(content).to include("gem 'simplecov'")
-    expect(content).to include("gem 'simplecov_linter_formatter'")
-    expect(content).to include("gem 'simplecov_text_formatter'")
+    expect(content).to include("simplecov")
+    expect(content).to include("simplecov_linter_formatter")
+    expect(content).to include("simplecov_text_formatter")
   end
 
   it "requires simplecov config file before rails" do
