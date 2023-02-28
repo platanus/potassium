@@ -26,14 +26,15 @@ RSpec.describe "Coverage" do
 
   context "with vue" do
     let(:node_modules_file) { IO.read("#{project_path}/package.json") }
+    let(:vite_config) { IO.read("#{project_path}/vite.config.ts") }
 
     before(:all) do
       remove_project_directory
-      create_dummy_project("front_end" => "vue")
+      create_dummy_project("front_end_vite" => true)
     end
 
-    it "adds jest coverage configuration" do
-      expect(node_modules_file).to include('"collectCoverage": true')
+    it "adds vitest coverage configuration" do
+      expect(vite_config).to include("provider: 'c8',")
     end
 
     it "adds jest text formatter package" do
