@@ -65,6 +65,7 @@ class Recipes::FrontEndVite < Rails::AppBuilder
       recipe.copy_default_assets
       recipe.insert_vue_into_layout
       recipe.setup_api_client
+      add_readme_header :vite
     end
   end
 
