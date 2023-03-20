@@ -83,6 +83,16 @@ readme:
         You can add or modify rules by editing the [`.rubocop.yml`](.rubocop.yml), [`.eslintrc.json`](.eslintrc.json) or [`.stylelintrc.json`](.stylelintrc.json) files.
 
         You can (and should) use linter integrations for your text editor of choice, using the project's configuration.
+    vscode:
+      title: VSCode Configuration
+      body: |
+        To use the recommended configurations follow the steps below:
+
+            install the recommended extensions in .vscode/extensions.json
+            copy (or link) .vscode/recommended-settings.json to .vscode/settings.json
+            restart the editor
+
+        To see the recommended extensions select "Extensions: Show Recommended Extensions" in the Command Palette.
     mailing:
       title: "Sending Emails"
       body: |
