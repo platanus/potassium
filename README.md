@@ -49,6 +49,12 @@ This will create a project with the following configuration:
   19. `spring`: `true`
 
 The remaining question will be asked as usual.
+
+### Running from Repository
+
+If you cloned this repository and are running the gem using the bin script (`potassium/bin/potassium create`), take careful note of the gem versions that are used. Sometimes the local Rails version is used instead of the one specified in the gemspec. Remove your local Gemfile.lock after pulling from the repository to help prevent these issues.
+
+
 ### Adding recipes to an existing project
 
 Use the `potassium install` command to add a recipe to a project:
