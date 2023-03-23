@@ -31,6 +31,6 @@ RSpec.describe "Google Tag Manager" do
 
   it 'add content security policy' do
     expect(content_security_policy_file)
-      .to include("\nRails.application.config.content_security_policy do |policy|")
+      .to include("https://developers.google.com/tag-manager/web/csp")
   end
 end

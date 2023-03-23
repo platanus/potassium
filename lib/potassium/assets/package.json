@@ -1,5 +1,12 @@
 {
   "name": "<%= @app_name.camelcase %>",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:changes": "vitest --changed master"
+  },
   "engines": {
     "node": "<%= get(:node_version) %>"
   }

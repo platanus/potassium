@@ -137,14 +137,12 @@ jobs:
             RSPEC_FORMAT_ARGS="--tag type:system -f progress --no-color -p 10"
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 
-      <%- if selected?(:front_end, :vue) -%>
-      - run:
-          name: Run jest
-          command: |
-            yarn run test > coverage/input_jest.txt
-            ./node_modules/.bin/format-coverage coverage/input_jest.txt coverage/output_jest.txt /home/circleci/project/app/javascript
-            cat coverage/output_jest.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
-      <%- end -%>
+    - run:
+        name: Run vitest
+        command: |
+          yarn run test > coverage/input_vitest.txt
+          ./node_modules/.bin/format-coverage coverage/input_vitest.txt coverage/output_vitest.txt /home/circleci/project/app/frontend
+          cat coverage/output_vitest.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
 
       - store_test_results:
           path: test_results

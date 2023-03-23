@@ -20,13 +20,11 @@ class Recipes::Style < Rails::AppBuilder
       gather_gem 'rubocop-platanus'
     end
 
-    after(:webpacker_install) do
+    after(:vite_install) do
       run "yarn add --dev stylelint eslint eslint-plugin-import "\
         "@typescript-eslint/eslint-plugin  @types/jest @typescript-eslint/parser "\
-        "eslint-plugin-jest eslint-plugin-platanus"
-      if selected?(:front_end, :vue)
-        run 'yarn add --dev eslint-plugin-vue @vue/eslint-config-typescript vue-tsc'
-      end
+        "eslint-plugin-jest eslint-plugin-platanus eslint-plugin-vue "\
+        "@vue/eslint-config-typescript eslint-plugin-tailwindcss"
     end
   end
 

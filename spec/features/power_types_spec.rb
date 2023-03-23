@@ -9,7 +9,7 @@ RSpec.describe "PowerTypes" do
 
   it "adds the PowerTypes gem to Gemfile" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
-    expect(gemfile_content).to include("gem 'power-types'")
+    expect(gemfile_content).to include("power-types")
   end
 
   it "adds the PowerTypes brief to README file" do

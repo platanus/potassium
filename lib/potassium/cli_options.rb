@@ -172,10 +172,12 @@ module Potassium::CliOptions # rubocop:disable Metrics/ModuleLength
       default_test_value: false
     },
     {
-      type: :flag,
-      name: :front_end,
-      desc: "Decides which front-end framework to use. Available: Vue, Angular 2, None",
-      default_test_value: "None"
+      type: :switch,
+      name: :front_end_vite,
+      desc: "Whether to use Vite as frontend bundler",
+      negatable: true,
+      default_value: true,
+      default_test_value: true
     },
     {
       type: :switch,

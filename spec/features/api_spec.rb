@@ -9,8 +9,8 @@ RSpec.describe "Api" do
 
   it "adds power_api related gems to Gemfile" do
     gemfile_content = IO.read("#{project_path}/Gemfile")
-    expect(gemfile_content).to include("gem 'power_api'")
-    expect(gemfile_content).to include("gem 'rswag-specs'")
+    expect(gemfile_content).to include("power_api")
+    expect(gemfile_content).to include("rswag-specs")
   end
 
   it "adds the power_api brief to README file" do

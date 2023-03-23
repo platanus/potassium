@@ -29,15 +29,14 @@ class Recipes::Admin < Rails::AppBuilder
     gem_exists?(/activeadmin/)
   end
 
-  private
-
   def add_active_admin
+    recipe = self
     gather_gem 'activeadmin', '~> 2.9'
-    gather_gem 'activeadmin_addons'
+    gather_gem 'activeadmin_addons', '~> 2.0.0.beta.0'
     add_readme_section :internal_dependencies, :active_admin
     after(:gem_install, wrap_in_action: :admin_install) do
       generate "active_admin:install --use_webpacker"
-      run 'bin/yarn add @activeadmin/activeadmin'
+      run 'yarn add @activeadmin/activeadmin'
       line = "ActiveAdmin.setup do |config|"
       initializer = "config/initializers/active_admin.rb"
       gsub_file initializer, /(#{Regexp.escape(line)})/mi do |_match|
@@ -58,77 +57,48 @@ class Recipes::Admin < Rails::AppBuilder
 
       generate "activeadmin_addons:install"
 
-      run "bin/yarn add arctic_admin @fortawesome/fontawesome-free"
-
-      aa_style = "app/javascript/stylesheets/active_admin.scss"
-
-      gsub_file(
-        aa_style,
-        "@import \"~@activeadmin/activeadmin/src/scss/mixins\";\n" +
-        "@import \"~@activeadmin/activeadmin/src/scss/base\";",
-        <<~HERE
-          @import '~arctic_admin/src/scss/main';
-
-          // Fix for sidebar when there are too many filters
-          #sidebar {
-            height: 100vh;
-            top: 0;
-            z-index: 10;
-          }
-
-          #sidebar::before {
-            top: 200px !important;
-          }
-
-          #filters_sidebar_section {
-            height: 100vh;
-            overflow: auto;
-          }
-
-          // Fix for invisible datepicker calendar
-          #ui-datepicker-div {
-            z-index: 11 !important;
-          }
-
-          // Fix for backwards date range input
-          #sidebar .sidebar_section .filter_date_range input:nth-child(2) {
-            float: none;
-          }
-
-          #sidebar .sidebar_section .filter_date_range {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: space-between
-          }
-
-          #sidebar .sidebar_section .filter_date_range label {
-            width: 100%;
-          }
-        HERE
-      )
-
-      aa_js = "app/javascript/packs/active_admin.js"
-      js_line = "import \"@activeadmin/activeadmin\";\n"
-
-      gsub_file(
-        aa_js,
-        js_line,
-        <<~HERE
-          #{js_line}
-          import '@fortawesome/fontawesome-free/css/all.css';
-          import 'arctic_admin';
-        HERE
-      )
-
-      run "mv app/javascript/packs/active_admin.js app/javascript/active_admin.js"
-      gsub_file(
-        "app/javascript/active_admin.js",
-        'import "../stylesheets/active_admin";',
-        'import "./stylesheets/active_admin.scss";'
-      )
+      run "yarn add arctic_admin @fortawesome/fontawesome-free"
 
       run 'rm -rf config/webpack/plugins'
+      run 'rm app/javascript/packs/active_admin.js'
       run 'rm -rf app/javascript/packs/active_admin'
+      run 'rm app/javascript/stylesheets/active_admin.scss'
+      run 'rmdir app/javascript/packs'
+      run 'rmdir app/javascript/stylesheets'
+      run 'rmdir app/javascript'
+
+      recipe.copy_frontend_files
+      recipe.insert_vite_monkeypatch
     end
+  end
+
+  def copy_frontend_files
+    copy_file '../assets/app/frontend/entrypoints/active_admin.js',
+              'app/frontend/entrypoints/active_admin.js'
+    copy_file '../assets/app/frontend/entrypoints/active_admin.scss',
+              'app/frontend/entrypoints/active_admin.scss'
+    copy_file '../assets/app/frontend/active_admin/jquery.js', 'app/frontend/active_admin/jquery.js'
+  end
+
+  def insert_vite_monkeypatch
+    monkeypatch =
+      <<~HERE
+        module ActiveAdminViteJS
+          def stylesheet_pack_tag(style, **options)
+            style = 'active_admin.scss' if style == 'active_admin.css'
+            vite_stylesheet_tag(style, **options)
+          end
+
+          def javascript_pack_tag(script, **options)
+            vite_javascript_tag(script, **options)
+          end
+        end
+
+        ActiveAdmin::Views::Pages::Base.include ActiveAdminViteJS
+        ActiveSupport.on_load(:action_view) { include ActiveAdminViteJS }
+
+      HERE
+    insert_into_file "config/initializers/active_admin.rb", monkeypatch,
+                     before: "ActiveAdmin.setup do |config|"
   end
 end

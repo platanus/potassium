@@ -10,7 +10,7 @@ RSpec.describe "File Storage" do
 
     it "adds the aws-sdk-s3 gem to Gemfile" do
       gemfile_content = IO.read("#{project_path}/Gemfile")
-      expect(gemfile_content).to include("gem 'aws-sdk-s3'")
+      expect(gemfile_content).to include("aws-sdk-s3")
     end
 
     it "customizes config file" do
@@ -43,9 +43,9 @@ RSpec.describe "File Storage" do
     shared_examples 'common shrine setup' do
       it "adds the aws-sdk-s3, shrine and marcel gems to Gemfile" do
         gemfile_content = IO.read("#{project_path}/Gemfile")
-        expect(gemfile_content).to include("gem 'aws-sdk-s3'")
-        expect(gemfile_content).to include("gem 'shrine'")
-        expect(gemfile_content).to include("gem 'marcel'")
+        expect(gemfile_content).to include("aws-sdk-s3")
+        expect(gemfile_content).to include("shrine")
+        expect(gemfile_content).to include("marcel")
       end
 
       it "adds brief to README file" do

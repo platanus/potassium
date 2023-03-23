@@ -22,20 +22,14 @@ readme:
             $ heroku local
 
         [Heroku Local]: https://devcenter.heroku.com/articles/heroku-local
-    webpack:
+    vite:
       title: "Development"
       body: |
-        For hot-reloading and fast webpacker compilation you need to run webpack's dev server along with the rails server:
+        For hot-reloading and fast compilation you need to run the vite dev server along with the rails server:
 
-            $ ./bin/webpacker-dev-server
+            $ ./bin/vite dev
 
         Running the dev server will also solve problems with the cache not refreshing between changes and provide better error messages if something fails to compile.
-
-        For even faster in-place component refreshing (with no page reloads), you can enable Hot Module Reloading in `config/webpacker.yml`
-
-            development:
-              dev_server:
-                hmr: true
     ci:
       title: "Continuous Integrations"
       body: |

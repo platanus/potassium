@@ -10,7 +10,7 @@ RSpec.describe "I18n" do
   it "adds the Clockwork gem to Gemfile" do
     content = IO.read("#{project_path}/Gemfile")
 
-    expect(content).to include("gem 'rails-i18n'")
+    expect(content).to include("rails-i18n")
   end
 
   it "configures application.rb" do

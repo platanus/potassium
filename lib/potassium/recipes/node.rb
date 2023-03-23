@@ -8,7 +8,7 @@ class Recipes::Node < Rails::AppBuilder
   def create
     info "Using node version LTS #{NODE_VERSION}"
     create_file '.node-version', NODE_VERSION, force: true
-    after(:webpacker_install) do
+    after(:vite_install) do
       json_file = File.read(Pathname.new("package.json"))
       js_package = JSON.parse(json_file)
       js_package["engines"] = { "node" => "#{NODE_VERSION}.x" }

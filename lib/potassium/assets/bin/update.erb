@@ -18,7 +18,7 @@ chdir APP_ROOT do
   system! 'gem install bundler --conservative'
 
   puts '== Installing YARN stuff =='
-  system! 'bin/yarn install'
+  system! 'yarn install'
 
   system('bundle check') || system!('bundle install')
   puts "\n== Updating database =="

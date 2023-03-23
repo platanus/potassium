@@ -5,7 +5,6 @@ class Recipes::VueAdmin < Rails::AppBuilder
         Ask.confirm "Do you want Vue support for ActiveAdmin?"
       end
       set(:vue_admin, vue_admin)
-      set(:front_end, :vue) if vue_admin
     end
   end
 
@@ -29,23 +28,18 @@ class Recipes::VueAdmin < Rails::AppBuilder
   end
 
   def installed?
-    dir_exist?("app/assets/javascripts/admin")
+    file_exist?("lib/vue_component.rb")
   end
 
   def add_vue_admin
     add_vue_component_library
     add_component_integration
-    js_line = 'import "activeadmin_addons"'
-    gsub_file(
-      'app/javascript/active_admin.js',
-      js_line,
-      <<~HERE
-        #{js_line}
-        #{active_admin_js}
-      HERE
+    insert_into_file(
+      'app/frontend/entrypoints/active_admin.js',
+      active_admin_js
     )
     copy_file '../assets/active_admin/admin-component.vue',
-              'app/javascript/components/admin-component.vue',
+              'app/frontend/components/admin-component.vue',
               force: true
   end
 
@@ -128,7 +122,7 @@ class Recipes::VueAdmin < Rails::AppBuilder
   def active_admin_js
     <<~HERE
       import { createApp } from 'vue';
-      import AdminComponent from './components/admin-component.vue';
+      import AdminComponent from '../components/admin-component.vue';
 
       function onLoad() {
         if (document.getElementById('wrapper') !== null) {
@@ -141,7 +135,7 @@ class Recipes::VueAdmin < Rails::AppBuilder
               }));
             },
           });
-          app.component('AdminComponent', AdminComponent);
+          app.component('admin_component', AdminComponent);
           app.mount('#wrapper');
         }
 

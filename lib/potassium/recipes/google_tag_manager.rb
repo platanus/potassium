@@ -25,7 +25,8 @@ class Recipes::GoogleTagManager < Rails::AppBuilder
   def add_content_security_policy
     inject_into_file(
       'config/initializers/content_security_policy.rb',
-      content_security_policy_code
+      content_security_policy_code,
+      before: '# Report violations without enforcing the policy.'
     )
   end
 
@@ -67,28 +68,23 @@ class Recipes::GoogleTagManager < Rails::AppBuilder
 
   def content_security_policy_code
     <<~HERE
-      Rails.application.config.content_security_policy do |policy|
-        policy.connect_src(
-          :self,
-          :https,
-          'http://localhost:3035',
-          'ws://localhost:3035',
-          'https://www.google-analytics.com'
-        )
-        # google tag manager requires to enable unsafe inline and vue unsave eval:
-        # https://developers.google.com/tag-manager/web/csp
-        # https://vuejs.org/v2/guide/installation.html#CSP-environments
-        policy.script_src(
-          :self,
-          :https,
-          :unsafe_inline,
-          :unsafe_eval,
-          'https://www.googletagmanager.com',
-          'https://www.google-analytics.com',
-          'https://ssl.google-analytics.com'
-        )
-        policy.img_src :self, 'data:', :https, 'https://www.googletagmanager.com', 'https://www.google-analytics.com'
-      end
+      # policy.connect_src(
+      #   *policy.connect_src,
+      #   'https://www.google-analytics.com'
+      # )
+      # google tag manager requires to enable unsafe inline:
+      # https://developers.google.com/tag-manager/web/csp
+      # policy.script_src(
+      #   *policy.script_src,
+      #   'https://www.googletagmanager.com',
+      #   'https://www.google-analytics.com',
+      #   'https://ssl.google-analytics.com'
+      # )
+      # policy.img_src(
+      #   *policy.img_src,
+      #   'https://www.googletagmanager.com',
+      #   'https://www.google-analytics.com'
+      # )
     HERE
   end
 end
