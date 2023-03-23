@@ -5,7 +5,6 @@ class Recipes::VueAdmin < Rails::AppBuilder
         Ask.confirm "Do you want Vue support for ActiveAdmin?"
       end
       set(:vue_admin, vue_admin)
-      set(:front_end, :vue) if vue_admin
     end
   end
 

@@ -43,7 +43,7 @@ This will create a project with the following configuration:
   13. `draper`: `true`
   14. `schedule`: `true`
   15. `sentry`: `true`
-  16. `front_end`: `'vue'`
+  16. `front_end_vite`: `true`
   17. `google_tag_manager`: `true`
   18. `test`: `true`
   19. `spring`: `true`
