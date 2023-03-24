@@ -2,7 +2,12 @@
 
 ## Unreleased
 
+## 7.0.0
+
 Features
+  - Updates to ActiveAdmin Addons 2 (beta) [#431](https://github.com/platanus/potassium/pull/431)
+  - Replaces Shakapacker with Vite [#431](https://github.com/platanus/potassium/pull/431)
+  - Update to Rails 7 [#431](https://github.com/platanus/potassium/pull/431)
   - Install repo analyzer gem to run in CI environment
   - Removes enumerize in favor of built-in enums [#428](https://github.com/platanus/potassium/pull/428)
   - Add linter rule to enforce the use of named exports [#427](https://github.com/platanus/potassium/pull/427)
