@@ -1,0 +1,3 @@
+filename: 'docs/erd'
+filetype: png
+exclude: 'ActiveAdmin::Comment, ActiveRecord::SchemaMigration, ActiveRecord::InternalMetadata, DataMigrate::DataSchemaMigration, ActiveStorage::Blob, ActiveStorage::VariantRecord, ActiveStorage::Attachment, ActionText::RichText, .*MigrationService$'

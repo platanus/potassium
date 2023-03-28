@@ -30,6 +30,7 @@ run_action(:asking) do
   ask :file_storage
   ask :heroku
   ask :github
+  ask :erd
 end
 
 run_action(:recipe_loading) do
@@ -79,6 +80,7 @@ run_action(:recipe_loading) do
   create :google_tag_manager
   create :mjml
   create :bullet
+  create :erd
 end
 
 info "Gathered enough information. Applying the template. Wait a minute."
