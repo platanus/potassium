@@ -4,10 +4,6 @@ set :titleized_app_name, get(:app_name).titleize
 set :underscorized_app_name, get(:app_name).underscore
 set :dasherized_app_name, get(:app_name).dasherize
 
-run_action(:after_create_rails) do
-  rubocop_revision
-end
-
 run_action(:cleaning) do
   clean_gemfile
 end
@@ -90,4 +86,8 @@ end
 run_action(:database_creation) do
   run "bundle exec rails db:create db:migrate"
   run "RACK_ENV=test bundle exec rails db:create db:migrate"
+end
+
+run_action(:rubocop_revision) do
+  run_rubocop
 end

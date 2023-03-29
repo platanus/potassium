@@ -97,10 +97,4 @@ module PotassiumTestHelpers
   def run_command(command)
     system(command)
   end
-
-  def run_rubocop
-    options, paths = RuboCop::Options.new.parse(["."])
-    runner = RuboCop::Runner.new(options, RuboCop::ConfigStore.new)
-    runner.run(paths)
-  end
 end
