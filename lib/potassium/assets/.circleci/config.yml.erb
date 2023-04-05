@@ -122,7 +122,7 @@ jobs:
 
       - run:
           name: POST extracted data to nest
-          command: bin/rake "repo_analyzer:analyze[platanus/<%= get(:app_name) %>]"
+          command: bin/rake "repo_analyzer:analyze[platanus/<%= get(:github_repo_name) || get(:dasherized_app_name) %>]"
 
       - run:
           name: Run simplecov
