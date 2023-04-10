@@ -36,9 +36,5 @@ RSpec.describe "Coverage" do
     it "adds vitest coverage configuration" do
       expect(vite_config).to include("provider: 'c8',")
     end
-
-    it "adds jest text formatter package" do
-      expect(node_modules_file).to include('jest-text-formatter')
-    end
   end
 end

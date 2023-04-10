@@ -18,7 +18,7 @@ class Recipes::Coverage < Rails::AppBuilder
   end
 
   def setup_coverage_dependencies
-    run "yarn add jest-text-formatter@1.0.2 c8 --dev"
+    run "yarn add c8 --dev"
   end
 
   private

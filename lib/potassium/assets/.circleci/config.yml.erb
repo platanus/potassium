@@ -140,9 +140,7 @@ jobs:
       - run:
           name: Run vitest
           command: |
-            yarn run test > coverage/input_vitest.txt
-            ./node_modules/.bin/format-coverage coverage/input_vitest.txt coverage/output_vitest.txt /home/circleci/project/app/frontend
-            cat coverage/output_vitest.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
+            yarn run test
 
       - store_test_results:
           path: test_results
