@@ -17,7 +17,9 @@ RSpec.describe 'CI' do
     expect(ci_config).to include('cimg/ruby', 'cache', 'rspec', 'reviewdog')
   end
 
-  it "adds repo analyzer config" do
-    expect(ci_config).to include('bin/rake "repo_analyzer:analyze[platanus/dummy_app]"')
+  it "uses dasherized app name for repo analyzer" do
+    expect(ci_config).to include(
+      "repo_analyzer:analyze[platanus/#{PotassiumTestHelpers::APP_NAME.dasherize}]"
+    )
   end
 end

@@ -32,7 +32,6 @@ run_action(:recipe_loading) do
   create :spring
   create :readme
   create :heroku
-  create :ci
   create :style
   create :puma
   create :env
@@ -67,6 +66,7 @@ run_action(:recipe_loading) do
   create :tzinfo
   create :script
   create :github
+  create :ci
   create :cleanup
   create :google_tag_manager
   create :mjml

@@ -70,7 +70,7 @@ RSpec.describe 'Front end' do
   end
 
   it 'includes mock example' do
-    expect(mock_example_file).to include('jest.fn()')
+    expect(mock_example_file).to include('vi.fn()')
   end
 
   it 'includes the dotenv monkeypatch' do

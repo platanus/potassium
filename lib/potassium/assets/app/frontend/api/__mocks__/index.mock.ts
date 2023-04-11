@@ -1,3 +1,3 @@
-const api = jest.fn();
+const api = vi.fn();
 
 export { api };

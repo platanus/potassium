@@ -122,7 +122,7 @@ jobs:
 
       - run:
           name: POST extracted data to nest
-          command: bin/rake "repo_analyzer:analyze[platanus/<%= get(:app_name) %>]"
+          command: bin/rake "repo_analyzer:analyze[platanus/<%= get(:github_repo_name) || get(:dasherized_app_name) %>]"
 
       - run:
           name: Run simplecov
@@ -137,12 +137,10 @@ jobs:
             RSPEC_FORMAT_ARGS="--tag type:system -f progress --no-color -p 10"
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 
-    - run:
-        name: Run vitest
-        command: |
-          yarn run test > coverage/input_vitest.txt
-          ./node_modules/.bin/format-coverage coverage/input_vitest.txt coverage/output_vitest.txt /home/circleci/project/app/frontend
-          cat coverage/output_vitest.txt | ./bin/reviewdog -reporter=github-pr-review -efm="%f:%l:%c: %m"
+      - run:
+          name: Run vitest
+          command: |
+            yarn run test
 
       - store_test_results:
           path: test_results
