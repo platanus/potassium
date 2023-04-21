@@ -49,6 +49,7 @@ SimpleCov.start 'rails' do
   add_filter 'app/responders'
   add_filter 'lib/fake_data_loader.rb'
   add_filter 'lib/vue_component.rb'
+  add_filter 'lib/environment_variables.rb'
 
   if ENV["CIRCLECI"]
     formatter(
