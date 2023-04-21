@@ -74,6 +74,7 @@ run_action(:recipe_loading) do
   create :front_end_vite
   create :admin
   create :vue_admin
+  create :environment_variables
 end
 
 info "Gathered enough information. Applying the template. Wait a minute."
