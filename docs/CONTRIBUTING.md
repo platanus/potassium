@@ -14,13 +14,13 @@ Now, to add some behavior, thanks to the [DSL](/docs/DSL.md) we have a kind of s
 4. Install the gems, filling the `Gemfile` before with all the gathered gems.
 5. Finally, create the database.
 
-The main step is the 3rd, when we call the `create` methods from the recipes. A recipe can do anything (because is a ruby script) but their responsability should be to gather gems and register callbacks for the process.
+The main step is the 3rd, when we call the `create` methods from the recipes. A recipe can do anything (because is a ruby script) but their responsibility should be to gather gems and register callbacks for the process.
 
 ### Recipe
 
 The recipes are classes defined in the `Recipes` module that inherit from
 `Rails::AppBuilder` and by convention can implement some of the following
-methods `ask`, `create` and `install`. So they took this form.
+methods `ask`, `create` and `install`. They take this form.
 
 ```ruby
 class Recipes::MyRecipe < Rails::AppBuilder
@@ -73,7 +73,7 @@ This method is used if you need to ask something to the user before doing someth
 
 We'll call this method to add specific functionality to the rails project.
 
-1. In the `create` method register a gem using `gather_gem` and create a callback to be called after the `gem_install` action succeded to run the generator. `gem_install` is one of the main actions that should be easily visible with a sneak peek in [the template][the-template].
+1. In the `create` method register a gem using `gather_gem` and create a callback to be called after the `gem_install` action succeeds to run the generator. `gem_install` is one of the main actions that should be easily visible with a sneak peek in [the template][the-template].
 
     ```ruby
     def create
@@ -99,8 +99,8 @@ We'll call this method to add specific functionality to the rails project.
 ##### | `install`
 
 The install method will be called when you use the `install` command from potassium.
-For example if you run `portassium install devise` this will use
-[the recipe template](/lib/potassium/templates/recipe.rb) to load an execute the
+For example, if you run `potassium install devise` this will use
+[the recipe template](/lib/potassium/templates/recipe.rb) to load and execute the
 `install` method for the **devise** recipe.
 
 You can define the main functionallity of a recipe in a private method and call
@@ -127,6 +127,6 @@ end
 
 To see further documentation of what we added to the rails template's DSL, check the [DSL documentation](/docs/DSL.md).
 
-> Remember that the DSL we are documenting is an extension over the [Rails Application Template DSL](http://edgeguides.rubyonrails.org/rails_application_templates.html), that itself is a dsl based on [Thor](https://github.com/erikhuda/thor/wiki).
+> Remember that the DSL we are documenting is an extension over the [Rails Application Template DSL](http://edgeguides.rubyonrails.org/rails_application_templates.html), that itself is a DSL based on [Thor](https://github.com/erikhuda/thor/wiki).
 
 [the-template]: /lib/potassium/templates/application.rb

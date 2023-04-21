@@ -1,6 +1,11 @@
 # Changelog
 
 ## Unreleased
+Features
+  - Add environment variables module recipe [#435](https://github.com/platanus/potassium/pull/435)
+
+Fixes
+  - Fix CircleCI config [#434](https://github.com/platanus/potassium/pull/434)
 
 ## 7.0.0
 
