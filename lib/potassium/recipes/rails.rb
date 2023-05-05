@@ -1,6 +1,8 @@
 class Recipes::Rails < Rails::AppBuilder
   def create
     gather_gem("bootsnap", require: false)
+    gather_gem("sassc", github: "sass/sassc-ruby", ref: 'refs/pull/233/head')
+    gather_gem("sassc-embedded")
     environment 'config.force_ssl = true', env: 'production'
     disable_automatic_nonce_generation
   end

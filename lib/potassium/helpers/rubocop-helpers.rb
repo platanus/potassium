@@ -1,3 +1,5 @@
+require "rubocop"
+
 module RubocopHelpers
   def run_rubocop
     options, paths = RuboCop::Options.new.parse(["-A"])
