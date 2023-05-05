@@ -14,4 +14,5 @@ module Potassium
   VUE_LOADER_VERSION = "^16.8.3"
   VUE_TEST_UTILS_VERSION = "^2.0.2"
   JEST_VERSION = "^29.0.0"
+  JSDOM_VERSION = "^21.1.2"
 end

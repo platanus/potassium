@@ -4,6 +4,7 @@ class Recipes::FrontEndVite < Rails::AppBuilder
   TAILWINDCSS_VERSION = Potassium::TAILWINDCSS_VERSION
   AUTOPREFIXER_VERSION = Potassium::AUTOPREFIXER_VERSION
   VUE_TEST_UTILS_VERSION = Potassium::VUE_TEST_UTILS_VERSION
+  JSDOM_VERSION = Potassium::JSDOM_VERSION
 
   DEPENDENCIES = {
     tailwind: [
@@ -29,7 +30,7 @@ class Recipes::FrontEndVite < Rails::AppBuilder
     vitest_dev: [
       "vitest",
       "@vue/test-utils@#{VUE_TEST_UTILS_VERSION}",
-      "jsdom"
+      "jsdom@#{JSDOM_VERSION}"
     ],
     api: [
       "axios",
