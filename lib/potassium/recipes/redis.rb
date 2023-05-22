@@ -3,6 +3,7 @@ class Recipes::Redis < Rails::AppBuilder
     add_redis
     add_docker_compose_redis_config
     set_redis_dot_env
+    add_session_store_config
   end
 
   def install
@@ -47,5 +48,10 @@ class Recipes::Redis < Rails::AppBuilder
         REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}/1
       TEXT
     )
+  end
+
+  def add_session_store_config
+    copy_file("../assets/config/initializers/session_store.rb",
+              "config/initializers/session_store.rb", force: true)
   end
 end

@@ -34,5 +34,10 @@ RSpec.describe "RedisProcessor" do
 
       expect(compose_content[:services]).to include(:redis)
     end
+
+    it 'copies session store config' do
+      content = IO.read("#{project_path}/config/initializers/session_store.rb")
+      expect(content).to include("RedisClient::Config")
+    end
   end
 end
