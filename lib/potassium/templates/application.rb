@@ -45,6 +45,7 @@ run_action(:recipe_loading) do
   create :yarn
   create :editorconfig
   create :mailer
+  create :redis
   create :background_processor
   create :schedule
   create :i18n
