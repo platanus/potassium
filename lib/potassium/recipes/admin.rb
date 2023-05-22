@@ -52,6 +52,7 @@ class Recipes::Admin < Rails::AppBuilder
             meta_tags_options = { viewport: 'width=device-width, initial-scale=1' }
             config.meta_tags = meta_tags_options
             config.meta_tags_for_logged_out_pages = meta_tags_options
+            config.comments = false
         HERE
       end
 
