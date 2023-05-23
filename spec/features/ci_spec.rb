@@ -13,8 +13,13 @@ RSpec.describe 'CI' do
     create_dummy_project
   end
 
+  it "adds brakeman to Gemfile" do
+    content = IO.read("#{project_path}/Gemfile")
+    expect(content).to include("brakeman")
+  end
+
   it "correctly bundles the config file" do
-    expect(ci_config).to include('cimg/ruby', 'cache', 'rspec', 'reviewdog')
+    expect(ci_config).to include('cimg/ruby', 'cache', 'rspec', 'reviewdog', 'brakeman')
   end
 
   it "uses dasherized app name for repo analyzer" do

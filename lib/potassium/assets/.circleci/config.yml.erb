@@ -151,6 +151,13 @@ jobs:
       - setup
 
       - run:
+          name: Run brakeman
+          shell: /bin/bash
+          command: |
+            bundle exec brakeman --quiet --format tabs --no-exit-on-warn --no-exit-on-error --output "tmp/brakeman_report"; \
+            ./bin/reviewdog < "tmp/brakeman_report" -reporter=github-pr-review -f=brakeman -name="Brakeman"
+
+      - run:
           name: Get files to lint
           command: git diff origin/master --name-only --diff-filter=d > tmp/files_to_lint
 
