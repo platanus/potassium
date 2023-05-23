@@ -136,7 +136,17 @@ class Recipes::VueAdmin < Rails::AppBuilder
             },
           });
           app.component('admin_component', AdminComponent);
-          app.mount('#wrapper');
+
+          // Avoid using '#wrapper' as the mount point, as that includes the entire admin page,
+          // which could be used for Client-Side Template Injection (CSTI) attacks. Limit the
+          // mount point to specific areas where you need Vue components.
+
+          // DO NOT mount Vue in elements that contain user input rendered by
+          // ActiveAdmin.
+          // By default ActiveAdmin doesn't escape {{ }} in user input, so it's
+          // possible to inject arbitrary JavaScript code into the page.
+
+          // app.mount('#wrapper');
         }
 
         return null;
