@@ -7,6 +7,10 @@ class Recipes::Ci < Rails::AppBuilder
       gather_gem 'rspec_junit_formatter', '~> 0.4'
     end
 
+    gather_gems(:development, :test) do
+      gather_gem('brakeman')
+    end
+
     add_readme_header :ci
     application 'config.assets.js_compressor = :uglifier', env: 'test'
   end
