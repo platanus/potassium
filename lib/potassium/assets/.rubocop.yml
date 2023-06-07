@@ -588,3 +588,7 @@ RSpec/LetSetup:
 RSpec/ExpectChange:
   Enabled: true
   EnforcedStyle: block
+RSpec/Focus:
+  AutoCorrect: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
