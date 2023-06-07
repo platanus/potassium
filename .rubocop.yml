@@ -528,3 +528,7 @@ RSpec/ExpectChange:
   EnforcedStyle: block
 RSpec/BeforeAfterAll:
   Enabled: false
+RSpec/Focus:
+  AutoCorrect: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
