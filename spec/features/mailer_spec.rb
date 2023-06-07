@@ -1,4 +1,3 @@
-# rubocop:disable Rspec/MultipleMemoizedHelpers
 require "spec_helper"
 
 RSpec.describe "Mailer" do
@@ -102,4 +101,3 @@ RSpec.describe "Mailer" do
     end
   end
 end
-# rubocop:enable Rspec/MultipleMemoizedHelpers

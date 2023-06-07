@@ -1,4 +1,3 @@
-# rubocop:disable RSpec/MultipleMemoizedHelpers
 require 'spec_helper'
 
 RSpec.describe 'Front end' do
@@ -78,4 +77,3 @@ RSpec.describe 'Front end' do
     expect(File.exists?(File.join(project_path, 'lib/dotenv_monkeypatch.rb'))).to be(true)
   end
 end
-# rubocop:enable RSpec/MultipleMemoizedHelpers
