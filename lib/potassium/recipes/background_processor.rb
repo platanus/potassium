@@ -14,8 +14,6 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
   def create
     if get(:background_processor)
       add_sidekiq
-      add_docker_compose_redis_config
-      set_redis_dot_env
     end
   end
 
@@ -40,7 +38,6 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
       append_to_file(".env.development", "DB_POOL=25\n")
       template("../assets/sidekiq.rb.erb", "config/initializers/sidekiq.rb", force: true)
       copy_file("../assets/sidekiq.yml", "config/sidekiq.yml", force: true)
-      copy_file("../assets/redis.yml", "config/redis.yml", force: true)
       recipe.mount_sidekiq_routes
     end
   end
@@ -67,33 +64,6 @@ class Recipes::BackgroundProcessor < Rails::AppBuilder
   end
 
   private
-
-  def add_docker_compose_redis_config
-    compose = DockerHelpers.new('docker-compose.yml')
-
-    service_definition =
-      <<~YAML
-        image: redis
-        ports:
-          - 6379
-        volumes:
-          - redis_data:/data
-      YAML
-
-    compose.add_service('redis', service_definition)
-    compose.add_volume('redis_data')
-  end
-
-  def set_redis_dot_env
-    append_to_file(
-      '.env.development',
-      <<~TEXT
-        REDIS_HOST=127.0.0.1
-        REDIS_PORT=COMMAND_EXPAND(make services-port SERVICE=redis PORT=6379)
-        REDIS_URL=redis://${REDIS_HOST}:${REDIS_PORT}/1
-      TEXT
-    )
-  end
 
   def enabled_mailer?
     mailer_answer = get(:email_service)

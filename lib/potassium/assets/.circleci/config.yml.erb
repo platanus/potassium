@@ -4,9 +4,7 @@ ruby-image: &ruby-image cimg/ruby:<%= ruby_version %>
 <%- if selected?(:database, :postgresql) -%>
 postgres-image: &postgres-image postgres:<%= Potassium::POSTGRES_VERSION %>
 <%- end -%>
-<%- if selected?(:background_processor) -%>
-redis-image: &redis-image redis
-<%- end -%>
+redis-image: &redis-image cimg/redis:6.2.12
 env-vars: &env-vars
   BUNDLE_JOBS: 4
   BUNDLE_PATH: vendor/bundle
@@ -23,9 +21,7 @@ executors:
       <%- if selected?(:database, :postgresql) -%>
       - image: *postgres-image
       <%- end -%>
-      <%- if selected?(:background_processor) -%>
       - image: *redis-image
-      <%- end -%>
 
   lint-executor:
     docker:
@@ -94,11 +90,10 @@ jobs:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
 
-      <%- if selected?(:background_processor) -%>
       - run:
           name: Wait for redis service
           command: dockerize -wait tcp://localhost:6379 -timeout 1m
-      <%- end -%>
+
       <%- if selected?(:database, :postgresql) -%>
       - run:
           name: Wait for postgres service
