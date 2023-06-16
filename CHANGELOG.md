@@ -1,13 +1,23 @@
 # Changelog
 
 ## Unreleased
+
+## 7.1.0
 Features
   - Add environment variables module recipe [#435](https://github.com/platanus/potassium/pull/435)
   - Run [Brakeman](https://brakemanscanner.org/) with reviewdog on CI [#440](https://github.com/platanus/potassium/pull/440)
+  - Changes to a couple of rspec rubocop rules [#441](https://github.com/platanus/potassium/pull/441)
   - Update node to 20 [#447](https://github.com/platanus/potassium/pull/447)
 
 Fixes
   - Fix CircleCI config [#434](https://github.com/platanus/potassium/pull/434)
+  - Fix `cannot load such file -- sassc` error [#436](https://github.com/platanus/potassium/pull/436)
+  - Set jsdom version for node compatibility [#436](https://github.com/platanus/potassium/pull/436)
+  - Fix `uninitialized constant RubocopHelpers::RuboCop` [#436](https://github.com/platanus/potassium/pull/436)
+  - Use Redis for sessions to address security issues [#437](https://github.com/platanus/potassium/pull/437)
+  - Comment vue mount in admin js to address security issues [#438](https://github.com/platanus/potassium/pull/438)
+  - Remove ActiveAdmin comments to address security issues [#439](https://github.com/platanus/potassium/pull/439)
+  - Various fixes related to TS, vite and vitest [#444](https://github.com/platanus/potassium/pull/444)
 
 ## 7.0.0
 
