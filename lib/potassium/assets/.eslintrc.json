@@ -3,7 +3,6 @@
     "browser": true,
     "es2021": true,
     "node": true,
-    "vi": true,
     "vue/setup-compiler-macros": true
   },
   "parserOptions": {

@@ -23,6 +23,7 @@ class Recipes::FrontEndVite < Rails::AppBuilder
       "vue@#{VUE_VERSION}"
     ],
     vue_dev: [
+      "@tsconfig/node14",
       "@vitejs/plugin-vue",
       "@vue/tsconfig",
       "vue-tsc"
