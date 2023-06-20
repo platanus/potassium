@@ -3,6 +3,12 @@ require 'spec_helper'
 RSpec.describe 'EnvironmentVariables' do
   let(:environment_variables) { IO.read("#{project_path}/lib/environment_variables.rb") }
 
+  before :all do
+    drop_dummy_database
+    remove_project_directory
+    create_dummy_project
+  end
+
   it 'creates a .env.test file' do
     expect(File.exists?("#{project_path}/.env.test")).to eq(true)
   end
