@@ -17,7 +17,7 @@ RSpec.describe "Mailer" do
   end
   let(:mailer_config_text) do
     <<~RUBY
-      require Rails.root.join("config", "mailer")
+      require Rails.root.join("config/mailer")
     RUBY
   end
 
