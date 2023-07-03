@@ -4,6 +4,7 @@
 Features
   - Add environment variables module recipe [#435](https://github.com/platanus/potassium/pull/435)
   - Run [Brakeman](https://brakemanscanner.org/) with reviewdog on CI [#440](https://github.com/platanus/potassium/pull/440)
+  - Update node to 20 [#447](https://github.com/platanus/potassium/pull/447)
 
 Fixes
   - Fix CircleCI config [#434](https://github.com/platanus/potassium/pull/434)

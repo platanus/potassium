@@ -1,6 +1,6 @@
 version: 2.1
 
-ruby-image: &ruby-image cimg/ruby:2.7.4-node
+ruby-image: &ruby-image cimg/ruby:2.7
 env-vars: &env-vars
   BUNDLE_JOBS: 4
   RAILS_ENV: test
@@ -31,6 +31,14 @@ commands:
           command: |
             gem install bundler:2.1.4
             bundle _2.1.4_ install
+
+      - run:
+          name: Install node and yarn
+          command: |
+            curl -sL https://deb.nodesource.com/setup_$(cat .node-version).x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            curl -o- -sL https://yarnpkg.com/install.sh | bash
+            sudo ln -s $HOME/.yarn/bin/yarn /usr/local/bin/yarn
 
       - save_cache:
           key: potassium-vendor-bundle-{{ .Branch }}

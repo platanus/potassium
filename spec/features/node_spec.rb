@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe "Node" do
-  let(:version) { "14" }
+  let(:version) { Potassium::NODE_VERSION }
 
   before(:all) do
     drop_dummy_database
