@@ -24,7 +24,7 @@ RSpec.describe 'CI' do
 
   it "uses dasherized app name for repo analyzer" do
     expect(ci_config).to include(
-      "repo_analyzer:analyze[platanus/#{PotassiumTestHelpers::APP_NAME.dasherize}]"
+      "repo_analyzer:analyze[platanus/#{PotassiumTestHelpers::APP_NAME.dasherize},project]"
     )
   end
 end

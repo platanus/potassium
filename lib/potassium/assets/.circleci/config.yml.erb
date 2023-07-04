@@ -5,6 +5,7 @@ ruby-image: &ruby-image cimg/ruby:<%= ruby_version %>
 postgres-image: &postgres-image postgres:<%= Potassium::POSTGRES_VERSION %>
 <%- end -%>
 redis-image: &redis-image cimg/redis:6.2.12
+repo-analyzer-image: &repo-analyzer-image platanus/repo-analyzer:ruby-3.2
 env-vars: &env-vars
   BUNDLE_JOBS: 4
   BUNDLE_PATH: vendor/bundle
@@ -22,6 +23,7 @@ executors:
       - image: *postgres-image
       <%- end -%>
       - image: *redis-image
+      - image: *repo-analyzer-image
 
   lint-executor:
     docker:
@@ -33,6 +35,9 @@ commands:
     description: checkout code, restore cache, install dependencies, save cache
     steps:
       - checkout
+
+      - setup_remote_docker:
+          version: 20.10.18
 
       - restore_cache:
           keys:
@@ -112,12 +117,16 @@ jobs:
             bundle exec rspec spec $RSPEC_FORMAT_ARGS $RSPEC_JUNIT_ARGS
 
       - run:
-          name: Update repo analyzer gem
-          command: bundle update --conservative repo_analyzer
-
-      - run:
-          name: POST extracted data to nest
-          command: bin/rake "repo_analyzer:analyze[platanus/<%= get(:github_repo_name) || get(:dasherized_app_name) %>]"
+          name: POST extracted info to Nest with Repo Analyzer
+          command: |
+            container_name=$(docker ps --filter "ancestor=platanus/repo-analyzer:ruby-3.2" --format "{{.Names}}")
+            docker cp /home/circleci/project "$container_name":/app/project
+            docker exec "$container_name" rm -rf project/node_modules/ project/vendor/
+            docker exec \
+            -e GITHUB_PERSONAL_TOKEN=$GITHUB_PERSONAL_TOKEN \
+            -e REPO_ANALYZER_URL=$REPO_ANALYZER_URL \
+            "$container_name" \
+            bundle exec rake 'repo_analyzer:analyze[platanus/<%= get(:github_repo_name) || get(:dasherized_app_name) %>,project]'
 
       - run:
           name: Run simplecov
