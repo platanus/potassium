@@ -50,7 +50,7 @@ readme:
 
         this will create the app on heroku, create a pipeline and link the app to the pipeline.
 
-        You'll still have to manually log in to the heroku dahsboard, go to the new pipeline and 'configure automatic deploys' using Github
+        You'll still have to manually log in to the heroku dashboard, go to the new pipeline and 'configure automatic deploys' using Github
         You can run the following command to open the dashboard in the pipeline page
 
             $ heroku pipelines:open
