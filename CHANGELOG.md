@@ -1,7 +1,8 @@
 # Changelog
 
 ## Unreleased
-
+Features
+  - Use repo_analyzer from docker image [#448](https://github.com/platanus/potassium/pull/448)
 ## 7.1.0
 Features
   - Add environment variables module recipe [#435](https://github.com/platanus/potassium/pull/435)
