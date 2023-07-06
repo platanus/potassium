@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 7.2.0
 Features
   - Use repo_analyzer from docker image [#448](https://github.com/platanus/potassium/pull/448)
 ## 7.1.0
