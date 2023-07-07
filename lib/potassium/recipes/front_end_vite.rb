@@ -35,10 +35,12 @@ class Recipes::FrontEndVite < Rails::AppBuilder
     ],
     api: [
       "axios",
-      "humps"
+      "humps",
+      "qs"
     ],
     api_dev: [
-      "@types/humps"
+      "@types/humps",
+      "@types/qs"
     ]
   }
 
@@ -124,6 +126,8 @@ class Recipes::FrontEndVite < Rails::AppBuilder
               'app/frontend/utils/case-converter.ts'
     copy_file '../assets/app/frontend/utils/csrf-token.ts',
               'app/frontend/utils/csrf-token.ts'
+    copy_file '../assets/app/frontend/utils/query-params.ts',
+              'app/frontend/utils/query-params.ts'
   end
 
   def add_vite_dev_ws_content_security_policy
