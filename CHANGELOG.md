@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+Features
+  - Add params serializer to API client [#449](https://github.com/platanus/potassium/pull/449)
+
 ## 7.2.0
 Features
   - Use repo_analyzer from docker image [#448](https://github.com/platanus/potassium/pull/448)
