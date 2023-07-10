@@ -1,6 +1,7 @@
 import axios, { type AxiosRequestTransformer, type AxiosResponseTransformer } from 'axios';
 import { convertKeys, type objectToConvert } from '../utils/case-converter';
 import { csrfToken } from '../utils/csrf-token';
+import { paramsSerializer } from '../utils/query-params';
 
 const api = axios.create({
   transformRequest: [
@@ -16,6 +17,7 @@ const api = axios.create({
     'Accept': 'application/json',
     'X-CSRF-Token': csrfToken(),
   },
+  paramsSerializer,
 });
 
 export { api };

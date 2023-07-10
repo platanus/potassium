@@ -23,6 +23,7 @@ RSpec.describe 'Front end' do
   let(:api_index_file) { read_file('app/frontend/api/index.ts') }
   let(:case_converter_file) { read_file('app/frontend/utils/case-converter.ts') }
   let(:csrf_token_file) { read_file('app/frontend/utils/csrf-token.ts') }
+  let(:query_params_file) { read_file('app/frontend/utils/query-params.ts') }
   let(:mock_example_file) { read_file('app/frontend/api/__mocks__/index.mock.ts') }
 
   it 'creates a project with vite' do
@@ -60,12 +61,14 @@ RSpec.describe 'Front end' do
   it 'includes correct packages for basic api client' do
     expect(node_modules_file).to include('"axios"')
     expect(node_modules_file).to include('"humps"')
+    expect(node_modules_file).to include('"qs"')
   end
 
   it 'includes api client files' do
     expect(api_index_file).to include('axios.create')
     expect(case_converter_file).to include('humps')
     expect(csrf_token_file).to include('meta[name=csrf-token]')
+    expect(query_params_file).to include('humps', 'qs')
   end
 
   it 'includes mock example' do
