@@ -62,7 +62,13 @@ class Recipes::Testing < Rails::AppBuilder
     run "bundle binstub guard"
     line = /guard :rspec, cmd: "bundle exec rspec" do\n/
     gsub_file 'Guardfile', line do
-      "guard :rspec, cmd: \"bin/rspec\" do\n"
+      <<~HERE
+        ignore(
+          [%r{^bin/*}, %r{^config/*}, %r{^db/*}, %r{^log/*}, %r{^public/*}, %r{^tmp/*}, %r{^node_modules/*}]
+        )
+
+        guard :rspec, cmd: \"bin/rspec\" do
+      HERE
     end
   end
 

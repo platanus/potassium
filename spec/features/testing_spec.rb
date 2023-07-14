@@ -4,6 +4,7 @@ RSpec.describe "Testing" do
   let(:gemfile_content) { IO.read("#{project_path}/Gemfile") }
   let(:rails_helper_content) { IO.read("#{project_path}/spec/rails_helper.rb") }
   let(:rspec_content) { IO.read("#{project_path}/.rspec") }
+  let(:guard_content) { IO.read("#{project_path}/Guardfile") }
 
   let(:support_directories) do
     %w{
@@ -48,7 +49,8 @@ RSpec.describe "Testing" do
   it { expect(Dir.entries("#{project_path}/spec/support/configurations")).to include(*conf_files) }
 
   it { expect(IO.read("#{project_path}/bin/rspec")).to include('path("rspec-core", "rspec")') }
-  it { expect(IO.read("#{project_path}/Guardfile")).to include(':rspec, cmd: "bin/rspec"') }
+  it { expect(guard_content).to include(':rspec, cmd: "bin/rspec"') }
+  it { expect(guard_content).to include('ignore(') }
   it { expect(IO.read("#{project_path}/bin/guard")).to include('path("guard", "guard")') }
 
   it { expect(IO.read("#{project_path}/README.md")).to include("To run unit test") }
