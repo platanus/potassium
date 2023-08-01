@@ -21,5 +21,6 @@ class Recipes::I18n < Rails::AppBuilder
 
     application("config.i18n.default_locale = '#{get(:lang)}'")
     application("config.i18n.fallbacks = [:es, :en]")
+    gsub_file 'config/environments/production.rb', "config.i18n.fallbacks = true\n", ''
   end
 end

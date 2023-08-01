@@ -14,9 +14,11 @@ RSpec.describe "I18n" do
   end
 
   it "configures application.rb" do
-    content = IO.read("#{project_path}/config/application.rb")
+    application_config = IO.read("#{project_path}/config/application.rb")
+    production_config = IO.read("#{project_path}/config/environments/production.rb")
 
-    expect(content).to include("config.i18n.default_locale = 'es-CL'")
-    expect(content).to include("config.i18n.fallbacks = [:es, :en]")
+    expect(application_config).to include("config.i18n.default_locale = 'es-CL'")
+    expect(application_config).to include("config.i18n.fallbacks = [:es, :en]")
+    expect(production_config).not_to include("config.i18n.fallbacks = true")
   end
 end
