@@ -24,16 +24,12 @@ class Recipes::Mailer < Rails::AppBuilder
     dependencies(email_service)
     config(email_service)
 
-    ensure_sidekiq_install_and_add_mailers_queue
+    ensure_sidekiq_install
   end
 
   def install
     ask
     create
-  end
-
-  def add_mailer_queue
-    insert_into_file "config/sidekiq.yml", "  - mailers", after: "- default\n"
   end
 
   private
@@ -115,16 +111,12 @@ class Recipes::Mailer < Rails::AppBuilder
     application "config.action_mailer.delivery_method = :letter_opener", env: "development"
   end
 
-  def ensure_sidekiq_install_and_add_mailers_queue
+  def ensure_sidekiq_install
     background_processor_recipe = load_recipe(:background_processor)
     background_processor_answer = get(:background_processor)
 
-    if background_processor_recipe.installed?
-      add_mailer_queue
-    else
-      recipe = self
-      after(:install_sidekiq) { recipe.add_mailer_queue }
-      background_processor_recipe.add_sidekiq unless background_processor_answer
+    unless background_processor_recipe.installed? || background_processor_answer
+      background_processor_recipe.add_sidekiq
     end
   end
 end
