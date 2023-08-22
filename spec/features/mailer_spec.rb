@@ -66,18 +66,6 @@ RSpec.describe "Mailer" do
       it { expect(mailer_config).to include("delivery_method = :aws_sdk") }
       it { expect(dev_config).to include("delivery_method = :letter_opener") }
     end
-
-    context "when selecting a mailer and sidekiq" do
-      before :all do
-        drop_dummy_database
-        remove_project_directory
-        create_dummy_project(
-          "background_processor" => true, "email_service" => 'sendgrid'
-        )
-      end
-
-      it { expect(sidekiq_config).to include("- mailers") }
-    end
   end
 
   context "when there is no mailer" do

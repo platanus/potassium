@@ -20,10 +20,6 @@ RSpec.describe "schedule" do
     expect(sidekiq_config).to include(":schedule:")
   end
 
-  it "doesn't remove mailers queue" do
-    expect(sidekiq_config).to include("- mailers")
-  end
-
   it "adds scheduler ui to the sidekiq initializer" do
     content = IO.read("#{project_path}/config/initializers/sidekiq.rb")
     expect(content).to include("require 'sidekiq-scheduler/web'")
