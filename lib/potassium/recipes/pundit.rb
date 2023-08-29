@@ -33,6 +33,7 @@ class Recipes::Pundit < Rails::AppBuilder
   def install_admin_pundit
     configure_active_admin_initializer
     copy_policies
+    copy_tests
   end
 
   private
@@ -50,6 +51,17 @@ class Recipes::Pundit < Rails::AppBuilder
     copy_policy("comment_policy", "active_admin")
   end
 
+  def copy_tests
+    copy_shared_examples
+    template(
+      '../assets/testing/admin_user_factory.rb', 'spec/factories/admin_users.rb', force: true
+    )
+    copy_test('admin_user_policy_spec')
+    copy_test('default_policy_spec')
+    copy_test('comment_policy_spec', 'active_admin')
+    copy_test('page_policy_spec', 'active_admin')
+  end
+
   def config_active_admin_option(option, value)
     initializer = "config/initializers/active_admin.rb"
     gsub_file initializer, /# config\.#{option} =[^\n]+\n/ do
@@ -65,6 +77,21 @@ class Recipes::Pundit < Rails::AppBuilder
     )
   end
 
+  def copy_shared_examples
+    template(
+      '../assets/testing/pundit/shared_examples.rb',
+      'spec/support/shared_examples/pundit_shared_examples.rb'
+    )
+  end
+
+  def copy_test(file_name, namespace = nil)
+    destination_path = [namespace, file_name].compact.join('/')
+    template(
+      "../assets/testing/pundit/#{file_name}.rb",
+      "spec/policies/back_office/#{destination_path}.rb"
+    )
+  end
+
   def run_pundit_installer
     gather_gem 'pundit'
 
@@ -72,6 +99,9 @@ class Recipes::Pundit < Rails::AppBuilder
       application_controller = "app/controllers/application_controller.rb"
       gsub_file application_controller, "protect_from_forgery" do
         "include Pundit\n  protect_from_forgery"
+      end
+      gsub_file 'spec/rails_helper.rb', "require 'spec_helper'" do
+        "require 'spec_helper'\nrequire 'pundit/rspec'"
       end
       generate "pundit:install"
       add_readme_section :internal_dependencies, :pundit
