@@ -5,6 +5,7 @@ Features
   - Add params serializer to API client [#449](https://github.com/platanus/potassium/pull/449)
   - Ignore irrelevant folders in guard [#450](https://github.com/platanus/potassium/pull/450)
   - Use same locale fallback in all environments [#451](https://github.com/platanus/potassium/pull/451)
+  - Add ActiveAdmin's page permission and test files for generated policies [#453](https://github.com/platanus/potassium/pull/453)
 
 ## 7.2.0
 Features

@@ -21,10 +21,67 @@ RSpec.describe "Pundit" do
     expect(content).to include("config.pundit_policy_namespace = :back_office")
   end
 
-  it "creates default policy" do
-    content = IO.read("#{project_path}/app/policies/back_office/default_policy.rb")
+  it 'creates admin user factory' do
+    content = IO.read("#{project_path}/spec/factories/admin_users.rb")
 
-    expect(content).to include("class BackOffice::DefaultPolicy")
+    expect(content).to include("email { Faker::Internet.unique.email }")
+    expect(content).to include("password")
+  end
+
+  describe 'admin_user policy' do
+    it "creates file" do
+      content = IO.read("#{project_path}/app/policies/back_office/admin_user_policy.rb")
+
+      expect(content).to include('class BackOffice::AdminUserPolicy')
+    end
+
+    it 'creates spec' do
+      content = IO.read("#{project_path}/spec/policies/back_office/admin_user_policy_spec.rb")
+      expect(content).to include('RSpec.describe BackOffice::AdminUserPolicy')
+    end
+  end
+
+  describe 'default policy' do
+    it 'creates file' do
+      content = IO.read("#{project_path}/app/policies/back_office/default_policy.rb")
+
+      expect(content).to include('class BackOffice::DefaultPolicy')
+    end
+
+    it 'creates spec' do
+      content = IO.read("#{project_path}/spec/policies/back_office/default_policy_spec.rb")
+      expect(content).to include('RSpec.describe BackOffice::DefaultPolicy')
+    end
+  end
+
+  describe 'comment policy' do
+    it 'creates file' do
+      content = IO.read("#{project_path}/app/policies/back_office/active_admin/comment_policy.rb")
+
+      expect(content).to include('class BackOffice::ActiveAdmin::CommentPolicy')
+    end
+
+    it 'creates spec' do
+      content = IO.read(
+        "#{project_path}/spec/policies/back_office/active_admin/comment_policy_spec.rb"
+      )
+      expect(content).to include('RSpec.describe BackOffice::ActiveAdmin::CommentPolicy')
+    end
+  end
+
+  describe 'page policy' do
+    it 'creates file' do
+      content = IO.read("#{project_path}/app/policies/back_office/active_admin/page_policy.rb")
+
+      expect(content).to include('class BackOffice::ActiveAdmin::PagePolicy')
+    end
+
+    it 'creates spec' do
+      content = IO.read(
+        "#{project_path}/spec/policies/back_office/active_admin/page_policy_spec.rb"
+      )
+      expect(content).to include('RSpec.describe BackOffice::ActiveAdmin::PagePolicy')
+    end
   end
 
   it "modifies the README file" do
