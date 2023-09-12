@@ -1,0 +1,22 @@
+{
+    "[ruby]": {
+        "editor.rulers": [
+            100
+        ]
+    },
+    "[vue]": {
+        "editor.rulers": [
+            120
+        ]
+    },
+    "[javascript]": {
+        "editor.rulers": [
+            120
+        ]
+    },
+    "[typescript]": {
+        "editor.rulers": [
+            120
+        ]
+    }
+}
